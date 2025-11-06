@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Learn Percentages - Fun & Easy!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: white;
+            border: 3px solid #667eea;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .nav-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .lesson-section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 0.5s;
+        }
+
+        .lesson-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin: 30px 0 15px 0;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .example-box {
+            background: #f0f8ff;
+            border-left: 5px solid #4CAF50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 3px;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+            background: #ddd;
+            border-radius: 10px;
+        }
+
+        .grid-square {
+            aspect-ratio: 1;
+            background: white;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+
+        .grid-square.shaded {
+            background: #4CAF50;
+        }
+
+        .interactive-box {
+            background: #fff3cd;
+            border: 3px dashed #ffc107;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .input-group {
+            margin: 15px 0;
+        }
+
+        input[type="number"], input[type="text"] {
+            padding: 12px;
+            font-size: 1.1em;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            width: 150px;
+            margin: 0 10px;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        .result {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .quiz-option {
+            background: white;
+            border: 3px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: #f0f0ff;
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .quiz-option.wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .navigation-arrows {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .arrow-btn {
+            background: #764ba2;
+            font-size: 1.2em;
+            padding: 15px 30px;
+        }
+
+        .tip-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .formula {
+            background: #fff9c4;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 3px solid #fbc02d;
+        }
+
+        .celebration {
+            text-align: center;
+            font-size: 3em;
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 2px solid #667eea;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f0f0ff;
+        }
+
+        .step-by-step {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .mascot {
+            text-align: center;
+            font-size: 5em;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            .lesson-section { padding: 20px; }
+            .nav-buttons { flex-direction: column; }
+        }
+				.home-fab{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  background:#FAF003;
+  color:#222;text-decoration:none;
+  font-size:22px;line-height:1;
+  border-radius:50%;
+  border:2px solid rgba(0,0,0,0.15);
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  z-index:9999;
+}
+.home-fab:hover{ transform:translateY(-2px); }
+    </style>
+</head>
+<body>
+    <a class="home-fab" href="index.html" aria-label="Home">🏠</a>
+    <div class="container">
+        <header>
+            <div class="mascot">🎯</div>
+            <h1>Learn Percentages!</h1>
+            <p style="font-size: 1.2em; color: #666;">Your Fun Journey to Master Percentages</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+        </header>
+
+        <div class="nav-buttons" id="navButtons">
+            <button class="nav-btn active" onclick="showLesson(0)">1. What is %?</button>
+            <button class="nav-btn" onclick="showLesson(1)">2. % to Fraction</button>
+            <button class="nav-btn" onclick="showLesson(2)">3. % to Decimal</button>
+            <button class="nav-btn" onclick="showLesson(3)">4. Fraction to %</button>
+            <button class="nav-btn" onclick="showLesson(4)">5. Decimal to %</button>
+            <button class="nav-btn" onclick="showLesson(5)">6. Finding %</button>
+            <button class="nav-btn" onclick="showLesson(6)">7. Word Problems</button>
+            <button class="nav-btn" onclick="showLesson(7)">8. Practice Quiz</button>
+        </div>
+
+        <!-- Lesson 1: Introduction to Percentages -->
+        <div class="lesson-section active" id="lesson0">
+            <h2>🎈 What is a Percentage?</h2>
+            
+            <div class="concept-box">
+                <h3 style="color: white;">💡 Big Idea!</h3>
+                <p><strong>Percentage</strong> means "out of 100"</p>
+                <p>The symbol is: <span style="font-size: 2em;">%</span></p>
+                <p>It comes from Latin words "per centum" meaning "for every hundred"</p>
+            </div>
+
+            <h3>🎨 Let's Visualize!</h3>
+            <p style="font-size: 1.2em;">Below is a grid with 100 squares. Let's see what 36% looks like:</p>
+            <div class="visual-grid" id="grid1"></div>
+            
+            <div class="interactive-box">
+                <h3>🎮 Try It Yourself!</h3>
+                <p>Shade different percentages:</p>
+                <div class="input-group">
+                    <label>Enter a percentage (0-100):</label>
+                    <input type="number" id="userPercent" min="0" max="100" value="50">
+                    <button onclick="shadeGrid()">Shade It!</button>
+                </div>
+                <div class="visual-grid" id="grid2"></div>
+            </div>
+
+            <div class="example-box">
+                <h3>📝 Examples:</h3>
+                <p><strong>39%</strong> means 39 out of 100 = 39/100 = 0.39</p>
+                <p><strong>50%</strong> means 50 out of 100 = half = 1/2</p>
+                <p><strong>100%</strong> means all of it = the whole thing!</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>🌟 Cool Tip:</strong> Think of percentage as cutting a pizza into 100 slices. If you eat 25 slices, you ate 25% of the pizza!
+            </div>
+
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="showLesson(0)" disabled>⬅️ Previous</button>
+                <button class="arrow-btn" onclick="showLesson(1)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Lesson 2: Converting Percentage to Fraction -->
+        <div class="lesson-section" id="lesson1">
+            <h2>🔄 Converting % to Fractions</h2>
+
+            <div class="concept-box">
+                <h3 style="color: white;">📚 The Rule:</h3>
+                <p style="font-size: 1.3em;">Remove the % sign and put 100 in the denominator!</p>
+            </div>
+
+            <div class="formula">
+                x% = x/100
+            </div>
+
+            <h3>🌟 Step-by-Step Examples:</h3>
+
+            <div class="step-by-step">
+                <strong>Example 1: Convert 24% to a fraction</strong>
+                <p>Step 1: Remove the % → 24</p>
+                <p>Step 2: Put 100 as denominator → 24/100</p>
+                <p>Step 3: Simplify (divide both by 4) → 6/25</p>
+                <p><strong>Answer: 24% = 6/25 or ratio 6:25</strong></p>
+            </div>
+
+            <div class="step-by-step">
+                <strong>Example 2: Convert 50% to a fraction</strong>
+                <p>Step 1: 50% = 50/100</p>
+                <p>Step 2: Simplify (divide by 50) → 1/2</p>
+                <p><strong>Answer: 50% = 1/2</strong></p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎯 Practice Time!</h3>
+                <p>Convert this percentage to a fraction:</p>
+                <div class="input-group">
+                    <label>Percentage:</label>
+                    <input type="number" id="percentInput1" value="25">%
+                    <button onclick="convertPercentToFraction()">Convert!</button>
+                </div>
+                <div class="result" id="result1"></div>
+            </div>
+
+            <div class="example-box">
+                <h3>🎪 More Examples:</h3>
+                <table>
+                    <tr>
+                        <th>Percentage</th>
+                        <th>Fraction</th>
+                        <th>Ratio</th>
+                    </tr>
+                    <tr>
+                        <td>25%</td>
+                        <td>1/4</td>
+                        <td>1:4</td>
+                    </tr>
+                    <tr>
+                        <td>50%</td>
+                        <td>1/2</td>
+                        <td>1:2</td>
+                    </tr>
+                    <tr>
+                        <td>75%</td>
+                        <td>3/4</td>
+                        <td>3:4</td>
+                    </tr>
+                    <tr>
+                        <td>100%</td>
+                        <td>1/1 = 1</td>
+                        <td>1:1</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="showLesson(0)">⬅️ Previous</button>
+                <button class="arrow-btn" onclick="showLesson(2)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Lesson 3: Converting Percentage to Decimal -->
+        <div class="lesson-section" id="lesson2">
+            <h2>🔢 Converting % to Decimals</h2>
+
+            <div class="concept-box">
+                <h3 style="color: white;">✨ Super Easy Rule:</h3>
+                <p style="font-size: 1.3em;">Divide by 100 and remove the % sign!</p>
+                <p style="font-size: 1.3em;">OR move the decimal point 2 places to the LEFT</p>
+            </div>
+
+            <div class="formula">
+                x% = x ÷ 100
+            </div>
+
+            <h3>🎯 Let's Practice!</h3>
+
+            <div class="step-by-step">
+                <strong>Example 1: 49% to decimal</strong>
+                <p>49% = 49/100 = <strong>0.49</strong></p>
+            </div>
+
+            <div class="step-by-step">
+                <strong>Example 2: 7.8% to decimal</strong>
+                <p>7.8% = 7.8/100 = <strong>0.078</strong></p>
+            </div>
+
+            <div class="step-by-step">
+                <strong>Example 3: 119% to decimal</strong>
+                <p>119% = 119/100 = <strong>1.19</strong></p>
+                <p>(Yes! Percentages can be more than 100%!)</p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Your Turn!</h3>
+                <p>Convert percentage to decimal:</p>
+                <div class="input-group">
+                    <input type="number" id="percentInput2" value="35" step="0.1">%
+                    <button onclick="convertPercentToDecimal()">Convert!</button>
+                </div>
+                <div class="result" id="result2"></div>
+            </div>
+
+            <div class="example-box">
+                <h3>🌈 Quick Reference:</h3>
+                <table>
+                    <tr>
+                        <th>Percentage</th>
+                        <th>Decimal</th>
+                    </tr>
+                    <tr><td>10%</td><td>0.1</td></tr>
+                    <tr><td>25%</td><td>0.25</td></tr>
+                    <tr><td>50%</td><td>0.5</td></tr>
+                    <tr><td>75%</td><td>0.75</td></tr>
+                    <tr><td>100%</td><td>1.0</td></tr>
+                    <tr><td>150%</td><td>1.5</td></tr>
+                </table>
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Memory Trick:</strong> To go from % to decimal, think "percent has 2 letters more than cent, so move decimal 2 places!"
+            </div>
+
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="showLesson(1)">⬅️ Previous</button>
+                <button class="arrow-btn" onclick="showLesson(3)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Lesson 4: Converting Fraction to Percentage -->
+        <div class="lesson-section" id="lesson3">
+            <h2>🔄 Converting Fractions to %</h2>
+
+            <div class="concept-box">
+                <h3 style="color: white;">🎪 Two Methods:</h3>
+                <p><strong>Method 1:</strong> Make the denominator 100</p>
+                <p><strong>Method 2:</strong> Multiply by 100 and add % sign</p>
+            </div>
+
+            <div class="formula">
+                Fraction × 100 = %
+            </div>
+
+            <h3>🌟 Method 1: When denominator easily becomes 100</h3>
+
+            <div class="step-by-step">
+                <strong>Example: 9/25 to percentage</strong>
+                <p>Step 1: What times 25 = 100? Answer: 4</p>
+                <p>Step 2: Multiply both top and bottom by 4</p>
+                <p>9/25 = (9×4)/(25×4) = 36/100</p>
+                <p><strong>Answer: 36%</strong></p>
+            </div>
+
+            <h3>🎯 Method 2: When denominator doesn't easily become 100</h3>
+
+            <div class="step-by-step">
+                <strong>Example: 4/7 to percentage</strong>
+                <p>Step 1: Multiply by 100</p>
+                <p>4/7 × 100 = 400/7</p>
+                <p>Step 2: Divide: 400 ÷ 7 = 57.14...</p>
+                <p><strong>Answer: 57 1/7 % (or about 57.14%)</strong></p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Practice!</h3>
+                <p>Convert fraction to percentage:</p>
+                <div class="input-group">
+                    <input type="number" id="numerator" value="3" style="width: 80px;"> /
+                    <input type="number" id="denominator" value="4" style="width: 80px;">
+                    <button onclick="convertFractionToPercent()">Convert!</button>
+                </div>
+                <div class="result" id="result3"></div>
+            </div>
+
+            <div class="example-box">
+                <h3>🎨 Common Fractions:</h3>
+                <table>
+                    <tr>
+                        <th>Fraction</th>
+                        <th>Percentage</th>
+                    </tr>
+                    <tr><td>1/2</td><td>50%</td></tr>
+                    <tr><td>1/4</td><td>25%</td></tr>
+                    <tr><td>3/4</td><td>75%</td></tr>
+                    <tr><td>1/5</td><td>20%</td></tr>
+                    <tr><td>1/10</td><td>10%</td></tr>
+                    <tr><td>1/3</td><td>33.33% or 33⅓%</td></tr>
+                </table>
+            </div>
+
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="showLesson(2)">⬅️ Previous</button>
+                <button class="arrow-btn" onclick="showLesson(4)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Lesson 5: Converting Decimal to Percentage -->
+        <div class="lesson-section" id="lesson4">
+            <h2>🔢 Converting Decimals to %</h2>
+
+            <div class="concept-box">
+                <h3 style="color: white;">⚡ Super Simple!</h3>
+                <p style="font-size: 1.3em;">Multiply by 100 and add % sign!</p>
+                <p style="font-size: 1.3em;">OR move decimal point 2 places RIGHT</p>
+            </div>
+
+            <div class="formula">
+                Decimal × 100 = %
+            </div>
+
+            <h3>🎯 Let's See Examples!</h3>
+
+            <div class="step-by-step">
+                <strong>Example 1: 0.7 to percentage</strong>
+                <p>0.7 × 100 = 70</p>
+                <p><strong>Answer: 70%</strong></p>
+            </div>
+
+            <div class="step-by-step">
+                <strong>Example 2: 0.09 to percentage</strong>
+                <p>0.09 × 100 = 9</p>
+                <p><strong>Answer: 9%</strong></p>
+            </div>
+
+            <div class="step-by-step">
+                <strong>Example 3: 2.16 to percentage</strong>
+                <p>2.16 × 100 = 216</p>
+                <p><strong>Answer: 216%</strong></p>
+                <p>(More than 100% means more than the whole!)</p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Try It!</h3>
+                <p>Convert decimal to percentage:</p>
+                <div class="input-group">
+                    <input type="number" id="decimalInput" value="0.45" step="0.01">
+                    <button onclick="convertDecimalToPercent()">Convert!</button>
+                </div>
+                <div class="result" id="result4"></div>
+            </div>
+
+            <div class="example-box">
+                <h3>🌟 Practice Examples:</h3>
+                <table>
+                    <tr>
+                        <th>Decimal</th>
+                        <th>Percentage</th>
+                    </tr>
+                    <tr><td>0.25</td><td>25%</td></tr>
+                    <tr><td>0.5</td><td>50%</td></tr>
+                    <tr><td>0.75</td><td>75%</td></tr>
+                    <tr><td>1.0</td><td>100%</td></tr>
+                    <tr><td>0.03</td><td>3%</td></tr>
+                    <tr><td>1.5</td><td>150%</td></tr>
+                </table>
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Remember:</strong> Decimal to % → move point RIGHT 2 places. % to Decimal → move point LEFT 2 places!
+            </div>
+
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="showLesson(3)">⬅️ Previous</button>
+                <button class="arrow-btn" onclick="showLesson(5)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Lesson 6: Finding Percentage of Quantity -->
+        <div class="lesson-section" id="lesson5">
+            <h2>🎯 Finding Percentage of Something</h2>
+
+            <div class="concept-box">
+                <h3 style="color: white;">🎪 The Magic Formula:</h3>
+                <p style="font-size: 1.3em;">x% of y = (x/100) × y</p>
+                <p>Convert % to fraction, then multiply!</p>
+            </div>
+
+            <div class="formula">
+                "OF" means MULTIPLY!
+            </div>
+
+            <h3>🌟 Step-by-Step Example:</h3>
+
+            <div class="step-by-step">
+                <strong>Find 30% of 40 mangoes</strong>
+                <p>Step 1: Convert 30% to fraction = 30/100</p>
+                <p>Step 2: Multiply by 40</p>
+                <p>30/100 × 40 = (30 × 40)/100 = 1200/100 = 12</p>
+                <p><strong>Answer: 12 mangoes</strong></p>
+            </div>
+
+            <div class="step-by-step">
+                <strong>Find 25% of 80 students</strong>
+                <p>25% = 25/100 = 1/4</p>
+                <p>1/4 × 80 = 80/4 = 20</p>
+                <p><strong>Answer: 20 students</strong></p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Calculate It!</h3>
+                <p>Find percentage of a number:</p>
+                <div class="input-group">
+                    <input type="number" id="percent5" value="20">% of
+                    <input type="number" id="quantity5" value="50">
+                    <button onclick="findPercentage()">Calculate!</button>
+                </div>
+                <div class="result" id="result5"></div>
+            </div>
+
+            <h3>🔄 Reverse Problem: What percentage is X of Y?</h3>
+
+            <div class="step-by-step">
+                <strong>What percentage of 85 is 17?</strong>
+                <p>Step 1: Make a fraction: 17/85</p>
+                <p>Step 2: Multiply by 100</p>
+                <p>(17/85) × 100 = 1700/85 = 20</p>
+                <p><strong>Answer: 20%</strong></p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎯 Reverse Calculator!</h3>
+                <p>What percentage is:</p>
+                <div class="input-group">
+                    <input type="number" id="part" value="15"> out of
+                    <input type="number" id="whole" value="60">?
+                    <button onclick="findWhatPercent()">Find %!</button>
+                </div>
+                <div class="result" id="result5b"></div>
+            </div>
+
+            <div class="example-box">
+                <h3>🎨 Real Life Examples:</h3>
+                <p>🍕 If a pizza has 8 slices and you eat 2, you ate 25% (2/8 = 1/4 = 25%)</p>
+                <p>💯 If you score 18 out of 20, you got 90% (18/20 × 100 = 90%)</p>
+                <p>💰 If you save $15 from $100, you saved 15%</p>
+            </div>
+
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="showLesson(4)">⬅️ Previous</button>
+                <button class="arrow-btn" onclick="showLesson(6)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Lesson 7: Word Problems -->
+        <div class="lesson-section" id="lesson6">
+            <h2>📖 Word Problems Made Easy!</h2>
+
+            <div class="concept-box">
+                <h3 style="color: white;">🎯 Problem Solving Steps:</h3>
+                <p>1. Read carefully and identify what you need to find</p>
+                <p>2. Write down the given information</p>
+                <p>3. Choose the right formula</p>
+                <p>4. Solve step by step</p>
+                <p>5. Check if answer makes sense</p>
+            </div>
+
+            <h3>🌟 Type 1: Finding Percentage</h3>
+
+            <div class="step-by-step">
+                <strong>Problem: In a class of 40 students, 25% are girls. How many girls?</strong>
+                <p>Given: Total = 40, Percentage = 25%</p>
+                <p>Find: Number of girls</p>
+                <p>Solution: 25% of 40 = 25/100 × 40 = 10</p>
+                <p><strong>Answer: 10 girls</strong></p>
+            </div>
+
+            <h3>🎯 Type 2: Comparing Percentages</h3>
+
+            <div class="step-by-step">
+                <strong>Problem: Amit scored 45/60 in Science and 36/50 in English. In which subject did he perform better?</strong>
+                <p>Science: (45/60) × 100 = 75%</p>
+                <p>English: (36/50) × 100 = 72%</p>
+                <p><strong>Answer: Better in Science!</strong></p>
+            </div>
+
+            <h3>💰 Type 3: Increase/Decrease Problems</h3>
+
+            <div class="step-by-step">
+                <strong>Problem: A toy costs ₹500. Price increased by 20%. What's the new price?</strong>
+                <p>Increase = 20% of 500 = (20/100) × 500 = ₹100</p>
+                <p>New price = Old price + Increase</p>
+                <p>New price = 500 + 100 = ₹600</p>
+                <p><strong>Answer: ₹600</strong></p>
+            </div>
+
+            <div class="formula">
+                Percentage Change = (Change/Original) × 100
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Solve This Problem!</h3>
+                <div id="wordProblem" style="background: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <p style="font-size: 1.2em;"><strong>A shop has 200 items. If 35% are sold, how many items are left?</strong></p>
+                </div>
+                <div class="input-group">
+                    <label>Items sold:</label>
+                    <input type="number" id="itemsSold" placeholder="?">
+                    <label>Items left:</label>
+                    <input type="number" id="itemsLeft" placeholder="?">
+                    <button onclick="checkWordProblem()">Check Answer!</button>
+                </div>
+                <div class="result" id="result6"></div>
+            </div>
+
+            <div class="example-box">
+                <h3>🎯 More Practice Problems:</h3>
+                <p><strong>1.</strong> A cricket team played 50 matches and won 70%. How many matches did they win?</p>
+                <p><strong>2.</strong> If 15% of 300 students are absent, how many are present?</p>
+                <p><strong>3.</strong> A shirt was ₹800, now ₹640. What's the percentage discount?</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>🌟 Pro Tip:</strong> Always check your answer! If you found 150% of something is less than the original, something's wrong!
+            </div>
+
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="showLesson(5)">⬅️ Previous</button>
+                <button class="arrow-btn" onclick="showLesson(7)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Lesson 8: Final Quiz -->
+        <div class="lesson-section" id="lesson7">
+            <h2>🏆 Final Quiz - Test Your Skills!</h2>
+
+            <div class="mascot">🎓</div>
+
+            <div id="quizContainer">
+                <div class="quiz-question" id="q1">
+                    <h3>Question 1:</h3>
+                    <p style="font-size: 1.2em;">What is 25% as a fraction in simplest form?</p>
+                    <div class="quiz-option" onclick="checkQuiz(1, 'A')">A) 1/2</div>
+                    <div class="quiz-option" onclick="checkQuiz(1, 'B')">B) 1/4</div>
+                    <div class="quiz-option" onclick="checkQuiz(1, 'C')">C) 1/5</div>
+                    <div class="quiz-option" onclick="checkQuiz(1, 'D')">D) 2/5</div>
+                </div>
+
+                <div class="quiz-question" id="q2" style="display:none;">
+                    <h3>Question 2:</h3>
+                    <p style="font-size: 1.2em;">What is 0.75 as a percentage?</p>
+                    <div class="quiz-option" onclick="checkQuiz(2, 'A')">A) 7.5%</div>
+                    <div class="quiz-option" onclick="checkQuiz(2, 'B')">B) 75%</div>
+                    <div class="quiz-option" onclick="checkQuiz(2, 'C')">C) 750%</div>
+                    <div class="quiz-option" onclick="checkQuiz(2, 'D')">D) 0.75%</div>
+                </div>
+
+                <div class="quiz-question" id="q3" style="display:none;">
+                    <h3>Question 3:</h3>
+                    <p style="font-size: 1.2em;">What is 30% of 60?</p>
+                    <div class="quiz-option" onclick="checkQuiz(3, 'A')">A) 15</div>
+                    <div class="quiz-option" onclick="checkQuiz(3, 'B')">B) 18</div>
+                    <div class="quiz-option" onclick="checkQuiz(3, 'C')">C) 20</div>
+                    <div class="quiz-option" onclick="checkQuiz(3, 'D')">D) 30</div>
+                </div>
+
+                <div class="quiz-question" id="q4" style="display:none;">
+                    <h3>Question 4:</h3>
+                    <p style="font-size: 1.2em;">What percentage is 15 out of 50?</p>
+                    <div class="quiz-option" onclick="checkQuiz(4, 'A')">A) 20%</div>
+                    <div class="quiz-option" onclick="checkQuiz(4, 'B')">B) 25%</div>
+                    <div class="quiz-option" onclick="checkQuiz(4, 'C')">C) 30%</div>
+                    <div class="quiz-option" onclick="checkQuiz(4, 'D')">D) 35%</div>
+                </div>
+
+                <div class="quiz-question" id="q5" style="display:none;">
+                    <h3>Question 5:</h3>
+                    <p style="font-size: 1.2em;">A shirt costs ₹400. After 25% discount, what's the new price?</p>
+                    <div class="quiz-option" onclick="checkQuiz(5, 'A')">A) ₹100</div>
+                    <div class="quiz-option" onclick="checkQuiz(5, 'B')">B) ₹200</div>
+                    <div class="quiz-option" onclick="checkQuiz(5, 'C')">C) ₹300</div>
+                    <div class="quiz-option" onclick="checkQuiz(5, 'D')">D) ₹350</div>
+                </div>
+
+                <div id="quizResult" style="display:none;">
+                    <div class="celebration">🎉🎊🏆🎉🎊</div>
+                    <h2 style="color: #4CAF50; text-align: center;">Congratulations!</h2>
+                    <p style="text-align: center; font-size: 1.5em;">You scored: <span id="quizScore" style="font-size: 2em; color: #667eea;"></span></p>
+                    <p style="text-align: center; font-size: 1.2em;" id="quizMessage"></p>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button onclick="restartQuiz()" style="font-size: 1.3em;">Try Again 🔄</button>
+                        <button onclick="showLesson(0)" style="font-size: 1.3em; background: #764ba2;">Review Lessons 📚</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="showLesson(6)">⬅️ Previous</button>
+                <button class="arrow-btn" onclick="showLesson(0)">Start Over 🔄</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLesson = 0;
+        let quizScore = 0;
+        let currentQuestion = 1;
+        const quizAnswers = {
+            1: 'B', // 25% = 1/4
+            2: 'B', // 0.75 = 75%
+            3: 'B', // 30% of 60 = 18
+            4: 'C', // 15/50 = 30%
+            5: 'C'  // 400 - 100 = 300
+        };
+
+        // Initialize grids
+        function createGrid(gridId, shadedCount = 0) {
+            const grid = document.getElementById(gridId);
+            grid.innerHTML = '';
+            for (let i = 0; i < 100; i++) {
+                const square = document.createElement('div');
+                square.className = 'grid-square';
+                if (i < shadedCount) {
+                    square.classList.add('shaded');
+                }
+                grid.appendChild(square);
+            }
+        }
+
+        // Initial setup
+        createGrid('grid1', 36);
+        createGrid('grid2', 50);
+
+        function shadeGrid() {
+            const percent = parseInt(document.getElementById('userPercent').value);
+            if (percent >= 0 && percent <= 100) {
+                createGrid('grid2', percent);
+            } else {
+                alert('Please enter a number between 0 and 100!');
+            }
+        }
+
+        function showLesson(lessonIndex) {
+            // Hide all lessons
+            const lessons = document.querySelectorAll('.lesson-section');
+            lessons.forEach(lesson => lesson.classList.remove('active'));
+            
+            // Show selected lesson
+            document.getElementById(`lesson${lessonIndex}`).classList.add('active');
+            
+            // Update nav buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === lessonIndex) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            currentLesson = lessonIndex;
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / 8) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = Math.round(progress) + '%';
+        }
+
+        function gcd(a, b) {
+            return b === 0 ? a : gcd(b, a % b);
+        }
+
+        function convertPercentToFraction() {
+            const percent = parseInt(document.getElementById('percentInput1').value);
+            const numerator = percent;
+            const denominator = 100;
+            const divisor = gcd(numerator, denominator);
+            const simplifiedNum = numerator / divisor;
+            const simplifiedDen = denominator / divisor;
+            
+            const result = document.getElementById('result1');
+            result.innerHTML = `<strong>${percent}%</strong> = ${numerator}/${denominator} = <strong>${simplifiedNum}/${simplifiedDen}</strong><br>Ratio: <strong>${simplifiedNum}:${simplifiedDen}</strong>`;
+            result.classList.add('show');
+        }
+
+        function convertPercentToDecimal() {
+            const percent = parseFloat(document.getElementById('percentInput2').value);
+            const decimal = percent / 100;
+            
+            const result = document.getElementById('result2');
+            result.innerHTML = `<strong>${percent}%</strong> = ${percent}/100 = <strong>${decimal}</strong>`;
+            result.classList.add('show');
+        }
+
+        function convertFractionToPercent() {
+            const num = parseFloat(document.getElementById('numerator').value);
+            const den = parseFloat(document.getElementById('denominator').value);
+            
+            if (den === 0) {
+                alert('Denominator cannot be zero!');
+                return;
+            }
+            
+            const percent = (num / den) * 100;
+            const result = document.getElementById('result3');
+            result.innerHTML = `<strong>${num}/${den}</strong> = (${num}/${den}) × 100 = <strong>${percent.toFixed(2)}%</strong>`;
+            result.classList.add('show');
+        }
+
+        function convertDecimalToPercent() {
+            const decimal = parseFloat(document.getElementById('decimalInput').value);
+            const percent = decimal * 100;
+            
+            const result = document.getElementById('result4');
+            result.innerHTML = `<strong>${decimal}</strong> × 100 = <strong>${percent}%</strong>`;
+            result.classList.add('show');
+        }
+
+        function findPercentage() {
+            const percent = parseFloat(document.getElementById('percent5').value);
+            const quantity = parseFloat(document.getElementById('quantity5').value);
+            const answer = (percent / 100) * quantity;
+            
+            const result = document.getElementById('result5');
+            result.innerHTML = `<strong>${percent}%</strong> of <strong>${quantity}</strong> = (${percent}/100) × ${quantity} = <strong>${answer}</strong>`;
+            result.classList.add('show');
+        }
+
+        function findWhatPercent() {
+            const part = parseFloat(document.getElementById('part').value);
+            const whole = parseFloat(document.getElementById('whole').value);
+            
+            if (whole === 0) {
+                alert('Total cannot be zero!');
+                return;
+            }
+            
+            const percent = (part / whole) * 100;
+            const result = document.getElementById('result5b');
+            result.innerHTML = `<strong>${part}</strong> out of <strong>${whole}</strong> = (${part}/${whole}) × 100 = <strong>${percent.toFixed(2)}%</strong>`;
+            result.classList.add('show');
+        }
+
+        function checkWordProblem() {
+            const sold = parseInt(document.getElementById('itemsSold').value);
+            const left = parseInt(document.getElementById('itemsLeft').value);
+            
+            const correctSold = (35 / 100) * 200; // 70
+            const correctLeft = 200 - correctSold; // 130
+            
+            const result = document.getElementById('result6');
+            
+            if (sold === correctSold && left === correctLeft) {
+                result.innerHTML = `🎉 Excellent! You're absolutely right!<br>
+                    35% of 200 = 70 items sold<br>
+                    200 - 70 = 130 items left<br>
+                    Keep up the great work! 🌟`;
+                result.style.background = '#4CAF50';
+                result.style.color = 'white';
+            } else {
+                result.innerHTML = `Not quite right. Let me help you:<br>
+                    <strong>Step 1:</strong> Find items sold = 35% of 200 = (35/100) × 200 = 70 items<br>
+                    <strong>Step 2:</strong> Items left = 200 - 70 = 130 items<br>
+                    Try again! 💪`;
+                result.style.background = '#ffeb3b';
+                result.style.color = '#333';
+            }
+            result.classList.add('show');
+        }
+
+        function checkQuiz(questionNum, answer) {
+            const options = document.querySelectorAll(`#q${questionNum} .quiz-option`);
+            
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+            
+            if (answer === quizAnswers[questionNum]) {
+                event.target.classList.add('correct');
+                quizScore++;
+                setTimeout(() => {
+                    document.getElementById(`q${questionNum}`).style.display = 'none';
+                    if (questionNum < 5) {
+                        document.getElementById(`q${questionNum + 1}`).style.display = 'block';
+                    } else {
+                        showQuizResult();
+                    }
+                }, 1500);
+            } else {
+                event.target.classList.add('wrong');
+                setTimeout(() => {
+                    options.forEach(opt => {
+                        if (opt.textContent.startsWith(quizAnswers[questionNum])) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }, 500);
+                
+                setTimeout(() => {
+                    document.getElementById(`q${questionNum}`).style.display = 'none';
+                    if (questionNum < 5) {
+                        document.getElementById(`q${questionNum + 1}`).style.display = 'block';
+                    } else {
+                        showQuizResult();
+                    }
+                }, 2500);
+            }
+        }
+
+        function showQuizResult() {
+            document.querySelector('#quizContainer .quiz-question:last-of-type').style.display = 'none';
+            const resultDiv = document.getElementById('quizResult');
+            const scoreSpan = document.getElementById('quizScore');
+            const messageP = document.getElementById('quizMessage');
+            
+            scoreSpan.textContent = `${quizScore}/5`;
+            
+            if (quizScore === 5) {
+                messageP.textContent = '🏆 Perfect Score! You\'re a Percentage Master! 🌟';
+                messageP.style.color = '#4CAF50';
+            } else if (quizScore >= 3) {
+                messageP.textContent = '👍 Great job! You\'re doing really well! Keep practicing!';
+                messageP.style.color = '#2196F3';
+            } else {
+                messageP.textContent = '💪 Good effort! Review the lessons and try again!';
+                messageP.style.color = '#FF9800';
+            }
+            
+            resultDiv.style.display = 'block';
+        }
+
+        function restartQuiz() {
+            quizScore = 0;
+            currentQuestion = 1;
+            
+            // Reset all questions
+            for (let i = 1; i <= 5; i++) {
+                const question = document.getElementById(`q${i}`);
+                question.style.display = i === 1 ? 'block' : 'none';
+                const options = question.querySelectorAll('.quiz-option');
+                options.forEach(opt => {
+                    opt.classList.remove('correct', 'wrong');
+                    opt.style.pointerEvents = 'auto';
+                });
+            }
+            
+            document.getElementById('quizResult').style.display = 'none';
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>

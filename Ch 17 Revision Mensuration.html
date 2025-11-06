@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Riya’s Revision — Mensuration</title>
+<style>
+:root{
+  --ink:#0f172a; --paper:#ffffff; --soft:#f8fafc;
+  --brand:#0ea5e9; --line:#e5e7eb; --home:#FAF03A; --hint:#f59e0b;
+  --ok:#10b981; --bad:#ef4444;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.5;font-size:18px}
+header{padding:22px 14px;background:linear-gradient(180deg,#ecfeff,#fff 70%)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 12px}
+h1{margin:0 0 6px;font-size:clamp(24px,4vw,36px);color:#065f46}
+.lead{margin:2px 0 0;color:#334155}
+main{max-width:1100px;margin:0 auto;padding:16px 12px 140px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.card h2{margin:0 0 10px;color:#065f46;font-size:22px}
+h3{margin:10px 0 8px;font-size:19px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.explain{background:var(--soft);border:1px dashed #cbd5e1;border-radius:12px;padding:12px}
+.badge{display:inline-block;background:#f1f5f9;border:1px solid var(--line);
+  border-radius:20px;padding:6px 10px;font-size:14px}
+.riya{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--line);vertical-align:middle}
+.kid{font-size:18px}
+.big{font-size:20px}
+.tip{background:#fffbeb;border-left:6px solid var(--hint);padding:10px;border-radius:10px}
+.btn{display:inline-block;padding:10px 14px;border-radius:12px;background:var(--brand);
+  color:#fff;text-decoration:none;border:none;cursor:pointer;font-weight:600}
+.btn.ghost{background:#e5e7eb;color:#111}
+.btn.small{padding:6px 10px;font-size:14px;border-radius:9px}
+.input{padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:18px}
+.input.big{width:160px;text-align:center}
+.block{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.center{text-align:center}
+table.grid{width:100%;border-collapse:collapse}
+table.grid th, table.grid td{border:1px solid var(--line);padding:8px;text-align:center}
+
+/* floating home */
+.home-fab{
+  position:fixed; top:12px; right:12px; width:42px; height:42px; line-height:42px;
+  text-align:center; border-radius:50%; background:#FAF03A; color:#111; font-size:20px;
+  text-decoration:none; border:2px solid rgba(0,0,0,.12); box-shadow:0 4px 10px rgba(0,0,0,.15); z-index:9999
+}
+
+/* footer progress */
+.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;z-index:999}
+.meter{flex:1;height:10px;background:#f1f5f9;border-radius:999px;position:relative}
+.meter>span{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#34d399,#0ea5e9);
+  border-radius:999px;transition:width .3s ease}
+.stars{font-size:22px}
+@media (max-width:520px){ body{font-size:17px} .riya{width:40px;height:40px} }
+
+/* SVG helper */
+svg{max-width:220px;max-height:160px}
+svg .dim{font: 14px/1.2 system-ui, sans-serif; fill:#0f172a}
+svg .L{stroke:#ef4444; stroke-width:3}
+svg .B{stroke:#0ea5e9; stroke-width:3}
+svg .s{stroke:#22c55e; stroke-width:3}
+svg .guide{stroke:#94a3b8; stroke-dasharray:6 4; stroke-width:2}
+</style>
+</head>
+<body>
+
+<!-- Floating Home Button -->
+<a class="home-fab" href="index.html" title="Back to Maths Home">🏠</a>
+
+<header>
+  <div class="wrap">
+    <h1>Riya’s Revision — Mensuration</h1>
+    <p class="lead">
+      <img class="riya" src="images/Riya-happy.png" alt="Riya">
+      Perimeter & Area — quick rules, clear figures, fun games! ⭐
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2>Warm-up: Perimeter vs Area</h2>
+    <div class="row">
+      <div class="explain">
+        <strong>Perimeter</strong> = total length around a closed shape.  
+        <span class="badge">Walk the edges and add!</span>
+        <div class="tip"><img class="riya" src="images/Riya-thinking.png" alt="">
+          Rectangle: <b>P = 2(L + B)</b> &nbsp; | &nbsp; Square: <b>P = 4 × side</b>
+        </div>
+      </div>
+      <div class="explain">
+        <strong>Area</strong> = space inside a shape (in square units).  
+        <div class="tip"><img class="riya" src="images/Riya-posing.png" alt="">
+          Rectangle: <b>A = L × B</b> &nbsp; | &nbsp; Square: <b>A = side × side</b>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIGURES: Rectangle with L & B -->
+  <section class="card">
+    <h2>Figures & Formulas</h2>
+    <div class="row">
+      <div class="explain center">
+        <h3>Rectangle</h3>
+        <svg viewBox="0 0 260 180" aria-label="Rectangle with L and B">
+          <rect x="40" y="40" width="180" height="100" fill="none" stroke="#0f172a" stroke-width="4"/>
+          <!-- L (length) -->
+          <line x1="40" y1="150" x2="220" y2="150" class="L"></line>
+          <text x="130" y="170" text-anchor="middle" class="dim">L</text>
+          <!-- B (breadth) -->
+          <line x1="30" y1="40" x2="30" y2="140" class="B"></line>
+          <text x="18" y="95" text-anchor="middle" class="dim">B</text>
+        </svg>
+        <div class="badge">P = 2(L+B), A = L×B</div>
+      </div>
+      <div class="explain center">
+        <h3>Square</h3>
+        <svg viewBox="0 0 220 180" aria-label="Square with side s">
+          <rect x="40" y="30" width="140" height="140" fill="none" stroke="#0f172a" stroke-width="4"/>
+          <line x1="40" y1="180" x2="180" y2="180" class="s"></line>
+          <text x="110" y="175" text-anchor="middle" class="dim">s</text>
+        </svg>
+        <div class="badge">P = 4s, A = s×s</div>
+      </div>
+      <div class="explain center">
+        <h3>Right Triangle (base b, height h)</h3>
+        <svg viewBox="0 0 240 180" aria-label="Right triangle with base and height">
+          <polygon points="40,150 200,150 40,50" fill="none" stroke="#0f172a" stroke-width="4"/>
+          <line x1="40" y1="150" x2="200" y2="150" class="L"></line>
+          <text x="120" y="170" text-anchor="middle" class="dim">b</text>
+          <line x1="40" y1="150" x2="40" y2="50" class="B"></line>
+          <text x="25" y="100" text-anchor="middle" class="dim">h</text>
+          <line x1="40" y1="150" x2="60" y2="150" class="guide"></line>
+          <line x1="60" y1="150" x2="60" y2="130" class="guide"></line>
+        </svg>
+        <div class="badge">A = ½ × b × h</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Exercise — Perimeter Practice</h2>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><img class="riya" src="images/Riya-confused.png"> Desk top: L=90 cm, B=30 cm</div>
+        P = <input id="p1" class="input big" placeholder="cm">
+        <button class="btn small" onclick="chkText('p1','240 cm')">Check</button>
+      </div>
+      <div class="explain">
+        <div class="block"><img class="riya" src="images/Riya-happy.png"> Square board: side=80 cm</div>
+        P = <input id="p2" class="input big" placeholder="cm">
+        <button class="btn small" onclick="chkText('p2','320 cm')">Check</button>
+      </div>
+      <div class="explain">
+        <div class="block"><img class="riya" src="images/Riya-posing.png"> Walkway with sides: 7, 5, 6, 3, 4, 2 (cm)</div>
+        P = <input id="p3" class="input big" placeholder="cm">
+        <button class="btn small" onclick="chkText('p3','27 cm')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Quick Quiz — Rectangle & Square</h2>
+    <div class="row">
+      <div class="explain">
+        Field: L=115 m, B=95 m. P = ?
+        <input id="qq1" class="input big" placeholder="m">
+        <button class="btn small" onclick="chkText('qq1','420 m')">Check</button>
+      </div>
+      <div class="explain">
+        Garden: L=34 m, B=26 m. P = ?
+        <input id="qq2" class="input big" placeholder="m">
+        <button class="btn small" onclick="chkText('qq2','120 m')">Check</button>
+      </div>
+      <div class="explain">
+        Square sheet: Perimeter=48 cm → side=?
+        <input id="qq3" class="input big" placeholder="cm">
+        <button class="btn small" onclick="chkText('qq3','12 cm')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Exercise — Regular Polygons</h2>
+    <div class="row">
+      <div class="explain">
+        Equilateral triangle: side=4 cm → P=?
+        <input id="rp1" class="input big" placeholder="cm">
+        <button class="btn small" onclick="chkText('rp1','12 cm')">Check</button>
+      </div>
+      <div class="explain">
+        Regular pentagon: side=12 cm → P=?
+        <input id="rp2" class="input big" placeholder="cm">
+        <button class="btn small" onclick="chkText('rp2','60 cm')">Check</button>
+      </div>
+      <div class="explain">
+        Regular octagon: side=15 cm → P=?
+        <input id="rp3" class="input big" placeholder="cm">
+        <button class="btn small" onclick="chkText('rp3','120 cm')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Area Practice — Rectangle, Square, Triangle</h2>
+    <div class="row">
+      <div class="explain">
+        Plot: L=45 m, B=30 m → A=?
+        <input id="a1" class="input big" placeholder="sq m">
+        <button class="btn small" onclick="chkText('a1','1350 sq m')">Check</button>
+      </div>
+      <div class="explain">
+        Square: side=14 cm → A=?
+        <input id="a2" class="input big" placeholder="sq cm">
+        <button class="btn small" onclick="chkText('a2','196 sq cm')">Check</button>
+      </div>
+      <div class="explain">
+        Right triangle: b=12 cm, h=8 cm → A=?
+        <input id="a3" class="input big" placeholder="sq cm">
+        <button class="btn small" onclick="chkText('a3','48 sq cm')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>MCQ — Speed Round</h2>
+    <div class="row">
+      <div class="explain">
+        Perimeter of rectangle = ?<br/>
+        <label><input type="radio" name="m1" value="A"> L + B</label><br/>
+        <label><input type="radio" name="m1" value="B"> 2(L + B)</label><br/>
+        <label><input type="radio" name="m1" value="C"> L × B</label><br/>
+        <button class="btn small" onclick="mcq('m1','B')">Check</button>
+      </div>
+      <div class="explain">
+        A square and a rectangle have the same perimeter. Which has the larger area (usually)?<br/>
+        <label><input type="radio" name="m2" value="A"> Rectangle</label><br/>
+        <label><input type="radio" name="m2" value="B"> Square</label><br/>
+        <label><input type="radio" name="m2" value="C"> Same area</label><br/>
+        <button class="btn small" onclick="mcq('m2','B')">Check</button>
+      </div>
+      <div class="explain">
+        Standard unit of area is?<br/>
+        <label><input type="radio" name="m3" value="A"> metre</label><br/>
+        <label><input type="radio" name="m3" value="B"> square metre</label><br/>
+        <label><input type="radio" name="m3" value="C"> litre</label><br/>
+        <button class="btn small" onclick="mcq('m3','B')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Mini-Game — Perimeter Bingo 🎯</h2>
+    <p>Tick items near you and estimate their perimeter:</p>
+    <div class="row">
+      <div class="explain"><label><input type="checkbox" class="bingo" value="book"> Book (rectangle)</label></div>
+      <div class="explain"><label><input type="checkbox" class="bingo" value="tile"> Floor tile (square)</label></div>
+      <div class="explain"><label><input type="checkbox" class="bingo" value="frame"> Photo frame (rectangle)</label></div>
+      <div class="explain"><label><input type="checkbox" class="bingo" value="plate"> Round plate (circle)</label></div>
+    </div>
+    <div class="block">
+      <button class="btn small" onclick="scoreBingo()">Score Bingo</button>
+      <span id="bingoMsg" class="badge">Pick 3+ to win ⭐⭐</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Timer Quiz ⏱️ (30s)</h2>
+    <p>Type answers like: <span class="badge">2(L+B), 4×side, ½×b×h</span></p>
+    <ol>
+      <li>Perimeter of a rectangle?</li>
+      <li>Perimeter of a square?</li>
+      <li>Area of a right triangle?</li>
+    </ol>
+    <div class="block">
+      <input id="t1" class="input" placeholder="comma separated">
+      <button class="btn" onclick="startTimer()">Start</button>
+      <button class="btn ghost" onclick="stopTimer()">Stop</button>
+      <button class="btn" onclick="checkTimer()">Submit</button>
+      <span class="badge">Time: <strong id="tt">30</strong>s</span>
+    </div>
+  </section>
+
+  <section class="card center">
+    <h2>All Done?</h2>
+    <p>Tap to see your report, Riya!</p>
+    <button class="btn" onclick="showSummary()">
+      <img class="riya" src="images/Riya-happy.png" alt=""> Show Summary
+    </button>
+    <div id="summary" class="explain" style="display:none;margin-top:12px"></div>
+  </section>
+
+</main>
+
+<!-- Progress footer -->
+<div class="footer">
+  <div class="stars" id="stars">☆ ☆ ☆</div>
+  <div class="meter"><span id="meter"></span></div>
+  <div class="badge">⭐ <span id="score">0</span></div>
+</div>
+
+<script>
+/* ==== Scoring + Progress ==== */
+let score=0, totalChecks=0, correct=0;
+const meter=document.getElementById('meter'), stars=document.getElementById('stars');
+function updateProgress(){
+  const pct=Math.min(100,Math.round((correct/Math.max(1,totalChecks))*100));
+  meter.style.width=pct+'%';
+  if(pct>=90) stars.textContent='⭐ ⭐ ⭐';
+  else if(pct>=60) stars.textContent='⭐ ⭐ ☆';
+  else if(pct>=30) stars.textContent='⭐ ☆ ☆';
+  else stars.textContent='☆ ☆ ☆';
+  document.getElementById('score').textContent=score;
+}
+function mark(ok){ totalChecks++; if(ok){ correct++; score+=1; } updateProgress(); }
+function normalize(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' ') }
+
+/* ==== Checkers ==== */
+function chkText(id, expected){
+  const v=normalize(document.getElementById(id).value);
+  const ok=v===normalize(expected);
+  alert(ok?'Correct! ✅':'Answer: '+expected);
+  mark(ok);
+}
+function mcq(group, expected){
+  const sel=document.querySelector('input[name="'+group+'"]:checked');
+  if(!sel){ alert('Choose an option'); return; }
+  const ok=sel.value===String(expected);
+  alert(ok?'Correct! ✅':'Not this one.');
+  mark(ok);
+}
+
+/* ==== Bingo ==== */
+function scoreBingo(){
+  const picks=[...document.querySelectorAll('.bingo:checked')].length;
+  const msg=document.getElementById('bingoMsg');
+  if(picks>=3){ msg.textContent='Yay! ⭐⭐ Bingo completed!'; mark(true); mark(true); }
+  else{ msg.textContent='Pick at least 3 to win ⭐⭐'; mark(false); }
+}
+
+/* ==== 30s Timer Quiz ==== */
+let t=null, left=30;
+function startTimer(){ stopTimer(); left=30; document.getElementById('tt').textContent=left;
+  t=setInterval(()=>{ left--; document.getElementById('tt').textContent=left; if(left<=0){ stopTimer(); checkTimer(); } },1000); }
+function stopTimer(){ if(t){ clearInterval(t); t=null; } }
+function checkTimer(){
+  const v=normalize(document.getElementById('t1').value).replace(/,\s*/g,',');
+  const ok=(v==='2(l+b),4×side,½×b×h' || v==='2(l+b),4xside,1/2×b×h' || v==='2(l+b),4×side,1/2xbxh' || v==='2(l+b),4×side,1/2×b×h');
+  alert(ok?'Speed star! +2 ⭐':'Answers: 2(L+B), 4×side, ½×b×h');
+  totalChecks++; if(ok){ correct++; score+=2; } updateProgress();
+}
+
+/* ==== Summary ==== */
+function showSummary(){
+  const s=document.getElementById('summary');
+  s.style.display='block';
+  s.innerHTML = `
+    <h3>Your Scorecard</h3>
+    <p><strong>Score:</strong> ${score} stars<br>
+       <strong>Correct:</strong> ${correct} / ${totalChecks} checks</p>
+    <p>Great job, Riya! Keep practicing with real objects around you — doors, tiles, books!</p>`;
+}
+</script>
+</body>
+</html>

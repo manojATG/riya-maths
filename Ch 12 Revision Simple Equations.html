@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Revision—Simple Equations (Kid Friendly) — Riya</title>
+<style>
+:root{
+  --ink:#0f172a; --paper:#ffffff; --soft:#f8fafc;
+  --brand:#0ea5e9; --mint:#ecfeff; --line:#e5e7eb;
+  --home:#FAF03A; --ok:#10b981; --warn:#ef4444; --hint:#f59e0b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  line-height:1.5; font-size:18px}
+header{padding:22px 14px;background:linear-gradient(180deg,#ecfeff, #fff 70%)}
+.wrap{max-width:960px;margin:0 auto;padding:0 12px}
+h1{margin:0 0 6px;font-size:clamp(24px,4vw,36px);color:#065f46}
+.lead{margin:2px 0 0;color:#334155}
+main{max-width:960px;margin:0 auto;padding:16px 12px 120px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.card h2{margin:0 0 10px;color:#065f46;font-size:22px}
+h3{margin:10px 0 8px;font-size:19px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.explain{background:var(--soft);border:1px dashed #cbd5e1;border-radius:12px;padding:12px}
+.badge{display:inline-block;background:#f1f5f9;border:1px solid var(--line);
+  border-radius:20px;padding:6px 10px;font-size:14px}
+.riya{width:52px;height:52px;border-radius:50%;object-fit:cover;
+  background:#fff;border:1px solid var(--line);vertical-align:middle}
+.kid{font-size:18px}
+.big{font-size:20px}
+.tip{background:#fffbeb;border-left:6px solid var(--hint);padding:10px;border-radius:10px}
+.btn{display:inline-block;padding:10px 14px;border-radius:12px;background:var(--brand);
+  color:#fff;text-decoration:none;border:none;cursor:pointer;font-weight:600}
+.btn.ghost{background:#e5e7eb;color:#111}
+.btn.small{padding:6px 10px;font-size:14px;border-radius:9px}
+.input{padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:18px}
+.input.big{width:110px;text-align:center}
+.block{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}
+hr.sep{border:0;border-top:1px dashed var(--line);margin:10px 0}
+.center{text-align:center}
+
+/* collapsible */
+.details{border:1px solid var(--line);border-radius:12px;background:#ffffff}
+.details summary{list-style:none;cursor:pointer;padding:10px 12px;border-radius:12px;
+  display:flex;align-items:center;gap:10px}
+.details summary:hover{background:#f8fafc}
+.details[open]{border-color:#cbd5e1}
+.details .inside{padding:10px 12px;border-top:1px dashed var(--line)}
+
+/* progress footer */
+.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;z-index:999}
+.meter{flex:1;height:10px;background:#f1f5f9;border-radius:999px;position:relative}
+.meter>span{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#34d399,#0ea5e9);
+  border-radius:999px;transition:width .3s ease}
+.stars{font-size:22px}
+
+/* floating home */
+.home-fab{
+  position:fixed; top:12px; right:12px; width:40px; height:40px; line-height:40px;
+  text-align:center; border-radius:50%; background:var(--home); color:#111; font-size:20px;
+  text-decoration:none; border:2px solid rgba(0,0,0,.12); box-shadow:0 4px 10px rgba(0,0,0,.15); z-index:9999
+}
+@media (max-width:520px){ body{font-size:17px} .riya{width:48px;height:48px} }
+code{background:#f1f5f9;padding:2px 6px;border-radius:8px}
+</style>
+</head>
+<body>
+
+<a class="home-fab" href="index.html" title="Back to Maths Home">🏠</a>
+
+<header>
+  <div class="wrap">
+    <h1>Riya’s Revision — Simple Equations</h1>
+    <p class="lead">
+      <img class="riya" src="images/Riya-happy.png" alt="Riya"> 
+      Read a tiny bit ➜ try 3 questions ➜ earn ⭐. Finish all blocks to complete the level!
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Tiny concept: what is an equation -->
+  <section class="card">
+    <h2>1) What’s a Simple Equation?</h2>
+    <div class="explain big">
+      An equation says **left side = right side**.  
+      Example: <code>2x + 3 = 11</code>.  
+      Your job: find the number for <code>x</code> that makes both sides equal.
+    </div>
+    <details class="details" role="group">
+      <summary><img class="riya" src="images/Riya-thinking.png" alt=""> Show me the idea with steps</summary>
+      <div class="inside kid">
+        Keep it balanced like a see-saw:
+        <ul>
+          <li>What you do to LHS, do the same to RHS.</li>
+          <li>Undo operations in reverse: first remove +/−, then ÷/×.</li>
+        </ul>
+        Example: <code>2x + 3 = 11</code> → subtract 3 → <code>2x = 8</code> → divide by 2 → <code>x = 4</code>.
+      </div>
+    </details>
+  </section>
+
+  <!-- Block A -->
+  <section class="card" id="A">
+    <h2>Block A — One-step (add / subtract)</h2>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><strong>1)</strong><code>x − 5 = 9</code> → x = 
+          <input id="a1" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('a1',14)">Check</button>
+        </div>
+        <div class="block"><strong>2)</strong><code>y + 7 = 12</code> → y =
+          <input id="a2" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('a2',5)">Check</button>
+        </div>
+        <div class="block"><strong>3)</strong><code>p − 13 = −4</code> → p =
+          <input id="a3" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('a3',9)">Check</button>
+        </div>
+      </div>
+      <div class="explain">
+        <details class="details">
+          <summary><img class="riya" src="images/Riya-posing.png" alt=""> Hint</summary>
+          <div class="inside">To move <code>−5</code> to the other side, it becomes <code>+5</code>. To move <code>+7</code>, it becomes <code>−7</code>.</div>
+        </details>
+        <div class="tip">Riya’s tip: write the next line directly under the old one, so steps look neat.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Block B -->
+  <section class="card" id="B">
+    <h2>Block B — One-step (multiply / divide)</h2>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><strong>4)</strong><code>4x = 28</code> → x =
+          <input id="b1" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('b1',7)">Check</button>
+        </div>
+        <div class="block"><strong>5)</strong><code>x / 3 = 6</code> → x =
+          <input id="b2" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('b2',18)">Check</button>
+        </div>
+        <div class="block"><strong>6)</strong><code>(3/5)x = 12</code> → x =
+          <input id="b3" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('b3',20)">Check</button>
+        </div>
+      </div>
+      <div class="explain">
+        <details class="details">
+          <summary><img class="riya" src="images/Riya-shocked.png" alt=""> Steps</summary>
+          <div class="inside">
+            For <code>(3/5)x = 12</code>, multiply both sides by <code>5/3</code> → <code>x = 12 × 5/3 = 20</code>.
+          </div>
+        </details>
+        <div class="tip">Riya’s tip: fractions flip when you move them—multiply by the reciprocal.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Block C -->
+  <section class="card" id="C">
+    <h2>Block C — Brackets & Transposition</h2>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><strong>7)</strong><code>2x − 7 = 5 − x</code> → x =
+          <input id="c1" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('c1',4)">Check</button>
+        </div>
+        <div class="block"><strong>8)</strong><code>3(y − 4) = 42</code> → y =
+          <input id="c2" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('c2',18)">Check</button>
+        </div>
+        <div class="block"><strong>9)</strong><code>3(m + 4) = 39</code> → m =
+          <input id="c3" class="input big" placeholder="?">
+          <button class="btn small" onclick="chk('c3',9)">Check</button>
+        </div>
+      </div>
+      <div class="explain">
+        <details class="details">
+          <summary><img class="riya" src="images/Riya-confused.png" alt=""> Need a nudge?</summary>
+          <div class="inside">
+            Move all x’s to one side and numbers to the other.  
+            For Q7: add x to both sides → <code>3x − 7 = 5</code>; add 7 → <code>3x = 12</code>; divide 3 → <code>x = 4</code>.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick MCQ -->
+  <section class="card">
+    <h2>Quick Quiz — Choose One</h2>
+    <div class="row">
+      <div class="explain">
+        <div><strong>10)</strong> If <code>3x − 5 = 13</code>, x = ?</div>
+        <label><input type="radio" name="m1" value="5"> 5</label>
+        <label><input type="radio" name="m1" value="6"> 6</label>
+        <label><input type="radio" name="m1" value="7"> 7</label>
+        <div class="block"><button class="btn small" onclick="mcq('m1','6')">Check</button></div>
+      </div>
+      <div class="explain">
+        <div><strong>11)</strong> If <code>x/3 = 4</code>, x = ?</div>
+        <label><input type="radio" name="m2" value="7"> 7</label>
+        <label><input type="radio" name="m2" value="8"> 8</label>
+        <label><input type="radio" name="m2" value="12"> 12</label>
+        <div class="block"><button class="btn small" onclick="mcq('m2','12')">Check</button></div>
+      </div>
+      <div class="explain">
+        <div><strong>12)</strong> Moving <code>+5</code> across “=” becomes …?</div>
+        <label><input type="radio" name="m3" value="+5"> +5</label>
+        <label><input type="radio" name="m3" value="-5"> −5</label>
+        <div class="block"><button class="btn small" onclick="mcq('m3','-5')">Check</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini Game -->
+  <section class="card">
+    <h2>Mini Game — 30-Second Sprint</h2>
+    <p>Type answers like this: <span class="badge">9, 9, 12</span></p>
+    <table class="kv" style="width:100%;border-collapse:collapse">
+      <tr><th style="border:1px solid var(--line);padding:8px;background:#f9fafb">Equations</th>
+          <th style="border:1px solid var(--line);padding:8px;background:#f9fafb">Your Answers</th></tr>
+      <tr>
+        <td style="border:1px solid var(--line);padding:8px">4x = 36,  x + 4 = 13,  x/3 = 4</td>
+        <td style="border:1px solid var(--line);padding:8px">
+          <input id="speed" class="input" placeholder="9, 9, 12" style="width:100%">
+        </td>
+      </tr>
+    </table>
+    <div class="block">
+      <button class="btn" onclick="startTimer()">Start 30s</button>
+      <button class="btn ghost" onclick="stopTimer()">Stop</button>
+      <button class="btn" onclick="checkSprint()">Submit</button>
+      <span class="badge">Time: <strong id="tt">30</strong>s</span>
+    </div>
+  </section>
+
+  <!-- Finish -->
+  <section class="card center">
+    <h2>All Done?</h2>
+    <p>Tap for your report.</p>
+    <button class="btn" onclick="showSummary()"><img class="riya" src="images/Riya-happy.png" alt=""> Show Summary</button>
+    <div id="summary" class="explain" style="display:none;margin-top:12px"></div>
+  </section>
+
+</main>
+
+<!-- Progress footer -->
+<div class="footer">
+  <div class="stars" id="stars">☆ ☆ ☆</div>
+  <div class="meter"><span id="meter"></span></div>
+  <div class="badge">⭐ <span id="score">0</span></div>
+</div>
+
+<script>
+let score=0, totalChecks=0, correct=0;
+const meter = document.getElementById('meter');
+const stars = document.getElementById('stars');
+
+function updateProgress(){
+  const pct = Math.min(100, Math.round((correct/Math.max(1,totalChecks))*100));
+  meter.style.width = pct + '%';
+  if(pct>=90) stars.textContent = '⭐ ⭐ ⭐';
+  else if(pct>=60) stars.textContent = '⭐ ⭐ ☆';
+  else if(pct>=30) stars.textContent = '⭐ ☆ ☆';
+  else stars.textContent = '☆ ☆ ☆';
+  document.getElementById('score').textContent = score;
+}
+
+function ding(ok){
+  if(ok){ new Audio('data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAA').play().catch(()=>{}); }
+}
+
+function mark(okay){
+  totalChecks++;
+  if(okay){ correct++; score+=1; ding(true); }
+  updateProgress();
+}
+
+function chk(id, ans){
+  const v = (document.getElementById(id).value||'').trim().toLowerCase();
+  const ok = v === String(ans).toLowerCase();
+  alert(ok ? 'Great job! ✅' : 'Try again! The answer is '+ans);
+  mark(ok);
+}
+
+function mcq(group, expected){
+  const sel = document.querySelector('input[name="'+group+'"]:checked');
+  if(!sel){ alert('Choose an option'); return; }
+  const ok = sel.value === String(expected);
+  alert(ok ? 'Correct! ✅' : 'Oops, not this one.');
+  mark(ok);
+}
+
+/* sprint timer */
+let t=null, left=30;
+function startTimer(){ stopTimer(); left=30; document.getElementById('tt').textContent=left;
+  t=setInterval(()=>{ left--; document.getElementById('tt').textContent=left; if(left<=0){ stopTimer(); checkSprint(); } },1000);
+}
+function stopTimer(){ if(t){ clearInterval(t); t=null; } }
+function checkSprint(){
+  const v=(document.getElementById('speed').value||'').replace(/\s+/g,'').toLowerCase();
+  const ok = (v==='9,9,12');
+  alert(ok ? 'Speed star! +2 ⭐' : 'Correct answers: 9,9,12');
+  totalChecks++; if(ok){ correct++; score+=2; }
+  updateProgress();
+}
+
+/* summary */
+function showSummary(){
+  const s=document.getElementById('summary');
+  s.style.display='block';
+  s.innerHTML = `
+    <h3>Your Scorecard</h3>
+    <p><strong>Score:</strong> ${score} stars<br>
+       <strong>Correct:</strong> ${correct} / ${totalChecks} checks</p>
+    <p>Keep going, Riya! Aim for full ⭐⭐⭐ by re-trying any wrong ones.</p>`;
+}
+</script>
+</body>
+</html>

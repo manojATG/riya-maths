@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Revision—Constructions (Kid Friendly) — Riya</title>
+<style>
+:root{
+  --ink:#0f172a; --paper:#ffffff; --soft:#f8fafc;
+  --brand:#0ea5e9; --line:#e5e7eb; --home:#FAF03A; --hint:#f59e0b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  line-height:1.5; font-size:18px}
+header{padding:22px 14px;background:linear-gradient(180deg,#ecfeff,#fff 70%)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 12px}
+h1{margin:0 0 6px;font-size:clamp(24px,4vw,36px);color:#065f46}
+.lead{margin:2px 0 0;color:#334155}
+main{max-width:1000px;margin:0 auto;padding:16px 12px 120px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.card h2{margin:0 0 10px;color:#065f46;font-size:22px}
+h3{margin:10px 0 8px;font-size:19px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.explain{background:var(--soft);border:1px dashed #cbd5e1;border-radius:12px;padding:12px}
+.badge{display:inline-block;background:#f1f5f9;border:1px solid var(--line);
+  border-radius:20px;padding:6px 10px;font-size:14px}
+.riya{width:48px;height:48px;border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--line);vertical-align:middle}
+.kid{font-size:18px}
+.big{font-size:20px}
+.tip{background:#fffbeb;border-left:6px solid var(--hint);padding:10px;border-radius:10px}
+.btn{display:inline-block;padding:10px 14px;border-radius:12px;background:var(--brand);
+  color:#fff;text-decoration:none;border:none;cursor:pointer;font-weight:600}
+.btn.ghost{background:#e5e7eb;color:#111}
+.btn.small{padding:6px 10px;font-size:14px;border-radius:9px}
+.input{padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:18px}
+.input.big{width:120px;text-align:center}
+.block{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.center{text-align:center}
+
+/* collapsible */
+.details{border:1px solid var(--line);border-radius:12px;background:#ffffff}
+.details summary{list-style:none;cursor:pointer;padding:10px 12px;border-radius:12px;
+  display:flex;align-items:center;gap:10px}
+.details summary:hover{background:#f8fafc}
+.details[open]{border-color:#cbd5e1}
+.details .inside{padding:10px 12px;border-top:1px dashed var(--line)}
+
+/* progress footer */
+.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;z-index:999}
+.meter{flex:1;height:10px;background:#f1f5f9;border-radius:999px;position:relative}
+.meter>span{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#34d399,#0ea5e9);
+  border-radius:999px;transition:width .3s ease}
+.stars{font-size:22px}
+
+/* floating home */
+.home-fab{
+  position:fixed; top:12px; right:12px; width:42px; height:42px; line-height:42px;
+  text-align:center; border-radius:50%; background:var(--home); color:#111; font-size:20px;
+  text-decoration:none; border:2px solid rgba(0,0,0,.12); box-shadow:0 4px 10px rgba(0,0,0,.15); z-index:9999
+}
+@media (max-width:520px){ body{font-size:17px} .riya{width:44px;height:44px} }
+</style>
+</head>
+<body>
+
+<a class="home-fab" href="index.html" title="Back to Maths Home">🏠</a>
+
+<header>
+  <div class="wrap">
+    <h1>Riya’s Revision — Constructions</h1>
+    <p class="lead">
+      <img class="riya" src="images/Riya-happy.png" alt="Riya">
+      Short steps ➜ try 3-at-a-time ➜ win ⭐. Circles, lines, perpendiculars, angles & more!
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2>Tools You’ll Use</h2>
+    <div class="row">
+      <div class="explain"><strong>Ruler:</strong> measure & draw straight lines.</div>
+      <div class="explain"><strong>Compass:</strong> draw perfect circles & arcs.</div>
+      <div class="explain"><strong>Divider:</strong> pick up distances safely.</div>
+      <div class="explain"><strong>Protractor & Set Squares:</strong> make angles like 30°, 45°, 60°, 90° …</div>
+    </div>
+    <div class="tip"><img class="riya" src="images/Riya-thinking.png" alt=""> Riya’s tips: sharp pencil, light points, thin lines, careful with compass tips.</div>
+  </section>
+
+  <!-- Circles -->
+  <section class="card" id="circle">
+    <h2>1) Circles</h2>
+    <div class="explain big">
+      <strong>How to draw radius r:</strong> mark centre O → set compass to r on a ruler → place at O → turn to draw.
+      <div class="badge">Word: <em>Concentric</em> = circles with the same centre.</div>
+    </div>
+    <details class="details"><summary><img class="riya" src="images/Riya-posing.png" alt=""> Show mini practice</summary>
+      <div class="inside">
+        Make these: r = 3 cm, 4.5 cm. With same O, draw r = 2.5, 3.5, 4.5 cm. Put P on, Q inside, R outside.
+      </div>
+    </details>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><strong>Quiz:</strong> Circles with same centre are called
+          <input class="input big" id="qc1" placeholder="one word">
+          <button class="btn small" onclick="chkText('qc1','concentric')">Check</button>
+        </div>
+        <div class="block"><strong>True/False:</strong> A radius is longer than any diameter.
+          <select id="qc2" class="input"><option value="">—</option><option>True</option><option>False</option></select>
+          <button class="btn small" onclick="chkSel('qc2','False')">Check</button>
+        </div>
+      </div>
+      <div class="explain">
+        <div class="block"><strong>Riddle:</strong> If boundary passes through O of the first circle, where is the second circle centred?
+          <input class="input big" id="qc3" placeholder="at O / elsewhere">
+          <button class="btn small" onclick="chkText('qc3','elsewhere')">Check</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Line segment -->
+  <section class="card" id="segment">
+    <h2>2) Line Segments</h2>
+    <div class="row">
+      <div class="explain">
+        <h3>Using Ruler</h3>
+        Place ruler → mark 0 and length → join.
+      </div>
+      <div class="explain">
+        <h3>Ruler + Compass (safer)</h3>
+        Draw line l → set compass to length → mark off arc from a point → the cut point gives the segment.
+      </div>
+    </div>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><strong>1)</strong> Need 5 cm: start at A=0; B=?
+          <input class="input big" id="ls1" placeholder="cm">
+          <button class="btn small" onclick="chkNum('ls1',5)">Check</button>
+        </div>
+      </div>
+      <div class="explain">
+        <div class="block"><strong>2)</strong> Arc from P to line l marks Q. Compass was 5.5 cm. PQ length?
+          <input class="input big" id="ls2" placeholder="? cm">
+          <button class="btn small" onclick="chkText('ls2','5.5 cm')">Check</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perpendiculars -->
+  <section class="card" id="perp">
+    <h2>3) Perpendiculars</h2>
+    <div class="row">
+      <div class="explain">
+        <h3>Through a point ON the line</h3>
+        Semicircle from P cuts line at A,B → arcs from A and B meet at Q → join P–Q.
+      </div>
+      <div class="explain">
+        <h3>From a point OFF the line</h3>
+        Arc from P cuts line at A,B → big arcs from A,B meet at Q → join P–Q; it hits line at R at 90°.
+      </div>
+    </div>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><strong>MCQ:</strong> For steps (b,c), radius must be
+          <label><input type="radio" name="pm" value="less"> less than AB/2</label>
+          <label><input type="radio" name="pm" value="more"> more than AB/2</label>
+          <button class="btn small" onclick="mcq('pm','more')">Check</button>
+        </div>
+      </div>
+      <div class="explain">
+        <div class="block"><strong>Fill:</strong> If PQ ⟂ m, we say “PQ is ____ to m”.
+          <input class="input big" id="pf1" placeholder="word">
+          <button class="btn small" onclick="chkText('pf1','perpendicular')">Check</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perpendicular bisector -->
+  <section class="card" id="pbis">
+    <h2>4) Perpendicular Bisector</h2>
+    <div class="explain">
+      Draw AB → arcs from A & B with radius > AB/2 above & below → join cross-points P,Q → PQ cuts AB at midpoint M and is ⟂ to AB.
+    </div>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><strong>Compute:</strong> AB = 5.4 cm. AM =
+          <input class="input big" id="pb1" placeholder="? cm">
+          <button class="btn small" onclick="chkText('pb1','2.7 cm')">Check</button>
+        </div>
+      </div>
+      <div class="explain">
+        <div class="block"><strong>True/False:</strong> Perpendicular bisector always passes through the midpoint.
+          <select id="pb2" class="input"><option value="">—</option><option>True</option><option>False</option></select>
+          <button class="btn small" onclick="chkSel('pb2','True')">Check</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Angles -->
+  <section class="card" id="angles">
+    <h2>5) Angles</h2>
+    <div class="row">
+      <div class="explain">
+        <h3>With Protractor</h3>
+        Place centre at vertex, zero edge on ray, read correct scale → mark → join.
+      </div>
+      <div class="explain">
+        <h3>With Compass</h3>
+        60° by stepping an arc; 30° is its bisector; 90° via perpendicular; then 45°, 120°, 135°, 150° etc.
+      </div>
+    </div>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><strong>Angle Hunt:</strong> 60° then bisect →
+          <input class="input big" id="ag1" placeholder="?°">
+          <button class="btn small" onclick="chkText('ag1','30°')">Check</button>
+        </div>
+      </div>
+      <div class="explain">
+        <div class="block"><strong>Add ’em:</strong> 90° + 45° =
+          <input class="input big" id="ag2" placeholder="?°">
+          <button class="btn small" onclick="chkText('ag2','135°')">Check</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games -->
+  <section class="card" id="games">
+    <h2>Mini Games</h2>
+    <div class="row">
+      <div class="explain">
+        <h3>Timer Quiz (30s)</h3>
+        <p>Type answers like: <span class="badge">concentric, 30°, midpoint</span></p>
+        <ol>
+          <li>Same-centre circles are ____.</li>
+          <li>Bisect 60° gives ____.</li>
+          <li>PQ that cuts AB into equal halves meets at the ____.</li>
+        </ol>
+        <div class="block">
+          <input id="g1" class="input" placeholder="comma separated">
+          <button class="btn" onclick="startTimer()">Start</button>
+          <button class="btn ghost" onclick="stopTimer()">Stop</button>
+          <button class="btn" onclick="checkTimer()">Submit</button>
+          <span class="badge">Time: <strong id="tt">30</strong>s</span>
+        </div>
+      </div>
+      <div class="explain">
+        <h3>Match-It (click to toggle)</h3>
+        <p class="kid">Match the pair: click to turn items green if they go together.</p>
+        <div class="block"><button class="btn small" onclick="toggle(this)" data-k="c-60">Compass step</button> ↔ <button class="btn small" onclick="toggle(this)" data-k="a-60">60°</button></div>
+        <div class="block"><button class="btn small" onclick="toggle(this)" data-k="p-bis">Perp. Bisector</button> ↔ <button class="btn small" onclick="toggle(this)" data-k="mid">Midpoint</button></div>
+        <div class="block"><button class="btn small" onclick="toggle(this)" data-k="perp">Perpendicular</button> ↔ <button class="btn small" onclick="toggle(this)" data-k="90">90°</button></div>
+        <div class="block"><button class="btn ghost" onclick="scoreMatch()">Check Matches</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Finish -->
+  <section class="card center">
+    <h2>All Done?</h2>
+    <p>Tap for your report.</p>
+    <button class="btn" onclick="showSummary()"><img class="riya" src="images/Riya-happy.png" alt=""> Show Summary</button>
+    <div id="summary" class="explain" style="display:none;margin-top:12px"></div>
+  </section>
+
+</main>
+
+<!-- Progress footer -->
+<div class="footer">
+  <div class="stars" id="stars">☆ ☆ ☆</div>
+  <div class="meter"><span id="meter"></span></div>
+  <div class="badge">⭐ <span id="score">0</span></div>
+</div>
+
+<script>
+let score=0, totalChecks=0, correct=0;
+const meter=document.getElementById('meter'), stars=document.getElementById('stars');
+function updateProgress(){
+  const pct=Math.min(100,Math.round((correct/Math.max(1,totalChecks))*100));
+  meter.style.width=pct+'%';
+  if(pct>=90) stars.textContent='⭐ ⭐ ⭐';
+  else if(pct>=60) stars.textContent='⭐ ⭐ ☆';
+  else if(pct>=30) stars.textContent='⭐ ☆ ☆';
+  else stars.textContent='☆ ☆ ☆';
+  document.getElementById('score').textContent=score;
+}
+function mark(ok){ totalChecks++; if(ok){ correct++; score+=1; } updateProgress(); }
+function normalize(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' ') }
+function chkText(id, expected){
+  const v=normalize(document.getElementById(id).value);
+  const ok=v===normalize(expected);
+  alert(ok?'Correct! ✅':'Answer: '+expected); mark(ok);
+}
+function chkNum(id, ans){
+  const v=parseFloat((document.getElementById(id).value||'').replace(/[^\d.]/g,''));
+  const ok=Math.abs(v-ans)<1e-6; alert(ok?'Correct! ✅':'Answer: '+ans); mark(ok);
+}
+function chkSel(id, expected){
+  const v=document.getElementById(id).value;
+  const ok=v===expected; alert(ok?'Correct! ✅':'Answer: '+expected); mark(ok);
+}
+function mcq(group, expected){
+  const sel=document.querySelector('input[name="'+group+'"]:checked');
+  if(!sel){ alert('Choose an option'); return; }
+  const ok=sel.value===String(expected); alert(ok?'Correct! ✅':'Not this one.'); mark(ok);
+}
+/* 30s timer quiz */
+let t=null, left=30;
+function startTimer(){ stopTimer(); left=30; document.getElementById('tt').textContent=left;
+  t=setInterval(()=>{ left--; document.getElementById('tt').textContent=left; if(left<=0){ stopTimer(); checkTimer(); } },1000); }
+function stopTimer(){ if(t){ clearInterval(t); t=null; } }
+function checkTimer(){
+  const v=normalize(document.getElementById('g1').value).replace(/,\s*/g,',');
+  const ok=v==='concentric,30°,midpoint' || v==='concentric,30,midpoint';
+  alert(ok?'Speed star! +2 ⭐':'Answers: concentric, 30°, midpoint');
+  totalChecks++; if(ok){ correct++; score+=2; } updateProgress();
+}
+/* Match-it mini game */
+let match={};
+function toggle(btn){
+  const k=btn.getAttribute('data-k');
+  if(match[k]){ btn.style.background=''; btn.style.color=''; delete match[k]; }
+  else{ match[k]=true; btn.style.background='#d1fae5'; btn.style.color='#065f46'; }
+}
+function scoreMatch(){
+  const required=['c-60','a-60','p-bis','mid','perp','90'];
+  const ok=required.every(k=>match[k]);
+  alert(ok?'+2 ⭐ Matched!':'Try to pair the right ideas (e.g., Perpendicular ↔ 90°)');
+  totalChecks++; if(ok){ correct++; score+=2; } updateProgress();
+}
+/* summary */
+function showSummary(){
+  const s=document.getElementById('summary');
+  s.style.display='block';
+  s.innerHTML=`<h3>Your Scorecard</h3>
+  <p><strong>Score:</strong> ${score} stars<br><strong>Correct:</strong> ${correct} / ${totalChecks} checks</p>
+  <p>Great work, Riya! Revisit any block to turn all stars gold ⭐⭐⭐.</p>`;
+}
+</script>
+</body>
+</html>

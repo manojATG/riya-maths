@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Geometry Construction Adventure - Learn with Fun!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #5a67d8;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 3px solid #fdcb6e;
+        }
+
+        .topic-card {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .steps-container {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #4caf50;
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .tip-box::before {
+            content: "💡 ";
+            font-size: 1.5em;
+        }
+
+        .remember-box {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .remember-box::before {
+            content: "📌 Remember: ";
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .warning-box::before {
+            content: "⚠️ Be Careful: ";
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            background: #667eea;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .nav-btn.active {
+            background: #764ba2;
+            color: white;
+        }
+
+        .quiz-section {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .quiz-option {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .correct {
+            background: #4caf50 !important;
+            color: white !important;
+        }
+
+        .incorrect {
+            background: #f44336 !important;
+            color: white !important;
+        }
+
+        .celebration {
+            font-size: 3em;
+            text-align: center;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .activity-box {
+            background: #ffebee;
+            border: 3px dashed #e91e63;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .tools-list {
+            background: #fff9c4;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .tools-list li {
+            margin: 8px 0;
+            font-size: 1.1em;
+        }
+
+        ul {
+            margin-left: 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example-box {
+            background: #e1f5fe;
+            border-left: 5px solid #03a9f4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .congratulations {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.3em;
+        }
+
+        .emoji {
+            font-size: 2em;
+        }
+
+        canvas {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            margin: 15px 0;
+            background: white;
+            cursor: crosshair;
+        }
+
+        .canvas-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+				.home-fab{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  background:#FAF003;
+  color:#222;text-decoration:none;
+  font-size:22px;line-height:1;
+  border-radius:50%;
+  border:2px solid rgba(0,0,0,0.15);
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  z-index:9999;
+}
+.home-fab:hover{ transform:translateY(-2px); }
+    </style>
+</head>
+<body>
+    <a class="home-fab" href="index.html" aria-label="Home">🏠</a>
+    <div class="container">
+        <h1>🎨 Welcome to Geometry Construction Adventure! 🎨</h1>
+        
+        <div class="intro-box">
+            <h2>🌟 Hey Young Mathematician! 🌟</h2>
+            <p style="font-size: 1.2em;">
+                Welcome to the amazing world of geometry! Today, you're going to learn how to draw perfect shapes using special tools. 
+                It's like being a mathematical artist! 🎭
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Did you know?</strong> Before engineers build rockets 🚀, cars 🚗, or design beautiful dresses 👗, 
+                they first draw them using geometry! Cool, right?
+            </p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar">0%</div>
+        </div>
+
+        <div class="nav-menu" id="navMenu">
+            <button class="nav-btn active" onclick="showSection('intro')">🏠 Start</button>
+            <button class="nav-btn" onclick="showSection('circles')">⭕ Circles</button>
+            <button class="nav-btn" onclick="showSection('lines')">📏 Lines</button>
+            <button class="nav-btn" onclick="showSection('perpendicular')">⊥ Perpendicular</button>
+            <button class="nav-btn" onclick="showSection('angles')">📐 Angles</button>
+            <button class="nav-btn" onclick="showSection('practice')">✏️ Practice</button>
+        </div>
+
+        <!-- INTRODUCTION SECTION -->
+        <div id="intro" class="section">
+            <h2>📚 What You'll Need (Your Magical Tools!)</h2>
+            
+            <div class="tools-list">
+                <h3>Your Geometry Toolkit:</h3>
+                <ul>
+                    <li><strong>✏️ Pencil</strong> - Make sure it's sharp!</li>
+                    <li><strong>📏 Ruler</strong> - For measuring and drawing straight lines</li>
+                    <li><strong>🧭 Compass</strong> - The magical tool for drawing perfect circles</li>
+                    <li><strong>📐 Protractor</strong> - For measuring angles</li>
+                    <li><strong>📄 Paper</strong> - Your canvas!</li>
+                    <li><strong>✂️ Divider</strong> - For comparing lengths</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <strong>Golden Rules for Perfect Drawings:</strong>
+                <ol>
+                    <li>Always keep your pencil sharp ✏️</li>
+                    <li>Draw light lines (don't press too hard!) 🖊️</li>
+                    <li>Keep your tools clean and neat 🧼</li>
+                    <li>Handle compass carefully - it has a sharp point! ⚠️</li>
+                </ol>
+            </div>
+
+            <button class="btn" onclick="startLearning()">🚀 Let's Start Learning!</button>
+        </div>
+
+        <!-- CIRCLES SECTION -->
+        <div id="circles" class="section hidden">
+            <h2>⭕ Chapter 1: Drawing Perfect Circles</h2>
+            
+            <div class="intro-box">
+                <p class="emoji">🎪</p>
+                <p>Look around you! Can you spot circles? A clock, a bangle, wheels... circles are everywhere! 
+                Now you'll learn to draw them perfectly! 🎯</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>🧭 What is a Compass?</h3>
+                <p>A compass is like a magical drawing tool with two legs. One leg has a sharp point (this stays at the center), 
+                and the other has a pencil (this draws the circle as you spin it around!).</p>
+            </div>
+
+            <div class="steps-container">
+                <h3>🎯 Let's Draw a Circle of 4 cm!</h3>
+                <p><strong>Follow these steps carefully:</strong></p>
+                
+                <div id="circleSteps">
+                    <div class="step active">
+                        <span class="step-number">1</span>
+                        <strong>Mark the Center</strong>
+                        <p>Make a small dot on your paper. This is point O - your circle's center! Think of it as the home base. 🏠</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <strong>Set Your Compass</strong>
+                        <p>Place the pointy end of your compass on the ruler at 0. Now open the other end (with the pencil) 
+                        until it reaches the 4 cm mark. Your compass is now ready! 📏</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <strong>Draw the Circle!</strong>
+                        <p>Put the pointy end exactly on point O. Now, holding the top of the compass, 
+                        slowly turn it around in a complete circle. Keep the pointy end still! 🔄</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">4</span>
+                        <strong>Tada! 🎉</strong>
+                        <p>You've drawn a perfect circle with radius 4 cm! The distance from the center (O) to any point on the circle is exactly 4 cm!</p>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="nextStep('circleSteps')">Next Step ▶️</button>
+                <button class="btn" onclick="resetSteps('circleSteps')">🔄 Start Over</button>
+            </div>
+
+            <div class="remember-box">
+                <strong>Important Words to Remember:</strong>
+                <ul>
+                    <li><strong>Center:</strong> The middle point of the circle (O)</li>
+                    <li><strong>Radius:</strong> Distance from center to the edge (4 cm in our example)</li>
+                    <li><strong>Concentric Circles:</strong> Circles with the same center but different sizes</li>
+                </ul>
+            </div>
+
+            <div class="activity-box">
+                <h3>🎨 Fun Activity: Make a Rainbow Circle!</h3>
+                <p>Try drawing 4 circles from the same center with radii: 2 cm, 3 cm, 4 cm, and 5 cm. 
+                Color each circle differently to make a rainbow! 🌈</p>
+            </div>
+
+            <div class="quiz-section">
+                <h3>🧠 Quick Check!</h3>
+                <div class="quiz-question">
+                    <p><strong>Q: If you draw two circles with the same center O, what are they called?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) Twin circles</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">B) Concentric circles</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C) Magic circles</div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="showSection('lines')">Next Chapter: Lines ▶️</button>
+        </div>
+
+        <!-- LINES SECTION -->
+        <div id="lines" class="section hidden">
+            <h2>📏 Chapter 2: Drawing Line Segments</h2>
+            
+            <div class="intro-box">
+                <p class="emoji">✂️</p>
+                <p>A line segment is like a piece of string cut at both ends. It has a starting point and an ending point!</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Method 1: Using Only a Ruler</h3>
+                <div class="steps-container">
+                    <h4>Let's draw a line segment of 5 cm:</h4>
+                    <div id="lineSteps1">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p>Place your ruler flat on the paper. Hold it firmly so it doesn't move!</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p>Put your pencil at the 0 mark and make a small dot. Label it 'A'. This is your starting point!</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p>Now make another dot at the 5 cm mark. Label it 'B'. This is your ending point!</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p>Connect points A and B with a straight line along the ruler. Done! AB is your line segment! ✅</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('lineSteps1')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('lineSteps1')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <h3>Method 2: Using Ruler + Compass (More Accurate!)</h3>
+                <div class="steps-container">
+                    <h4>Let's draw a line segment of 5.5 cm:</h4>
+                    <div id="lineSteps2">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p>Draw a long line 'l' and mark any point P on it.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p>Set your compass to 5.5 cm using the ruler (like you did for circles!).</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p>Place the pointy end on point P. Draw an arc (a curved line) that cuts line l at another point. Call this point Q.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p>PQ is your line segment of exactly 5.5 cm! This method is super accurate! 🎯</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('lineSteps2')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('lineSteps2')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>Why use Method 2?</strong>
+                Sometimes when we look at the ruler, our eyes might not be exactly above the mark, and we might make small mistakes. 
+                Using the compass helps us be more accurate! 🔬
+            </div>
+
+            <button class="btn" onclick="showSection('perpendicular')">Next: Perpendicular Lines ▶️</button>
+        </div>
+
+        <!-- PERPENDICULAR SECTION -->
+        <div id="perpendicular" class="section hidden">
+            <h2>⊥ Chapter 3: Perpendicular Lines (Lines that Meet at 90°)</h2>
+            
+            <div class="intro-box">
+                <p class="emoji">📐</p>
+                <p>Perpendicular lines are like the corners of a book or a window - they meet at a perfect right angle (90°)! 
+                The symbol for perpendicular is ⊥.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Type 1: Perpendicular from a Point ON the Line</h3>
+                <p>Imagine you're standing on a road and want to make a path that goes straight up!</p>
+                
+                <div class="steps-container">
+                    <div id="perpSteps1">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p><strong>Draw the base:</strong> Draw a line l and mark a point P on it.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p><strong>Make a semicircle:</strong> Put your compass point on P and draw a curve that cuts the line at two points. 
+                            Call them A and B. (Think of it like making a rainbow arch! 🌈)</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p><strong>From point A:</strong> Put compass on A and draw an arc above the line. (Make the radius bigger than PA!)</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p><strong>From point B:</strong> Without changing the compass size, put it on B and draw another arc. 
+                            This arc should cross the first arc! Call this crossing point Q.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span>
+                            <p><strong>Draw the perpendicular:</strong> Connect P and Q with a straight line. 
+                            PQ is perpendicular to line l! PQ ⊥ l 🎉</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('perpSteps1')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('perpSteps1')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <h3>Type 2: Perpendicular from a Point OUTSIDE the Line</h3>
+                <p>Now imagine you're standing away from a road and want to find the shortest path to reach it!</p>
+                
+                <div class="steps-container">
+                    <div id="perpSteps2">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p><strong>Draw setup:</strong> Draw a line m and mark a point P outside (above or below) it.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p><strong>Make an arc:</strong> Put compass on P and draw a big arc that cuts line m at two points A and B.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p><strong>From point A:</strong> Put compass on A and draw an arc BELOW line m (on the opposite side from P).</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p><strong>From point B:</strong> Keep the same compass size, put it on B, and draw another arc below line m. 
+                            The two arcs should cross at point Q.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span>
+                            <p><strong>Connect and celebrate:</strong> Draw a line from P to Q. This line crosses line m at point R. 
+                            PQ ⊥ m! You did it! 🌟</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('perpSteps2')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('perpSteps2')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <h3>Type 3: Perpendicular Bisector (Cutting in Half!)</h3>
+                <p>This special line cuts a line segment into two equal parts AND is perpendicular to it! Double awesome! ✂️✌️</p>
+                
+                <div class="steps-container">
+                    <h4>Let's bisect a line segment AB of 5.4 cm:</h4>
+                    <div id="perpSteps3">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p><strong>Draw the line segment:</strong> Draw AB = 5.4 cm using your ruler.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p><strong>From point A:</strong> Open your compass to MORE than half of AB. 
+                            (If AB is 5.4 cm, open it to about 3 cm or more). Draw arcs above and below AB.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p><strong>From point B:</strong> Keep the SAME compass size, put compass on B, and draw arcs above and below. 
+                            They should cross the first arcs! Call these crossing points P (above) and Q (below).</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p><strong>Draw the bisector:</strong> Connect P and Q with a straight line. This line cuts AB at point M. 
+                            PQ is the perpendicular bisector! AM = MB = 2.7 cm! 🎊</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('perpSteps3')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('perpSteps3')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <div class="remember-box">
+                <strong>Magic Fact:</strong> The perpendicular from a point to a line is the SHORTEST distance! 
+                That's why if you want to get to a road quickly, you walk perpendicular to it, not at an angle! 🚶‍♂️
+            </div>
+
+            <button class="btn" onclick="showSection('angles')">Next: Fun with Angles! ▶️</button>
+        </div>
+
+        <!-- ANGLES SECTION -->
+        <div id="angles" class="section hidden">
+            <h2>📐 Chapter 4: Amazing Angles!</h2>
+            
+            <div class="intro-box">
+                <p class="emoji">🔺</p>
+                <p>An angle is formed when two lines meet at a point! Think of it like opening a book - 
+                the more you open it, the bigger the angle! 📖</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>🎯 Drawing Angles with a Protractor</h3>
+                <p>A protractor is like a rainbow ruler that measures angles in degrees (°)!</p>
+                
+                <div class="steps-container">
+                    <h4>Let's draw a 50° angle:</h4>
+                    <div id="angleSteps1">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p><strong>Draw a ray:</strong> Draw a straight line AB with an arrow at the end. This is called a ray!</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p><strong>Place protractor:</strong> Put the center hole of the protractor exactly on point A. 
+                            Line up the bottom (zero line) with ray AB.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p><strong>Find 50°:</strong> Look carefully at the numbers. Find 50° on the inner scale (since we started from zero). 
+                            Make a small dot there and call it C.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p><strong>Complete the angle:</strong> Remove the protractor. Draw a line from A to C. 
+                            ∠BAC = 50°! Perfect! 📐</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('angleSteps1')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('angleSteps1')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                Protractors have TWO sets of numbers! Always start counting from zero. If your ray points right, use the inner scale. 
+                If it points left, use the outer scale! 👀
+            </div>
+
+            <div class="topic-card">
+                <h3>✂️ Angle Bisector (Cutting Angle in Half!)</h3>
+                <p>Just like we cut line segments in half, we can cut angles in half too!</p>
+                
+                <div class="steps-container">
+                    <h4>Let's bisect an angle AOB:</h4>
+                    <div id="angleSteps2">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p><strong>Draw an arc:</strong> Put compass point on O (the corner of the angle). 
+                            Draw an arc that cuts both rays at points P and Q.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p><strong>From P:</strong> Put compass on P and draw an arc in the middle of the angle 
+                            (between the two rays). Make the radius more than half of PQ.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p><strong>From Q:</strong> Keep the same compass size, put it on Q, and draw another arc. 
+                            It should cross the first arc at point R.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p><strong>Draw the bisector:</strong> Draw a ray from O through R. This ray OS divides the angle into two equal parts! 
+                            ∠AOS = ∠BOS! Magic! ✨</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('angleSteps2')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('angleSteps2')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 40px;">🌟 Special Angles with Compass Only!</h2>
+            <p>Now comes the coolest part - you can draw perfect angles without a protractor! 🎨</p>
+
+            <div class="topic-card">
+                <h3>📐 Drawing 60° (Easy Peasy!)</h3>
+                <div class="steps-container">
+                    <div id="angle60Steps">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p>Draw a ray OA.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p>Put compass on O and draw an arc cutting OA at point P.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p>WITHOUT changing the compass size, put it on P and draw another arc cutting the first arc at Q. 
+                            (This is the magic step! ✨)</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p>Draw a ray from O through Q. ∠AOB = 60°! That's it! 🎉</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('angle60Steps')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('angle60Steps')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <h3>📐 Drawing 30° (Half of 60°!)</h3>
+                <div class="example-box">
+                    <p><strong>Here's the trick:</strong></p>
+                    <ol>
+                        <li>First draw a 60° angle (like above)</li>
+                        <li>Then bisect it (cut it in half)</li>
+                        <li>You get 30°! 60° ÷ 2 = 30° 🎯</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <h3>📐 Drawing 90° (Perfect Right Angle!)</h3>
+                <div class="steps-container">
+                    <div id="angle90Steps">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <p>Draw a ray OP.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <p>Draw an arc from O cutting OP at A.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <p>From A, draw an arc cutting the first arc at B (same radius).</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <p>From B, draw another arc cutting the first arc at C (same radius).</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span>
+                            <p>Now from B, draw an arc above the line. From C, draw another arc with the SAME radius. 
+                            They cross at D.</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">6</span>
+                            <p>Draw a ray from O through D. ∠POD = 90°! Perfect corner! 📐</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="nextStep('angle90Steps')">Next Step ▶️</button>
+                    <button class="btn" onclick="resetSteps('angle90Steps')">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <h3>📐 More Amazing Angles!</h3>
+                <div class="example-box">
+                    <p><strong>Once you know 60° and 90°, you can make ALL these angles:</strong></p>
+                    <ul>
+                        <li><strong>45°</strong> = 90° ÷ 2 (bisect 90°)</li>
+                        <li><strong>120°</strong> = 60° + 60° (make two 60° angles next to each other)</li>
+                        <li><strong>135°</strong> = 90° + 45°</li>
+                        <li><strong>150°</strong> = 90° + 60°</li>
+                        <li><strong>75°</strong> = 30° + 45°</li>
+                        <li><strong>105°</strong> = 60° + 45°</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="remember-box">
+                <strong>All angles that are multiples of 15° can be drawn with just a compass and ruler!</strong> 
+                15°, 30°, 45°, 60°, 75°, 90°, 105°, 120°, 135°, 150°, 165°, 180° - you can do them all! 💪
+            </div>
+
+            <button class="btn" onclick="showSection('practice')">Time to Practice! ✏️</button>
+        </div>
+
+        <!-- PRACTICE SECTION -->
+        <div id="practice" class="section hidden">
+            <h2>✏️ Practice Time - Let's Test Your Skills!</h2>
+            
+            <div class="congratulations">
+                <p class="emoji">🎓</p>
+                <h3>Wow! You've Learned So Much!</h3>
+                <p>Now let's see how well you remember everything! 🌟</p>
+            </div>
+
+            <div class="quiz-section">
+                <h3>🧠 Super Quiz Challenge!</h3>
+                
+                <div class="quiz-question">
+                    <p><strong>Q1: What tool do we use to draw perfect circles?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) Ruler</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">B) Compass</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C) Protractor</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) Divider</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Q2: The distance from the center to any point on a circle is called:</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) Diameter</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">B) Radius</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C) Circumference</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) Arc</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Q3: What does the symbol ⊥ mean?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) Equal to</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">B) Parallel</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">C) Perpendicular</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) Not equal to</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Q4: A perpendicular bisector divides a line segment into how many equal parts?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">A) Two</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">B) Three</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C) Four</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) Five</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Q5: What is a right angle?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) 45°</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">B) 60°</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">C) 90°</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) 180°</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Q6: If you bisect a 60° angle, what angle do you get?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) 20°</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">B) 30°</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C) 40°</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) 50°</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Q7: Which tool would you use to measure angles?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) Ruler</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">B) Compass</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">C) Protractor</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) Set square</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Q8: Circles with the same center but different sizes are called:</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">A) Concentric circles</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">B) Eccentric circles</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C) Twin circles</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) Parallel circles</div>
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h3>🎨 Fun Projects to Try!</h3>
+                <ol>
+                    <li><strong>Flower Design:</strong> Draw 6 circles around one center point, each passing through the center. You'll make a beautiful flower! 🌸</li>
+                    <li><strong>Geometric Art:</strong> Draw a square using perpendicular lines, then draw its diagonals. What shape appears in the middle? 💎</li>
+                    <li><strong>Angle Wheel:</strong> From one point, draw angles of 30°, 60°, 90°, 120°, and 150°. Color each section differently! 🎨</li>
+                    <li><strong>Snowflake Pattern:</strong> Draw 6 lines meeting at a point, each 60° apart. Add small perpendiculars on each line. ❄️</li>
+                    <li><strong>Rainbow Circles:</strong> Draw 5 concentric circles and color them like a rainbow! 🌈</li>
+                </ol>
+            </div>
+
+            <div class="topic-card">
+                <h3>📋 Checklist - Can You Do These?</h3>
+                <div style="padding: 15px;">
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Draw a circle of any given radius
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Draw concentric circles
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Draw a line segment using ruler
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Draw a line segment using ruler and compass
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Draw perpendicular from a point on a line
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Draw perpendicular from a point outside a line
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Draw a perpendicular bisector
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Measure and draw angles with protractor
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Bisect an angle
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Construct 30°, 60°, 90° with compass
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" onchange="updateProgress()"> Construct 45°, 120°, 135°, 150°
+                    </label>
+                </div>
+            </div>
+
+            <div class="congratulations" style="margin-top: 40px;">
+                <p class="celebration">🎉🌟🎊</p>
+                <h2>YOU ARE NOW A GEOMETRY MASTER!</h2>
+                <p>You've learned how to use a compass, ruler, and protractor like a pro! 
+                Keep practicing and you'll become even better! 🚀</p>
+                <p style="margin-top: 15px;">Remember: Geometry is everywhere around you! 
+                Look for circles, angles, and perpendicular lines in buildings, nature, and everyday objects! 👀</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>💡 Tips for Success:</strong></p>
+            <p>Practice makes perfect! Try drawing something new every day. 
+            Start simple and gradually try more complex constructions. 
+            Don't worry if it's not perfect the first time - even the best mathematicians had to practice! 💪</p>
+            <p style="margin-top: 10px;">
+                <em>Keep learning, keep growing, and have fun with geometry! 🌟</em>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let currentStepIndex = {};
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update progress
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function startLearning() {
+            showSection('circles');
+            updateProgress();
+        }
+
+        function nextStep(containerId) {
+            const container = document.getElementById(containerId);
+            const steps = container.querySelectorAll('.step');
+            
+            if (!currentStepIndex[containerId]) {
+                currentStepIndex[containerId] = 0;
+            }
+            
+            // Hide current step
+            steps[currentStepIndex[containerId]].classList.remove('active');
+            
+            // Move to next step
+            currentStepIndex[containerId]++;
+            
+            // If we've reached the end, loop back
+            if (currentStepIndex[containerId] >= steps.length) {
+                currentStepIndex[containerId] = 0;
+            }
+            
+            // Show next step
+            steps[currentStepIndex[containerId]].classList.add('active');
+        }
+
+        function resetSteps(containerId) {
+            const container = document.getElementById(containerId);
+            const steps = container.querySelectorAll('.step');
+            
+            steps.forEach(step => step.classList.remove('active'));
+            steps[0].classList.add('active');
+            currentStepIndex[containerId] = 0;
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Remove previous colors from siblings
+            const siblings = element.parentElement.querySelectorAll('.quiz-option');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+            });
+            
+            // Add appropriate class
+            if (isCorrect) {
+                element.classList.add('correct');
+                setTimeout(() => {
+                    showEncouragement('Awesome! 🎉 You got it right!');
+                }, 100);
+            } else {
+                element.classList.add('incorrect');
+                setTimeout(() => {
+                    showEncouragement('Oops! Try again! 💪 You can do it!');
+                }, 100);
+            }
+        }
+
+        function showEncouragement(message) {
+            const existingMsg = document.querySelector('.encouragement-message');
+            if (existingMsg) {
+                existingMsg.remove();
+            }
+            
+            const msg = document.createElement('div');
+            msg.className = 'encouragement-message';
+            msg.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 30px 50px;
+                border-radius: 20px;
+                font-size: 1.5em;
+                font-weight: bold;
+                z-index: 1000;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                animation: popIn 0.3s ease;
+            `;
+            msg.textContent = message;
+            document.body.appendChild(msg);
+            
+            setTimeout(() => {
+                msg.style.animation = 'popOut 0.3s ease';
+                setTimeout(() => msg.remove(), 300);
+            }, 2000);
+        }
+
+        function updateProgress() {
+            // Calculate progress based on checked checkboxes
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const total = checkboxes.length;
+            
+            let percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Add some CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes popIn {
+                    from {
+                        transform: translate(-50%, -50%) scale(0);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translate(-50%, -50%) scale(1);
+                        opacity: 1;
+                    }
+                }
+                @keyframes popOut {
+                    from {
+                        transform: translate(-50%, -50%) scale(1);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translate(-50%, -50%) scale(0);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Riya’s Revision — Symmetry & Reflection</title>
+<style>
+:root{
+  --ink:#0f172a; --paper:#ffffff; --soft:#f8fafc;
+  --brand:#0ea5e9; --line:#e5e7eb; --home:#FAF03A; --hint:#f59e0b;
+  --ok:#10b981; --bad:#ef4444;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.5;font-size:18px}
+header{padding:22px 14px;background:linear-gradient(180deg,#ecfeff,#fff 70%)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 12px}
+h1{margin:0 0 6px;font-size:clamp(24px,4vw,36px);color:#065f46}
+.lead{margin:2px 0 0;color:#334155}
+main{max-width:1100px;margin:0 auto;padding:16px 12px 140px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.card h2{margin:0 0 10px;color:#065f46;font-size:22px}
+h3{margin:10px 0 8px;font-size:19px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.explain{background:var(--soft);border:1px dashed #cbd5e1;border-radius:12px;padding:12px}
+.badge{display:inline-block;background:#f1f5f9;border:1px solid var(--line);
+  border-radius:20px;padding:6px 10px;font-size:14px}
+.riya{width:48px;height:48px;border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--line);vertical-align:middle}
+.kid{font-size:18px}
+.big{font-size:20px}
+.tip{background:#fffbeb;border-left:6px solid var(--hint);padding:10px;border-radius:10px}
+.btn{display:inline-block;padding:10px 14px;border-radius:12px;background:var(--brand);
+  color:#fff;text-decoration:none;border:none;cursor:pointer;font-weight:600}
+.btn.ghost{background:#e5e7eb;color:#111}
+.btn.small{padding:6px 10px;font-size:14px;border-radius:9px}
+.input{padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:18px}
+.input.big{width:140px;text-align:center}
+.block{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.center{text-align:center}
+table.grid{width:100%;border-collapse:collapse}
+table.grid th, table.grid td{border:1px solid var(--line);padding:8px;text-align:center}
+
+/* shape placeholders */
+.shape{height:120px;border:2px dashed #cbd5e1;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;color:#64748b;background:#f8fafc}
+
+/* floating home */
+.home-fab{
+  position:fixed; top:12px; right:12px; width:42px; height:42px; line-height:42px;
+  text-align:center; border-radius:50%; background:#FAF03A; color:#111; font-size:20px;
+  text-decoration:none; border:2px solid rgba(0,0,0,.12); box-shadow:0 4px 10px rgba(0,0,0,.15); z-index:9999
+}
+
+/* footer progress */
+.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;z-index:999}
+.meter{flex:1;height:10px;background:#f1f5f9;border-radius:999px;position:relative}
+.meter>span{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#34d399,#0ea5e9);
+  border-radius:999px;transition:width .3s ease}
+.stars{font-size:22px}
+@media (max-width:520px){ body{font-size:17px} .riya{width:44px;height:44px} }
+</style>
+</head>
+<body>
+
+<!-- Floating Home Button -->
+<a class="home-fab" href="index.html" title="Back to Maths Home">🏠</a>
+
+<header>
+  <div class="wrap">
+    <h1>Riya’s Revision — Symmetry & Reflection</h1>
+    <p class="lead">
+      <img class="riya" src="images/Riya-happy.png" alt="Riya">
+      Let’s spot mirror magic, count symmetry lines, and play quick games! ⭐
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Warm-up / Definitions (from normal + extended) -->
+  <section class="card">
+    <h2>Warm-up: What is Symmetry & Reflection?</h2>
+    <div class="row">
+      <div class="explain">
+        <strong>Line (Axis) of Symmetry</strong>: a line that splits a shape into two matching halves.
+        <div class="tip"><img class="riya" src="images/Riya-thinking.png" alt="">
+          Riya says: “Fold on the line — both sides should overlap exactly!”
+        </div>
+      </div>
+      <div class="explain">
+        <strong>Reflection (Mirror Image)</strong>: flip across a line to get a mirror twin.
+        <div class="badge">Rule: points are at the <em>same distance</em> from the mirror line on both sides.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Count symmetry lines (from both; includes SVG placeholders & inputs) -->
+  <section class="card">
+    <h2>Count the Lines of Symmetry (Shapes)</h2>
+    <div class="row">
+      <div class="explain">
+        <div class="shape">■ Square — imagine vertical, horizontal & diagonals</div>
+        Lines of symmetry:
+        <input id="sq" class="input big" placeholder="?">
+        <button class="btn small" onclick="chkText('sq','4')">Check</button>
+      </div>
+      <div class="explain">
+        <div class="shape">▭ Rectangle — think vertical & horizontal only</div>
+        Lines of symmetry:
+        <input id="rec" class="input big" placeholder="?">
+        <button class="btn small" onclick="chkText('rec','2')">Check</button>
+      </div>
+      <div class="explain">
+        <div class="shape">◯ Circle — every diameter works</div>
+        Lines of symmetry:
+        <input id="ci" class="input big" placeholder="?">
+        <button class="btn small" onclick="chkTextAny('ci',['infinite','many','a lot'])">Check</button>
+      </div>
+      <div class="explain">
+        <div class="shape">🔺 Equilateral triangle — all sides equal</div>
+        Lines of symmetry:
+        <input id="et" class="input big" placeholder="?">
+        <button class="btn small" onclick="chkText('et','3')">Check</button>
+      </div>
+      <div class="explain">
+        <div class="shape">⬡ Regular hexagon — equal sides/angles</div>
+        Lines of symmetry:
+        <input id="hx" class="input big" placeholder="?">
+        <button class="btn small" onclick="chkText('hx','6')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vertical vs Horizontal vs Slanted (from normal) -->
+  <section class="card">
+    <h2>Vertical vs Horizontal vs Slanted</h2>
+    <div class="row">
+      <div class="explain">
+        <strong>Vertical symmetry</strong>: line goes up–down (like a mirror through the middle of a face). “MOM” often has vertical symmetry (font-dependent).
+      </div>
+      <div class="explain">
+        <strong>Horizontal symmetry</strong>: line goes left–right (like the horizon). Butterflies often show horizontal symmetry.
+      </div>
+      <div class="explain">
+        <strong>Slanted symmetry</strong>: a diagonal line (like across a square corner-to-corner).
+      </div>
+    </div>
+    <div class="row">
+      <div class="explain">
+        <div class="block"><img class="riya" src="images/Riya-posing.png" alt="">
+          The word “TOOT” has <em>which</em> symmetry most likely?</div>
+        <select id="w1" class="input">
+          <option value="">—</option><option>Vertical</option><option>Horizontal</option><option>Slanted</option><option>None</option>
+        </select>
+        <button class="btn small" onclick="chkSel('w1','Horizontal')">Check</button>
+      </div>
+      <div class="explain">
+        <div class="block"><img class="riya" src="images/Riya-confused.png" alt="">
+          A rectangle (not a square) has ____ lines of symmetry.</div>
+        <input id="w2" class="input big" placeholder="?">
+        <button class="btn small" onclick="chkText('w2','2')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Letters symmetry (from extended) -->
+  <section class="card">
+    <h2>Letters & Symmetry (Fun)</h2>
+    <p>Type <b>V</b> for Vertical, <b>H</b> for Horizontal, <b>B</b> for Both, or <b>0</b> for None.</p>
+    <table class="grid">
+      <tr><th>Letter</th><th>Your Answer</th><th></th></tr>
+      <tr><td>A</td><td><input id="L_A" class="input big"></td><td><button class="btn small" onclick="chkText('L_A','V')">Check</button></td></tr>
+      <tr><td>H</td><td><input id="L_H" class="input big"></td><td><button class="btn small" onclick="chkText('L_H','B')">Check</button></td></tr>
+      <tr><td>K</td><td><input id="L_K" class="input big"></td><td><button class="btn small" onclick="chkText('L_K','0')">Check</button></td></tr>
+      <tr><td>M</td><td><input id="L_M" class="input big"></td><td><button class="btn small" onclick="chkText('L_M','V')">Check</button></td></tr>
+      <tr><td>N</td><td><input id="L_N" class="input big"></td><td><button class="btn small" onclick="chkText('L_N','0')">Check</button></td></tr>
+      <tr><td>O</td><td><input id="L_O" class="input big"></td><td><button class="btn small" onclick="chkText('L_O','B')">Check</button></td></tr>
+      <tr><td>X</td><td><input id="L_X" class="input big"></td><td><button class="btn small" onclick="chkText('L_X','B')">Check</button></td></tr>
+      <tr><td>Z</td><td><input id="L_Z" class="input big"></td><td><button class="btn small" onclick="chkText('L_Z','0')">Check</button></td></tr>
+    </table>
+  </section>
+
+  <!-- Reflecting points (from normal + extended) -->
+  <section class="card">
+    <h2>Reflecting Points (Mirror across a line)</h2>
+    <div class="row">
+      <div class="explain">
+        <h3>Steps</h3>
+        <ol>
+          <li>Draw the mirror line (axis) ℓ.</li>
+          <li>Measure distance of point A to ℓ (use a perpendicular).</li>
+          <li>Mark A′ on the other side at the same distance along that perpendicular.</li>
+        </ol>
+        <div class="tip"><img class="riya" src="images/Riya-happy.png" alt="">
+          The segment AA′ is <b>perpendicular</b> to the mirror line, and Aℓ = A′ℓ.
+        </div>
+      </div>
+      <div class="explain">
+        If A is 3 cm from ℓ, then A′ is ____ cm from ℓ:
+        <input id="r1" class="input big" placeholder="? cm">
+        <button class="btn small" onclick="chkText('r1','3 cm')">Check</button>
+        <div class="shape" style="margin-top:10px">📷 Insert point reflection diagram here</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Make it symmetric (from normal) -->
+  <section class="card">
+    <h2>Make it Symmetric!</h2>
+    <div class="row">
+      <div class="explain">
+        <div class="shape">📷 Half-drawn butterfly — finish the other half</div>
+        True/False: If you reflect correctly, antenna tips are equal distance from the line.
+        <select id="ms1" class="input"><option value="">—</option><option>True</option><option>False</option></select>
+        <button class="btn small" onclick="chkSel('ms1','True')">Check</button>
+      </div>
+      <div class="explain">
+        <div class="shape">📷 Half star — complete by reflecting</div>
+        Fill: After reflecting, angles stay the ____ size.
+        <input id="ms2" class="input big" placeholder="same/different">
+        <button class="btn small" onclick="chkText('ms2','same')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mirror Flip game (from extended) -->
+  <section class="card">
+    <h2>Mini Game — Mirror Flip</h2>
+    <div class="row">
+      <div class="explain">
+        <div class="shape">📷 Original: Arrow → ; Mirror line is vertical. Which option is the correct mirror?</div>
+        <label><input type="radio" name="mf1" value="A"> A: ← (left-facing)</label><br>
+        <label><input type="radio" name="mf1" value="B"> B: → (same)</label><br>
+        <label><input type="radio" name="mf1" value="C"> C: ↑</label><br>
+        <button class="btn small" onclick="mcq('mf1','A')">Check</button>
+      </div>
+      <div class="explain">
+        <div class="shape">📷 Original: The letter ‘L’ ; Mirror line is horizontal.</div>
+        <label><input type="radio" name="mf2" value="A"> A: L flipped left-right</label><br>
+        <label><input type="radio" name="mf2" value="B"> B: L flipped up-down</label><br>
+        <label><input type="radio" name="mf2" value="C"> C: Same L</label><br>
+        <button class="btn small" onclick="mcq('mf2','B')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Symmetry Bingo (from extended) -->
+  <section class="card">
+    <h2>Symmetry Bingo 🎯 (Objects at Home)</h2>
+    <p>Tick items you can find today that show symmetry:</p>
+    <div class="row">
+      <div class="explain"><label><input type="checkbox" class="bingo" value="door"> Door (rectangle — 2)</label></div>
+      <div class="explain"><label><input type="checkbox" class="bingo" value="clock"> Round wall clock (many)</label></div>
+      <div class="explain"><label><input type="checkbox" class="bingo" value="tile"> Floor tile (square — 4)</label></div>
+      <div class="explain"><label><input type="checkbox" class="bingo" value="leaf"> Leaf (often vertical)</label></div>
+      <div class="explain"><label><input type="checkbox" class="bingo" value="cup"> Cup (usually none)</label></div>
+    </div>
+    <div class="block">
+      <button class="btn small" onclick="scoreBingo()">Score Bingo</button>
+      <span id="bingoMsg" class="badge">Pick 4+ to win ⭐⭐</span>
+    </div>
+  </section>
+
+  <!-- Quick Quiz Mix (from extended) -->
+  <section class="card">
+    <h2>Quick Quiz Mix</h2>
+    <div class="row">
+      <div class="explain">
+        <div><strong>True/False:</strong> A scalene triangle has a vertical or horizontal symmetry line.</div>
+        <select id="qq1" class="input"><option value="">—</option><option>True</option><option>False</option></select>
+        <button class="btn small" onclick="chkSel('qq1','False')">Check</button>
+      </div>
+      <div class="explain">
+        <div>Fill: Another name for symmetry line is ____.</div>
+        <input id="qq2" class="input big" placeholder="axis / mirror line">
+        <button class="btn small" onclick="chkTextAny('qq2',['axis','mirror line','mirror'])">Check</button>
+      </div>
+      <div class="explain">
+        <div>MCQ: A regular pentagon has how many symmetry lines?</div>
+        <label><input type="radio" name="qq3" value="3"> 3</label>
+        <label><input type="radio" name="qq3" value="4"> 4</label>
+        <label><input type="radio" name="qq3" value="5"> 5</label>
+        <button class="btn small" onclick="mcq('qq3','5')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timer Quiz (from both) -->
+  <section class="card">
+    <h2>Timer Quiz ⏱️ (30s)</h2>
+    <p>Type answers like: <span class="badge">axis, equal distance, 4</span></p>
+    <ol>
+      <li>Another word for line of symmetry is ____.</li>
+      <li>Mirror rule: points are at ____ ____ from the line.</li>
+      <li>Lines of symmetry in a square?</li>
+    </ol>
+    <div class="block">
+      <input id="g1" class="input" placeholder="comma separated">
+      <button class="btn" onclick="startTimer()">Start</button>
+      <button class="btn ghost" onclick="stopTimer()">Stop</button>
+      <button class="btn" onclick="checkTimer()">Submit</button>
+      <span class="badge">Time: <strong id="tt">30</strong>s</span>
+    </div>
+  </section>
+
+  <!-- Optional online game link -->
+  <section class="card">
+    <h2>Optional Online Game (1 link)</h2>
+    <p>Want a drag-drop mirror symmetry activity? Try:</p>
+    <p><a href="https://www.geogebra.org/classic?lang=en" target="_blank" rel="noopener">Open GeoGebra (Mirror & Symmetry)</a></p>
+    <p class="tip"><img class="riya" src="images/Riya-posing.png" alt="">
+      Use the <em>Reflect Object in Line</em> tool to play with reflections.</p>
+  </section>
+
+  <!-- Finish -->
+  <section class="card center">
+    <h2>All Done?</h2>
+    <p>Tap to see your report, Riya!</p>
+    <button class="btn" onclick="showSummary()">
+      <img class="riya" src="images/Riya-happy.png" alt=""> Show Summary
+    </button>
+    <div id="summary" class="explain" style="display:none;margin-top:12px"></div>
+  </section>
+
+</main>
+
+<!-- Progress footer -->
+<div class="footer">
+  <div class="stars" id="stars">☆ ☆ ☆</div>
+  <div class="meter"><span id="meter"></span></div>
+  <div class="badge">⭐ <span id="score">0</span></div>
+</div>
+
+<script>
+/* ==== Scoring + Progress ==== */
+let score=0, totalChecks=0, correct=0;
+const meter=document.getElementById('meter'), stars=document.getElementById('stars');
+function updateProgress(){
+  const pct=Math.min(100,Math.round((correct/Math.max(1,totalChecks))*100));
+  meter.style.width=pct+'%';
+  if(pct>=90) stars.textContent='⭐ ⭐ ⭐';
+  else if(pct>=60) stars.textContent='⭐ ⭐ ☆';
+  else if(pct>=30) stars.textContent='⭐ ☆ ☆';
+  else stars.textContent='☆ ☆ ☆';
+  document.getElementById('score').textContent=score;
+}
+function mark(ok){ totalChecks++; if(ok){ correct++; score+=1; } updateProgress(); }
+function normalize(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' ') }
+
+/* ==== Generic checkers ==== */
+function chkText(id, expected){
+  const v=normalize(document.getElementById(id).value);
+  const ok=v===normalize(expected);
+  alert(ok?'Correct! ✅':'Answer: '+expected);
+  mark(ok);
+}
+function chkTextAny(id, arr){
+  const v=normalize(document.getElementById(id).value);
+  const ok=arr.map(normalize).includes(v);
+  alert(ok?'Correct! ✅':'Acceptable answers: '+arr.join(', '));
+  mark(ok);
+}
+function chkSel(id, expected){
+  const v=document.getElementById(id).value;
+  const ok=v===expected;
+  alert(ok?'Correct! ✅':'Answer: '+expected);
+  mark(ok);
+}
+function mcq(group, expected){
+  const sel=document.querySelector('input[name="'+group+'"]:checked');
+  if(!sel){ alert('Choose an option'); return; }
+  const ok=sel.value===String(expected);
+  alert(ok?'Correct! ✅':'Not this one.');
+  mark(ok);
+}
+
+/* ==== Bingo ==== */
+function scoreBingo(){
+  const picks=[...document.querySelectorAll('.bingo:checked')].length;
+  const msg=document.getElementById('bingoMsg');
+  if(picks>=4){ msg.textContent='Yay! ⭐⭐ Bingo completed!'; mark(true); mark(true); }
+  else{ msg.textContent='Pick at least 4 to win ⭐⭐'; mark(false); }
+}
+
+/* ==== 30s Timer Quiz ==== */
+let t=null, left=30;
+function startTimer(){ stopTimer(); left=30; document.getElementById('tt').textContent=left;
+  t=setInterval(()=>{ left--; document.getElementById('tt').textContent=left; if(left<=0){ stopTimer(); checkTimer(); } },1000); }
+function stopTimer(){ if(t){ clearInterval(t); t=null; } }
+function checkTimer(){
+  const v=normalize(document.getElementById('g1').value).replace(/,\s*/g,',');
+  const ok=v==='axis,equal distance,4' || v==='axis,equaldistance,4';
+  alert(ok?'Speed star! +2 ⭐':'Answers: axis, equal distance, 4');
+  totalChecks++; if(ok){ correct++; score+=2; } updateProgress();
+}
+
+/* ==== Summary ==== */
+function showSummary(){
+  const s=document.getElementById('summary');
+  s.style.display='block';
+  s.innerHTML = `
+    <h3>Your Scorecard</h3>
+    <p><strong>Score:</strong> ${score} stars<br>
+       <strong>Correct:</strong> ${correct} / ${totalChecks} checks</p>
+    <p>Awesome work, Riya! Revisit any block to turn all stars gold ⭐⭐⭐.</p>`;
+}
+</script>
+</body>
+</html>

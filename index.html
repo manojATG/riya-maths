@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riya's Super Fun Maths Adventure - Term 2!</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 3em;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+      animation: bounce 2s infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    /* Mascot animation */
+    .big-mascot {
+      width: 180px;
+      transform-origin: top right;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+      animation: wave 2.5s ease-in-out infinite, blink 8s infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(3deg); }
+      50% { transform: rotate(-3deg); }
+      75% { transform: rotate(3deg); }
+    }
+
+    @keyframes blink {
+      0%, 95%, 100% { filter: brightness(1); }
+      96%, 99% { filter: brightness(0.4); }
+    }
+
+    .greeting {
+      font-size: 1.2em;
+      color: #2d3436;
+      padding: 15px 25px;
+      border: 3px dashed #ffeaa7;
+      background: linear-gradient(135deg, #fff 0%, #ffeaa7 100%);
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin: 10px auto;
+    }
+
+    /* Top table layout */
+    .header-table {
+      width: 90%;
+      max-width: 900px;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+    }
+
+    .header-table td {
+      vertical-align: middle;
+      padding: 15px;
+    }
+
+    .left-cell {
+      width: 220px;
+      text-align: center;
+    }
+
+    /* Main chapter table */
+    table.chapters {
+      margin: 30px auto;
+      border-collapse: collapse;
+      width: 90%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    table.chapters th {
+      background: #6c5ce7;
+      color: #fff;
+      font-size: 1.3em;
+      padding: 15px;
+    }
+
+    table.chapters td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      font-size: 1.1em;
+    }
+
+    table.chapters tr:nth-child(even) {
+      background: #f3f4ff;
+    }
+
+    table.chapters tr:hover {
+      background: #fff59d;
+      transform: scale(1.02);
+      transition: all 0.3s ease;
+    }
+
+    a {
+      text-decoration: none;
+      color: #4a3edb;
+      font-weight: bold;
+    }
+
+    .revision-btn {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.8em;
+      border: 2px solid white;
+      transition: 0.3s ease;
+    }
+
+    .revision-btn:hover {
+      background: linear-gradient(135deg, #ff8787 0%, #ff6b6b 100%);
+      transform: scale(1.1);
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 1em;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 40px auto;
+      backdrop-filter: blur(10px);
+    }
+
+    .sparkle {
+      display: inline-block;
+      animation: sparkle 1.5s infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+  
+</head>
+<body>
+
+  <!-- 🔹 TOP TABLE (Mascot + Title + Greeting) -->
+  <table class="header-table">
+    <tr>
+      <td rowspan="2" class="left-cell">
+        <img src="images/Riya4.png" alt="Riya Mascot" class="big-mascot" />
+      </td>
+      <td>
+        <h1>Riya's Super Fun Maths Adventure! <span class="sparkle">🔢🧮📐𝞹📈🧠📚</span></h1>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="greeting">
+          <p>Hey Riya Ganguli, Class 6! 🎉<br><br>
+Math is more than numbers—it's your secret superpower!<br>
+Dive into Term 2 by clicking the chapters below. Let the adventure begin, math wizard! 🧙‍♀️✨</p>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- 🔹 CHAPTERS TABLE -->
+  <table class="chapters">
+    <tr>
+      <th>Chapter</th>
+      <th>Topic</th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <td>4️⃣</td>
+      <td><a href="Ch 4 Playing with Numbers.html">Playing with Numbers 🔢</a></td>
+      <td><a href="Ch 4 Revision perplexity.html" class="revision-btn">Revision</a></td>
+    </tr>
+    <tr>
+      <td>5️⃣</td>
+      <td><a href="Ch 5 Fractions.html">Fractions 🥧</a></td>
+      <td><a href="Ch 5 Revision - Fractrions.html" class="revision-btn">Revision</a></td>
+    </tr>
+    <tr>
+      <td>6️⃣</td>
+      <td><a href="Ch 6 Decimals.html">Decimals 💰</a></td>
+      <td><a href="Ch 6 Revision - Decimals.html" class="revision-btn">Revision</a></td>
+    </tr>
+    <tr>
+      <td>7️⃣</td>
+      <td><a href="Ch 7 Sets.html">Sets 🎲</a></td>
+      <td><a href="Ch 7 Revision - Sets.html" class="revision-btn">Revision</a></td>
+    </tr>
+    <tr>
+      <td>🔟</td>
+      <td><a href="Ch 10 Percentage.html">Percentage 🎯</a></td>
+      <td><a href="Ch 10 Revision - Percentage.html" class="revision-btn">Revision</a></td>
+    </tr>
+    <tr>
+      <td>1️⃣2️⃣</td>
+      <td><a href="Ch 12 Simple Equations.html">Simple Equations 🧩</a></td>
+      <td><a href="Ch 12 Revision Simple Equations.html" class="revision-btn">Revision</a></td>
+    </tr>
+    <tr>
+      <td>1️⃣5️⃣</td>
+      <td><a href="Ch 15 Constructions.html">Constructions 📐</a></td>
+      <td><a href="Ch 15 Revision Constructions.html" class="revision-btn">Revision</a></td>
+    </tr>
+    <tr>
+      <td>1️⃣6️⃣</td>
+      <td><a href="Ch 16 Symmetry and Reflection.html">Symmetry & Reflection 🪞</a></td>
+      <td><a href="Ch 16 Revision Symmetry and Reflection.html" class="revision-btn">Revision</a></td>
+    </tr>
+    <tr>
+      <td>1️⃣7️⃣</td>
+      <td><a href="Ch 17 Mensuration.html">Mensuration 📏</a></td>
+      <td><a href="Ch 17 Revision Mensuration.html" class="revision-btn">Revision</a></td>
+    </tr>
+	    <tr>
+      <td>🎯</td>
+      <td><b>Final Revision ⌛</b></td>
+      <td><a href="Final Revision.html" class="revision-btn">Revision</a></td>
+    </tr>
+  </table>
+
+  <footer>
+    <p>Keep exploring, Riya! Every math problem is a new adventure. 💫</p>
+    <p>You're doing amazing! Keep up the great work! ⭐</p>
+  </footer>
+  
+  
+</body>
+</html>

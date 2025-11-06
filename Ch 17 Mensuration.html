@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Mensuration - Your Fun Learning Journey!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .mascot {
+            font-size: 3em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            background: white;
+            border: none;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: #667eea;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .content-section {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #f5576c;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #f5576c;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .remember-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #f5576c;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px dashed #667eea;
+        }
+
+        .interactive-canvas {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            background: white;
+            cursor: crosshair;
+        }
+
+        .quiz-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #667eea;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .quiz-option:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .quiz-option.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .feedback.incorrect {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+
+        .shape-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 15px;
+        }
+
+        .shape {
+            margin: 0 20px;
+            text-align: center;
+        }
+
+        .rectangle-demo {
+            width: 200px;
+            height: 120px;
+            border: 3px solid #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .square-demo {
+            width: 150px;
+            height: 150px;
+            border: 3px solid #f5576c;
+            background: rgba(245, 87, 108, 0.2);
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .dimension-label {
+            position: absolute;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .input-group {
+            margin: 15px 0;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #667eea;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .calculate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .prev-btn, .next-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .grid-paper {
+            display: inline-block;
+            background: 
+                linear-gradient(to right, #ddd 1px, transparent 1px),
+                linear-gradient(to bottom, #ddd 1px, transparent 1px);
+            background-size: 20px 20px;
+            border: 2px solid #667eea;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 2px solid #667eea;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-size: 1.1em;
+        }
+
+        tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+
+        .formula {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid #ff9800;
+            font-weight: bold;
+        }
+
+        .try-it {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .nav-menu {
+                grid-template-columns: 1fr;
+            }
+        }
+		
+				.home-fab{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  background:#FAF003;
+  color:#222;text-decoration:none;
+  font-size:22px;line-height:1;
+  border-radius:50%;
+  border:2px solid rgba(0,0,0,0.15);
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  z-index:9999;
+}
+.home-fab:hover{ transform:translateY(-2px); }
+    </style>
+</head>
+<body>
+    <a class="home-fab" href="index.html" aria-label="Home">🏠</a>
+    <div class="container">
+        <header>
+            <div class="mascot">📐📏🎯</div>
+            <h1>Welcome to Mensuration Adventure!</h1>
+            <p>Let's explore the world of Perimeter and Area together! 🚀</p>
+        </header>
+
+        <div class="progress-container">
+            <h3 style="margin-bottom: 10px;">Your Learning Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+        </div>
+
+        <div class="nav-menu">
+            <button class="nav-btn active" onclick="showSection(0)">🏠 Introduction</button>
+            <button class="nav-btn" onclick="showSection(1)">📏 Perimeter Basics</button>
+            <button class="nav-btn" onclick="showSection(2)">🔲 Rectangle Perimeter</button>
+            <button class="nav-btn" onclick="showSection(3)">⬛ Square Perimeter</button>
+            <button class="nav-btn" onclick="showSection(4)">🔷 Regular Polygons</button>
+            <button class="nav-btn" onclick="showSection(5)">📊 Area Introduction</button>
+            <button class="nav-btn" onclick="showSection(6)">📐 Area of Rectangle</button>
+            <button class="nav-btn" onclick="showSection(7)">⬜ Area of Square</button>
+            <button class="nav-btn" onclick="showSection(8)">🎮 Practice Time!</button>
+        </div>
+
+        <!-- Section 0: Introduction -->
+        <div class="content-section active" id="section0">
+            <h2>🌟 Welcome to Mensuration!</h2>
+            
+            <div class="info-box">
+                <h3>What is Mensuration? 🤔</h3>
+                <p><strong>Mensuration</strong> is a fun branch of mathematics where we learn to measure shapes! We'll discover how to find:</p>
+                <ul>
+                    <li><span class="emoji">📏</span> <strong>Perimeter</strong> - The distance around a shape (like walking around a park!)</li>
+                    <li><span class="emoji">📊</span> <strong>Area</strong> - The space inside a shape (like how much carpet you need for a room!)</li>
+                </ul>
+            </div>
+
+            <h3>🎯 Real-Life Examples</h3>
+            <div class="example-box">
+                <p><strong>Think about these everyday situations:</strong></p>
+                <ol>
+                    <li><span class="emoji">🚜</span> A farmer wants to fence his field - needs to know the <strong>perimeter</strong>!</li>
+                    <li><span class="emoji">🖼️</span> Putting a ribbon around a bulletin board - that's <strong>perimeter</strong> too!</li>
+                    <li><span class="emoji">🏃</span> Running around a circular park - calculating distance using <strong>perimeter</strong>!</li>
+                    <li><span class="emoji">🏠</span> Tiling a floor - needs to know the <strong>area</strong>!</li>
+                    <li><span class="emoji">🎨</span> Painting a wall - calculating <strong>area</strong> helps!</li>
+                </ol>
+            </div>
+
+            <div class="remember-box">
+                <h3>💡 Important to Remember</h3>
+                <p><strong>Perimeter</strong> is measured in units like cm, m (centimeters, meters)</p>
+                <p><strong>Area</strong> is measured in square units like cm², m² (square centimeters, square meters)</p>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" style="visibility: hidden;">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(1)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 1: Perimeter Basics -->
+        <div class="content-section" id="section1">
+            <h2>📏 What is Perimeter?</h2>
+            
+            <div class="info-box">
+                <h3>Simple Definition 🎈</h3>
+                <p style="font-size: 1.3em;"><strong>Perimeter = The total length of the boundary of a closed shape</strong></p>
+                <p>Imagine you're walking around a park - the total distance you walk is the perimeter!</p>
+            </div>
+
+            <h3>🎨 Let's Visualize!</h3>
+            <div class="shape-demo">
+                <svg width="300" height="200">
+                    <rect x="50" y="50" width="200" height="100" fill="#a8edea" stroke="#667eea" stroke-width="4"/>
+                    <path d="M 50 50 L 50 30 M 250 50 L 250 30 M 50 30 L 250 30" stroke="#f5576c" stroke-width="2" marker-end="url(#arrowred)"/>
+                    <text x="150" y="20" text-anchor="middle" fill="#f5576c" font-weight="bold">Length</text>
+                    
+                    <path d="M 250 50 L 270 50 M 250 150 L 270 150 M 270 50 L 270 150" stroke="#f5576c" stroke-width="2"/>
+                    <text x="280" y="105" fill="#f5576c" font-weight="bold">Breadth</text>
+                    
+                    <circle cx="50" cy="50" r="5" fill="#ff6b6b"/>
+                    <circle cx="250" cy="50" r="5" fill="#ff6b6b"/>
+                    <circle cx="250" cy="150" r="5" fill="#ff6b6b"/>
+                    <circle cx="50" cy="150" r="5" fill="#ff6b6b"/>
+                </svg>
+            </div>
+
+            <div class="example-box">
+                <h3>📝 Example: Your Desk!</h3>
+                <p>Let's say your desk is a rectangle with:</p>
+                <ul>
+                    <li>Length (AB) = 90 cm</li>
+                    <li>Breadth (BC) = 30 cm</li>
+                    <li>Length (CD) = 90 cm</li>
+                    <li>Breadth (DA) = 30 cm</li>
+                </ul>
+                <div class="formula">
+                    Perimeter = AB + BC + CD + DA<br>
+                    = 90 + 30 + 90 + 30<br>
+                    = <strong>240 cm</strong>
+                </div>
+            </div>
+
+            <div class="try-it">
+                <h3>🎮 Try It Yourself!</h3>
+                <div class="calculator">
+                    <p><strong>Calculate the perimeter of an irregular shape:</strong></p>
+                    <p>A shape has sides: 7 cm, 5 cm, 6 cm, 3 cm, 4 cm, 2 cm</p>
+                    <div class="input-group">
+                        <label>Enter the sum of all sides:</label>
+                        <input type="number" id="irregularPerimeter" placeholder="Add all sides">
+                    </div>
+                    <button class="calculate-btn" onclick="checkIrregular()">Check Answer! ✓</button>
+                    <div class="result" id="irregularResult"></div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" onclick="showSection(0)">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(2)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Rectangle Perimeter -->
+        <div class="content-section" id="section2">
+            <h2>🔲 Perimeter of Rectangle</h2>
+            
+            <div class="info-box">
+                <h3>🎯 The Magic Formula!</h3>
+                <p>Since opposite sides of a rectangle are equal, we can use a shortcut!</p>
+                <div class="formula">
+                    Perimeter of Rectangle = 2(Length + Breadth)<br>
+                    or<br>
+                    Perimeter = 2(L + B)
+                </div>
+            </div>
+
+            <div class="rectangle-demo">
+                <span class="dimension-label" style="top: -25px; left: 50%; transform: translateX(-50%);">Length (L)</span>
+                <span class="dimension-label" style="right: -70px; top: 50%; transform: translateY(-50%);">Breadth (B)</span>
+                <span class="dimension-label" style="bottom: -25px; left: 50%; transform: translateX(-50%);">Length (L)</span>
+                <span class="dimension-label" style="left: -70px; top: 50%; transform: translateY(-50%);">Breadth (B)</span>
+            </div>
+
+            <div class="example-box">
+                <h3>📚 Example 1: Rectangular Field</h3>
+                <p><strong>Problem:</strong> A field is 115 m long and 95 m wide. Find its perimeter.</p>
+                <p><strong>Solution:</strong></p>
+                <p>Length (L) = 115 m</p>
+                <p>Breadth (B) = 95 m</p>
+                <div class="formula">
+                    Perimeter = 2(L + B)<br>
+                    = 2(115 + 95)<br>
+                    = 2 × 210<br>
+                    = <strong>420 m</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>💰 Example 2: Cost Calculation</h3>
+                <p><strong>Problem:</strong> A rectangular garden is 34 m long and 26 m wide. What is the cost of fencing at ₹55 per meter?</p>
+                <p><strong>Solution:</strong></p>
+                <p>Step 1: Find Perimeter</p>
+                <div class="formula">
+                    Perimeter = 2(34 + 26) = 2 × 60 = 120 m
+                </div>
+                <p>Step 2: Calculate Cost</p>
+                <div class="formula">
+                    Cost = 120 × ₹55 = <strong>₹6,600</strong>
+                </div>
+            </div>
+
+            <div class="try-it">
+                <h3>🎮 Interactive Calculator</h3>
+                <div class="calculator">
+                    <h4>Calculate Rectangle Perimeter:</h4>
+                    <div class="input-group">
+                        <label>Length (cm):</label>
+                        <input type="number" id="rectLength" placeholder="Enter length">
+                    </div>
+                    <div class="input-group">
+                        <label>Breadth (cm):</label>
+                        <input type="number" id="rectBreadth" placeholder="Enter breadth">
+                    </div>
+                    <button class="calculate-btn" onclick="calculateRectPerimeter()">Calculate Perimeter! 🧮</button>
+                    <div class="result" id="rectPerimeterResult"></div>
+                </div>
+            </div>
+
+            <div class="remember-box">
+                <h3>⚠️ Common Mistake to Avoid!</h3>
+                <p><strong>Wrong:</strong> 2(L + B) = (2 × 5) + 3 = 13 cm ❌</p>
+                <p><strong>Right:</strong> 2(L + B) = 2 × (5 + 3) = 2 × 8 = 16 cm ✅</p>
+                <p>Remember: Add first, then multiply by 2!</p>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" onclick="showSection(1)">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(3)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Square Perimeter -->
+        <div class="content-section" id="section3">
+            <h2>⬛ Perimeter of Square</h2>
+            
+            <div class="info-box">
+                <h3>🎯 Square is Special!</h3>
+                <p>A square is a special rectangle where <strong>all four sides are equal</strong>!</p>
+                <div class="formula">
+                    Perimeter of Square = 4 × side<br>
+                    or<br>
+                    Perimeter = 4 × s
+                </div>
+            </div>
+
+            <div class="square-demo">
+                <span class="dimension-label" style="top: -25px; left: 50%; transform: translateX(-50%);">side</span>
+                <span class="dimension-label" style="right: -40px; top: 50%; transform: translateY(-50%);">side</span>
+                <span class="dimension-label" style="bottom: -25px; left: 50%; transform: translateX(-50%);">side</span>
+                <span class="dimension-label" style="left: -40px; top: 50%; transform: translateY(-50%);">side</span>
+            </div>
+
+            <div class="example-box">
+                <h3>📚 Example 1: Bulletin Board</h3>
+                <p><strong>Problem:</strong> A square bulletin board has each side = 80 cm. Find its perimeter.</p>
+                <p><strong>Solution:</strong></p>
+                <div class="formula">
+                    Perimeter = 4 × side<br>
+                    = 4 × 80<br>
+                    = <strong>320 cm</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>💰 Example 2: Two-Layer Fencing</h3>
+                <p><strong>Problem:</strong> A square land has side 80 m. Find cost of two-layer fencing at ₹10/m.</p>
+                <p><strong>Solution:</strong></p>
+                <p>Step 1: Find Perimeter</p>
+                <div class="formula">
+                    Perimeter = 4 × 80 = 320 m
+                </div>
+                <p>Step 2: Two layers means double the wire</p>
+                <div class="formula">
+                    Wire needed = 2 × 320 = 640 m
+                </div>
+                <p>Step 3: Calculate Cost</p>
+                <div class="formula">
+                    Cost = 640 × ₹10 = <strong>₹6,400</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>🔄 Reverse Calculation</h3>
+                <p><strong>Problem:</strong> If perimeter of square = 48 cm, find its side.</p>
+                <p><strong>Solution:</strong></p>
+                <div class="formula">
+                    4 × side = 48<br>
+                    side = 48 ÷ 4<br>
+                    side = <strong>12 cm</strong>
+                </div>
+            </div>
+
+            <div class="try-it">
+                <h3>🎮 Interactive Calculator</h3>
+                <div class="calculator">
+                    <h4>Calculate Square Perimeter:</h4>
+                    <div class="input-group">
+                        <label>Side (cm):</label>
+                        <input type="number" id="squareSide" placeholder="Enter side length">
+                    </div>
+                    <button class="calculate-btn" onclick="calculateSquarePerimeter()">Calculate Perimeter! 🧮</button>
+                    <div class="result" id="squarePerimeterResult"></div>
+                </div>
+            </div>
+
+            <div class="remember-box">
+                <h3>⚠️ Don't Mix Up!</h3>
+                <p><strong>Perimeter of Square:</strong> 4 × side (measured in cm, m)</p>
+                <p><strong>NOT Area!</strong> Area = side × side (measured in cm², m²)</p>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" onclick="showSection(2)">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(4)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Regular Polygons -->
+        <div class="content-section" id="section4">
+            <h2>🔷 Perimeter of Regular Polygons</h2>
+            
+            <div class="info-box">
+                <h3>🎨 What's a Regular Polygon?</h3>
+                <p>A polygon where <strong>all sides and angles are equal</strong>!</p>
+                <p>Examples: Equilateral triangle, Square, Regular pentagon, Regular hexagon</p>
+            </div>
+
+            <h3>📐 The Universal Formula</h3>
+            <div class="formula">
+                Perimeter of Regular Polygon = n × side<br>
+                where n = number of sides
+            </div>
+
+            <div class="shape-demo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+                <div class="shape">
+                    <svg width="100" height="100">
+                        <polygon points="50,10 90,80 10,80" fill="#a8edea" stroke="#667eea" stroke-width="3"/>
+                    </svg>
+                    <p><strong>Triangle</strong></p>
+                    <p>3 × side</p>
+                </div>
+                <div class="shape">
+                    <svg width="100" height="100">
+                        <rect x="20" y="20" width="60" height="60" fill="#fed6e3" stroke="#f5576c" stroke-width="3"/>
+                    </svg>
+                    <p><strong>Square</strong></p>
+                    <p>4 × side</p>
+                </div>
+                <div class="shape">
+                    <svg width="100" height="100">
+                        <polygon points="50,15 85,40 70,75 30,75 15,40" fill="#ffeaa7" stroke="#fdcb6e" stroke-width="3"/>
+                    </svg>
+                    <p><strong>Pentagon</strong></p>
+                    <p>5 × side</p>
+                </div>
+                <div class="shape">
+                    <svg width="100" height="100">
+                        <polygon points="50,10 75,25 75,55 50,70 25,55 25,25" fill="#dfe6e9" stroke="#74b9ff" stroke-width="3"/>
+                    </svg>
+                    <p><strong>Hexagon</strong></p>
+                    <p>6 × side</p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>📚 Examples with Different Polygons</h3>
+                
+                <h4>1. Equilateral Triangle (side = 4 cm)</h4>
+                <div class="formula">
+                    Perimeter = 3 × 4 = <strong>12 cm</strong>
+                </div>
+
+                <h4>2. Regular Pentagon (side = 125 m)</h4>
+                <div class="formula">
+                    Perimeter = 5 × 125 = <strong>625 m</strong>
+                </div>
+
+                <h4>3. Regular Hexagon (perimeter = 60 cm, find side)</h4>
+                <div class="formula">
+                    6 × side = 60<br>
+                    side = 60 ÷ 6 = <strong>10 cm</strong>
+                </div>
+
+                <h4>4. Regular Octagon (side = 15 cm)</h4>
+                <div class="formula">
+                    Perimeter = 8 × 15 = <strong>120 cm</strong>
+                </div>
+            </div>
+
+            <div class="try-it">
+                <h3>🎮 Polygon Calculator</h3>
+                <div class="calculator">
+                    <h4>Calculate Perimeter of Any Regular Polygon:</h4>
+                    <div class="input-group">
+                        <label>Number of Sides:</label>
+                        <input type="number" id="polygonSides" placeholder="Enter number of sides" min="3">
+                    </div>
+                    <div class="input-group">
+                        <label>Length of Each Side (cm):</label>
+                        <input type="number" id="polygonSide" placeholder="Enter side length">
+                    </div>
+                    <button class="calculate-btn" onclick="calculatePolygonPerimeter()">Calculate Perimeter! 🧮</button>
+                    <div class="result" id="polygonPerimeterResult"></div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <h3>🎯 Quick Quiz!</h3>
+                <div class="quiz-question">Q: Two sides of a triangle are 24 cm and 20 cm. If perimeter is 62 cm, what's the third side?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuiz1(this, false)">A) 20 cm</div>
+                    <div class="quiz-option" onclick="checkQuiz1(this, true)">B) 18 cm</div>
+                    <div class="quiz-option" onclick="checkQuiz1(this, false)">C) 22 cm</div>
+                    <div class="quiz-option" onclick="checkQuiz1(this, false)">D) 16 cm</div>
+                </div>
+                <div class="feedback" id="quiz1Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" onclick="showSection(3)">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(5)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 5: Area Introduction -->
+        <div class="content-section" id="section5">
+            <h2>📊 Introduction to Area</h2>
+            
+            <div class="info-box">
+                <h3>🎯 What is Area?</h3>
+                <p style="font-size: 1.3em;"><strong>Area = The amount of surface enclosed by a closed figure</strong></p>
+                <p>Think of it as: <strong>How much space is inside a shape?</strong></p>
+            </div>
+
+            <h3>🌍 Real-Life Uses of Area</h3>
+            <div class="example-box">
+                <ol>
+                    <li><span class="emoji">🏡</span> <strong>Buying Land:</strong> More area = More cost!</li>
+                    <li><span class="emoji">🎨</span> <strong>Painting Walls:</strong> Calculate area to know how much paint to buy</li>
+                    <li><span class="emoji">🪟</span> <strong>Glass for Windows:</strong> Need to know the area</li>
+                    <li><span class="emoji">📋</span> <strong>Covering Bulletin Board:</strong> Calculate area for colored paper</li>
+                    <li><span class="emoji">🔨</span> <strong>Carpentry Work:</strong> Carpenters use area to estimate materials</li>
+                </ol>
+            </div>
+
+            <div class="remember-box">
+                <h3>📐 Units of Area</h3>
+                <p><strong>Standard Unit:</strong> 1 square centimeter (1 sq cm or 1 cm²)</p>
+                <p>This is the area of a square with each side = 1 cm</p>
+                
+                <svg width="100" height="100" style="display: block; margin: 10px auto; border: 2px solid #667eea;">
+                    <rect x="25" y="25" width="50" height="50" fill="#a8edea" stroke="#667eea" stroke-width="2"/>
+                    <text x="50" y="15" text-anchor="middle" font-size="12" fill="#667eea">1 cm</text>
+                    <text x="85" y="55" font-size="12" fill="#667eea">1 cm</text>
+                    <text x="50" y="55" text-anchor="middle" font-size="14" fill="#f5576c" font-weight="bold">1 cm²</text>
+                </svg>
+
+                <p><strong>Other Units:</strong></p>
+                <ul>
+                    <li>mm² (square millimeters)</li>
+                    <li>m² (square meters)</li>
+                    <li>hectare (ha) for land = 10,000 m²</li>
+                </ul>
+            </div>
+
+            <h3>📊 Finding Area Using Grid Paper</h3>
+            <div class="info-box">
+                <p><strong>Simple Method:</strong> Count the squares!</p>
+                <p>If a shape covers 8 squares (each 1 cm × 1 cm), then area = 8 cm²</p>
+                
+                <div class="grid-paper" style="margin: 20px auto; display: block; width: fit-content;">
+                    <svg width="180" height="180">
+                        <!-- Grid -->
+                        <defs>
+                            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ddd" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="180" height="180" fill="url(#grid)"/>
+                        
+                        <!-- Colored squares -->
+                        <rect x="20" y="20" width="20" height="20" fill="#667eea" opacity="0.7"/>
+                        <rect x="40" y="20" width="20" height="20" fill="#667eea" opacity="0.7"/>
+                        <rect x="60" y="20" width="20" height="20" fill="#667eea" opacity="0.7"/>
+                        <rect x="80" y="20" width="20" height="20" fill="#667eea" opacity="0.7"/>
+                        <rect x="20" y="40" width="20" height="20" fill="#667eea" opacity="0.7"/>
+                        <rect x="40" y="40" width="20" height="20" fill="#667eea" opacity="0.7"/>
+                        <rect x="60" y="40" width="20" height="20" fill="#667eea" opacity="0.7"/>
+                        <rect x="80" y="40" width="20" height="20" fill="#667eea" opacity="0.7"/>
+                        
+                        <text x="90" y="100" font-size="16" fill="#f5576c" font-weight="bold">8 squares = 8 cm²</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>📋 Rules for Counting on Graph Paper</h3>
+                <ol>
+                    <li>✅ Full square = 1 sq unit</li>
+                    <li>✅ More than half covered = 1 sq unit</li>
+                    <li>✅ Exactly half covered = ½ sq unit</li>
+                    <li>❌ Less than half covered = Ignore it</li>
+                </ol>
+            </div>
+
+            <div class="try-it">
+                <h3>🎮 Practice Counting!</h3>
+                <div class="calculator">
+                    <p><strong>Count the area:</strong></p>
+                    <p>A shape has: 12 full squares + 8 half squares</p>
+                    <div class="input-group">
+                        <label>Calculate total area (in sq units):</label>
+                        <input type="number" id="gridArea" placeholder="Enter your answer">
+                    </div>
+                    <p><em>Hint: Full squares + (Half squares ÷ 2)</em></p>
+                    <button class="calculate-btn" onclick="checkGridArea()">Check Answer! ✓</button>
+                    <div class="result" id="gridAreaResult"></div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" onclick="showSection(4)">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(6)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 6: Area of Rectangle -->
+        <div class="content-section" id="section6">
+            <h2>📐 Area of Rectangle</h2>
+            
+            <div class="info-box">
+                <h3>🎯 The Simple Formula!</h3>
+                <div class="formula">
+                    Area of Rectangle = Length × Breadth<br>
+                    or<br>
+                    Area = L × B
+                </div>
+                <p style="margin-top: 15px;">This means: How many rows × How many squares in each row</p>
+            </div>
+
+            <div class="example-box">
+                <h3>🔍 Let's Understand Visually</h3>
+                <p>A rectangle is 7 cm long and 4 cm wide:</p>
+                
+                <div class="grid-paper" style="margin: 20px auto; display: block; width: fit-content;">
+                    <svg width="160" height="100">
+                        <defs>
+                            <pattern id="grid2" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ddd" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect x="10" y="10" width="140" height="80" fill="url(#grid2)" stroke="#667eea" stroke-width="3"/>
+                        
+                        <text x="80" y="5" text-anchor="middle" font-size="12" fill="#f5576c" font-weight="bold">7 cm</text>
+                        <text x="155" y="50" font-size="12" fill="#f5576c" font-weight="bold">4 cm</text>
+                    </svg>
+                </div>
+                
+                <p>Count: 4 rows × 7 squares = 28 squares</p>
+                <div class="formula">
+                    Area = 7 × 4 = <strong>28 cm²</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>📚 Example 1: Rectangular Plot</h3>
+                <p><strong>Problem:</strong> A plot is 45 m long and 30 m wide. Find its area.</p>
+                <p><strong>Solution:</strong></p>
+                <div class="formula">
+                    Area = Length × Breadth<br>
+                    = 45 × 30<br>
+                    = <strong>1,350 m²</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>💰 Example 2: Cost of Carpeting</h3>
+                <p><strong>Problem:</strong> A room is 12 m long and 9 m wide. Find cost of carpeting at ₹85/m².</p>
+                <p><strong>Solution:</strong></p>
+                <p>Step 1: Find Area</p>
+                <div class="formula">
+                    Area = 12 × 9 = 108 m²
+                </div>
+                <p>Step 2: Calculate Cost</p>
+                <div class="formula">
+                    Cost = 108 × ₹85 = <strong>₹9,180</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>🔄 Reverse Calculation</h3>
+                <p><strong>Problem:</strong> Area = 200 m², Length = 20 m. Find Breadth.</p>
+                <p><strong>Solution:</strong></p>
+                <div class="formula">
+                    Area = L × B<br>
+                    200 = 20 × B<br>
+                    B = 200 ÷ 20<br>
+                    B = <strong>10 m</strong>
+                </div>
+            </div>
+
+            <div class="try-it">
+                <h3>🎮 Rectangle Area Calculator</h3>
+                <div class="calculator">
+                    <h4>Calculate the Area:</h4>
+                    <div class="input-group">
+                        <label>Length (cm):</label>
+                        <input type="number" id="rectAreaLength" placeholder="Enter length">
+                    </div>
+                    <div class="input-group">
+                        <label>Breadth (cm):</label>
+                        <input type="number" id="rectAreaBreadth" placeholder="Enter breadth">
+                    </div>
+                    <button class="calculate-btn" onclick="calculateRectArea()">Calculate Area! 🧮</button>
+                    <div class="result" id="rectAreaResult"></div>
+                </div>
+            </div>
+
+            <div class="remember-box">
+                <h3>⚠️ Important Points!</h3>
+                <ul>
+                    <li>✅ Area is always in <strong>square units</strong> (cm², m²)</li>
+                    <li>✅ Both measurements must be in the <strong>same unit</strong></li>
+                    <li>✅ If length and breadth double, area becomes <strong>4 times</strong>!</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>Example:</strong> If L = 5, B = 3, Area = 15</p>
+                <p>If L = 10, B = 6, Area = 60 (which is 4 × 15!)</p>
+            </div>
+
+            <div class="quiz-box">
+                <h3>🎯 Quick Challenge!</h3>
+                <div class="quiz-question">Q: A rectangular garden is 8.60 m long and 6.25 m wide. What's the area?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuiz2(this, false)">A) 50.25 m²</div>
+                    <div class="quiz-option" onclick="checkQuiz2(this, true)">B) 53.75 m²</div>
+                    <div class="quiz-option" onclick="checkQuiz2(this, false)">C) 52.50 m²</div>
+                    <div class="quiz-option" onclick="checkQuiz2(this, false)">D) 54.00 m²</div>
+                </div>
+                <div class="feedback" id="quiz2Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" onclick="showSection(5)">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(7)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 7: Area of Square -->
+        <div class="content-section" id="section7">
+            <h2>⬜ Area of Square</h2>
+            
+            <div class="info-box">
+                <h3>🎯 Square's Special Formula!</h3>
+                <p>Since all sides are equal in a square:</p>
+                <div class="formula">
+                    Area of Square = side × side<br>
+                    or<br>
+                    Area = side² (read as "side squared")
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>🔍 Visual Understanding</h3>
+                <p>A square with side 5 cm:</p>
+                
+                <div class="grid-paper" style="margin: 20px auto; display: block; width: fit-content;">
+                    <svg width="120" height="120">
+                        <defs>
+                            <pattern id="grid3" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ddd" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect x="10" y="10" width="100" height="100" fill="url(#grid3)" stroke="#f5576c" stroke-width="3"/>
+                        
+                        <text x="60" y="5" text-anchor="middle" font-size="12" fill="#f5576c" font-weight="bold">5 cm</text>
+                        <text x="115" y="60" font-size="12" fill="#f5576c" font-weight="bold">5 cm</text>
+                    </svg>
+                </div>
+                
+                <p>Count: 5 rows × 5 squares = 25 squares</p>
+                <div class="formula">
+                    Area = 5 × 5 = 5² = <strong>25 cm²</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>📚 Example 1: Square Paper</h3>
+                <p><strong>Problem:</strong> A square paper has side 14 cm. Find its area.</p>
+                <p><strong>Solution:</strong></p>
+                <div class="formula">
+                    Area = side × side<br>
+                    = 14 × 14<br>
+                    = <strong>196 cm²</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>🔄 From Perimeter to Area</h3>
+                <p><strong>Problem:</strong> A square has perimeter 48 cm. Find its side and area.</p>
+                <p><strong>Solution:</strong></p>
+                <p>Step 1: Find Side</p>
+                <div class="formula">
+                    Perimeter = 4 × side<br>
+                    48 = 4 × side<br>
+                    side = 48 ÷ 4 = 12 cm
+                </div>
+                <p>Step 2: Find Area</p>
+                <div class="formula">
+                    Area = 12 × 12 = <strong>144 cm²</strong>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>📐 Comparing Areas</h3>
+                <p><strong>Problem:</strong> Which has more area?</p>
+                <p>Square: side = 120 m</p>
+                <p>Rectangle: 150 m × 100 m</p>
+                <p><strong>Solution:</strong></p>
+                <div class="formula">
+                    Square Area = 120 × 120 = 14,400 m²<br>
+                    Rectangle Area = 150 × 100 = 15,000 m²<br>
+                    Rectangle has <strong>600 m² more area!</strong>
+                </div>
+            </div>
+
+            <div class="try-it">
+                <h3>🎮 Square Area Calculator</h3>
+                <div class="calculator">
+                    <h4>Calculate the Area:</h4>
+                    <div class="input-group">
+                        <label>Side (cm):</label>
+                        <input type="number" id="squareAreaSide" placeholder="Enter side length">
+                    </div>
+                    <button class="calculate-btn" onclick="calculateSquareArea()">Calculate Area! 🧮</button>
+                    <div class="result" id="squareAreaResult"></div>
+                </div>
+            </div>
+
+            <div class="remember-box">
+                <h3>⚠️ Don't Confuse!</h3>
+                <table>
+                    <tr>
+                        <th>For Square</th>
+                        <th>Perimeter</th>
+                        <th>Area</th>
+                    </tr>
+                    <tr>
+                        <td>Formula</td>
+                        <td>4 × side</td>
+                        <td>side × side</td>
+                    </tr>
+                    <tr>
+                        <td>Unit</td>
+                        <td>cm, m</td>
+                        <td>cm², m²</td>
+                    </tr>
+                    <tr>
+                        <td>Example (side = 7)</td>
+                        <td>4 × 7 = 28 cm</td>
+                        <td>7 × 7 = 49 cm²</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" onclick="showSection(6)">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(8)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 8: Practice Time -->
+        <div class="content-section" id="section8">
+            <h2>🎮 Practice Time - Test Your Skills!</h2>
+            
+            <div class="info-box">
+                <h3>🌟 You've Learned So Much!</h3>
+                <p>Let's practice with some fun problems! Try your best! 💪</p>
+            </div>
+
+            <div class="quiz-box">
+                <h3>Problem 1: Perimeter of Rectangle</h3>
+                <div class="quiz-question">A rectangular field is 85 m long and 65 m wide. What is its perimeter?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkPractice1(this, false)">A) 150 m</div>
+                    <div class="quiz-option" onclick="checkPractice1(this, true)">B) 300 m</div>
+                    <div class="quiz-option" onclick="checkPractice1(this, false)">C) 280 m</div>
+                    <div class="quiz-option" onclick="checkPractice1(this, false)">D) 320 m</div>
+                </div>
+                <div class="feedback" id="practice1Feedback"></div>
+            </div>
+
+            <div class="quiz-box">
+                <h3>Problem 2: Area of Square</h3>
+                <div class="quiz-question">A square garden has side 25 m. What is its area?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkPractice2(this, false)">A) 100 m²</div>
+                    <div class="quiz-option" onclick="checkPractice2(this, false)">B) 500 m²</div>
+                    <div class="quiz-option" onclick="checkPractice2(this, true)">C) 625 m²</div>
+                    <div class="quiz-option" onclick="checkPractice2(this, false)">D) 650 m²</div>
+                </div>
+                <div class="feedback" id="practice2Feedback"></div>
+            </div>
+
+            <div class="quiz-box">
+                <h3>Problem 3: Cost Calculation</h3>
+                <div class="quiz-question">Cost of fencing a 10m × 7m park at ₹25/m is?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkPractice3(this, false)">A) ₹700</div>
+                    <div class="quiz-option" onclick="checkPractice3(this, true)">B) ₹850</div>
+                    <div class="quiz-option" onclick="checkPractice3(this, false)">C) ₹800</div>
+                    <div class="quiz-option" onclick="checkPractice3(this, false)">D) ₹900</div>
+                </div>
+                <div class="feedback" id="practice3Feedback"></div>
+            </div>
+
+            <div class="try-it">
+                <h3>🎯 Challenge Problem!</h3>
+                <div class="calculator">
+                    <p><strong>A room is 8.60 m long and 6.25 m wide. Floor tiles are 20 cm × 10 cm. Each tile costs ₹100.</strong></p>
+                    <p><strong>Find the total cost of tiles needed.</strong></p>
+                    
+                    <p style="margin-top: 15px;"><em>Hints:</em></p>
+                    <ol style="font-size: 0.9em;">
+                        <li>Convert room dimensions to cm (multiply by 100)</li>
+                        <li>Find room area in cm²</li>
+                        <li>Find area of one tile in cm²</li>
+                        <li>Divide room area by tile area = number of tiles</li>
+                        <li>Multiply number of tiles by ₹100</li>
+                    </ol>
+                    
+                    <div class="input-group">
+                        <label>Enter your answer (in Rupees):</label>
+                        <input type="number" id="challengeAnswer" placeholder="Total cost">
+                    </div>
+                    <button class="calculate-btn" onclick="checkChallenge()">Check Answer! 🏆</button>
+                    <div class="result" id="challengeResult"></div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>🏆 Summary - What We Learned</h3>
+                <table>
+                    <tr>
+                        <th>Shape</th>
+                        <th>Perimeter</th>
+                        <th>Area</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Rectangle</strong></td>
+                        <td>2(L + B)</td>
+                        <td>L × B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Square</strong></td>
+                        <td>4 × side</td>
+                        <td>side × side</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Triangle</strong></td>
+                        <td>Sum of 3 sides</td>
+                        <td>½ × base × height</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Regular Polygon</strong></td>
+                        <td>n × side</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="remember-box">
+                <h3>🎓 Key Takeaways</h3>
+                <ul>
+                    <li>✅ <strong>Perimeter</strong> = Distance around (in cm, m)</li>
+                    <li>✅ <strong>Area</strong> = Space inside (in cm², m²)</li>
+                    <li>✅ Always use <strong>same units</strong> for calculations</li>
+                    <li>✅ Check your answer - does it make sense?</li>
+                    <li>✅ Practice makes perfect! 🌟</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 20px; color: white; margin-top: 30px;">
+                <h2>🎉 Congratulations! 🎉</h2>
+                <h3>You've completed the Mensuration chapter!</h3>
+                <p style="font-size: 1.2em; margin-top: 15px;">You're now a Perimeter and Area Expert! 🏆</p>
+                <p style="font-size: 3em; margin: 20px 0;">🌟🎯📐</p>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="prev-btn" onclick="showSection(7)">⬅️ Previous</button>
+                <button class="next-btn" onclick="showSection(0)" style="background: linear-gradient(135deg, #4CAF50, #8BC34A);">🏠 Back to Start</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        const totalSections = 9;
+        let completedSections = new Set([0]);
+
+        function showSection(index) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById('section' + index).classList.add('active');
+            
+            // Update navigation buttons
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            navBtns[index].classList.add('active');
+            
+            // Update current section
+            currentSection = index;
+            completedSections.add(index);
+            
+            // Update progress bar
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = Math.round(progress) + '%';
+        }
+
+        // Calculator Functions
+        function checkIrregular() {
+            const answer = document.getElementById('irregularPerimeter').value;
+            const result = document.getElementById('irregularResult');
+            const correct = 27;
+            
+            if (answer == correct) {
+                result.textContent = '🎉 Excellent! You got it right! 7+5+6+3+4+2 = 27 cm';
+                result.className = 'result show correct';
+            } else {
+                result.textContent = '🤔 Not quite! Try adding all the sides: 7+5+6+3+4+2';
+                result.className = 'result show incorrect';
+            }
+        }
+
+        function calculateRectPerimeter() {
+            const length = parseFloat(document.getElementById('rectLength').value);
+            const breadth = parseFloat(document.getElementById('rectBreadth').value);
+            const result = document.getElementById('rectPerimeterResult');
+            
+            if (length && breadth) {
+                const perimeter = 2 * (length + breadth);
+                result.textContent = `🎯 Perimeter = 2(${length} + ${breadth}) = 2 × ${length + breadth} = ${perimeter} cm`;
+                result.className = 'result show';
+            } else {
+                result.textContent = '⚠️ Please enter both length and breadth!';
+                result.className = 'result show';
+            }
+        }
+
+        function calculateSquarePerimeter() {
+            const side = parseFloat(document.getElementById('squareSide').value);
+            const result = document.getElementById('squarePerimeterResult');
+            
+            if (side) {
+                const perimeter = 4 * side;
+                result.textContent = `🎯 Perimeter = 4 × ${side} = ${perimeter} cm`;
+                result.className = 'result show';
+            } else {
+                result.textContent = '⚠️ Please enter the side length!';
+                result.className = 'result show';
+            }
+        }
+
+        function calculatePolygonPerimeter() {
+            const sides = parseInt(document.getElementById('polygonSides').value);
+            const sideLength = parseFloat(document.getElementById('polygonSide').value);
+            const result = document.getElementById('polygonPerimeterResult');
+            
+            if (sides && sideLength) {
+                const perimeter = sides * sideLength;
+                result.textContent = `🎯 Perimeter = ${sides} × ${sideLength} = ${perimeter} cm`;
+                result.className = 'result show';
+            } else {
+                result.textContent = '⚠️ Please enter both values!';
+                result.className = 'result show';
+            }
+        }
+
+        function checkGridArea() {
+            const answer = parseFloat(document.getElementById('gridArea').value);
+            const result = document.getElementById('gridAreaResult');
+            const correct = 16; // 12 + (8/2) = 12 + 4 = 16
+            
+            if (answer == correct) {
+                result.textContent = '🎉 Perfect! 12 full squares + (8 half squares ÷ 2) = 12 + 4 = 16 sq units';
+                result.className = 'result show';
+            } else {
+                result.textContent = '🤔 Try again! Add full squares to (half squares ÷ 2)';
+                result.className = 'result show';
+            }
+        }
+
+        function calculateRectArea() {
+            const length = parseFloat(document.getElementById('rectAreaLength').value);
+            const breadth = parseFloat(document.getElementById('rectAreaBreadth').value);
+            const result = document.getElementById('rectAreaResult');
+            
+            if (length && breadth) {
+                const area = length * breadth;
+                result.textContent = `🎯 Area = ${length} × ${breadth} = ${area} cm²`;
+                result.className = 'result show';
+            } else {
+                result.textContent = '⚠️ Please enter both length and breadth!';
+                result.className = 'result show';
+            }
+        }
+
+        function calculateSquareArea() {
+            const side = parseFloat(document.getElementById('squareAreaSide').value);
+            const result = document.getElementById('squareAreaResult');
+            
+            if (side) {
+                const area = side * side;
+                result.textContent = `🎯 Area = ${side} × ${side} = ${area} cm²`;
+                result.className = 'result show';
+            } else {
+                result.textContent = '⚠️ Please enter the side length!';
+                result.className = 'result show';
+            }
+        }
+
+        // Quiz Functions
+        function checkQuiz1(element, isCorrect) {
+            const feedback = document.getElementById('quiz1Feedback');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = '🎉 Correct! Perimeter = 62 cm, Two sides = 24 + 20 = 44 cm, So third side = 62 - 44 = 18 cm';
+                feedback.className = 'feedback show correct';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = '❌ Not quite! Remember: Third side = Perimeter - (First side + Second side)';
+                feedback.className = 'feedback show incorrect';
+            }
+        }
+
+        function checkQuiz2(element, isCorrect) {
+            const feedback = document.getElementById('quiz2Feedback');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = '🎉 Excellent! Area = 8.60 × 6.25 = 53.75 m²';
+                feedback.className = 'feedback show correct';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = '❌ Try again! Multiply 8.60 × 6.25 carefully!';
+                feedback.className = 'feedback show incorrect';
+            }
+        }
+
+        function checkPractice1(element, isCorrect) {
+            const feedback = document.getElementById('practice1Feedback');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = '🎉 Perfect! Perimeter = 2(85 + 65) = 2 × 150 = 300 m';
+                feedback.className = 'feedback show correct';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = '❌ Remember: Perimeter of rectangle = 2(L + B)';
+                feedback.className = 'feedback show incorrect';
+            }
+        }
+
+        function checkPractice2(element, isCorrect) {
+            const feedback = document.getElementById('practice2Feedback');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = '🎉 Amazing! Area = 25 × 25 = 625 m²';
+                feedback.className = 'feedback show correct';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = '❌ Remember: Area of square = side × side';
+                feedback.className = 'feedback show incorrect';
+            }
+        }
+
+        function checkPractice3(element, isCorrect) {
+            const feedback = document.getElementById('practice3Feedback');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = '🎉 Superb! Perimeter = 2(10+7) = 34 m, Cost = 34 × ₹25 = ₹850';
+                feedback.className = 'feedback show correct';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = '❌ First find perimeter, then multiply by rate!';
+                feedback.className = 'feedback show incorrect';
+            }
+        }
+
+        function checkChallenge() {
+            const answer = parseFloat(document.getElementById('challengeAnswer').value);
+            const result = document.getElementById('challengeResult');
+            const correct = 268750;
+            
+            if (answer == correct) {
+                result.textContent = '🏆 INCREDIBLE! You solved the challenge! Room: 860×625 cm² = 537,500 cm². Tile: 20×10 = 200 cm². Tiles needed: 537,500÷200 = 2,687.5 ≈ 2,688 tiles. Cost: 2,688 × ₹100 = ₹268,800 (or ₹268,750 if using exact calculation)';
+                result.className = 'result show';
+                result.style.background = '#ffd700';
+                result.style.color = '#000';
+            } else {
+                result.textContent = '🤔 Not quite! Follow the steps carefully. Room area in cm² ÷ Tile area in cm² = Number of tiles. Then multiply by ₹100!';
+                result.className = 'result show';
+            }
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Complete Math Adventure - All Chapters!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 5px;
+            margin: 20px 30px;
+        }
+
+        .progress-fill {
+            height: 30px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 15px;
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: #f8f9fa;
+            padding: 15px;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .nav-tab {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transform: scale(1.05);
+        }
+
+        .content-area {
+            padding: 30px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        .chapter {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .chapter.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .topic-section {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 3px solid #00bcd4;
+        }
+
+        .topic-title {
+            color: #00796b;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .explanation-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .example-box {
+            background: #fff9c4;
+            border-left: 5px solid #fbc02d;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .exercise-container {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .question {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .input-answer {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 8px 4px;
+        }
+
+        .hint-btn {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 13px;
+            margin: 8px 4px;
+        }
+
+        .feedback {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .correct {
+            background: #c8e6c9;
+            color: #2e7d32;
+            border: 2px solid #4caf50;
+        }
+
+        .incorrect {
+            background: #ffcdd2;
+            color: #c62828;
+            border: 2px solid #f44336;
+        }
+
+        .hint {
+            background: #fff9c4;
+            color: #f57f17;
+            border: 2px solid #fbc02d;
+        }
+
+        .remember-box {
+            background: #ffebee;
+            border-left: 5px solid #f44336;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .table-style {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-style th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .table-style td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table-style tr:hover {
+            background: #e3f2fd;
+        }
+
+        .mascot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .nav-tab {
+                width: 100%;
+            }
+            .content-area {
+                padding: 15px;
+            }
+        }
+		
+				.home-fab{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  background:#FAF003;
+  color:#222;text-decoration:none;
+  font-size:22px;line-height:1;
+  border-radius:50%;
+  border:2px solid rgba(0,0,0,0.15);
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  z-index:9999;
+}
+.home-fab:hover{ transform:translateY(-2px); }
+    </style>
+</head>
+<body>
+    <a class="home-fab" href="index.html" aria-label="Home">🏠</a>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Final Revision for Maths Sem II</h1>
+            <p>ICSE Mathematics Grade 6 - Term II (All 8 Chapters!)</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0% Complete</div>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showChapter('ch4')">📚 Ch 4: Playing with Numbers</button>
+            <button class="nav-tab" onclick="showChapter('ch5')">🍕 Ch 5: Fractions</button>
+            <button class="nav-tab" onclick="showChapter('ch6')">🔢 Ch 6: Decimals</button>
+            <button class="nav-tab" onclick="showChapter('ch7')">📦 Ch 7: Sets</button>
+            <button class="nav-tab" onclick="showChapter('ch8')">% Ch 8: Percentage</button>
+            <button class="nav-tab" onclick="showChapter('ch9')">⚖️ Ch 9: Equations</button>
+            <button class="nav-tab" onclick="showChapter('ch10')">🦋 Ch 10: Symmetry</button>
+            <button class="nav-tab" onclick="showChapter('ch11')">📐 Ch 11: Mensuration</button>
+        </div>
+
+        <div class="content-area">
+            <!-- CHAPTER 4: PLAYING WITH NUMBERS -->
+            <div id="ch4" class="chapter active">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                    📚 Chapter 4: Playing with Numbers
+                </h2>
+
+                <div class="topic-section">
+                    <div class="topic-title">🎪 BODMAS Rule</div>
+                    <div class="explanation-box">
+                        <p><strong>BODMAS</strong> = Brackets, Of, Division, Multiplication, Addition, Subtraction</p>
+                        <p>This is the ORDER in which we solve math problems!</p>
+                    </div>
+                    <div class="formula-box">
+                        <p>B - Brackets ( ) { } [ ]</p>
+                        <p>O - Of (means ×)</p>
+                        <p>D - Division ÷</p>
+                        <p>M - Multiplication ×</p>
+                        <p>A - Addition +</p>
+                        <p>S - Subtraction −</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> 48 − 16 ÷ 4<br>
+                        Step 1: Division first → 16 ÷ 4 = 4<br>
+                        Step 2: Subtract → 48 − 4 = 44 ✓
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q1</span>
+                            <p>15 × (102 − 2) = ?</p>
+                            <input type="text" class="input-answer" id="q1">
+                            <button class="check-btn" onclick="check('q1','1500',1)">Check</button>
+                            <button class="hint-btn" onclick="hint('h1')">Hint</button>
+                            <div id="h1" class="feedback hint" style="display:none">Solve bracket first: 102−2=100, then 15×100</div>
+                            <div id="f1" class="feedback"></div>
+                        </div>
+                        <div class="question">
+                            <span class="question-number">Q2</span>
+                            <p>72 ÷ 12 of 3 = ?</p>
+                            <input type="text" class="input-answer" id="q2">
+                            <button class="check-btn" onclick="check('q2','2',2)">Check</button>
+                            <button class="hint-btn" onclick="hint('h2')">Hint</button>
+                            <div id="h2" class="feedback hint" style="display:none">'Of' means multiply: 12×3=36, then 72÷36</div>
+                            <div id="f2" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🧩 Factors & Multiples</div>
+                    <div class="explanation-box">
+                        <p><strong>Factor:</strong> A number that divides another number exactly.</p>
+                        <p><strong>Multiple:</strong> Result of multiplying a number by 1, 2, 3...</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Factors of 12:</strong> 1, 2, 3, 4, 6, 12<br>
+                        <strong>Multiples of 5:</strong> 5, 10, 15, 20, 25...
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q3</span>
+                            <p>Write factors of 20:</p>
+                            <input type="text" class="input-answer" id="q3">
+                            <button class="check-btn" onclick="check('q3','1,2,4,5,10,20',3)">Check</button>
+                            <div id="f3" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">⭐ Prime & Composite</div>
+                    <div class="explanation-box">
+                        <p><strong>Prime:</strong> Has exactly 2 factors (1 and itself)</p>
+                        <p><strong>Composite:</strong> Has more than 2 factors</p>
+                    </div>
+                    <div class="remember-box">
+                        <p>• 2 is the only even prime number!</p>
+                        <p>• 1 is neither prime nor composite</p>
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q4</span>
+                            <p>Is 13 prime or composite?</p>
+                            <input type="text" class="input-answer" id="q4">
+                            <button class="check-btn" onclick="check('q4','prime',4)">Check</button>
+                            <div id="f4" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🔍 Divisibility Rules</div>
+                    <div class="explanation-box">
+                        <p><strong>By 2:</strong> Last digit is 0, 2, 4, 6, or 8</p>
+                        <p><strong>By 3:</strong> Sum of digits divisible by 3</p>
+                        <p><strong>By 5:</strong> Last digit is 0 or 5</p>
+                        <p><strong>By 10:</strong> Last digit is 0</p>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🎯 HCF & LCM</div>
+                    <div class="explanation-box">
+                        <p><strong>HCF</strong> (Highest Common Factor): Largest number that divides both numbers</p>
+                        <p><strong>LCM</strong> (Lowest Common Multiple): Smallest number that is a multiple of both</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Find HCF of 12 and 18:</strong><br>
+                        Factors of 12: 1, 2, 3, 4, 6, 12<br>
+                        Factors of 18: 1, 2, 3, 6, 9, 18<br>
+                        Common factors: 1, 2, 3, 6<br>
+                        HCF = 6 (highest) ✓
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 5: FRACTIONS -->
+            <div id="ch5" class="chapter">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                    🍕 Chapter 5: Fractions
+                </h2>
+
+                <div class="topic-section">
+                    <div class="topic-title">🍰 What are Fractions?</div>
+                    <div class="explanation-box">
+                        <p>A fraction represents a part of a whole!</p>
+                        <p><strong>Numerator</strong> (top) = Parts taken</p>
+                        <p><strong>Denominator</strong> (bottom) = Total equal parts</p>
+                    </div>
+                    <div class="formula-box">
+                        <p style="font-size: 2em;">3/4</p>
+                        <p>3 = Numerator (parts we have)</p>
+                        <p>4 = Denominator (total parts)</p>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">📝 Types of Fractions</div>
+                    <div class="explanation-box">
+                        <p><strong>Proper:</strong> Numerator < Denominator (3/4, 2/5)</p>
+                        <p><strong>Improper:</strong> Numerator ≥ Denominator (7/4, 9/5)</p>
+                        <p><strong>Mixed:</strong> Whole number + Fraction (2¼, 3½)</p>
+                        <p><strong>Like:</strong> Same denominator (2/7, 5/7)</p>
+                        <p><strong>Unlike:</strong> Different denominators (1/2, 2/3)</p>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">➕ Adding Fractions</div>
+                    <div class="explanation-box">
+                        <p><strong>Like Fractions:</strong> Add numerators, keep denominator same</p>
+                        <p><strong>Unlike Fractions:</strong> Make denominators same (LCM), then add</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example 1:</strong> 2/7 + 3/7 = (2+3)/7 = 5/7 ✓<br><br>
+                        <strong>Example 2:</strong> 1/2 + 1/3<br>
+                        LCM of 2,3 = 6<br>
+                        = 3/6 + 2/6 = 5/6 ✓
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q5</span>
+                            <p>Add: 3/8 + 2/8 = ?</p>
+                            <input type="text" class="input-answer" id="q5" placeholder="Answer as fraction (e.g., 5/8)">
+                            <button class="check-btn" onclick="check('q5','5/8',5)">Check</button>
+                            <div id="f5" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">✖️ Multiplying Fractions</div>
+                    <div class="explanation-box">
+                        <p>Multiply numerators together, multiply denominators together!</p>
+                    </div>
+                    <div class="formula-box">
+                        a/b × c/d = (a×c)/(b×d)
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> 2/3 × 3/4 = (2×3)/(3×4) = 6/12 = 1/2 ✓
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">➗ Dividing Fractions</div>
+                    <div class="explanation-box">
+                        <p>Flip the second fraction and multiply!</p>
+                    </div>
+                    <div class="formula-box">
+                        a/b ÷ c/d = a/b × d/c
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> 2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6 ✓
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 6: DECIMALS -->
+            <div id="ch6" class="chapter">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                    🔢 Chapter 6: Decimals
+                </h2>
+
+                <div class="topic-section">
+                    <div class="topic-title">📍 Decimal Place Value</div>
+                    <div class="explanation-box">
+                        <p>Decimals are another way to write fractions!</p>
+                        <p>The dot (.) is called the decimal point</p>
+                    </div>
+                    <div class="formula-box">
+                        <p style="font-size: 1.5em;">23.456</p>
+                        <p>2 = Tens | 3 = Ones | . = Point</p>
+                        <p>4 = Tenths | 5 = Hundredths | 6 = Thousandths</p>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🔄 Fractions to Decimals</div>
+                    <div class="example-box">
+                        <strong>Method:</strong> Divide numerator by denominator<br>
+                        1/2 = 1 ÷ 2 = 0.5 ✓<br>
+                        3/4 = 3 ÷ 4 = 0.75 ✓<br>
+                        1/5 = 1 ÷ 5 = 0.2 ✓
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q6</span>
+                            <p>Convert 1/4 to decimal:</p>
+                            <input type="text" class="input-answer" id="q6">
+                            <button class="check-btn" onclick="check('q6','0.25',6)">Check</button>
+                            <div id="f6" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">➕ Adding Decimals</div>
+                    <div class="explanation-box">
+                        <p>Line up the decimal points, then add!</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> 3.45 + 2.3<br>
+                        <pre>  3.45
++ 2.30
+------
+  5.75 ✓</pre>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">✖️ Multiplying Decimals</div>
+                    <div class="explanation-box">
+                        <p>1. Multiply as whole numbers</p>
+                        <p>2. Count total decimal places</p>
+                        <p>3. Put decimal point in answer</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> 2.5 × 3.2<br>
+                        25 × 32 = 800 (ignore decimals first)<br>
+                        Total decimal places = 1 + 1 = 2<br>
+                        Answer = 8.00 = 8.0 ✓
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 7: SETS -->
+            <div id="ch7" class="chapter">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                    📦 Chapter 7: Sets
+                </h2>
+
+                <div class="topic-section">
+                    <div class="topic-title">🎁 What is a Set?</div>
+                    <div class="explanation-box">
+                        <p>A <strong>Set</strong> is a collection of well-defined objects!</p>
+                        <p>Objects in a set are called <strong>elements</strong></p>
+                        <p>We write sets using curly brackets { }</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        A = {1, 2, 3, 4, 5} (Set of first 5 natural numbers)<br>
+                        B = {a, e, i, o, u} (Set of vowels)<br>
+                        C = {red, blue, green} (Set of colors)
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">📝 Ways to Write Sets</div>
+                    <div class="explanation-box">
+                        <p><strong>1. Roster Form:</strong> List all elements</p>
+                        <p><strong>2. Set-Builder Form:</strong> Describe the property</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Roster:</strong> A = {2, 4, 6, 8, 10}<br>
+                        <strong>Set-Builder:</strong> A = {x : x is an even number less than 12}
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🔢 Types of Sets</div>
+                    <div class="explanation-box">
+                        <p><strong>Empty Set:</strong> No elements { } or ∅</p>
+                        <p><strong>Finite Set:</strong> Limited number of elements</p>
+                        <p><strong>Infinite Set:</strong> Unlimited elements</p>
+                        <p><strong>Equal Sets:</strong> Same elements</p>
+                        <p><strong>Subset:</strong> All elements of A are in B</p>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🎯 Set Operations</div>
+                    <div class="explanation-box">
+                        <p><strong>Union (∪):</strong> All elements from both sets</p>
+                        <p><strong>Intersection (∩):</strong> Common elements only</p>
+                    </div>
+                    <div class="example-box">
+                        A = {1, 2, 3, 4}<br>
+                        B = {3, 4, 5, 6}<br>
+                        A ∪ B = {1, 2, 3, 4, 5, 6}<br>
+                        A ∩ B = {3, 4} ✓
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 8: PERCENTAGE -->
+            <div id="ch8" class="chapter">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                    % Chapter 8: Percentage
+                </h2>
+
+                <div class="topic-section">
+                    <div class="topic-title">💯 What is Percentage?</div>
+                    <div class="explanation-box">
+                        <p>Percentage means "per hundred" or "out of 100"</p>
+                        <p>Symbol: %</p>
+                        <p>50% means 50 out of 100 = 50/100 = 0.5</p>
+                    </div>
+                    <div class="formula-box">
+                        <p>Percentage = (Part/Whole) × 100</p>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🔄 Conversions</div>
+                    <div class="explanation-box">
+                        <p><strong>Fraction to %:</strong> Multiply by 100</p>
+                        <p><strong>% to Fraction:</strong> Divide by 100</p>
+                        <p><strong>Decimal to %:</strong> Multiply by 100</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        1/4 = (1/4) × 100 = 25%<br>
+                        75% = 75/100 = 3/4<br>
+                        0.3 = 0.3 × 100 = 30% ✓
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q7</span>
+                            <p>Convert 1/2 to percentage:</p>
+                            <input type="text" class="input-answer" id="q7">
+                            <button class="check-btn" onclick="check('q7','50',7)">Check</button>
+                            <div id="f7" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">📊 Finding Percentage</div>
+                    <div class="formula-box">
+                        x% of y = (x/100) × y
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> Find 20% of 150<br>
+                        = (20/100) × 150<br>
+                        = 0.2 × 150<br>
+                        = 30 ✓
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q8</span>
+                            <p>Find 25% of 80:</p>
+                            <input type="text" class="input-answer" id="q8">
+                            <button class="check-btn" onclick="check('q8','20',8)">Check</button>
+                            <div id="f8" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">📈 Increase/Decrease</div>
+                    <div class="explanation-box">
+                        <p><strong>Increase by x%:</strong> Original × (1 + x/100)</p>
+                        <p><strong>Decrease by x%:</strong> Original × (1 − x/100)</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> Increase 200 by 10%<br>
+                        = 200 × (1 + 10/100)<br>
+                        = 200 × 1.1<br>
+                        = 220 ✓
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🛍️ Profit & Loss</div>
+                    <div class="explanation-box">
+                        <p><strong>Profit% = (Profit/CP) × 100</strong></p>
+                        <p><strong>Loss% = (Loss/CP) × 100</strong></p>
+                        <p>CP = Cost Price, SP = Selling Price</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 9: SIMPLE EQUATIONS -->
+            <div id="ch9" class="chapter">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                    ⚖️ Chapter 9: Simple Equations
+                </h2>
+
+                <div class="topic-section">
+                    <div class="topic-title">⚖️ What is an Equation?</div>
+                    <div class="explanation-box">
+                        <p>An equation is like a balanced scale!</p>
+                        <p>Both sides must be equal</p>
+                        <p>We use letters (x, y, z) to represent unknown values</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        x + 5 = 12<br>
+                        2y = 10<br>
+                        3z − 7 = 8
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🔧 Solving Equations</div>
+                    <div class="explanation-box">
+                        <p><strong>Rule:</strong> Whatever you do to one side, do to the other!</p>
+                        <p>To find x, we need to get x alone on one side</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example 1:</strong> x + 7 = 15<br>
+                        Subtract 7 from both sides:<br>
+                        x + 7 − 7 = 15 − 7<br>
+                        x = 8 ✓<br><br>
+                        
+                        <strong>Example 2:</strong> 3x = 21<br>
+                        Divide both sides by 3:<br>
+                        3x ÷ 3 = 21 ÷ 3<br>
+                        x = 7 ✓
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q9</span>
+                            <p>Solve: x + 9 = 20</p>
+                            <input type="text" class="input-answer" id="q9">
+                            <button class="check-btn" onclick="check('q9','11',9)">Check</button>
+                            <div id="f9" class="feedback"></div>
+                        </div>
+                        <div class="question">
+                            <span class="question-number">Q10</span>
+                            <p>Solve: 4x = 32</p>
+                            <input type="text" class="input-answer" id="q10">
+                            <button class="check-btn" onclick="check('q10','8',10)">Check</button>
+                            <div id="f10" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">📝 Transposition Method</div>
+                    <div class="explanation-box">
+                        <p>When you move a number to the other side, its operation changes:</p>
+                        <p>+ becomes −</p>
+                        <p>− becomes +</p>
+                        <p>× becomes ÷</p>
+                        <p>÷ becomes ×</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> 2x − 5 = 13<br>
+                        Move −5 to right (becomes +5):<br>
+                        2x = 13 + 5<br>
+                        2x = 18<br>
+                        x = 18 ÷ 2<br>
+                        x = 9 ✓
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 10: SYMMETRY -->
+            <div id="ch10" class="chapter">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                    🦋 Chapter 10: Symmetry
+                </h2>
+
+                <div class="topic-section">
+                    <div class="topic-title">🪞 Line of Symmetry</div>
+                    <div class="explanation-box">
+                        <p>A <strong>line of symmetry</strong> divides a shape into two identical halves</p>
+                        <p>Each half is the mirror image of the other!</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Examples with symmetry lines:</strong><br>
+                        🦋 Butterfly - 1 vertical line<br>
+                        ⭐ Star - Multiple lines<br>
+                        ❤️ Heart - 1 vertical line<br>
+                        ⚪ Circle - Infinite lines!
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">📐 Symmetry in Shapes</div>
+                    <div class="explanation-box">
+                        <table class="table-style">
+                            <tr>
+                                <th>Shape</th>
+                                <th>Lines of Symmetry</th>
+                            </tr>
+                            <tr>
+                                <td>Square</td>
+                                <td>4 lines</td>
+                            </tr>
+                            <tr>
+                                <td>Rectangle</td>
+                                <td>2 lines</td>
+                            </tr>
+                            <tr>
+                                <td>Equilateral Triangle</td>
+                                <td>3 lines</td>
+                            </tr>
+                            <tr>
+                                <td>Circle</td>
+                                <td>Infinite</td>
+                            </tr>
+                            <tr>
+                                <td>Parallelogram</td>
+                                <td>0 lines</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🔄 Reflection</div>
+                    <div class="explanation-box">
+                        <p>Reflection is like looking in a mirror!</p>
+                        <p>The reflected image is the same distance from the mirror line</p>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🔡 Symmetry in Letters</div>
+                    <div class="example-box">
+                        <strong>Vertical symmetry:</strong> A, H, I, M, O, T, U, V, W, X, Y<br>
+                        <strong>Horizontal symmetry:</strong> B, C, D, E, H, I, O, X<br>
+                        <strong>Both:</strong> H, I, O, X
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 11: MENSURATION -->
+            <div id="ch11" class="chapter">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                    📐 Chapter 11: Mensuration
+                </h2>
+
+                <div class="topic-section">
+                    <div class="topic-title">🏃 Perimeter</div>
+                    <div class="explanation-box">
+                        <p><strong>Perimeter</strong> = Distance around the boundary</p>
+                        <p>Like running around a field! 🏃‍♀️</p>
+                    </div>
+                    <div class="formula-box">
+                        <p><strong>Rectangle:</strong> P = 2(L + B)</p>
+                        <p><strong>Square:</strong> P = 4 × side</p>
+                        <p><strong>Triangle:</strong> P = a + b + c</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> Rectangle with L=10cm, B=5cm<br>
+                        P = 2(10 + 5)<br>
+                        P = 2(15)<br>
+                        P = 30 cm ✓
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q11</span>
+                            <p>Find perimeter of square with side 8 cm:</p>
+                            <input type="text" class="input-answer" id="q11">
+                            <button class="check-btn" onclick="check('q11','32',11)">Check</button>
+                            <div id="f11" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🎨 Area</div>
+                    <div class="explanation-box">
+                        <p><strong>Area</strong> = Space inside a shape</p>
+                        <p>Like painting a wall! 🎨</p>
+                        <p>Measured in square units (cm², m²)</p>
+                    </div>
+                    <div class="formula-box">
+                        <p><strong>Rectangle:</strong> A = L × B</p>
+                        <p><strong>Square:</strong> A = side × side</p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Example:</strong> Rectangle with L=12cm, B=5cm<br>
+                        A = 12 × 5<br>
+                        A = 60 cm² ✓
+                    </div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q12</span>
+                            <p>Find area of square with side 6 cm:</p>
+                            <input type="text" class="input-answer" id="q12">
+                            <button class="check-btn" onclick="check('q12','36',12)">Check</button>
+                            <div id="f12" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">🎯 When to Use What?</div>
+                    <div class="tip-box">
+                        <table class="table-style">
+                            <tr>
+                                <th>Use PERIMETER when...</th>
+                                <th>Use AREA when...</th>
+                            </tr>
+                            <tr>
+                                <td>🚧 Building a fence</td>
+                                <td>🎨 Painting a wall</td>
+                            </tr>
+                            <tr>
+                                <td>🏃 Running around</td>
+                                <td>🌱 Laying grass</td>
+                            </tr>
+                            <tr>
+                                <td>🎀 Adding border</td>
+                                <td>📐 Covering floor</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="topic-section">
+                    <div class="topic-title">📖 Word Problems</div>
+                    <div class="exercise-container">
+                        <div class="question">
+                            <span class="question-number">Q13</span>
+                            <p>A rectangular garden is 15m long and 8m wide. Find its perimeter:</p>
+                            <input type="text" class="input-answer" id="q13">
+                            <button class="check-btn" onclick="check('q13','46',13)">Check</button>
+                            <button class="hint-btn" onclick="hint('h13')">Hint</button>
+                            <div id="h13" class="feedback hint" style="display:none">Use P = 2(L+B) = 2(15+8)</div>
+                            <div id="f13" class="feedback"></div>
+                        </div>
+                        <div class="question">
+                            <span class="question-number">Q14</span>
+                            <p>A room is 12m long and 9m wide. Find area to carpet it:</p>
+                            <input type="text" class="input-answer" id="q14">
+                            <button class="check-btn" onclick="check('q14','108',14)">Check</button>
+                            <button class="hint-btn" onclick="hint('h14')">Hint</button>
+                            <div id="h14" class="feedback hint" style="display:none">Area = L × B = 12 × 9</div>
+                            <div id="f14" class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mascot" onclick="showMessage()">🤖</div>
+
+    <script>
+        let completed = new Set();
+        const totalQuestions = 14;
+
+        function showChapter(id) {
+            document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function check(inputId, answer, qNum) {
+            let userAns = document.getElementById(inputId).value.trim().toLowerCase();
+            let correct = answer.toLowerCase();
+            let feedback = document.getElementById('f' + qNum);
+            
+            if (userAns === correct || userAns.replace(/\s/g,'') === correct.replace(/\s/g,'')) {
+                feedback.className = 'feedback correct';
+                feedback.style.display = 'block';
+                feedback.innerHTML = '🎉 Excellent! Correct answer! You\'re amazing! ⭐';
+                completed.add(qNum);
+                updateProgress();
+                confetti();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.style.display = 'block';
+                feedback.innerHTML = '💪 Try again! You can do it!';
+            }
+        }
+
+        function hint(hintId) {
+            let h = document.getElementById(hintId);
+            h.style.display = h.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function updateProgress() {
+            let percent = Math.round((completed.size / totalQuestions) * 100);
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('progressBar').textContent = percent + '% Complete';
+            localStorage.setItem('mathProgress', JSON.stringify([...completed]));
+        }
+
+        function confetti() {
+            const symbols = ['🎉','⭐','✨','🌟','🎊'];
+            for(let i=0; i<30; i++) {
+                setTimeout(() => {
+                    let c = document.createElement('div');
+                    c.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
+                    c.style.position='fixed';
+                    c.style.left=Math.random()*window.innerWidth+'px';
+                    c.style.top='-50px';
+                    c.style.fontSize='30px';
+                    c.style.zIndex='10000';
+                    document.body.appendChild(c);
+                    c.animate([
+                        {transform:'translateY(0) rotate(0deg)', opacity:1},
+                        {transform:`translateY(${window.innerHeight}px) rotate(360deg)`, opacity:0}
+                    ], {duration:2000, easing:'ease-in'}).onfinish = () => c.remove();
+                }, i*30);
+            }
+        }
+
+        function showMessage() {
+            const messages = [
+                "You're doing great! Keep going! 🌟",
+                "Math is fun! You're learning so much! 🎉",
+                "Every question makes you smarter! 🧠",
+                "You're a math superstar! ⭐",
+                "Keep up the amazing work! 🚀"
+            ];
+            alert(messages[Math.floor(Math.random()*messages.length)]);
+        }
+
+        // Load saved progress
+        let saved = localStorage.getItem('mathProgress');
+        if(saved) {
+            completed = new Set(JSON.parse(saved));
+            updateProgress();
+        }
+    </script>
+</body>
+</html>
