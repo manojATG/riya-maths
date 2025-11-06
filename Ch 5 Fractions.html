@@ -1,0 +1,2527 @@
+html<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riya’s Fun with Fractions - Interactive Learning Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .lesson-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .lesson-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #f0f0f0;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .lesson-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .lesson-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .lesson-btn.completed {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .content-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .example-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .try-it {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .fraction-visual {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 20px;
+            font-size: 1.5em;
+        }
+
+        .numerator {
+            border-bottom: 3px solid #333;
+            padding: 5px 15px;
+            font-weight: bold;
+        }
+
+        .denominator {
+            padding: 5px 15px;
+            font-weight: bold;
+        }
+
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 50px);
+            gap: 5px;
+            margin: 20px 0;
+        }
+
+        .grid-cell {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .grid-cell.shaded {
+            background: #667eea;
+        }
+
+        .grid-cell:hover {
+            transform: scale(1.1);
+        }
+
+        .quiz-container {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .quiz-option.incorrect {
+            background: #f44336;
+            color: white;
+        }
+
+        .feedback {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .feedback.incorrect {
+            background: #f44336;
+            color: white;
+        }
+
+        .number-line {
+            width: 100%;
+            height: 60px;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 10px;
+            position: relative;
+            margin: 30px 0;
+        }
+
+        .number-line-marker {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: #333;
+        }
+
+        .number-line-label {
+            position: absolute;
+            top: -25px;
+            transform: translateX(-50%);
+            font-weight: bold;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.prev {
+            background: #9e9e9e;
+            color: white;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            font-size: 1.1em;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            width: 100px;
+            margin: 0 10px;
+        }
+
+        button.check-answer {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        button.check-answer:hover {
+            background: #45a049;
+        }
+
+        .visual-fraction {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .circle-fraction {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #333;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .rectangle-fraction {
+            width: 200px;
+            height: 100px;
+            border: 3px solid #333;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        .cake-visual {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .stamps-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .stamp {
+            width: 40px;
+            height: 40px;
+            background: #ffc107;
+            border: 2px solid #333;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .tip-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .tip-box::before {
+            content: "💡 Tip: ";
+            font-weight: bold;
+            color: #2196F3;
+        }
+
+        .mascot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .mascot:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .mascot-message {
+            position: fixed;
+            bottom: 130px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            max-width: 300px;
+            display: none;
+            z-index: 999;
+        }
+
+        .mascot-message.show {
+            display: block;
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5em;
+            display: none;
+            z-index: 2000;
+            animation: celebrate 1s ease;
+        }
+
+        @keyframes celebrate {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.5); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            .content-section { padding: 20px; }
+            .mascot { width: 70px; height: 70px; font-size: 2em; }
+        }
+		
+		.rev-btn {
+  display: inline-block;
+  background-color: #faf03a;
+  color: #5f3dc4;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 25px;
+  text-decoration: none;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+.rev-btn:hover {
+  background-color: #fff57a;
+  transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎉 Fun with Fractions! 🎉</h1>
+            <p style="font-size: 1.2em; color: #666;">Your Interactive Learning Adventure</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+        </header>
+
+        <div class="lesson-nav" id="lessonNav">
+            <!-- Navigation buttons will be generated by JavaScript -->
+        </div>
+
+        <!-- Lesson 1: Introduction to Fractions -->
+        <div class="content-section active" data-lesson="1">
+            <h2>🍰 Lesson 1: What Are Fractions?</h2>
+            
+            <p style="font-size: 1.2em;">Hi there, young mathematician! 👋 Welcome to the wonderful world of fractions!</p>
+            
+            <h3>Let's Start with a Story...</h3>
+            <div class="example-box">
+                <p><strong>🎄 The Christmas Cake Story:</strong></p>
+                <p>Imagine your father brings home a delicious cake on Christmas day! 🎂 He wants to share it equally between you and your brother/sister.</p>
+                <p>How will he divide it? He cuts it into <span class="highlight">2 equal parts</span> and gives one piece to each of you!</p>
+                <p>This means you get <span class="highlight">1 out of 2</span> pieces, or we can write it as:</p>
+                <div class="fraction-visual">
+                    <div class="numerator">1</div>
+                    <div class="denominator">2</div>
+                </div>
+                <p>This is called a <strong>fraction</strong>!</p>
+            </div>
+
+            <h3>Another Example: The Stamp Collection 📬</h3>
+            <div class="example-box">
+                <p>Suppose you have 20 stamps. You divide them into 4 equal groups:</p>
+                <div class="stamps-visual" id="stampsVisual">
+                    <!-- Stamps will be generated by JavaScript -->
+                </div>
+                <p>If you give one group (5 stamps) to your friend, you gave <span class="highlight">1 out of 4</span> groups:</p>
+                <div class="fraction-visual">
+                    <div class="numerator">1</div>
+                    <div class="denominator">4</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                A fraction is a part of a whole. The whole can be one object (like a cake) or a collection of objects (like stamps)!
+            </div>
+
+            <h3>🎮 Try It Yourself!</h3>
+            <div class="try-it">
+                <p><strong>Click on the boxes to shade them:</strong></p>
+                <p>Try to shade exactly half (1/2) of the boxes:</p>
+                <div class="interactive-grid" id="grid1">
+                    <!-- Grid will be generated by JavaScript -->
+                </div>
+                <button class="check-answer" onclick="checkGrid1()">Check My Answer!</button>
+                <div class="feedback" id="grid1Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()" disabled>← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Parts of a Fraction →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 2: Numerator and Denominator -->
+        <div class="content-section" data-lesson="2">
+            <h2>🔢 Lesson 2: Understanding Fraction Parts</h2>
+            
+            <h3>Every Fraction Has Two Parts!</h3>
+            <div class="example-box">
+                <p>Let's look at the fraction:</p>
+                <div class="fraction-visual" style="font-size: 2em;">
+                    <div class="numerator" style="color: #e91e63;">3</div>
+                    <div class="denominator" style="color: #2196F3;">5</div>
+                </div>
+                <p><strong style="color: #e91e63;">The top number (3) is called the NUMERATOR</strong></p>
+                <p>It tells us how many parts we have taken.</p>
+                <p><strong style="color: #2196F3;">The bottom number (5) is called the DENOMINATOR</strong></p>
+                <p>It tells us into how many equal parts the whole is divided.</p>
+            </div>
+
+            <h3>How to Read Fractions 📖</h3>
+            <div class="example-box">
+                <p>We read <span class="fraction-visual"><span class="numerator">3</span><span class="denominator">5</span></span> as <strong>"three-fifths"</strong></p>
+                <p>More examples:</p>
+                <ul style="margin-left: 30px; margin-top: 10px;">
+                    <li><span class="fraction-visual"><span class="numerator">1</span><span class="denominator">2</span></span> = one-half</li>
+                    <li><span class="fraction-visual"><span class="numerator">3</span><span class="denominator">4</span></span> = three-fourths (or three-quarters)</li>
+                    <li><span class="fraction-visual"><span class="numerator">7</span><span class="denominator">8</span></span> = seven-eighths</li>
+                    <li><span class="fraction-visual"><span class="numerator">2</span><span class="denominator">3</span></span> = two-thirds</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                The denominator must NEVER be zero! Why? Because you can't divide something into zero parts!
+            </div>
+
+            <h3>🎮 Quiz Time!</h3>
+            <div class="quiz-container">
+                <p><strong>Question: In the fraction 4/7, which is the numerator?</strong></p>
+                <div class="quiz-option" onclick="checkQuiz(this, true)">A) 4 ✓</div>
+                <div class="quiz-option" onclick="checkQuiz(this, false)">B) 7</div>
+                <div class="quiz-option" onclick="checkQuiz(this, false)">C) 11</div>
+                <div class="feedback" id="quiz1Feedback"></div>
+            </div>
+
+            <div class="quiz-container">
+                <p><strong>Question: What does the denominator tell us?</strong></p>
+                <div class="quiz-option" onclick="checkQuiz2(this, false)">A) How many parts we have</div>
+                <div class="quiz-option" onclick="checkQuiz2(this, true)">B) Into how many equal parts the whole is divided ✓</div>
+                <div class="quiz-option" onclick="checkQuiz2(this, false)">C) The color of the fraction</div>
+                <div class="feedback" id="quiz2Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Fractions on Number Line →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 3: Fractions on Number Line -->
+        <div class="content-section" data-lesson="3">
+            <h2>📏 Lesson 3: Fractions on the Number Line</h2>
+            
+            <p>Just like whole numbers, fractions also have their place on a number line!</p>
+
+            <h3>Remember Whole Numbers?</h3>
+            <div class="example-box">
+                <p>You've seen whole numbers on a line before:</p>
+                <svg width="100%" height="80" style="margin: 20px 0;">
+                    <line x1="50" y1="40" x2="650" y2="40" stroke="#333" stroke-width="3"/>
+                    <circle cx="50" cy="40" r="5" fill="#333"/>
+                    <circle cx="150" cy="40" r="5" fill="#333"/>
+                    <circle cx="250" cy="40" r="5" fill="#333"/>
+                    <circle cx="350" cy="40" r="5" fill="#333"/>
+                    <circle cx="450" cy="40" r="5" fill="#333"/>
+                    <circle cx="550" cy="40" r="5" fill="#333"/>
+                    <circle cx="650" cy="40" r="5" fill="#333"/>
+                    <text x="50" y="65" text-anchor="middle" font-size="18" font-weight="bold">0</text>
+                    <text x="150" y="65" text-anchor="middle" font-size="18" font-weight="bold">1</text>
+                    <text x="250" y="65" text-anchor="middle" font-size="18" font-weight="bold">2</text>
+                    <text x="350" y="65" text-anchor="middle" font-size="18" font-weight="bold">3</text>
+                    <text x="450" y="65" text-anchor="middle" font-size="18" font-weight="bold">4</text>
+                    <text x="550" y="65" text-anchor="middle" font-size="18" font-weight="bold">5</text>
+                    <text x="650" y="65" text-anchor="middle" font-size="18" font-weight="bold">6</text>
+                </svg>
+            </div>
+
+            <h3>Now Let's Place 1/2 on the Number Line!</h3>
+            <div class="example-box">
+                <p>To show 1/2, we divide the space between 0 and 1 into <strong>2 equal parts</strong>:</p>
+                <svg width="100%" height="120" style="margin: 20px 0;">
+                    <line x1="50" y1="60" x2="450" y2="60" stroke="#333" stroke-width="3"/>
+                    <!-- Points -->
+                    <circle cx="50" cy="60" r="6" fill="#333"/>
+                    <circle cx="250" cy="60" r="8" fill="#e91e63"/>
+                    <circle cx="450" cy="60" r="6" fill="#333"/>
+                    <!-- Labels -->
+                    <text x="50" y="90" text-anchor="middle" font-size="18" font-weight="bold">0</text>
+                    <text x="250" y="35" text-anchor="middle" font-size="20" font-weight="bold" fill="#e91e63">1/2</text>
+                    <text x="250" y="90" text-anchor="middle" font-size="14" fill="#e91e63">(or 2/2)</text>
+                    <text x="450" y="90" text-anchor="middle" font-size="18" font-weight="bold">1</text>
+                    <!-- Arrow pointing to 1/2 -->
+                    <path d="M 250 45 L 250 55" stroke="#e91e63" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                </svg>
+                <p>The denominator (2) tells us to divide into 2 parts!</p>
+                <p>The numerator (1) tells us to count 1 part from 0!</p>
+            </div>
+
+            <h3>Example: Placing 3/5 on a Number Line</h3>
+            <div class="example-box">
+                <p><strong>Step 1:</strong> Denominator is 5, so divide the space between 0 and 1 into 5 equal parts.</p>
+                <p><strong>Step 2:</strong> Numerator is 3, so count 3 parts from 0.</p>
+                <svg width="100%" height="120" style="margin: 20px 0;">
+                    <line x1="50" y1="60" x2="550" y2="60" stroke="#333" stroke-width="3"/>
+                    <!-- Points -->
+                    <circle cx="50" cy="60" r="5" fill="#333"/>
+                    <circle cx="150" cy="60" r="5" fill="#2196F3"/>
+                    <circle cx="250" cy="60" r="5" fill="#2196F3"/>
+                    <circle cx="350" cy="60" r="8" fill="#e91e63"/>
+                    <circle cx="450" cy="60" r="5" fill="#2196F3"/>
+                    <circle cx="550" cy="60" r="5" fill="#333"/>
+                    <!-- Labels -->
+                    <text x="50" y="90" text-anchor="middle" font-size="16" font-weight="bold">0</text>
+                    <text x="150" y="90" text-anchor="middle" font-size="14">1/5</text>
+                    <text x="250" y="90" text-anchor="middle" font-size="14">2/5</text>
+                    <text x="350" y="35" text-anchor="middle" font-size="20" font-weight="bold" fill="#e91e63">3/5</text>
+                    <text x="450" y="90" text-anchor="middle" font-size="14">4/5</text>
+                    <text x="550" y="90" text-anchor="middle" font-size="16" font-weight="bold">1</text>
+                </svg>
+            </div>
+
+            <div class="tip-box">
+                The denominator tells you how many equal parts to make. The numerator tells you how many steps to take from 0!
+            </div>
+
+            <h3>🎮 Interactive Challenge!</h3>
+            <div class="try-it">
+                <p><strong>Where would you place 2/4 on this number line?</strong></p>
+                <svg width="100%" height="120" id="numberLineChallenge">
+                    <line x1="50" y1="60" x2="450" y2="60" stroke="#333" stroke-width="3"/>
+                    <circle cx="50" cy="60" r="6" fill="#333"/>
+                    <circle cx="150" cy="60" r="6" fill="#ddd" class="clickable-point" onclick="checkNumberLine(this, false)"/>
+                    <circle cx="250" cy="60" r="6" fill="#ddd" class="clickable-point" onclick="checkNumberLine(this, true)"/>
+                    <circle cx="350" cy="60" r="6" fill="#ddd" class="clickable-point" onclick="checkNumberLine(this, false)"/>
+                    <circle cx="450" cy="60" r="6" fill="#333"/>
+                    <text x="50" y="90" text-anchor="middle" font-size="18" font-weight="bold">0</text>
+                    <text x="450" y="90" text-anchor="middle" font-size="18" font-weight="bold">1</text>
+                </svg>
+                <p style="margin-top: 15px; font-size: 0.9em; color: #666;">Click on the circle where you think 2/4 should be!</p>
+                <div class="feedback" id="numberLineFeedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Types of Fractions →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 4: Types of Fractions -->
+        <div class="content-section" data-lesson="4">
+            <h2>🎭 Lesson 4: Three Types of Fractions</h2>
+            
+            <p>Fractions come in three different types. Let's learn about each one!</p>
+
+            <h3>1️⃣ Proper Fractions</h3>
+            <div class="example-box">
+                <p><strong>Rule:</strong> Numerator is <span class="highlight">smaller</span> than denominator</p>
+                <div style="margin: 20px 0;">
+                    <div class="fraction-visual">
+                        <div class="numerator" style="color: #4CAF50;">3</div>
+                        <div class="denominator" style="color: #333;">5</div>
+                    </div>
+                    <span style="font-size: 1.5em; margin: 0 20px;">3 < 5 ✓</span>
+                </div>
+                <p>More examples: 1/2, 2/3, 4/7, 5/9</p>
+                <p><strong>Important:</strong> All proper fractions are <span class="highlight">less than 1</span></p>
+                <p>They represent a <strong>part</strong> of a whole.</p>
+                <svg width="200" height="120">
+                    <rect x="10" y="10" width="180" height="100" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="10" y="10" width="108" height="100" fill="#4CAF50" opacity="0.7"/>
+                    <text x="100" y="70" text-anchor="middle" font-size="24" font-weight="bold" fill="white">3/5</text>
+                </svg>
+            </div>
+
+            <h3>2️⃣ Improper Fractions</h3>
+            <div class="example-box">
+                <p><strong>Rule:</strong> Numerator is <span class="highlight">equal to or greater</span> than denominator</p>
+                <div style="margin: 20px 0;">
+                    <div class="fraction-visual">
+                        <div class="numerator" style="color: #FF5722;">7</div>
+                        <div class="denominator" style="color: #333;">4</div>
+                    </div>
+                    <span style="font-size: 1.5em; margin: 0 20px;">7 > 4 ✓</span>
+                </div>
+                <p>More examples: 5/3, 8/8, 13/7, 9/2</p>
+                <p><strong>Important:</strong> All improper fractions are <span class="highlight">equal to or greater than 1</span></p>
+                <p><strong>Story Time:</strong> Imagine sharing 3 apples equally between you and your sister:</p>
+                <p>Each gets 1 apple + half of the remaining apple = 1½ apples</p>
+                <p>This can also be written as 3/2 (an improper fraction!)</p>
+            </div>
+
+            <h3>3️⃣ Mixed Fractions</h3>
+            <div class="example-box">
+                <p><strong>Rule:</strong> A whole number + a proper fraction</p>
+                <div style="margin: 20px 0; font-size: 2em;">
+                    <span style="color: #2196F3; font-weight: bold;">2</span>
+                    <div class="fraction-visual" style="font-size: 0.7em; display: inline-flex;">
+                        <div class="numerator">1</div>
+                        <div class="denominator">3</div>
+                    </div>
+                </div>
+                <p>We read this as "two and one-third"</p>
+                <p>More examples: 1½, 3¾, 5⅖, 2⅔</p>
+                <svg width="100%" height="150">
+                    <circle cx="70" cy="75" r="40" fill="#2196F3"/>
+                    <circle cx="170" cy="75" r="40" fill="#2196F3"/>
+                    <circle cx="270" cy="75" r="40" fill="none" stroke="#2196F3" stroke-width="3"/>
+                    <path d="M 270 75 L 270 35 A 40 40 0 0 1 298.66 60" fill="#2196F3"/>
+                    <text x="370" y="85" font-size="36" font-weight="bold">= 2⅓</text>
+                </svg>
+            </div>
+
+            <div class="tip-box">
+                Quick way to identify: If the top number is smaller → Proper. If top is bigger → Improper. If there's a whole number with a fraction → Mixed!
+            </div>
+
+            <h3>🎮 Classification Challenge!</h3>
+            <div class="quiz-container">
+                <p><strong>What type is 5/8?</strong></p>
+                <div class="quiz-option" onclick="checkFractionType(this, 'proper')">Proper Fraction ✓</div>
+                <div class="quiz-option" onclick="checkFractionType(this, 'improper')">Improper Fraction</div>
+                <div class="quiz-option" onclick="checkFractionType(this, 'mixed')">Mixed Fraction</div>
+                <div class="feedback" id="typeQuiz1"></div>
+            </div>
+
+            <div class="quiz-container">
+                <p><strong>What type is 9/4?</strong></p>
+                <div class="quiz-option" onclick="checkFractionType2(this, 'proper')">Proper Fraction</div>
+                <div class="quiz-option" onclick="checkFractionType2(this, 'improper')">Improper Fraction ✓</div>
+                <div class="quiz-option" onclick="checkFractionType2(this, 'mixed')">Mixed Fraction</div>
+                <div class="feedback" id="typeQuiz2"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Converting Fractions →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 5: Converting Between Improper and Mixed -->
+        <div class="content-section" data-lesson="5">
+            <h2>🔄 Lesson 5: Converting Fractions</h2>
+            
+            <h3>Improper to Mixed Fraction</h3>
+            <div class="example-box">
+                <p><strong>Example: Convert 11/4 to a mixed fraction</strong></p>
+                <p><strong>Step 1:</strong> Divide the numerator (11) by the denominator (4)</p>
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace;">
+                    <p>11 ÷ 4 = <span style="color: #2196F3; font-weight: bold;">2</span> remainder <span style="color: #e91e63; font-weight: bold;">3</span></p>
+                    <p style="margin-top: 10px;">4 × 2 = 8</p>
+                    <p>11 - 8 = 3</p>
+                </div>
+                <p><strong>Step 2:</strong> Write the answer as:</p>
+                <p style="font-size: 1.5em; margin: 20px 0;">
+                    <span style="color: #2196F3; font-weight: bold;">Quotient</span> 
+                    <span style="color: #e91e63; font-weight: bold;">Remainder</span>/<span style="color: #4CAF50; font-weight: bold;">Divisor</span>
+                </p>
+                <p style="font-size: 2em; text-align: center; margin: 20px 0;">
+                    <span style="color: #2196F3;">2</span><sup style="color: #e91e63;">3</sup>/<sub style="color: #4CAF50;">4</sub>
+                </p>
+                <p><strong>Answer: 11/4 = 2¾</strong></p>
+            </div>
+
+            <div class="tip-box">
+                Think of it like sharing pizza! If you have 11 slices and each pizza has 4 slices, you have 2 whole pizzas plus 3 extra slices (¾ of a pizza).
+            </div>
+
+            <h3>Mixed to Improper Fraction</h3>
+            <div class="example-box">
+                <p><strong>Example: Convert 3⅖ to an improper fraction</strong></p>
+                <p><strong>Step 1:</strong> Multiply the whole number by the denominator</p>
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p style="font-size: 1.2em;">3 × 5 = <span style="color: #2196F3; font-weight: bold;">15</span></p>
+                </div>
+                <p><strong>Step 2:</strong> Add the numerator to this result</p>
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p style="font-size: 1.2em;">15 + 2 = <span style="color: #e91e63; font-weight: bold;">17</span></p>
+                </div>
+                <p><strong>Step 3:</strong> Put this sum over the denominator</p>
+                <div style="margin: 20px 0;">
+                    <div class="fraction-visual" style="font-size: 2em;">
+                        <div class="numerator" style="color: #e91e63;">17</div>
+                        <div class="denominator" style="color: #4CAF50;">5</div>
+                    </div>
+                </div>
+                <p><strong>Answer: 3⅖ = 17/5</strong></p>
+            </div>
+
+            <h3>🎮 Practice Time!</h3>
+            <div class="try-it">
+                <p><strong>Convert 13/5 to a mixed fraction:</strong></p>
+                <p>When I divide 13 by 5, I get:</p>
+                <p>Quotient: <input type="number" id="quotient1" min="0" max="10" style="width: 80px;"></p>
+                <p>Remainder: <input type="number" id="remainder1" min="0" max="10" style="width: 80px;"></p>
+                <button class="check-answer" onclick="checkConversion1()">Check Answer</button>
+                <div class="feedback" id="conversion1Feedback"></div>
+            </div>
+
+            <div class="try-it">
+                <p><strong>Convert 2¾ to an improper fraction:</strong></p>
+                <p>First, multiply: 2 × 4 = <input type="number" id="mult1" min="0" max="20" style="width: 80px;"></p>
+                <p>Then add: ___ + 3 = <input type="number" id="add1" min="0" max="20" style="width: 80px;"></p>
+                <p>So the improper fraction is: <input type="number" id="final1" min="0" max="20" style="width: 80px;">/4</p>
+                <button class="check-answer" onclick="checkConversion2()">Check Answer</button>
+                <div class="feedback" id="conversion2Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Equivalent Fractions →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 6: Equivalent Fractions -->
+        <div class="content-section" data-lesson="6">
+            <h2>🎨 Lesson 6: Equivalent Fractions</h2>
+            
+            <p>Sometimes different fractions can represent the SAME amount! These are called equivalent fractions.</p>
+
+            <h3>Visual Proof!</h3>
+            <div class="example-box">
+                <p><strong>Look at these shapes - they all show the same amount shaded:</strong></p>
+                <svg width="100%" height="180">
+                    <!-- First rectangle: 1/2 -->
+                    <rect x="20" y="20" width="100" height="60" fill="none" stroke="#333" stroke-width="2"/>
+                    <rect x="20" y="20" width="50" height="60" fill="#4CAF50" opacity="0.7"/>
+                    <text x="70" y="110" text-anchor="middle" font-size="20" font-weight="bold">1/2</text>
+                    
+                    <!-- Second rectangle: 2/4 -->
+                    <g transform="translate(140, 0)">
+                        <rect x="20" y="20" width="100" height="60" fill="none" stroke="#333" stroke-width="2"/>
+                        <rect x="20" y="20" width="50" height="60" fill="#4CAF50" opacity="0.7"/>
+                        <line x1="70" y1="20" x2="70" y2="80" stroke="#333" stroke-width="2"/>
+                        <text x="70" y="110" text-anchor="middle" font-size="20" font-weight="bold">2/4</text>
+                    </g>
+                    
+                    <!-- Third rectangle: 3/6 -->
+                    <g transform="translate(280, 0)">
+                        <rect x="20" y="20" width="100" height="60" fill="none" stroke="#333" stroke-width="2"/>
+                        <rect x="20" y="20" width="50" height="60" fill="#4CAF50" opacity="0.7"/>
+                        <line x1="53.33" y1="20" x2="53.33" y2="80" stroke="#333" stroke-width="2"/>
+                        <line x1="86.66" y1="20" x2="86.66" y2="80" stroke="#333" stroke-width="2"/>
+                        <text x="70" y="110" text-anchor="middle" font-size="20" font-weight="bold">3/6</text>
+                    </g>
+                    
+                    <!-- Fourth rectangle: 4/8 -->
+                    <g transform="translate(420, 0)">
+                        <rect x="20" y="20" width="100" height="60" fill="none" stroke="#333" stroke-width="2"/>
+                        <rect x="20" y="20" width="50" height="60" fill="#4CAF50" opacity="0.7"/>
+                        <line x1="45" y1="20" x2="45" y2="80" stroke="#333" stroke-width="2"/>
+                        <line x1="70" y1="20" x2="70" y2="80" stroke="#333" stroke-width="2"/>
+                        <line x1="95" y1="20" x2="95" y2="80" stroke="#333" stroke-width="2"/>
+                        <text x="70" y="110" text-anchor="middle" font-size="20" font-weight="bold">4/8</text>
+                    </g>
+                </svg>
+                <p style="text-align: center; font-size: 1.3em; margin-top: 20px;">
+                    <strong>1/2 = 2/4 = 3/6 = 4/8</strong>
+                </p>
+                <p>All these fractions are <span class="highlight">equivalent</span>!</p>
+            </div>
+
+            <h3>The Magic Rule!</h3>
+            <div class="example-box">
+                <p><strong>To get equivalent fractions:</strong></p>
+                <p>✨ <span class="highlight">Multiply or divide BOTH the numerator and denominator by the SAME number</span> ✨</p>
+                
+                <p style="margin-top: 20px;"><strong>Example 1: Multiply both by 2</strong></p>
+                <div style="font-size: 1.5em; margin: 20px; text-align: center;">
+                    <span class="fraction-visual">
+                        <div class="numerator">1</div>
+                        <div class="denominator">3</div>
+                    </span>
+                    <span style="margin: 0 20px;">=</span>
+                    <span class="fraction-visual">
+                        <div class="numerator">1 × 2</div>
+                        <div class="denominator">3 × 2</div>
+                    </span>
+                    <span style="margin: 0 20px;">=</span>
+                    <span class="fraction-visual">
+                        <div class="numerator">2</div>
+                        <div class="denominator">6</div>
+                    </span>
+                </div>
+
+                <p><strong>Example 2: Divide both by 3</strong></p>
+                <div style="font-size: 1.5em; margin: 20px; text-align: center;">
+                    <span class="fraction-visual">
+                        <div class="numerator">9</div>
+                        <div class="denominator">12</div>
+                    </span>
+                    <span style="margin: 0 20px;">=</span>
+                    <span class="fraction-visual">
+                        <div class="numerator">9 ÷ 3</div>
+                        <div class="denominator">12 ÷ 3</div>
+                    </span>
+                    <span style="margin: 0 20px;">=</span>
+                    <span class="fraction-visual">
+                        <div class="numerator">3</div>
+                        <div class="denominator">4</div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                Think of it like cutting a pizza! If you cut 1/2 a pizza into smaller pieces, you still have the same amount of pizza - just in more pieces!
+            </div>
+
+            <h3>🎮 Find the Equivalent!</h3>
+            <div class="try-it">
+                <p><strong>Find an equivalent fraction for 2/5 by multiplying both parts by 3:</strong></p>
+                <p style="font-size: 1.3em;">
+                    2/5 = <input type="number" id="equiv1" min="0" max="20" style="width: 80px;"> / <input type="number" id="equiv2" min="0" max="20" style="width: 80px;">
+                </p>
+                <button class="check-answer" onclick="checkEquivalent1()">Check Answer</button>
+                <div class="feedback" id="equiv1Feedback"></div>
+            </div>
+
+            <div class="quiz-container">
+                <p><strong>Which fraction is equivalent to 3/4?</strong></p>
+                <div class="quiz-option" onclick="checkEquivQuiz(this, false)">A) 6/7</div>
+                <div class="quiz-option" onclick="checkEquivQuiz(this, true)">B) 6/8 ✓</div>
+                <div class="quiz-option" onclick="checkEquivQuiz(this, false)">C) 4/6</div>
+                <div class="feedback" id="equivQuiz"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Simplest Form →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 7: Simplest Form -->
+        <div class="content-section" data-lesson="7">
+            <h2>⭐ Lesson 7: Simplest Form of Fractions</h2>
+            
+            <p>Just like cleaning your room, we can "clean up" fractions by making them simpler!</p>
+
+            <h3>What is Simplest Form?</h3>
+            <div class="example-box">
+                <p>A fraction is in <strong>simplest form</strong> when the numerator and denominator have <span class="highlight">NO common factors except 1</span>.</p>
+                <p style="margin-top: 15px;">Example:</p>
+                <div style="font-size: 1.5em; margin: 20px 0; text-align: center;">
+                    <span class="fraction-visual">
+                        <div class="numerator">8</div>
+                        <div class="denominator">12</div>
+                    </span>
+                    <span style="margin: 0 20px; color: #ff5722;">NOT simplest</span>
+                </div>
+                <p>Why? Because both 8 and 12 can be divided by 4!</p>
+                <div style="font-size: 1.5em; margin: 20px 0; text-align: center;">
+                    <span class="fraction-visual">
+                        <div class="numerator">8 ÷ 4</div>
+                        <div class="denominator">12 ÷ 4</div>
+                    </span>
+                    <span style="margin: 0 20px;">=</span>
+                    <span class="fraction-visual">
+                        <div class="numerator">2</div>
+                        <div class="denominator">3</div>
+                    </span>
+                    <span style="margin: 0 20px; color: #4CAF50;">✓ Simplest!</span>
+                </div>
+            </div>
+
+            <h3>How to Simplify Step-by-Step</h3>
+            <div class="example-box">
+                <p><strong>Example: Simplify 18/24</strong></p>
+                
+                <p><strong>Step 1:</strong> Find common factors of 18 and 24</p>
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p>Factors of 18: 1, 2, 3, 6, 9, 18</p>
+                    <p>Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24</p>
+                    <p style="color: #4CAF50; font-weight: bold;">Common factors: 1, 2, 3, 6</p>
+                    <p style="color: #e91e63; font-weight: bold;">Biggest common factor: 6</p>
+                </div>
+
+                <p><strong>Step 2:</strong> Divide both by the biggest common factor (6)</p>
+                <div style="font-size: 1.5em; margin: 20px 0; text-align: center;">
+                    <span class="fraction-visual">
+                        <div class="numerator">18 ÷ 6</div>
+                        <div class="denominator">24 ÷ 6</div>
+                    </span>
+                    <span style="margin: 0 20px;">=</span>
+                    <span class="fraction-visual">
+                        <div class="numerator">3</div>
+                        <div class="denominator">4</div>
+                    </span>
+                </div>
+
+                <p><strong>Step 3:</strong> Check if we can simplify more</p>
+                <p>3 and 4 have no common factors except 1, so <strong>3/4 is the simplest form!</strong></p>
+            </div>
+
+            <div class="tip-box">
+                Quick trick: If both numbers are even, you can always divide by 2! Keep dividing by common factors until you can't anymore.
+            </div>
+
+            <h3>Another Method: Divide Step by Step</h3>
+            <div class="example-box">
+                <p><strong>Example: Simplify 42/112</strong></p>
+                <p>Don't know the biggest factor? No problem! Divide step by step:</p>
+                <div style="font-size: 1.3em; margin: 20px 0;">
+                    <p>42/112 = (42 ÷ 2)/(112 ÷ 2) = <strong>21/56</strong></p>
+                    <p style="margin-top: 10px;">21/56 = (21 ÷ 7)/(56 ÷ 7) = <strong>3/8</strong></p>
+                    <p style="margin-top: 10px; color: #4CAF50; font-weight: bold;">3/8 is the simplest form! ✓</p>
+                </div>
+            </div>
+
+            <h3>🎮 Simplification Challenge!</h3>
+            <div class="try-it">
+                <p><strong>Simplify 15/25:</strong></p>
+                <p>What number can divide both 15 and 25? <input type="number" id="simplify1" min="1" max="10" style="width: 80px;"></p>
+                <p>15 ÷ ___ = <input type="number" id="simplifyNum" min="1" max="15" style="width: 80px;"></p>
+                <p>25 ÷ ___ = <input type="number" id="simplifyDen" min="1" max="25" style="width: 80px;"></p>
+                <button class="check-answer" onclick="checkSimplify()">Check Answer</button>
+                <div class="feedback" id="simplifyFeedback"></div>
+            </div>
+
+            <div class="quiz-container">
+                <p><strong>Which fraction is already in simplest form?</strong></p>
+                <div class="quiz-option" onclick="checkSimplestQuiz(this, false)">A) 6/9</div>
+                <div class="quiz-option" onclick="checkSimplestQuiz(this, true)">B) 5/7 ✓</div>
+                <div class="quiz-option" onclick="checkSimplestQuiz(this, false)">C) 10/15</div>
+                <div class="feedback" id="simplestQuiz"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Comparing Fractions →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 8: Comparing Fractions -->
+        <div class="content-section" data-lesson="8">
+            <h2>⚖️ Lesson 8: Comparing Fractions</h2>
+            
+            <p>Which fraction is bigger? Let's learn how to compare!</p>
+
+            <h3>Case 1: Same Denominator (Like Fractions)</h3>
+            <div class="example-box">
+                <p><strong>When denominators are the same, just compare numerators!</strong></p>
+                <p>Which is bigger: 3/7 or 5/7?</p>
+                <svg width="100%" height="200">
+                    <text x="50" y="30" font-size="24" font-weight="bold">3/7</text>
+                    <rect x="50" y="50" width="300" height="60" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="50" y="50" width="128.57" height="60" fill="#4CAF50" opacity="0.7"/>
+                    
+                    <text x="50" y="160" font-size="24" font-weight="bold">5/7</text>
+                    <rect x="50" y="180" width="300" height="60" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="50" y="180" width="214.29" height="60" fill="#e91e63" opacity="0.7"/>
+                </svg>
+                <p style="text-align: center; font-size: 1.5em; margin-top: 20px;">
+                    5 > 3, so <strong>5/7 > 3/7</strong> ✓
+                </p>
+            </div>
+
+            <h3>Case 2: Same Numerator (Different Denominators)</h3>
+            <div class="example-box">
+                <p><strong>When numerators are the same, the fraction with SMALLER denominator is BIGGER!</strong></p>
+                <p>Which is bigger: 1/3 or 1/5?</p>
+                <svg width="100%" height="250">
+                    <text x="50" y="30" font-size="24" font-weight="bold">1/3</text>
+                    <rect x="50" y="50" width="300" height="60" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="50" y="50" width="100" height="60" fill="#4CAF50" opacity="0.7"/>
+                    <line x1="150" y1="50" x2="150" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="250" y1="50" x2="250" y2="110" stroke="#333" stroke-width="2"/>
+                    
+                    <text x="50" y="160" font-size="24" font-weight="bold">1/5</text>
+                    <rect x="50" y="180" width="300" height="60" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="50" y="180" width="60" height="60" fill="#2196F3" opacity="0.7"/>
+                    <line x1="110" y1="180" x2="110" y2="240" stroke="#333" stroke-width="2"/>
+                    <line x1="170" y1="180" x2="170" y2="240" stroke="#333" stroke-width="2"/>
+                    <line x1="230" y1="180" x2="230" y2="240" stroke="#333" stroke-width="2"/>
+                    <line x1="290" y1="180" x2="290" y2="240" stroke="#333" stroke-width="2"/>
+                </svg>
+                <p style="text-align: center; font-size: 1.3em; margin-top: 20px;">
+                    The bigger the denominator, the smaller the pieces!<br>
+                    <strong>1/3 > 1/5</strong> ✓
+                </p>
+            </div>
+
+            <div class="tip-box">
+                Think of pizza! 1/3 of a pizza (3 pieces total) is bigger than 1/5 of a pizza (5 pieces total) because when you cut it into MORE pieces, each piece becomes SMALLER!
+            </div>
+
+            <h3>Case 3: Different Numerators AND Denominators</h3>
+            <div class="example-box">
+                <p><strong>Make them into like fractions first!</strong></p>
+                <p>Which is bigger: 2/3 or 3/4?</p>
+                
+                <p><strong>Step 1:</strong> Find LCM of denominators (3 and 4)</p>
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p>Multiples of 3: 3, 6, 9, <span style="color: #e91e63; font-weight: bold;">12</span>, 15...</p>
+                    <p>Multiples of 4: 4, 8, <span style="color: #e91e63; font-weight: bold;">12</span>, 16...</p>
+                    <p><strong>LCM = 12</strong></p>
+                </div>
+
+                <p><strong>Step 2:</strong> Convert to equivalent fractions with denominator 12</p>
+                <div style="font-size: 1.3em; margin: 20px 0;">
+                    <p>2/3 = (2 × 4)/(3 × 4) = <strong>8/12</strong></p>
+                    <p>3/4 = (3 × 3)/(4 × 3) = <strong>9/12</strong></p>
+                </div>
+
+                <p><strong>Step 3:</strong> Compare!</p>
+                <p style="font-size: 1.5em; text-align: center; margin: 20px 0;">
+                    8/12 < 9/12, so <strong>2/3 < 3/4</strong> ✓
+                </p>
+            </div>
+
+            <h3>🎮 Comparison Challenge!</h3>
+            <div class="quiz-container">
+                <p><strong>Which fraction is bigger: 5/8 or 3/8?</strong></p>
+                <div class="quiz-option" onclick="checkCompare1(this, true)">A) 5/8 ✓</div>
+                <div class="quiz-option" onclick="checkCompare1(this, false)">B) 3/8</div>
+                <div class="quiz-option" onclick="checkCompare1(this, false)">C) They're equal</div>
+                <div class="feedback" id="compare1"></div>
+            </div>
+
+            <div class="quiz-container">
+                <p><strong>Which fraction is bigger: 1/4 or 1/6?</strong></p>
+                <div class="quiz-option" onclick="checkCompare2(this, true)">A) 1/4 ✓</div>
+                <div class="quiz-option" onclick="checkCompare2(this, false)">B) 1/6</div>
+                <div class="quiz-option" onclick="checkCompare2(this, false)">C) They're equal</div>
+                <div class="feedback" id="compare2"></div>
+            </div>
+
+            <div class="try-it">
+                <p><strong>Compare 3/5 and 2/3. Which is bigger?</strong></p>
+                <p>First, find the LCM of 5 and 3: <input type="number" id="lcm1" min="1" max="20" style="width: 80px;"></p>
+                <p>Convert 3/5: 3/5 = <input type="number" id="convert1" min="1" max="20" style="width: 60px;">/15</p>
+                <p>Convert 2/3: 2/3 = <input type="number" id="convert2" min="1" max="20" style="width: 60px;">/15</p>
+                <button class="check-answer" onclick="checkCompareExercise()">Check Answer</button>
+                <div class="feedback" id="compareEx"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Adding Fractions →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 9: Adding Fractions -->
+        <div class="content-section" data-lesson="9">
+            <h2>➕ Lesson 9: Adding Fractions</h2>
+            
+            <h3>Adding Like Fractions (Same Denominator)</h3>
+            <div class="example-box">
+                <p><strong>Super Easy! Just add the numerators!</strong></p>
+                <p>Example: 2/7 + 3/7</p>
+                <svg width="100%" height="200">
+                    <rect x="50" y="30" width="200" height="60" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="50" y="30" width="57.14" height="60" fill="#4CAF50" opacity="0.7"/>
+                    <line x1="78.57" y1="30" x2="78.57" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="107.14" y1="30" x2="107.14" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="135.71" y1="30" x2="135.71" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="164.28" y1="30" x2="164.28" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="192.85" y1="30" x2="192.85" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="221.42" y1="30" x2="221.42" y2="90" stroke="#333" stroke-width="2"/>
+                    <text x="150" y="120" text-anchor="middle" font-size="20">2/7</text>
+                    
+                    <text x="270" y="60" font-size="30">+</text>
+                    
+                    <rect x="310" y="30" width="200" height="60" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="310" y="30" width="85.71" height="60" fill="#2196F3" opacity="0.7"/>
+                    <line x1="338.57" y1="30" x2="338.57" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="367.14" y1="30" x2="367.14" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="395.71" y1="30" x2="395.71" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="424.28" y1="30" x2="424.28" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="452.85" y1="30" x2="452.85" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="481.42" y1="30" x2="481.42" y2="90" stroke="#333" stroke-width="2"/>
+                    <text x="410" y="120" text-anchor="middle" font-size="20">3/7</text>
+                </svg>
+                
+                <div style="font-size: 1.5em; margin: 30px 0; text-align: center;">
+                    <span style="color: #4CAF50; font-weight: bold;">2</span>
+                    <span> + </span>
+                    <span style="color: #2196F3; font-weight: bold;">3</span>
+                    <br>
+                    <div style="border-top: 3px solid #333; width: 100px; margin: 10px auto;"></div>
+                    <span style="color: #333; font-weight: bold;">7</span>
+                    <br><br>
+                    <span>= </span>
+                    <span style="color: #e91e63; font-weight: bold;">5/7</span>
+                </div>
+                
+                <p style="text-align: center; background: #fff3cd; padding: 15px; border-radius: 10px;">
+                    <strong>Rule:</strong> When denominators are the same, add numerators and keep the denominator!
+                </p>
+            </div>
+
+            <h3>Adding Unlike Fractions (Different Denominators)</h3>
+            <div class="example-box">
+                <p><strong>First make them like fractions, then add!</strong></p>
+                <p>Example: 1/4 + 1/3</p>
+                
+                <p><strong>Step 1:</strong> Find LCM of 4 and 3</p>
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p>LCM(4, 3) = <strong>12</strong></p>
+                </div>
+
+                <p><strong>Step 2:</strong> Convert to equivalent fractions</p>
+                <div style="font-size: 1.3em; margin: 20px 0;">
+                    <p>1/4 = (1 × 3)/(4 × 3) = <strong>3/12</strong></p>
+                    <p>1/3 = (1 × 4)/(3 × 4) = <strong>4/12</strong></p>
+                </div>
+
+                <p><strong>Step 3:</strong> Add the like fractions</p>
+                <div style="font-size: 1.5em; margin: 20px 0; text-align: center;">
+                    3/12 + 4/12 = <strong style="color: #4CAF50;">7/12</strong> ✓
+                </div>
+            </div>
+
+            <div class="tip-box">
+                Remember: You can only add fractions when they have the same denominator. If they don't, convert them first!
+            </div>
+
+            <h3>Adding Mixed Fractions</h3>
+            <div class="example-box">
+                <p><strong>Two ways to do it!</strong></p>
+                <p>Example: 2⅓ + 1½</p>
+                
+                <p><strong>Method 1: Convert to improper fractions</strong></p>
+                <div style="font-size: 1.2em; margin: 15px 0;">
+                    <p>2⅓ = 7/3</p>
+                    <p>1½ = 3/2</p>
+                    <p>LCM(3, 2) = 6</p>
+                    <p>7/3 = 14/6</p>
+                    <p>3/2 = 9/6</p>
+                    <p>14/6 + 9/6 = <strong style="color: #4CAF50;">23/6 = 3⅚</strong></p>
+                </div>
+
+                <p><strong>Method 2: Add whole numbers and fractions separately</strong></p>
+                <div style="font-size: 1.2em; margin: 15px 0;">
+                    <p>Whole numbers: 2 + 1 = 3</p>
+                    <p>Fractions: ⅓ + ½</p>
+                    <p>⅓ = 2/6, ½ = 3/6</p>
+                    <p>2/6 + 3/6 = 5/6</p>
+                    <p>Total: 3 + ⅚ = <strong style="color: #4CAF50;">3⅚</strong></p>
+                </div>
+            </div>
+
+            <h3>🎮 Addition Practice!</h3>
+            <div class="try-it">
+                <p><strong>Solve: 3/8 + 2/8 = ?</strong></p>
+                <p>Answer: <input type="number" id="add1num" min="0" max="20" style="width: 80px;"> / 8</p>
+                <button class="check-answer" onclick="checkAdd1()">Check Answer</button>
+                <div class="feedback" id="add1Feedback"></div>
+            </div>
+
+            <div class="try-it">
+                <p><strong>Solve: 1/2 + 1/4 = ?</strong></p>
+                <p>First, find LCM of 2 and 4: <input type="number" id="add2lcm" min="1" max="10" style="width: 60px;"></p>
+                <p>1/2 = <input type="number" id="add2conv1" min="1" max="10" style="width: 60px;"> / 4</p>
+                <p>So: 1/2 + 1/4 = <input type="number" id="add2result" min="1" max="10" style="width: 60px;"> / 4</p>
+                <button class="check-answer" onclick="checkAdd2()">Check Answer</button>
+                <div class="feedback" id="add2Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Subtracting Fractions →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 10: Subtracting Fractions -->
+        <div class="content-section" data-lesson="10">
+            <h2>➖ Lesson 10: Subtracting Fractions</h2>
+            
+            <p>Subtraction is just like addition, but we're taking away instead of adding!</p>
+
+            <h3>Subtracting Like Fractions</h3>
+            <div class="example-box">
+                <p><strong>Just subtract the numerators!</strong></p>
+                <p>Example: 5/7 - 2/7</p>
+                
+                <svg width="100%" height="150">
+                    <text x="50" y="30" font-size="20">Start with 5/7:</text>
+                    <rect x="50" y="50" width="280" height="60" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="50" y="50" width="200" height="60" fill="#4CAF50" opacity="0.7"/>
+                    <line x1="90" y1="50" x2="90" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="130" y1="50" x2="130" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="170" y1="50" x2="170" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="210" y1="50" x2="210" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="250" y1="50" x2="250" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="290" y1="50" x2="290" y2="110" stroke="#333" stroke-width="2"/>
+                    
+                    <text x="360" y="85" font-size="24">−</text>
+                    
+                    <text x="400" y="30" font-size="20">Take away 2/7:</text>
+                    <rect x="400" y="50" width="280" height="60" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="400" y="50" width="80" height="60" fill="#f44336" opacity="0.7"/>
+                    <rect x="480" y="50" width="120" height="60" fill="#4CAF50" opacity="0.7"/>
+                    <line x1="440" y1="50" x2="440" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="480" y1="50" x2="480" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="520" y1="50" x2="520" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="560" y1="50" x2="560" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="600" y1="50" x2="600" y2="110" stroke="#333" stroke-width="2"/>
+                    <line x1="640" y1="50" x2="640" y2="110" stroke="#333" stroke-width="2"/>
+                </svg>
+
+                <div style="font-size: 1.5em; margin: 30px 0; text-align: center;">
+                    <span style="color: #4CAF50; font-weight: bold;">5</span>
+                    <span> - </span>
+                    <span style="color: #f44336; font-weight: bold;">2</span>
+                    <br>
+                    <div style="border-top: 3px solid #333; width: 100px; margin: 10px auto;"></div>
+                    <span style="color: #333; font-weight: bold;">7</span>
+                    <br><br>
+                    <span>= </span>
+                    <span style="color: #e91e63; font-weight: bold;">3/7</span>
+                </div>
+            </div>
+
+            <h3>Subtracting Unlike Fractions</h3>
+            <div class="example-box">
+                <p><strong>Make them like fractions first!</strong></p>
+                <p>Example: 3/4 - 1/3</p>
+                
+                <p><strong>Step 1:</strong> Find LCM</p>
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p>LCM(4, 3) = <strong>12</strong></p>
+                </div>
+
+                <p><strong>Step 2:</strong> Convert both fractions</p>
+                <div style="font-size: 1.3em; margin: 20px 0;">
+                    <p>3/4 = (3 × 3)/(4 × 3) = <strong>9/12</strong></p>
+                    <p>1/3 = (1 × 4)/(3 × 4) = <strong>4/12</strong></p>
+                </div>
+
+                <p><strong>Step 3:</strong> Subtract</p>
+                <div style="font-size: 1.5em; margin: 20px 0; text-align: center;">
+                    9/12 - 4/12 = <strong style="color: #4CAF50;">5/12</strong> ✓
+                </div>
+            </div>
+
+            <div class="tip-box">
+                Important: Always subtract the SMALLER fraction from the LARGER one!
+            </div>
+
+            <h3>Subtracting Mixed Fractions</h3>
+            <div class="example-box">
+                <p>Example: 3½ - 1¼</p>
+                
+                <p><strong>Method 1: Convert to improper fractions</strong></p>
+                <div style="font-size: 1.2em; margin: 15px 0;">
+                    <p>3½ = 7/2</p>
+                    <p>1¼ = 5/4</p>
+                    <p>LCM(2, 4) = 4</p>
+                    <p>7/2 = 14/4</p>
+                    <p>14/4 - 5/4 = <strong style="color: #4CAF50;">9/4 = 2¼</strong></p>
+                </div>
+
+                <p><strong>Method 2: Subtract parts separately</strong></p>
+                <div style="font-size: 1.2em; margin: 15px 0;">
+                    <p>Whole numbers: 3 - 1 = 2</p>
+                    <p>Fractions: ½ - ¼</p>
+                    <p>½ = 2/4</p>
+                    <p>2/4 - 1/4 = 1/4</p>
+                    <p>Total: 2 + ¼ = <strong style="color: #4CAF50;">2¼</strong></p>
+                </div>
+            </div>
+
+            <h3>🎮 Subtraction Practice!</h3>
+            <div class="try-it">
+                <p><strong>Solve: 7/9 - 4/9 = ?</strong></p>
+                <p>Answer: <input type="number" id="sub1num" min="0" max="20" style="width: 80px;"> / 9</p>
+                <button class="check-answer" onclick="checkSub1()">Check Answer</button>
+                <div class="feedback" id="sub1Feedback"></div>
+            </div>
+
+            <div class="try-it">
+                <p><strong>Solve: 2/3 - 1/2 = ?</strong></p>
+                <p>LCM of 3 and 2 = <input type="number" id="sub2lcm" min="1" max="10" style="width: 60px;"></p>
+                <p>2/3 = <input type="number" id="sub2conv1" min="1" max="10" style="width: 60px;"> / 6</p>
+                <p>1/2 = <input type="number" id="sub2conv2" min="1" max="10" style="width: 60px;"> / 6</p>
+                <p>Result: <input type="number" id="sub2result" min="1" max="10" style="width: 60px;"> / 6</p>
+                <button class="check-answer" onclick="checkSub2()">Check Answer</button>
+                <div class="feedback" id="sub2Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Multiplying Fractions →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 11: Multiplying Fractions -->
+        <div class="content-section" data-lesson="11">
+            <h2>✖️ Lesson 11: Multiplying Fractions</h2>
+            
+            <p>Multiplication is easier than you think!</p>
+
+            <h3>Multiplying a Whole Number by a Fraction</h3>
+            <div class="example-box">
+                <p><strong>Multiply the whole number with the numerator!</strong></p>
+                <p>Example: 3 × 2/5</p>
+                
+                <div style="font-size: 1.5em; margin: 20px 0; text-align: center;">
+                    3 × <span class="fraction-visual">
+                        <div class="numerator">2</div>
+                        <div class="denominator">5</div>
+                    </span>
+                    = 
+                    <span class="fraction-visual">
+                        <div class="numerator">3 × 2</div>
+                        <div class="denominator">5</div>
+                    </span>
+                    = 
+                    <span class="fraction-visual">
+                        <div class="numerator" style="color: #4CAF50;">6</div>
+                        <div class="denominator">5</div>
+                    </span>
+                    = <strong style="color: #e91e63;">1⅕</strong>
+                </div>
+
+                <p><strong>Another way to think about it:</strong></p>
+                <p>3 × 2/5 means "2/5 + 2/5 + 2/5"</p>
+            </div>
+
+            <h3>Multiplying Two Fractions</h3>
+            <div class="example-box">
+                <p><strong>Super simple! Multiply numerators together and denominators together!</strong></p>
+                <p>Example: 2/3 × 3/4</p>
+                
+                <div style="font-size: 1.5em; margin: 30px 0; text-align: center;">
+                    <span class="fraction-visual">
+                        <div class="numerator" style="color: #4CAF50;">2</div>
+                        <div class="denominator" style="color: #2196F3;">3</div>
+                    </span>
+                    × 
+                    <span class="fraction-visual">
+                        <div class="numerator" style="color: #FF5722;">3</div>
+                        <div class="denominator" style="color: #9C27B0;">4</div>
+                    </span>
+                    = 
+                    <span class="fraction-visual">
+                        <div class="numerator" style="color: #4CAF50;">2 × <span style="color: #FF5722;">3</span></div>
+                        <div class="denominator" style="color: #2196F3;">3 × <span style="color: #9C27B0;">4</span></div>
+                    </span>
+                    = 
+                    <span class="fraction-visual">
+                        <div class="numerator">6</div>
+                        <div class="denominator">12</div>
+                    </span>
+                    = <strong style="color: #e91e63;">1/2</strong>
+                </div>
+
+                <p style="text-align: center; background: #e3f2fd; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <strong>Rule:</strong> Top × Top, Bottom × Bottom!<br>
+                    Then simplify if possible.
+                </p>
+            </div>
+
+            <h3>Visual Understanding</h3>
+            <div class="example-box">
+                <p><strong>What does 1/2 × 1/3 mean?</strong></p>
+                <p>It means "1/2 of 1/3" or "taking half of one-third"</p>
+                
+                <svg width="300" height="200">
+                    <rect x="20" y="20" width="120" height="80" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="20" y="20" width="40" height="80" fill="#2196F3" opacity="0.3"/>
+                    <line x1="60" y1="20" x2="60" y2="100" stroke="#333" stroke-width="2"/>
+                    <line x1="100" y1="20" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                    <text x="70" y="130" text-anchor="middle" font-size="18">1/3</text>
+                    
+                    <text x="160" y="60" font-size="30">→</text>
+                    
+                    <rect x="200" y="20" width="120" height="80" fill="none" stroke="#333" stroke-width="3"/>
+                    <rect x="200" y="20" width="40" height="80" fill="#2196F3" opacity="0.3"/>
+                    <line x1="240" y1="20" x2="240" y2="100" stroke="#333" stroke-width="2"/>
+                    <line x1="280" y1="20" x2="280" y2="100" stroke="#333" stroke-width="2"/>
+                    <line x1="200" y1="60" x2="320" y2="60" stroke="#333" stroke-width="2"/>
+                    <rect x="200" y="20" width="40" height="40" fill="#4CAF50" opacity="0.7"/>
+                    <text x="260" y="130" text-anchor="middle" font-size="18">1/2 of 1/3 = 1/6</text>
+                </svg>
+            </div>
+
+            <div class="tip-box">
+                When you multiply fractions, the answer gets SMALLER (unless multiplying by something greater than 1)!
+            </div>
+
+            <h3>Multiplying Mixed Fractions</h3>
+            <div class="example-box">
+                <p><strong>Convert to improper fractions first!</strong></p>
+                <p>Example: 2⅓ × 1½</p>
+                
+                <div style="font-size: 1.3em; margin: 20px 0;">
+                    <p><strong>Step 1:</strong> Convert to improper</p>
+                    <p>2⅓ = 7/3</p>
+                    <p>1½ = 3/2</p>
+                    
+                    <p style="margin-top: 15px;"><strong>Step 2:</strong> Multiply</p>
+                    <p>7/3 × 3/2 = (7 × 3)/(3 × 2) = 21/6</p>
+                    
+                    <p style="margin-top: 15px;"><strong>Step 3:</strong> Simplify</p>
+                    <p>21/6 = 21 ÷ 3 / 6 ÷ 3 = 7/2 = <strong style="color: #4CAF50;">3½</strong></p>
+                </div>
+            </div>
+
+            <h3>🎮 Multiplication Practice!</h3>
+            <div class="try-it">
+                <p><strong>Solve: 4 × 3/5 = ?</strong></p>
+                <p>Answer: <input type="number" id="mult1num" min="0" max="30" style="width: 80px;"> / 5</p>
+                <button class="check-answer" onclick="checkMult1()">Check Answer</button>
+                <div class="feedback" id="mult1Feedback"></div>
+            </div>
+
+            <div class="try-it">
+                <p><strong>Solve: 2/3 × 3/4 = ?</strong></p>
+                <p>Numerator: 2 × 3 = <input type="number" id="mult2num" min="0" max="20" style="width: 60px;"></p>
+                <p>Denominator: 3 × 4 = <input type="number" id="mult2den" min="0" max="20" style="width: 60px;"></p>
+                <p>Simplified: <input type="number" id="mult2simp" min="0" max="20" style="width: 60px;"> / 12</p>
+                <button class="check-answer" onclick="checkMult2()">Check Answer</button>
+                <div class="feedback" id="mult2Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Next: Dividing Fractions →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 12: Dividing Fractions -->
+        <div class="content-section" data-lesson="12">
+            <h2>➗ Lesson 12: Dividing Fractions</h2>
+            
+            <p>Division has a special trick - we flip and multiply!</p>
+
+            <h3>Understanding Reciprocals</h3>
+            <div class="example-box">
+                <p><strong>The reciprocal is what you get when you flip a fraction!</strong></p>
+                <div style="font-size: 1.5em; margin: 20px 0; text-align: center;">
+                    <p>Fraction: <span class="fraction-visual">
+                        <div class="numerator">3</div>
+                        <div class="denominator">4</div>
+                    </span></p>
+                    <p style="margin: 20px 0;">↕️ Flip it!</p>
+                    <p>Reciprocal: <span class="fraction-visual">
+                        <div class="numerator">4</div>
+                        <div class="denominator">3</div>
+                    </span></p>
+                </div>
+                
+                <p style="margin-top: 20px;"><strong>More examples:</strong></p>
+                <ul style="font-size: 1.2em; margin-left: 40px;">
+                    <li>Reciprocal of 2/5 is 5/2</li>
+                    <li>Reciprocal of 7/3 is 3/7</li>
+                    <li>Reciprocal of 5 (or 5/1) is 1/5</li>
+                </ul>
+
+                <p style="background: #fff3cd; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <strong>Special Property:</strong> When you multiply a fraction by its reciprocal, you always get 1!<br>
+                    Example: 3/4 × 4/3 = 12/12 = 1 ✓
+                </p>
+            </div>
+
+            <h3>Dividing by a Fraction</h3>
+            <div class="example-box">
+                <p><strong>The Magic Rule: "Keep, Change, Flip"</strong></p>
+                <p>Example: 2/3 ÷ 4/5</p>
+                
+                <div style="font-size: 1.5em; margin: 30px 0; text-align: center; line-height: 2;">
+                    <span class="fraction-visual">
+                        <div class="numerator">2</div>
+                        <div class="denominator">3</div>
+                    </span>
+                    <span style="color: #4CAF50; font-weight: bold;"> ÷ </span>
+                    <span class="fraction-visual">
+                        <div class="numerator">4</div>
+                        <div class="denominator">5</div>
+                    </span>
+                    
+                    <p style="margin: 20px 0;">↓</p>
+                    
+                    <p style="color: #2196F3; font-size: 0.8em;">Keep the first, Change ÷ to ×, Flip the second</p>
+                    
+                    <p style="margin: 20px 0;">↓</p>
+                    
+                    <span class="fraction-visual">
+                        <div class="numerator">2</div>
+                        <div class="denominator">3</div>
+                    </span>
+                    <span style="color: #e91e63; font-weight: bold;"> × </span>
+                    <span class="fraction-visual">
+                        <div class="numerator">5</div>
+                        <div class="denominator">4</div>
+                    </span>
+                    <span> = </span>
+                    <span class="fraction-visual">
+                        <div class="numerator">10</div>
+                        <div class="denominator">12</div>
+                    </span>
+                    <span> = <strong style="color: #4CAF50;">5/6</strong></span>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                Remember: Dividing by a fraction is the same as multiplying by its reciprocal!
+            </div>
+
+            <h3>Why Does "Keep, Change, Flip" Work?</h3>
+            <div class="example-box">
+                <p><strong>Let's understand with a simple example:</strong></p>
+                <p>How many halves are in 1?</p>
+                <p>1 ÷ 1/2 = ?</p>
+                
+                <svg width="300" height="150">
+                    <rect x="20" y="20" width="100" height="80" fill="#4CAF50" opacity="0.7" stroke="#333" stroke-width="3"/>
+                    <line x1="70" y1="20" x2="70" y2="100" stroke="#333" stroke-width="3" stroke-dasharray="5,5"/>
+                    <text x="45" y="130" text-anchor="middle" font-size="16">First 1/2</text>
+                    <text x="95" y="130" text-anchor="middle" font-size="16">Second 1/2</text>
+                    <text x="70" y="65" text-anchor="middle" font-size="24" font-weight="bold" fill="white">2 halves!</text>
+                </svg>
+                
+                <p>So: 1 ÷ 1/2 = 1 × 2/1 = 2 ✓</p>
+                <p>There are 2 halves in 1 whole!</p>
+            </div>
+
+            <h3>Dividing Whole Numbers by Fractions</h3>
+            <div class="example-box">
+                <p>Example: 6 ÷ 2/3</p>
+                
+                <div style="font-size: 1.3em; margin: 20px 0;">
+                    <p><strong>Step 1:</strong> Write the whole number as a fraction</p>
+                    <p>6 = 6/1</p>
+                    
+                    <p style="margin-top: 15px;"><strong>Step 2:</strong> Apply "Keep, Change, Flip"</p>
+                    <p>6/1 ÷ 2/3 = 6/1 × 3/2</p>
+                    
+                    <p style="margin-top: 15px;"><strong>Step 3:</strong> Multiply</p>
+                    <p>6/1 × 3/2 = 18/2 = <strong style="color: #4CAF50;">9</strong></p>
+                </div>
+            </div>
+
+            <h3>Dividing Mixed Fractions</h3>
+            <div class="example-box">
+                <p>Example: 2½ ÷ 1¼</p>
+                
+                <div style="font-size: 1.2em; margin: 20px 0;">
+                    <p><strong>Step 1:</strong> Convert to improper fractions</p>
+                    <p>2½ = 5/2</p>
+                    <p>1¼ = 5/4</p>
+                    
+                    <p style="margin-top: 15px;"><strong>Step 2:</strong> Keep, Change, Flip</p>
+                    <p>5/2 ÷ 5/4 = 5/2 × 4/5</p>
+                    
+                    <p style="margin-top: 15px;"><strong>Step 3:</strong> Multiply and simplify</p>
+                    <p>5/2 × 4/5 = 20/10 = <strong style="color: #4CAF50;">2</strong></p>
+                </div>
+            </div>
+
+            <h3>🎮 Division Challenge!</h3>
+            <div class="try-it">
+                <p><strong>What is the reciprocal of 3/7?</strong></p>
+                <p>Answer: <input type="number" id="recip1" min="0" max="20" style="width: 60px;"> / <input type="number" id="recip2" min="0" max="20" style="width: 60px;"></p>
+                <button class="check-answer" onclick="checkReciprocal()">Check Answer</button>
+                <div class="feedback" id="recipFeedback"></div>
+            </div>
+
+            <div class="try-it">
+                <p><strong>Solve: 1/2 ÷ 1/4 = ?</strong></p>
+                <p>Step 1: Change to multiplication: 1/2 × <input type="number" id="div1flip" min="0" max="10" style="width: 60px;"> / 1</p>
+                <p>Step 2: Result = <input type="number" id="div1result" min="0" max="10" style="width: 60px;"></p>
+                <button class="check-answer" onclick="checkDiv1()">Check Answer</button>
+                <div class="feedback" id="div1Feedback"></div>
+            </div>
+
+            <div class="try-it">
+                <p><strong>Solve: 3/4 ÷ 2/3 = ?</strong></p>
+                <p>Flip 2/3 to get: <input type="number" id="div2num" min="0" max="10" style="width: 60px;"> / <input type="number" id="div2den" min="0" max="10" style="width: 60px;"></p>
+                <p>3/4 × ___ = <input type="number" id="div2resnum" min="0" max="20" style="width: 60px;"> / <input type="number" id="div2resden" min="0" max="20" style="width: 60px;"></p>
+                <button class="check-answer" onclick="checkDiv2()">Check Answer</button>
+                <div class="feedback" id="div2Feedback"></div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+                <button class="nav-btn next" onclick="nextLesson()">Finish! 🎉</button>
+            </div>
+        </div>
+
+        <!-- Lesson 13: Congratulations -->
+        <div class="content-section" data-lesson="13">
+            <h2>🎉 Congratulations! You Did It! 🎉</h2>
+            
+            <div style="text-align: center; padding: 40px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; margin: 30px 0;">
+                <h1 style="font-size: 3em; color: white;">🏆</h1>
+                <h2 style="color: white; margin: 20px 0;">You're Now a Fraction Master!</h2>
+                <p style="font-size: 1.3em;">You've completed all 12 lessons on fractions!</p>
+            </div>
+
+            <h3>📚 What You've Learned:</h3>
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <ul style="font-size: 1.2em; line-height: 2; margin-left: 20px;">
+                    <li>✅ What fractions are and how to read them</li>
+                    <li>✅ Numerators and denominators</li>
+                    <li>✅ Placing fractions on a number line</li>
+                    <li>✅ Types of fractions (proper, improper, mixed)</li>
+                    <li>✅ Converting between different types</li>
+                    <li>✅ Equivalent fractions</li>
+                    <li>✅ Simplifying fractions</li>
+                    <li>✅ Comparing fractions</li>
+                    <li>✅ Adding fractions</li>
+                    <li>✅ Subtracting fractions</li>
+                    <li>✅ Multiplying fractions</li>
+                    <li>✅ Dividing fractions</li>
+                </ul>
+            </div>
+
+            <h3>💡 Quick Reference Guide:</h3>
+            <div class="example-box">
+                <h4 style="color: #667eea;">Adding/Subtracting:</h4>
+                <p>• Same denominator: Add/subtract numerators, keep denominator</p>
+                <p>• Different denominators: Make them the same first (find LCM)</p>
+                
+                <h4 style="color: #667eea; margin-top: 20px;">Multiplying:</h4>
+                <p>• Multiply numerators together, multiply denominators together</p>
+                <p>• Top × Top, Bottom × Bottom</p>
+                
+                <h4 style="color: #667eea; margin-top: 20px;">Dividing:</h4>
+                <p>• Keep, Change, Flip!</p>
+                <p>• Keep first fraction, change ÷ to ×, flip second fraction</p>
+                
+                <h4 style="color: #667eea; margin-top: 20px;">Simplifying:</h4>
+                <p>• Divide numerator and denominator by their greatest common factor</p>
+            </div>
+
+            <h3>🎮 Final Challenge - Test Your Skills!</h3>
+            <div class="quiz-container">
+                <p><strong>1. Simplify: 12/16</strong></p>
+                <p>Answer: <input type="number" id="final1num" min="0" max="20" style="width: 60px;"> / <input type="number" id="final1den" min="0" max="20" style="width: 60px;"></p>
+            </div>
+
+            <div class="quiz-container">
+                <p><strong>2. Add: 2/5 + 1/3</strong></p>
+                <p>Answer: <input type="number" id="final2num" min="0" max="30" style="width: 60px;"> / <input type="number" id="final2den" min="0" max="30" style="width: 60px;"></p>
+            </div>
+
+            <div class="quiz-container">
+                <p><strong>3. Multiply: 3/4 × 2/3</strong></p>
+                <p>Answer: <input type="number" id="final3num" min="0" max="20" style="width: 60px;"> / <input type="number" id="final3den" min="0" max="20" style="width: 60px;"></p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="check-answer" style="font-size: 1.3em; padding: 20px 40px;" onclick="checkFinalQuiz()">Check All Answers!</button>
+                <div class="feedback" id="finalFeedback" style="font-size: 1.3em; margin-top: 20px;"></div>
+            </div>
+
+            <div class="tip-box" style="margin-top: 40px;">
+                Remember: Practice makes perfect! Keep practicing these concepts and you'll become even better at fractions!
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; padding: 30px; background: #fff3cd; border-radius: 15px;">
+                <h3>🌟 You're Amazing! 🌟</h3>
+                <p style="font-size: 1.2em;">You've worked hard and learned so much. Keep up the great work, mathematician!</p>
+                <p style="font-size: 2em; margin-top: 20px;">🎓📐✨</p>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn prev" onclick="previousLesson()">← Previous</button>
+				
+              <a href="Ch 5 Revision - Fractrions.html" class="rev-btn">🔁 Revision</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mascot -->
+    <div class="mascot" onclick="showMascotMessage()">
+        🦊
+    </div>
+    <div class="mascot-message" id="mascotMessage">
+        Hi! I'm Foxy, your learning buddy! Click on any lesson above to jump to it. You're doing great!
+    </div>
+
+    <!-- Celebration -->
+    <div class="celebration" id="celebration">🎉</div>
+
+    <script>
+        // State management
+        let currentLesson = 1;
+        const totalLessons = 13;
+        let completedLessons = [];
+        let mascotMessages = [
+            "You're doing amazing! Keep going! 🌟",
+            "Wow! You're a quick learner! 🚀",
+            "Great job on that lesson! 📚",
+            "You're mastering fractions! 💪",
+            "Fantastic work! Keep it up! ⭐",
+            "I'm so proud of you! 🎯",
+            "You're becoming a math wizard! ✨"
+        ];
+
+        // Initialize
+        window.onload = function() {
+            generateLessonNav();
+            generateStamps();
+            generateGrid();
+            updateProgress();
+        };
+
+        // Generate lesson navigation
+        function generateLessonNav() {
+            const nav = document.getElementById('lessonNav');
+            const lessons = [
+                "What Are Fractions?",
+                "Parts of a Fraction",
+                "Number Line",
+                "Types of Fractions",
+                "Converting Fractions",
+                "Equivalent Fractions",
+                "Simplest Form",
+                "Comparing",
+                "Adding",
+                "Subtracting",
+                "Multiplying",
+                "Dividing",
+                "Congratulations!"
+            ];
+
+            lessons.forEach((lesson, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'lesson-btn';
+                btn.textContent = `${index + 1}. ${lesson}`;
+                btn.onclick = () => goToLesson(index + 1);
+                if (index === 0) btn.classList.add('active');
+                nav.appendChild(btn);
+            });
+        }
+
+        // Generate stamps for lesson 1
+        function generateStamps() {
+            const container = document.getElementById('stampsVisual');
+            for (let i = 0; i < 20; i++) {
+                const stamp = document.createElement('div');
+                stamp.className = 'stamp';
+                stamp.textContent = '📮';
+                if (i < 5) stamp.style.background = '#4CAF50';
+                container.appendChild(stamp);
+            }
+        }
+
+        // Generate interactive grid
+        function generateGrid() {
+            const grid = document.getElementById('grid1');
+            for (let i = 0; i < 8; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                cell.onclick = function() {
+                    this.classList.toggle('shaded');
+                };
+                grid.appendChild(cell);
+            }
+        }
+
+        // Navigation functions
+        function nextLesson() {
+            if (currentLesson < totalLessons) {
+                if (!completedLessons.includes(currentLesson)) {
+                    completedLessons.push(currentLesson);
+                    showCelebration();
+                }
+                currentLesson++;
+                showLesson(currentLesson);
+                updateProgress();
+            }
+        }
+
+        function previousLesson() {
+            if (currentLesson > 1) {
+                currentLesson--;
+                showLesson(currentLesson);
+            }
+        }
+
+        function goToLesson(lessonNum) {
+            currentLesson = lessonNum;
+            showLesson(currentLesson);
+        }
+
+        function showLesson(lessonNum) {
+            // Hide all lessons
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected lesson
+            const section = document.querySelector(`[data-lesson="${lessonNum}"]`);
+            if (section) {
+                section.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update navigation buttons
+            updateNavButtons();
+        }
+
+        function updateNavButtons() {
+            const buttons = document.querySelectorAll('.lesson-btn');
+            buttons.forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (completedLessons.includes(index + 1)) {
+                    btn.classList.add('completed');
+                }
+                if (index + 1 === currentLesson) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function updateProgress() {
+            const progress = (completedLessons.length / (totalLessons - 1)) * 100;
+            const fill = document.getElementById('progressFill');
+            fill.style.width = progress + '%';
+            fill.textContent = Math.round(progress) + '%';
+        }
+
+        function restartCourse() {
+            currentLesson = 1;
+            completedLessons = [];
+            showLesson(1);
+            updateProgress();
+            updateNavButtons();
+        }
+
+        // Mascot functions
+        function showMascotMessage() {
+            const message = document.getElementById('mascotMessage');
+            message.classList.toggle('show');
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 3000);
+        }
+
+        function showCelebration() {
+            const celebration = document.getElementById('celebration');
+            celebration.style.display = 'block';
+            setTimeout(() => {
+                celebration.style.display = 'none';
+            }, 1000);
+            
+            // Random mascot message
+            const mascot = document.getElementById('mascotMessage');
+            mascot.textContent = mascotMessages[Math.floor(Math.random() * mascotMessages.length)];
+            mascot.classList.add('show');
+            setTimeout(() => {
+                mascot.classList.remove('show');
+            }, 3000);
+        }
+
+        // Check functions for interactive exercises
+        function checkGrid1() {
+            const cells = document.querySelectorAll('#grid1 .grid-cell');
+            const shaded = Array.from(cells).filter(cell => cell.classList.contains('shaded')).length;
+            const feedback = document.getElementById('grid1Feedback');
+            
+            if (shaded === 4) {
+                feedback.textContent = "🎉 Perfect! You shaded exactly half (4 out of 8)!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = `Not quite! You shaded ${shaded} boxes. Try to shade exactly 4 boxes to make 1/2.`;
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkQuiz(element, isCorrect) {
+            const feedback = document.getElementById('quiz1Feedback');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = "🎉 Excellent! The numerator is the top number!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "Not quite. Remember, the numerator is the TOP number in a fraction!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkQuiz2(element, isCorrect) {
+            const feedback = document.getElementById('quiz2Feedback');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = "🎉 Perfect! The denominator tells us how many equal parts!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "Try again! The denominator tells us into how many parts the whole is divided.";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkNumberLine(element, isCorrect) {
+            const feedback = document.getElementById('numberLineFeedback');
+            
+            if (isCorrect) {
+                element.setAttribute('fill', '#4CAF50');
+                feedback.textContent = "🎉 Fantastic! 2/4 = 1/2, which is exactly in the middle!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.setAttribute('fill', '#f44336');
+                feedback.textContent = "Oops! Remember: 2/4 is the same as 1/2, which should be right in the middle!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkFractionType(element, type) {
+            const feedback = document.getElementById('typeQuiz1');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (type === 'proper') {
+                element.classList.add('correct');
+                feedback.textContent = "🎉 Yes! 5/8 is a proper fraction because 5 < 8!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "Not quite! In 5/8, the numerator (5) is smaller than the denominator (8), so it's proper!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkFractionType2(element, type) {
+            const feedback = document.getElementById('typeQuiz2');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (type === 'improper') {
+                element.classList.add('correct');
+                feedback.textContent = "🎉 Perfect! 9/4 is improper because 9 > 4!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "Not this time! In 9/4, the numerator (9) is bigger than denominator (4), so it's improper!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkConversion1() {
+            const quotient = parseInt(document.getElementById('quotient1').value);
+            const remainder = parseInt(document.getElementById('remainder1').value);
+            const feedback = document.getElementById('conversion1Feedback');
+            
+            if (quotient === 2 && remainder === 3) {
+                feedback.textContent = "🎉 Excellent! 13 ÷ 5 = 2 remainder 3, so 13/5 = 2⅗!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Not quite! Try dividing 13 by 5. What's the quotient and remainder?";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkConversion2() {
+            const mult = parseInt(document.getElementById('mult1').value);
+            const add = parseInt(document.getElementById('add1').value);
+            const final = parseInt(document.getElementById('final1').value);
+            const feedback = document.getElementById('conversion2Feedback');
+            
+            if (mult === 8 && add === 11 && final === 11) {
+                feedback.textContent = "🎉 Perfect! 2 × 4 = 8, then 8 + 3 = 11, so 2¾ = 11/4!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Not quite! Remember: multiply the whole number by the denominator, then add the numerator!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkEquivalent1() {
+            const num = parseInt(document.getElementById('equiv1').value);
+            const den = parseInt(document.getElementById('equiv2').value);
+            const feedback = document.getElementById('equiv1Feedback');
+            
+            if (num === 6 && den === 15) {
+                feedback.textContent = "🎉 Brilliant! 2 × 3 = 6 and 5 × 3 = 15, so 2/5 = 6/15!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Try again! Multiply both the numerator (2) and denominator (5) by 3!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkEquivQuiz(element, isCorrect) {
+            const feedback = document.getElementById('equivQuiz');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = "🎉 Correct! 3/4 = 6/8 (multiply both by 2)!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "Not quite! Try multiplying both parts of 3/4 by 2!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkSimplify() {
+            const divisor = parseInt(document.getElementById('simplify1').value);
+            const num = parseInt(document.getElementById('simplifyNum').value);
+            const den = parseInt(document.getElementById('simplifyDen').value);
+            const feedback = document.getElementById('simplifyFeedback');
+            
+            if (divisor === 5 && num === 3 && den === 5) {
+                feedback.textContent = "🎉 Perfect! Dividing both by 5 gives us 3/5 in simplest form!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Not quite! Find the biggest number that divides both 15 and 25. Hint: it's 5!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkSimplestQuiz(element, isCorrect) {
+            const feedback = document.getElementById('simplestQuiz');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = "🎉 Yes! 5/7 cannot be simplified because 5 and 7 have no common factors!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "Not quite! Both 6 and 9 can be divided by 3, and 10 and 15 by 5!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkCompare1(element, isCorrect) {
+            const feedback = document.getElementById('compare1');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = "🎉 Right! When denominators are same, bigger numerator means bigger fraction!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "Not quite! 5 is bigger than 3, so 5/8 > 3/8!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkCompare2(element, isCorrect) {
+            const feedback = document.getElementById('compare2');
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = "🎉 Correct! When numerators are same, smaller denominator means bigger fraction!";
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "Think again! 1/4 means bigger pieces than 1/6!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkCompareExercise() {
+            const lcm = parseInt(document.getElementById('lcm1').value);
+            const conv1 = parseInt(document.getElementById('convert1').value);
+            const conv2 = parseInt(document.getElementById('convert2').value);
+            const feedback = document.getElementById('compareEx');
+            
+            if (lcm === 15 && conv1 === 9 && conv2 === 10) {
+                feedback.textContent = "🎉 Excellent! LCM is 15, 3/5 = 9/15, 2/3 = 10/15. So 2/3 is bigger!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Not quite! LCM of 5 and 3 is 15. Then convert both fractions!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkAdd1() {
+            const result = parseInt(document.getElementById('add1num').value);
+            const feedback = document.getElementById('add1Feedback');
+            
+            if (result === 5) {
+                feedback.textContent = "🎉 Perfect! 3 + 2 = 5, so 3/8 + 2/8 = 5/8!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Try again! Add the numerators: 3 + 2 = ?";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkAdd2() {
+            const lcm = parseInt(document.getElementById('add2lcm').value);
+            const conv = parseInt(document.getElementById('add2conv1').value);
+            const result = parseInt(document.getElementById('add2result').value);
+            const feedback = document.getElementById('add2Feedback');
+            
+            if (lcm === 4 && conv === 2 && result === 3) {
+                feedback.textContent = "🎉 Brilliant! LCM = 4, 1/2 = 2/4, so 2/4 + 1/4 = 3/4!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Not quite! LCM of 2 and 4 is 4. Convert 1/2 to fourths first!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkSub1() {
+            const result = parseInt(document.getElementById('sub1num').value);
+            const feedback = document.getElementById('sub1Feedback');
+            
+            if (result === 3) {
+                feedback.textContent = "🎉 Excellent! 7 - 4 = 3, so 7/9 - 4/9 = 3/9 = 1/3!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Try again! Subtract the numerators: 7 - 4 = ?";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkSub2() {
+            const lcm = parseInt(document.getElementById('sub2lcm').value);
+            const conv1 = parseInt(document.getElementById('sub2conv1').value);
+            const conv2 = parseInt(document.getElementById('sub2conv2').value);
+            const result = parseInt(document.getElementById('sub2result').value);
+            const feedback = document.getElementById('sub2Feedback');
+            
+            if (lcm === 6 && conv1 === 4 && conv2 === 3 && result === 1) {
+                feedback.textContent = "🎉 Perfect! LCM = 6, 2/3 = 4/6, 1/2 = 3/6, so 4/6 - 3/6 = 1/6!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Not quite! Find LCM, convert both fractions, then subtract!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkMult1() {
+            const result = parseInt(document.getElementById('mult1num').value);
+            const feedback = document.getElementById('mult1Feedback');
+            
+            if (result === 12) {
+                feedback.textContent = "🎉 Great! 4 × 3 = 12, so 4 × 3/5 = 12/5!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Try again! Multiply the whole number by the numerator: 4 × 3 = ?";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkMult2() {
+            const num = parseInt(document.getElementById('mult2num').value);
+            const den = parseInt(document.getElementById('mult2den').value);
+            const simp = parseInt(document.getElementById('mult2simp').value);
+            const feedback = document.getElementById('mult2Feedback');
+            
+            if (num === 6 && den === 12 && simp === 6) {
+                feedback.textContent = "🎉 Excellent! 2 × 3 = 6, 3 × 4 = 12, and 6/12 stays as 6/12 or simplifies to 1/2!";
+                feedback.className = 'feedback correct show';
+            } else if (num === 6 && den === 12) {
+                feedback.textContent = "Good! But can you simplify 6/12? (Hint: divide both by 6!)";
+                feedback.className = 'feedback incorrect show';
+            } else {
+                feedback.textContent = "Not quite! Multiply numerators together (2 × 3) and denominators together (3 × 4)!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkReciprocal() {
+            const num = parseInt(document.getElementById('recip1').value);
+            const den = parseInt(document.getElementById('recip2').value);
+            const feedback = document.getElementById('recipFeedback');
+            
+            if (num === 7 && den === 3) {
+                feedback.textContent = "🎉 Perfect! Just flip it! The reciprocal of 3/7 is 7/3!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Not quite! To find the reciprocal, just flip the fraction upside down!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkDiv1() {
+            const flip = parseInt(document.getElementById('div1flip').value);
+            const result = parseInt(document.getElementById('div1result').value);
+            const feedback = document.getElementById('div1Feedback');
+            
+            if (flip === 4 && result === 2) {
+                feedback.textContent = "🎉 Brilliant! Flip 1/4 to get 4/1, then 1/2 × 4/1 = 4/2 = 2!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Try again! Flip 1/4 to get 4/1, then multiply!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkDiv2() {
+            const num = parseInt(document.getElementById('div2num').value);
+            const den = parseInt(document.getElementById('div2den').value);
+            const resnum = parseInt(document.getElementById('div2resnum').value);
+            const resden = parseInt(document.getElementById('div2resden').value);
+            const feedback = document.getElementById('div2Feedback');
+            
+            if (num === 3 && den === 2 && (resnum === 9 || resnum === 1) && (resden === 8 || resden === 1)) {
+                feedback.textContent = "🎉 Excellent! Flip to 3/2, multiply to get 9/8 or 1⅛!";
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = "Not quite! Flip 2/3 to 3/2, then multiply: 3/4 × 3/2!";
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+
+        function checkFinalQuiz() {
+            const q1num = parseInt(document.getElementById('final1num').value);
+            const q1den = parseInt(document.getElementById('final1den').value);
+            const q2num = parseInt(document.getElementById('final2num').value);
+            const q2den = parseInt(document.getElementById('final2den').value);
+            const q3num = parseInt(document.getElementById('final3num').value);
+            const q3den = parseInt(document.getElementById('final3den').value);
+            const feedback = document.getElementById('finalFeedback');
+            
+            let correct = 0;
+            let total = 3;
+            
+            if (q1num === 3 && q1den === 4) correct++;
+            if (q2num === 11 && q2den === 15) correct++;
+            if ((q3num === 1 && q3den === 2) || (q3num === 6 && q3den === 12)) correct++;
+            
+            if (correct === total) {
+                feedback.textContent = `🎉🎊🎈 PERFECT SCORE! ${correct}/${total} correct! You're a FRACTION MASTER! 🏆👑✨`;
+                feedback.className = 'feedback correct show';
+                showCelebration();
+            } else {
+                feedback.textContent = `Good try! You got ${correct}/${total} correct. Review the lessons and try again!`;
+                feedback.className = 'feedback incorrect show';
+            }
+        }
+    </script>
+
+<!-- Floating Home Button (top-right) -->
+<a href="index.html" class="home-btn" title="Go to Maths Home Page">🏠</a>
+
+<style>
+/* Floating Home Button */
+.home-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background-color: #faf03a;
+  color: #5f3dc4;
+  font-size: 20px;
+  text-decoration: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  line-height: 42px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+.home-btn:hover {
+  background-color: #fff57a;
+  transform: scale(1.1);
+}
+
+/* Riya Mascot Styling */
+.riya-mascot {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: contain;
+  display: block;
+  margin: 15px auto;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.inline-riya {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  float: right;
+  margin: 5px 0 10px 12px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // 1) Add "Riya" flavor to the header
+  const header = document.querySelector("header");
+  if (header) {
+    // Update main title to include Riya
+    const h1 = header.querySelector("h1");
+    if (h1 && !/Riya/i.test(h1.textContent)) {
+      h1.textContent = "🎉 Fun with Fractions with Riya! 🎉";
+    }
+    // Add a friendly Riya intro mascot
+    const intro = document.createElement("div");
+    intro.innerHTML = `
+      <img src="images/Riya-happy.png" alt="Riya mascot happy" class="riya-mascot" />
+      <p style="text-align:center; font-weight:bold; color:#5f3dc4; margin-top:6px;">
+        Hi, I'm <span style="text-decoration:underline;">Riya</span> — let's explore fractions together! 🍰
+      </p>
+    `;
+    header.appendChild(intro);
+  }
+
+  // 2) Add Riya mascots into learning boxes across the page
+  const boxes = document.querySelectorAll(".example-box, .try-it, .tip-box, .quiz-container");
+  boxes.forEach((box, i) => {
+    const img = document.createElement("img");
+    // Rotate through expressions for variety
+    const pick = i % 4;
+    img.src = pick === 0 ? "images/Riya-thinking.png"
+           : pick === 1 ? "images/Riya-posing.png"
+           : pick === 2 ? "images/Riya-giggling.png"
+           : "images/Riya-confused.png";
+    img.alt = "Riya mascot";
+    img.className = "inline-riya";
+    box.appendChild(img);
+
+    // Add a little "Riya says" line atop tip boxes
+    if (box.classList.contains("tip-box")) {
+      const p = document.createElement("p");
+      p.style.cssText = "font-weight:bold; color:#5f3dc4; margin-bottom:6px;";
+      if (!/Riya says:/i.test(box.textContent)) {
+        p.textContent = "Riya says: Remember this!";
+        box.prepend(p);
+      }
+    }
+  });
+
+  // 3) Add a celebratory Riya near the end of the document
+  const container = document.querySelector(".container") || document.querySelector("main") || document.body;
+  const finale = document.createElement("div");
+  finale.style.cssText = "margin: 20px 0; text-align:center;";
+  finale.innerHTML = `
+    <img src="images/Riya-giggling.png" alt="Riya mascot celebrating" class="riya-mascot" />
+    <p style="font-weight: bold; color:#5f3dc4;">Awesome progress! Riya is proud of you! 🌟</p>
+  `;
+  container.appendChild(finale);
+});
+</script>
+
+</body>
+</html>

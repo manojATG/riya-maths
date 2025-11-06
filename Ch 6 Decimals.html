@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riya Learns Decimals — Fun Interactive Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar nav a {
+            text-decoration: none;
+            color: #555;
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .progress-bar {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+
+        .progress-bar h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .progress-fill {
+            height: 20px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.5s;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            line-height: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 40px;
+            flex: 1;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .mascot-box {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+        }
+
+        .mascot-box::before {
+            content: "🦊 Deci the Fox says: ";
+            font-weight: bold;
+            color: #d63031;
+        }
+
+        /* Interactive Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            gap: 2px;
+            margin: 20px 0;
+            padding: 10px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            width: fit-content;
+        }
+
+        .grid-cell {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 2px solid #bdc3c7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .grid-cell.shaded {
+            background: #3498db;
+            border-color: #2980b9;
+        }
+
+        .grid-cell:hover {
+            transform: scale(1.1);
+        }
+
+        /* Rectangle Visualization */
+        .rectangle-visual {
+            display: flex;
+            gap: 5px;
+            margin: 20px 0;
+        }
+
+        .rectangle-bar {
+            display: flex;
+            border: 2px solid #34495e;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .rect-part {
+            width: 30px;
+            height: 50px;
+            background: white;
+            border-right: 1px solid #bdc3c7;
+            transition: all 0.3s;
+        }
+
+        .rect-part.filled {
+            background: #e74c3c;
+        }
+
+        /* Interactive Button */
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Quiz Container */
+        .quiz {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 3px solid #667eea;
+        }
+
+        .quiz-question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: #d5dbdb;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #2ecc71;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .quiz-option.incorrect {
+            background: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+
+        /* Number Line */
+        .number-line {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .number-line-base {
+            height: 3px;
+            background: #34495e;
+            flex: 1;
+            position: relative;
+        }
+
+        .number-marker {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background: #34495e;
+            top: -6px;
+        }
+
+        .number-label {
+            position: absolute;
+            top: 20px;
+            font-size: 14px;
+            transform: translateX(-50%);
+        }
+
+        /* Drag and Drop */
+        .drag-drop-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .draggable {
+            padding: 15px 25px;
+            background: #3498db;
+            color: white;
+            border-radius: 10px;
+            cursor: move;
+            user-select: none;
+        }
+
+        .drop-zone {
+            min-width: 150px;
+            min-height: 80px;
+            border: 3px dashed #bdc3c7;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ecf0f1;
+        }
+
+        .drop-zone.drag-over {
+            background: #d5dbdb;
+            border-color: #667eea;
+        }
+
+        /* Place Value Table */
+        .place-value-table {
+            border-collapse: collapse;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .place-value-table th,
+        .place-value-table td {
+            border: 2px solid #667eea;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .place-value-table th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        .place-value-table td {
+            background: white;
+        }
+
+        .decimal-point {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        /* Input Exercise */
+        .input-exercise {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .input-exercise input {
+            padding: 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 150px;
+            margin: 0 10px;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+
+        /* Example Box */
+        .example-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        /* Remember Box */
+        .remember-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .remember-box h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+
+        /* Celebration Animation */
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .celebrate {
+            animation: celebrate 0.5s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .container {
+                flex-direction: column;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(10, 30px);
+            }
+            
+            .grid-cell {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        /* Score Badge */
+        .score-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Visual Fraction */
+        .visual-fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .visual-fraction .numerator {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .visual-fraction .denominator {
+            padding-top: 5px;
+        }
+    
+/* --- Riya additions --- */
+.home-fab{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  background:#FAF003;
+  color:#222;text-decoration:none;
+  font-size:22px;line-height:1;
+  border-radius:50%;
+  border:2px solid rgba(0,0,0,0.15);
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  z-index:9999;
+}
+.home-fab:hover{ transform:translateY(-2px); }
+
+.riya-sticker{
+  float:right;
+  width:84px; max-width:25vw;
+  margin:0 0 10px 12px;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));
+  border-radius:12px;
+}
+@media (max-width: 640px){ .riya-sticker{ width:64px; } }
+
+/* Change helper mascot to Riya */
+.mascot-box::before{
+  content: "👧 Riya says: ";
+  font-weight:bold;
+  color:#d63031;
+}
+
+</style>
+</head>
+<body>
+    <a class="home-fab" href="index.html" aria-label="Home">🏠</a>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h2>🎯 Learn Decimals!</h2>
+            <nav>
+                <ul>
+                    <li><a href="#intro">🌟 Introduction</a></li>
+                    <li><a href="#what-are-decimals">📚 What are Decimals?</a></li>
+                    <li><a href="#tenths">🔟 Tenths</a></li>
+                    <li><a href="#hundredths">💯 Hundredths</a></li>
+                    <li><a href="#thousandths">🎯 Thousandths</a></li>
+                    <li><a href="#visual">🎨 Visual Decimals</a></li>
+                    <li><a href="#place-value">📊 Place Value</a></li>
+                    <li><a href="#conversions">🔄 Conversions</a></li>
+                    <li><a href="#number-line">📏 Number Line</a></li>
+                    <li><a href="#comparing">⚖️ Comparing</a></li>
+                    <li><a href="#everyday">🌍 Everyday Use</a></li>
+                    <li><a href="#addition">➕ Addition</a></li>
+                    <li><a href="#subtraction">➖ Subtraction</a></li>
+                    <li><a href="#final-quiz">🏆 Final Quiz</a></li>
+                </ul>
+            </nav>
+            <div class="progress-bar">
+                <h3>Your Progress</h3>
+                <div style="background: #e0e0e0; border-radius: 10px;">
+                    <div class="progress-fill" id="progress" style="width: 0%;">0%</div>
+                </div>
+            </div>
+            <div class="score-badge" id="total-score">Score: 0 🌟</div>
+        
+    <div style="margin-top:15px;padding:12px;background:#fff9c4;border-radius:10px;border:2px dashed #f39c12;">
+      <strong>Hey, I'm Riya!</strong> 👋<br/>Let's crack decimals together. Pick a topic on the left and follow me!
+    </div>
+    
+</aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Introduction Section -->
+            <section id="intro" class="section">
+                <h2>🌟 Riya's Wonderful World of Decimals!</h2>
+<img class="riya-sticker" src="images/Riya7.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Hi there! I'm Deci the Fox, and I'm so excited to be your guide on this amazing journey! Decimals are super cool numbers that help us measure things very precisely. Let's learn together! 🎉
+                </div>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    Have you ever wondered how we write prices like ₹10.50 or measure your height as 1.5 meters? That's where decimals come in! They help us show parts of whole numbers in a really smart way.
+                </p>
+                <p style="font-size: 18px; line-height: 1.8; margin-top: 15px;">
+                    Today, you'll learn:
+                </p>
+                <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                    <li>✨ What decimals are and why they're important</li>
+                    <li>🎨 How to visualize decimals with pictures</li>
+                    <li>🔢 How to read and write decimals</li>
+                    <li>➕➖ How to add and subtract decimals</li>
+                    <li>🌍 How we use decimals every day!</li>
+                </ul>
+                <button class="btn" onclick="scrollToSection('what-are-decimals')">Let's Start Learning! 🚀</button>
+            </section>
+
+            <!-- What are Decimals Section -->
+            <section id="what-are-decimals" class="section">
+                <h2>📚 What are Decimals?</h2>
+<img class="riya-sticker" src="images/Riya5.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Decimals are a special way of writing fractions! Instead of writing ½, we can write 0.5. Cool, right?
+                </div>
+                
+                <p style="font-size: 18px; line-height: 1.8;">
+                    Decimals are numbers that have a <strong style="color: #e74c3c;">decimal point (.)</strong> in them. The decimal point separates the whole number from the part that's less than one.
+                </p>
+
+                <div class="example-box">
+                    <h4>🌟 Real-Life Examples:</h4>
+                    <ul style="line-height: 2;">
+                        <li><strong>Money:</strong> ₹25.50 (Twenty-five rupees and fifty paise)</li>
+                        <li><strong>Height:</strong> 1.5 meters (One and a half meters)</li>
+                        <li><strong>Temperature:</strong> 98.4°F (Your body temperature)</li>
+                        <li><strong>Sports:</strong> A long jump of 2.36 meters</li>
+                    </ul>
+                </div>
+
+                <h3>🔍 Parts of a Decimal Number</h3>
+                <div style="text-align: center; margin: 30px 0;">
+                    <div style="font-size: 48px; font-weight: bold; color: #2c3e50;">
+                        <span style="color: #27ae60;">25</span><span style="color: #e74c3c; font-size: 60px;">.</span><span style="color: #3498db;">75</span>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 100px; margin-top: 20px; font-size: 18px;">
+                        <div>
+                            <div style="color: #27ae60; font-weight: bold;">Whole Part</div>
+                            <div>(Twenty-five)</div>
+                        </div>
+                        <div>
+                            <div style="color: #e74c3c; font-weight: bold;">Decimal Point</div>
+                            <div>(The separator)</div>
+                        </div>
+                        <div>
+                            <div style="color: #3498db; font-weight: bold;">Decimal Part</div>
+                            <div>(Seventy-five hundredths)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz">
+                    <div class="quiz-question">🎯 Quick Check: Which of these is a decimal number?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 25</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 3.5</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 100</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 1/2</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tenths Section -->
+            <section id="tenths" class="section">
+                <h2>🔟 Understanding Tenths</h2>
+<img class="riya-sticker" src="images/Riya6.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    When we divide something into 10 equal parts, each part is called "one tenth"! It's written as 1/10 or 0.1
+                </div>
+
+                <p style="font-size: 18px; line-height: 1.8;">
+                    Imagine you have a chocolate bar divided into 10 equal pieces. If you eat 3 pieces, you've eaten <strong>3 tenths</strong> or <strong>0.3</strong> of the chocolate bar!
+                </p>
+
+                <h3>🎨 Let's Visualize Tenths!</h3>
+                <p>Click on the boxes below to shade them and see tenths in action:</p>
+                <div style="margin: 20px 0;">
+                    <div class="rectangle-visual">
+                        <div class="rectangle-bar" id="tenths-bar">
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                            <div class="rect-part" onclick="toggleShade(this)"></div>
+                        </div>
+                    </div>
+                    <div style="font-size: 24px; font-weight: bold; color: #667eea;" id="tenths-display">Shaded: 0/10 = 0.0</div>
+                </div>
+
+                <div class="example-box">
+                    <h4>✏️ How to Write Tenths:</h4>
+                    <ul style="line-height: 2; font-size: 18px;">
+                        <li>1/10 = 0.1 (say: "zero point one" or "one tenth")</li>
+                        <li>3/10 = 0.3 (say: "zero point three" or "three tenths")</li>
+                        <li>7/10 = 0.7 (say: "zero point seven" or "seven tenths")</li>
+                    </ul>
+                </div>
+
+                <div class="remember-box">
+                    <h4>💡 Remember:</h4>
+                    The first place after the decimal point is the <strong>tenths</strong> place!
+                </div>
+
+                <div class="input-exercise">
+                    <h3>✍️ Practice Time!</h3>
+                    <p style="font-size: 18px;">Convert these fractions to decimals:</p>
+                    <div style="margin: 20px 0;">
+                        <p>5/10 = <input type="text" id="tenths-ex1" maxlength="3"> 
+                        <button class="btn" onclick="checkDecimalAnswer('tenths-ex1', '0.5', 'tenths-fb1')">Check</button></p>
+                        <div class="feedback" id="tenths-fb1"></div>
+                    </div>
+                    <div style="margin: 20px 0;">
+                        <p>9/10 = <input type="text" id="tenths-ex2" maxlength="3"> 
+                        <button class="btn" onclick="checkDecimalAnswer('tenths-ex2', '0.9', 'tenths-fb2')">Check</button></p>
+                        <div class="feedback" id="tenths-fb2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hundredths Section -->
+            <section id="hundredths" class="section">
+                <h2>💯 Understanding Hundredths</h2>
+<img class="riya-sticker" src="images/Riya9.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    When we divide something into 100 equal parts, each part is called "one hundredth"! It's written as 1/100 or 0.01
+                </div>
+
+                <p style="font-size: 18px; line-height: 1.8;">
+                    Hundredths are even smaller than tenths! Think of a big pizza cut into 100 tiny slices. Each slice is one hundredth!
+                </p>
+
+                <h3>🎨 Interactive 10×10 Grid (100 squares)</h3>
+                <p>Click on the squares to shade them. Watch the decimal number change!</p>
+                <div class="grid-container" id="hundredths-grid">
+                    <!-- Grid will be generated by JavaScript -->
+                </div>
+                <div style="font-size: 24px; font-weight: bold; color: #667eea; margin-top: 15px;" id="hundredths-display">
+                    Shaded: 0/100 = 0.00
+                </div>
+                <button class="btn" onclick="resetGrid('hundredths-grid')">Reset Grid</button>
+
+                <div class="example-box">
+                    <h4>✏️ How to Write Hundredths:</h4>
+                    <ul style="line-height: 2; font-size: 18px;">
+                        <li>1/100 = 0.01 (say: "zero point zero one")</li>
+                        <li>15/100 = 0.15 (say: "zero point one five")</li>
+                        <li>50/100 = 0.50 = 0.5 (say: "zero point five zero" or "zero point five")</li>
+                    </ul>
+                </div>
+
+                <div class="remember-box">
+                    <h4>💡 Remember:</h4>
+                    The second place after the decimal point is the <strong>hundredths</strong> place!<br>
+                    <strong>Important:</strong> 0.5 = 0.50 (adding zeros at the end doesn't change the value!)
+                </div>
+
+                <div class="quiz">
+                    <div class="quiz-question">🎯 What is 25/100 as a decimal?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 0.025</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 0.25</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 2.5</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 0.52</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thousandths Section -->
+            <section id="thousandths" class="section">
+                <h2>🎯 Understanding Thousandths</h2>
+<img class="riya-sticker" src="images/Riya10.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Thousandths are super tiny parts! When we divide something into 1000 equal parts, each part is "one thousandth" - written as 1/1000 or 0.001
+                </div>
+
+                <p style="font-size: 18px; line-height: 1.8;">
+                    Thousandths help us be very, very precise! Scientists use them when they need to measure things very accurately.
+                </p>
+
+                <div class="example-box">
+                    <h4>✏️ How to Write Thousandths:</h4>
+                    <ul style="line-height: 2; font-size: 18px;">
+                        <li>1/1000 = 0.001 (say: "zero point zero zero one")</li>
+                        <li>25/1000 = 0.025 (say: "zero point zero two five")</li>
+                        <li>500/1000 = 0.500 = 0.5 (say: "zero point five")</li>
+                    </ul>
+                </div>
+
+                <h3>📊 Comparing Tenths, Hundredths, and Thousandths</h3>
+                <table class="place-value-table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Fraction</th>
+                        <th>Decimal</th>
+                        <th>How Big?</th>
+                    </tr>
+                    <tr>
+                        <td>One Tenth</td>
+                        <td>1/10</td>
+                        <td>0.1</td>
+                        <td>🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕 (10 parts)</td>
+                    </tr>
+                    <tr>
+                        <td>One Hundredth</td>
+                        <td>1/100</td>
+                        <td>0.01</td>
+                        <td>📦 (100 parts - smaller!)</td>
+                    </tr>
+                    <tr>
+                        <td>One Thousandth</td>
+                        <td>1/1000</td>
+                        <td>0.001</td>
+                        <td>🔬 (1000 parts - tiniest!)</td>
+                    </tr>
+                </table>
+
+                <div class="remember-box">
+                    <h4>💡 Remember:</h4>
+                    <ul style="line-height: 1.8;">
+                        <li>The first place after the decimal: <strong>TENTHS</strong> (0.<span style="color: red;">?</span>)</li>
+                        <li>The second place after the decimal: <strong>HUNDREDTHS</strong> (0.?<span style="color: red;">?</span>)</li>
+                        <li>The third place after the decimal: <strong>THOUSANDTHS</strong> (0.??<span style="color: red;">?</span>)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Visual Decimals Section -->
+            <section id="visual" class="section">
+                <h2>🎨 Visualizing Decimals with Pictures</h2>
+<img class="riya-sticker" src="images/Riya11.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Pictures make decimals super easy! Let's see how rectangles and grids can help us understand decimals better.
+                </div>
+
+                <h3>🟦 Rectangle Method</h3>
+                <p style="font-size: 18px;">A rectangle divided into 10 parts helps us see tenths clearly!</p>
+
+                <div style="margin: 30px 0;">
+                    <h4>Example: 1.6 (One and six-tenths)</h4>
+                    <div class="rectangle-visual">
+                        <div class="rectangle-bar">
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                        </div>
+                        <div class="rectangle-bar">
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part filled"></div>
+                            <div class="rect-part"></div>
+                            <div class="rect-part"></div>
+                            <div class="rect-part"></div>
+                            <div class="rect-part"></div>
+                        </div>
+                    </div>
+                    <p style="font-size: 18px; margin-top: 10px;">
+                        <strong>1 whole rectangle</strong> (=1) + <strong>6 parts</strong> (=0.6) = <strong>1.6</strong>
+                    </p>
+                </div>
+
+                <h3>🎮 Your Turn! Create Your Own Decimal</h3>
+                <div style="margin: 20px 0;">
+                    <label style="font-size: 18px;">How many parts do you want to shade? (0-10): </label>
+                    <input type="number" id="custom-shade" min="0" max="10" value="0" style="font-size: 18px; padding: 5px;">
+                    <button class="btn" onclick="createCustomDecimal()">Create!</button>
+                </div>
+                <div class="rectangle-visual" id="custom-visual">
+                    <div class="rectangle-bar" id="custom-bar">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                </div>
+                <div style="font-size: 24px; font-weight: bold; color: #667eea; margin-top: 15px;" id="custom-decimal-display"></div>
+            </section>
+
+            <!-- Place Value Section -->
+            <section id="place-value" class="section">
+                <h2>📊 Place Value Chart - Understanding Decimal Places</h2>
+<img class="riya-sticker" src="images/Riya4.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Every digit in a decimal number has a special place and value! Let's learn about them.
+                </div>
+
+                <p style="font-size: 18px; line-height: 1.8;">
+                    Just like whole numbers (Ones, Tens, Hundreds), decimals have special places too!
+                </p>
+
+                <h3>🎯 The Complete Place Value Chart</h3>
+                <table class="place-value-table" style="margin: 20px auto;">
+                    <tr>
+                        <th>Thousands</th>
+                        <th>Hundreds</th>
+                        <th>Tens</th>
+                        <th>Ones</th>
+                        <th class="decimal-point">.</th>
+                        <th>Tenths</th>
+                        <th>Hundredths</th>
+                        <th>Thousandths</th>
+                    </tr>
+                    <tr>
+                        <td>1000</td>
+                        <td>100</td>
+                        <td>10</td>
+                        <td>1</td>
+                        <td class="decimal-point">.</td>
+                        <td>1/10</td>
+                        <td>1/100</td>
+                        <td>1/1000</td>
+                    </tr>
+                    <tr style="background: #e8f4f8 !important;">
+                        <td>7</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td class="decimal-point">.</td>
+                        <td>4</td>
+                        <td>8</td>
+                        <td>6</td>
+                    </tr>
+                </table>
+
+                <div class="example-box">
+                    <h4>🔍 Reading the number 7532.486:</h4>
+                    <ul style="line-height: 2; font-size: 18px;">
+                        <li><strong>7</strong> is in the thousands place = 7 × 1000 = 7000</li>
+                        <li><strong>5</strong> is in the hundreds place = 5 × 100 = 500</li>
+                        <li><strong>3</strong> is in the tens place = 3 × 10 = 30</li>
+                        <li><strong>2</strong> is in the ones place = 2 × 1 = 2</li>
+                        <li><strong>4</strong> is in the tenths place = 4 × 0.1 = 0.4</li>
+                        <li><strong>8</strong> is in the hundredths place = 8 × 0.01 = 0.08</li>
+                        <li><strong>6</strong> is in the thousandths place = 6 × 0.001 = 0.006</li>
+                    </ul>
+                    <p style="font-size: 20px; margin-top: 15px; color: #667eea;">
+                        <strong>Total = 7000 + 500 + 30 + 2 + 0.4 + 0.08 + 0.006 = 7532.486</strong>
+                    </p>
+                </div>
+
+                <div class="input-exercise">
+                    <h3>🎮 Interactive Place Value Game!</h3>
+                    <p style="font-size: 18px;">What is the place value of the underlined digit?</p>
+                    <p style="font-size: 32px; margin: 20px 0;">45.<u>7</u>23</p>
+                    <div style="margin: 20px 0;">
+                        <input type="text" id="place-val-ex1" placeholder="Enter place value">
+                        <button class="btn" onclick="checkPlaceValue('place-val-ex1', '0.7', 'place-val-fb1')">Check</button>
+                    </div>
+                    <div class="feedback" id="place-val-fb1"></div>
+                </div>
+
+                <div class="quiz">
+                    <div class="quiz-question">🎯 In the number 234.567, which digit is in the hundredths place?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 5</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 6</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 7</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 4</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conversions Section -->
+            <section id="conversions" class="section">
+                <h2>🔄 Converting Between Fractions and Decimals</h2>
+<img class="riya-sticker" src="images/Riya8.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Decimals and fractions are best friends! They're just different ways of showing the same thing. Let me teach you how to switch between them!
+                </div>
+
+                <h3>➡️ Converting Decimals to Fractions</h3>
+                <div class="example-box">
+                    <h4>Easy Steps:</h4>
+                    <ol style="line-height: 2; font-size: 18px;">
+                        <li><strong>Count</strong> how many digits are after the decimal point</li>
+                        <li><strong>Write</strong> the number without the decimal as the numerator</li>
+                        <li><strong>Write</strong> 1 followed by zeros (as many as decimal places) as denominator</li>
+                        <li><strong>Simplify</strong> if possible</li>
+                    </ol>
+                    <h4 style="margin-top: 20px;">Examples:</h4>
+                    <div style="font-size: 20px; line-height: 2.5;">
+                        <p><strong>0.5</strong> → <span style="color: #e74c3c;">1 decimal place</span> → 5/10 → <strong>1/2</strong> ✨</p>
+                        <p><strong>0.25</strong> → <span style="color: #e74c3c;">2 decimal places</span> → 25/100 → <strong>1/4</strong> ✨</p>
+                        <p><strong>0.125</strong> → <span style="color: #e74c3c;">3 decimal places</span> → 125/1000 → <strong>1/8</strong> ✨</p>
+                    </div>
+                </div>
+
+                <h3>⬅️ Converting Fractions to Decimals</h3>
+                <div class="example-box">
+                    <h4>Two Methods:</h4>
+                    <p style="font-size: 18px; margin: 10px 0;"><strong>Method 1:</strong> Make the denominator 10, 100, or 1000</p>
+                    <div style="font-size: 20px; margin: 20px 0;">
+                        <p><strong>3/5</strong> → multiply top and bottom by 2 → <strong>6/10</strong> → <strong>0.6</strong> ✨</p>
+                    </div>
+                    <p style="font-size: 18px; margin: 10px 0;"><strong>Method 2:</strong> Divide the numerator by denominator</p>
+                    <div style="font-size: 20px; margin: 20px 0;">
+                        <p><strong>3/4</strong> → 3 ÷ 4 → <strong>0.75</strong> ✨</p>
+                    </div>
+                </div>
+
+                <div class="input-exercise">
+                    <h3>✍️ Practice Conversions!</h3>
+                    <div style="margin: 20px 0;">
+                        <p style="font-size: 18px;">Convert 0.75 to a fraction (in lowest terms):</p>
+                        <input type="text" id="conv-ex1" placeholder="e.g., 3/4">
+                        <button class="btn" onclick="checkFractionAnswer('conv-ex1', '3/4', 'conv-fb1')">Check</button>
+                        <div class="feedback" id="conv-fb1"></div>
+                    </div>
+                    <div style="margin: 20px 0;">
+                        <p style="font-size: 18px;">Convert 7/10 to a decimal:</p>
+                        <input type="text" id="conv-ex2" placeholder="e.g., 0.7">
+                        <button class="btn" onclick="checkDecimalAnswer('conv-ex2', '0.7', 'conv-fb2')">Check</button>
+                        <div class="feedback" id="conv-fb2"></div>
+                    </div>
+                </div>
+
+                <div class="remember-box">
+                    <h4>💡 Quick Reference:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>1/2 = 0.5</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>1/4 = 0.25</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>3/4 = 0.75</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>1/5 = 0.2</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>2/5 = 0.4</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>1/10 = 0.1</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Number Line Section -->
+            <section id="number-line" class="section">
+                <h2>📏 Decimals on the Number Line</h2>
+<img class="riya-sticker" src="images/Riya12.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Number lines help us see where decimals are located! They show us which decimal is bigger or smaller.
+                </div>
+
+                <p style="font-size: 18px; line-height: 1.8;">
+                    Just like whole numbers, we can place decimals on a number line. The further right you go, the bigger the number!
+                </p>
+
+                <h3>🎯 Number Line from 0 to 2</h3>
+                <div style="margin: 40px 0;">
+                    <svg width="100%" height="100" viewBox="0 0 800 100">
+                        <!-- Main line -->
+                        <line x1="50" y1="50" x2="750" y2="50" stroke="#34495e" stroke-width="3"/>
+                        
+                        <!-- Markers and labels for whole numbers -->
+                        <line x1="50" y1="40" x2="50" y2="60" stroke="#34495e" stroke-width="3"/>
+                        <text x="50" y="80" text-anchor="middle" font-size="18" font-weight="bold">0</text>
+                        
+                        <line x1="400" y1="40" x2="400" y2="60" stroke="#34495e" stroke-width="3"/>
+                        <text x="400" y="80" text-anchor="middle" font-size="18" font-weight="bold">1</text>
+                        
+                        <line x1="750" y1="40" x2="750" y2="60" stroke="#34495e" stroke-width="3"/>
+                        <text x="750" y="80" text-anchor="middle" font-size="18" font-weight="bold">2</text>
+                        
+                        <!-- Decimal markers -->
+                        <line x1="225" y1="45" x2="225" y2="55" stroke="#e74c3c" stroke-width="2"/>
+                        <circle cx="225" cy="50" r="5" fill="#e74c3c"/>
+                        <text x="225" y="30" text-anchor="middle" font-size="16" fill="#e74c3c" font-weight="bold">0.5</text>
+                        
+                        <line x1="575" y1="45" x2="575" y2="55" stroke="#3498db" stroke-width="2"/>
+                        <circle cx="575" cy="50" r="5" fill="#3498db"/>
+                        <text x="575" y="30" text-anchor="middle" font-size="16" fill="#3498db" font-weight="bold">1.5</text>
+                    </svg>
+                </div>
+
+                <div class="example-box">
+                    <h4>📍 Important Points to Remember:</h4>
+                    <ul style="line-height: 2; font-size: 18px;">
+                        <li>0.5 is exactly halfway between 0 and 1</li>
+                        <li>1.5 is exactly halfway between 1 and 2</li>
+                        <li>0.3 is less than 0.5 (would be to the left of 0.5)</li>
+                        <li>0.8 is greater than 0.5 (would be to the right of 0.5)</li>
+                    </ul>
+                </div>
+
+                <h3>🎮 Interactive: Where Does It Go?</h3>
+                <div style="background: white; padding: 20px; border-radius: 15px; margin: 20px 0;">
+                    <p style="font-size: 18px; margin-bottom: 15px;">Between which two whole numbers does <strong style="color: #667eea;">1.7</strong> lie?</p>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn" onclick="checkNumberLine(this, false)">0 and 1</button>
+                        <button class="btn" onclick="checkNumberLine(this, true)">1 and 2</button>
+                        <button class="btn" onclick="checkNumberLine(this, false)">2 and 3</button>
+                    </div>
+                </div>
+
+                <div class="quiz">
+                    <div class="quiz-question">🎯 Which decimal comes first on a number line?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">A) 0.3</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 0.7</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 0.5</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 0.9</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparing Decimals Section -->
+            <section id="comparing" class="section">
+                <h2>⚖️ Comparing Decimals - Which is Bigger?</h2>
+<img class="riya-sticker" src="images/Riya6.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Sometimes we need to know which decimal is bigger or smaller. I'll teach you an easy trick to compare them!
+                </div>
+
+                <h3>🎯 The Comparing Strategy</h3>
+                <div class="example-box">
+                    <h4>Step-by-Step Method:</h4>
+                    <ol style="line-height: 2; font-size: 18px;">
+                        <li><strong>Step 1:</strong> Compare the whole number parts first</li>
+                        <li><strong>Step 2:</strong> If whole parts are equal, compare tenths</li>
+                        <li><strong>Step 3:</strong> If tenths are equal, compare hundredths</li>
+                        <li><strong>Step 4:</strong> Keep going until you find a difference!</li>
+                    </ol>
+                </div>
+
+                <h3>✨ Let's Practice Together!</h3>
+                <div style="background: white; padding: 25px; border-radius: 15px; margin: 20px 0;">
+                    <h4 style="color: #667eea;">Example 1: Compare 3.5 and 3.8</h4>
+                    <table style="width: 100%; margin: 15px 0;">
+                        <tr style="background: #f0f0f0;">
+                            <td style="padding: 10px;"><strong>Number</strong></td>
+                            <td style="padding: 10px;"><strong>Whole Part</strong></td>
+                            <td style="padding: 10px;"><strong>Tenths</strong></td>
+                            <td style="padding: 10px;"><strong>Result</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">3.5</td>
+                            <td style="padding: 10px; background: #d4edda;">3</td>
+                            <td style="padding: 10px; background: #f8d7da;">5</td>
+                            <td style="padding: 10px;">Smaller!</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">3.8</td>
+                            <td style="padding: 10px; background: #d4edda;">3</td>
+                            <td style="padding: 10px; background: #d4edda;">8</td>
+                            <td style="padding: 10px;"><strong>Bigger! ✨</strong></td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 18px; color: #27ae60;"><strong>Answer: 3.8 > 3.5</strong> (8 tenths is more than 5 tenths!)</p>
+                </div>
+
+                <div style="background: white; padding: 25px; border-radius: 15px; margin: 20px 0;">
+                    <h4 style="color: #667eea;">Example 2: Compare 2.45 and 2.5</h4>
+                    <p style="font-size: 18px; margin: 15px 0;">
+                        First, let's make them have the same decimal places: 2.45 and 2.50
+                    </p>
+                    <table style="width: 100%; margin: 15px 0;">
+                        <tr style="background: #f0f0f0;">
+                            <td style="padding: 10px;"><strong>Number</strong></td>
+                            <td style="padding: 10px;"><strong>Ones</strong></td>
+                            <td style="padding: 10px;"><strong>Tenths</strong></td>
+                            <td style="padding: 10px;"><strong>Hundredths</strong></td>
+                            <td style="padding: 10px;"><strong>Result</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">2.45</td>
+                            <td style="padding: 10px; background: #d4edda;">2</td>
+                            <td style="padding: 10px; background: #f8d7da;">4</td>
+                            <td style="padding: 10px;">5</td>
+                            <td style="padding: 10px;">Smaller!</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">2.50</td>
+                            <td style="padding: 10px; background: #d4edda;">2</td>
+                            <td style="padding: 10px; background: #d4edda;">5</td>
+                            <td style="padding: 10px;">0</td>
+                            <td style="padding: 10px;"><strong>Bigger! ✨</strong></td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 18px; color: #27ae60;"><strong>Answer: 2.5 > 2.45</strong></p>
+                </div>
+
+                <div class="remember-box">
+                    <h4>💡 Pro Tips:</h4>
+                    <ul style="line-height: 2; font-size: 18px;">
+                        <li>0.5 = 0.50 = 0.500 (they're all the same!)</li>
+                        <li>You can add zeros at the end to help compare</li>
+                        <li>Compare from left to right, one digit at a time</li>
+                    </ul>
+                </div>
+
+                <div class="input-exercise">
+                    <h3>🎮 Your Turn to Compare!</h3>
+                    <div style="margin: 20px 0;">
+                        <p style="font-size: 20px;">Which is bigger: <strong>4.6</strong> or <strong>4.59</strong>?</p>
+                        <div style="margin: 15px 0;">
+                            <button class="btn" onclick="checkComparison(this, true)">4.6 is bigger</button>
+                            <button class="btn" onclick="checkComparison(this, false)">4.59 is bigger</button>
+                            <button class="btn" onclick="checkComparison(this, false)">They're equal</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz">
+                    <div class="quiz-question">🎯 Arrange in ascending order (smallest to largest): 0.7, 0.07, 0.77</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">A) 0.07, 0.7, 0.77</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 0.7, 0.07, 0.77</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 0.77, 0.7, 0.07</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 0.07, 0.77, 0.7</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Everyday Use Section -->
+            <section id="everyday" class="section">
+                <h2>🌍 Decimals in Everyday Life</h2>
+<img class="riya-sticker" src="images/Riya5.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Decimals are everywhere! Let's see how we use them every single day without even thinking about it!
+                </div>
+
+                <h3>💰 Money</h3>
+                <div class="example-box">
+                    <h4>Understanding Rupees and Paise</h4>
+                    <p style="font-size: 18px; line-height: 2;">
+                        <strong>100 paise = 1 rupee</strong><br>
+                        So, 1 paisa = 1/100 rupee = ₹0.01
+                    </p>
+                    <div style="font-size: 20px; margin: 20px 0;">
+                        <p>🪙 50 paise = ₹50/100 = <strong>₹0.50</strong></p>
+                        <p>🪙 75 paise = ₹75/100 = <strong>₹0.75</strong></p>
+                        <p>💵 ₹5.50 = 5 rupees and 50 paise</p>
+                        <p>💵 ₹25.75 = 25 rupees and 75 paise</p>
+                    </div>
+                </div>
+
+                <h3>📏 Length and Distance</h3>
+                <div class="example-box">
+                    <h4>Converting Units</h4>
+                    <p style="font-size: 18px; line-height: 2;">
+                        <strong>Millimeters to Centimeters:</strong> 10 mm = 1 cm<br>
+                        <strong>Centimeters to Meters:</strong> 100 cm = 1 m<br>
+                        <strong>Meters to Kilometers:</strong> 1000 m = 1 km
+                    </p>
+                    <div style="font-size: 20px; margin: 20px 0;">
+                        <p>📐 5 mm = 5/10 cm = <strong>0.5 cm</strong></p>
+                        <p>📐 25 cm = 25/100 m = <strong>0.25 m</strong></p>
+                        <p>📐 500 m = 500/1000 km = <strong>0.5 km</strong></p>
+                    </div>
+                </div>
+
+                <h3>⚖️ Weight</h3>
+                <div class="example-box">
+                    <h4>Grams and Kilograms</h4>
+                    <p style="font-size: 18px; line-height: 2;">
+                        <strong>1000 grams = 1 kilogram</strong><br>
+                        So, 1 gram = 1/1000 kg = 0.001 kg
+                    </p>
+                    <div style="font-size: 20px; margin: 20px 0;">
+                        <p>⚖️ 250 g = 250/1000 kg = <strong>0.25 kg</strong></p>
+                        <p>⚖️ 500 g = 500/1000 kg = <strong>0.5 kg</strong></p>
+                        <p>⚖️ 2 kg 750 g = 2 kg + 0.750 kg = <strong>2.750 kg</strong></p>
+                    </div>
+                </div>
+
+                <div class="remember-box">
+                    <h4>💡 Quick Conversion Guide:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px; font-size: 16px;">
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <strong>100 paise = ₹1</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <strong>10 mm = 1 cm</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <strong>100 cm = 1 m</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <strong>1000 m = 1 km</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <strong>1000 g = 1 kg</strong>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <strong>1000 mL = 1 L</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-exercise">
+                    <h3>✍️ Real-Life Practice!</h3>
+                    <div style="margin: 20px 0;">
+                        <p style="font-size: 18px;">Convert 250 grams to kilograms:</p>
+                        <input type="text" id="real-ex1" placeholder="e.g., 0.25">
+                        <span style="margin-left: 10px;">kg</span>
+                        <button class="btn" onclick="checkDecimalAnswer('real-ex1', '0.25', 'real-fb1')">Check</button>
+                        <div class="feedback" id="real-fb1"></div>
+                    </div>
+                    <div style="margin: 20px 0;">
+                        <p style="font-size: 18px;">Convert 350 paise to rupees:</p>
+                        <span style="margin-right: 10px;">₹</span>
+                        <input type="text" id="real-ex2" placeholder="e.g., 3.5">
+                        <button class="btn" onclick="checkDecimalAnswer('real-ex2', '3.5', 'real-fb2')">Check</button>
+                        <div class="feedback" id="real-fb2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Addition Section -->
+            <section id="addition" class="section">
+                <h2>➕ Adding Decimals</h2>
+<img class="riya-sticker" src="images/Riya7.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Adding decimals is just like adding whole numbers! The most important rule: <strong>Line up the decimal points!</strong>
+                </div>
+
+                <h3>📝 The Golden Rule</h3>
+                <div class="remember-box">
+                    <h4>🌟 Always Remember:</h4>
+                    <p style="font-size: 20px; line-height: 2;">
+                        When adding decimals, <strong>make sure the decimal points are in a straight line!</strong> 
+                        This way, you're adding tenths with tenths, hundredths with hundredths, and so on.
+                    </p>
+                </div>
+
+                <h3>✨ Step-by-Step Examples</h3>
+                <div class="example-box">
+                    <h4>Example 1: Add 2.5 + 3.7</h4>
+                    <div style="font-family: 'Courier New', monospace; font-size: 24px; background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <pre style="margin: 0;">    2.5
+  + 3.7
+  -----
+    6.2</pre>
+                    </div>
+                    <p style="font-size: 18px; color: #27ae60;">
+                        <strong>5 tenths + 7 tenths = 12 tenths = 1.2 (carry the 1!)</strong><br>
+                        <strong>2 ones + 3 ones + 1 (carried) = 6 ones</strong>
+                    </p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Example 2: Add 12.75 + 8.4 + 3.25</h4>
+                    <p style="font-size: 18px;">First, make them like decimals: 12.75 + 8.40 + 3.25</p>
+                    <div style="font-family: 'Courier New', monospace; font-size: 24px; background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <pre style="margin: 0;">   12.75
+    8.40
+  + 3.25
+  ------
+   24.40</pre>
+                    </div>
+                    <p style="font-size: 18px; color: #27ae60;">
+                        <strong>Answer: 24.40 or 24.4</strong>
+                    </p>
+                </div>
+
+                <h3>🎮 Interactive Addition Practice</h3>
+                <div style="background: white; padding: 25px; border-radius: 15px; margin: 20px 0;">
+                    <h4>Solve: 5.6 + 2.8 = ?</h4>
+                    <div style="font-family: 'Courier New', monospace; font-size: 24px; background: #f9f9f9; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <pre style="margin: 0;">    5.6
+  + 2.8
+  -----
+    <input type="text" id="add-ex1" maxlength="5" style="font-size: 24px; width: 100px; border: none; border-bottom: 3px solid #667eea; background: transparent; text-align: center;"></pre>
+                    </div>
+                    <button class="btn" onclick="checkDecimalAnswer('add-ex1', '8.4', 'add-fb1')">Check Answer</button>
+                    <div class="feedback" id="add-fb1"></div>
+                </div>
+
+                <div class="input-exercise">
+                    <h3>✍️ Word Problem</h3>
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        Sarah buys a book for <strong>₹45.50</strong>, a pencil for <strong>₹3.75</strong>, and a notebook for <strong>₹25.25</strong>. 
+                        How much money does she spend in total?
+                    </p>
+                    <div style="margin: 20px 0;">
+                        <span style="margin-right: 10px;">Total: ₹</span>
+                        <input type="text" id="word-add1" placeholder="Enter total">
+                        <button class="btn" onclick="checkDecimalAnswer('word-add1', '74.5', 'word-add-fb1', true)">Check</button>
+                        <div class="feedback" id="word-add-fb1"></div>
+                    </div>
+                </div>
+
+                <div class="quiz">
+                    <div class="quiz-question">🎯 What is 7.25 + 2.8 + 0.95?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 10.00</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 11.00</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 10.10</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 11.10</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subtraction Section -->
+            <section id="subtraction" class="section">
+                <h2>➖ Subtracting Decimals</h2>
+<img class="riya-sticker" src="images/Riya9.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Subtracting decimals is easy too! Just like addition, the secret is to <strong>line up those decimal points!</strong>
+                </div>
+
+                <h3>📝 The Golden Rule (Again!)</h3>
+                <div class="remember-box">
+                    <h4>🌟 Always Remember:</h4>
+                    <p style="font-size: 20px; line-height: 2;">
+                        When subtracting decimals, <strong>line up the decimal points vertically!</strong> 
+                        You can add zeros to make the numbers have the same decimal places.
+                    </p>
+                </div>
+
+                <h3>✨ Step-by-Step Examples</h3>
+                <div class="example-box">
+                    <h4>Example 1: Subtract 5.8 - 2.3</h4>
+                    <div style="font-family: 'Courier New', monospace; font-size: 24px; background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <pre style="margin: 0;">    5.8
+  - 2.3
+  -----
+    3.5</pre>
+                    </div>
+                    <p style="font-size: 18px; color: #27ae60;">
+                        <strong>8 tenths - 3 tenths = 5 tenths</strong><br>
+                        <strong>5 ones - 2 ones = 3 ones</strong>
+                    </p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Example 2: Subtract 20.4 - 9.57</h4>
+                    <p style="font-size: 18px;">First, make them like decimals: 20.40 - 9.57</p>
+                    <div style="font-family: 'Courier New', monospace; font-size: 24px; background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <pre style="margin: 0;">   20.40
+  - 9.57
+  ------
+   10.83</pre>
+                    </div>
+                    <p style="font-size: 18px;">
+                        We need to borrow! 40 hundredths becomes 3 tenths and 10 hundredths.<br>
+                        10 - 7 = 3 hundredths<br>
+                        3 - 5 = ? (need to borrow again!)<br>
+                        13 - 5 = 8 tenths<br>
+                        19 - 9 = 10 ones
+                    </p>
+                    <p style="font-size: 18px; color: #27ae60;">
+                        <strong>Answer: 10.83</strong>
+                    </p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Example 3: Subtract from a whole number</h4>
+                    <p style="font-size: 18px;">Subtract 7.25 from 10</p>
+                    <p style="font-size: 18px;">Write 10 as 10.00 to make it easier:</p>
+                    <div style="font-family: 'Courier New', monospace; font-size: 24px; background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <pre style="margin: 0;">   10.00
+  - 7.25
+  ------
+    2.75</pre>
+                    </div>
+                    <p style="font-size: 18px; color: #27ae60;">
+                        <strong>Answer: 2.75</strong>
+                    </p>
+                </div>
+
+                <h3>🎮 Interactive Subtraction Practice</h3>
+                <div style="background: white; padding: 25px; border-radius: 15px; margin: 20px 0;">
+                    <h4>Solve: 15.6 - 7.8 = ?</h4>
+                    <div style="font-family: 'Courier New', monospace; font-size: 24px; background: #f9f9f9; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <pre style="margin: 0;">   15.6
+  - 7.8
+  -----
+    <input type="text" id="sub-ex1" maxlength="5" style="font-size: 24px; width: 100px; border: none; border-bottom: 3px solid #667eea; background: transparent; text-align: center;"></pre>
+                    </div>
+                    <button class="btn" onclick="checkDecimalAnswer('sub-ex1', '7.8', 'sub-fb1')">Check Answer</button>
+                    <div class="feedback" id="sub-fb1"></div>
+                </div>
+
+                <div class="input-exercise">
+                    <h3>✍️ Word Problem</h3>
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        A water tank contains <strong>200 liters</strong> of water. If <strong>136.25 liters</strong> is used, 
+                        how much water is left in the tank?
+                    </p>
+                    <div style="margin: 20px 0;">
+                        <input type="text" id="word-sub1" placeholder="Enter amount">
+                        <span style="margin-left: 10px;">liters</span>
+                        <button class="btn" onclick="checkDecimalAnswer('word-sub1', '63.75', 'word-sub-fb1')">Check</button>
+                        <div class="feedback" id="word-sub-fb1"></div>
+                    </div>
+                </div>
+
+                <div class="quiz">
+                    <div class="quiz-question">🎯 What is 50 - 23.45?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 27.45</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 26.55</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 26.45</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 27.55</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Quiz Section -->
+            <section id="final-quiz" class="section">
+                <h2>🏆 Final Challenge - Test Your Skills!</h2>
+<img class="riya-sticker" src="images/Riya11.png" alt="Riya mascot">
+                <div class="mascot-box">
+                    Wow! You've learned so much! Now let's see how well you remember everything. Good luck! 🌟
+                </div>
+
+                <div class="quiz" style="border-color: #f39c12; border-width: 5px;">
+                    <div class="quiz-question" style="color: #f39c12;">Question 1: What is the place value of 7 in 45.678?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 1)">A) Ones</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 1)">B) Tenths</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, true, 1)">C) Hundredths</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 1)">D) Thousandths</div>
+                    </div>
+                </div>
+
+                <div class="quiz" style="border-color: #f39c12; border-width: 5px;">
+                    <div class="quiz-question" style="color: #f39c12;">Question 2: Convert 3/4 to a decimal</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 2)">A) 0.34</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, true, 2)">B) 0.75</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 2)">C) 0.43</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 2)">D) 0.25</div>
+                    </div>
+                </div>
+
+                <div class="quiz" style="border-color: #f39c12; border-width: 5px;">
+                    <div class="quiz-question" style="color: #f39c12;">Question 3: Which is the largest? 0.5, 0.05, 0.55</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 3)">A) 0.5</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 3)">B) 0.05</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, true, 3)">C) 0.55</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 3)">D) They're all equal</div>
+                    </div>
+                </div>
+
+                <div class="quiz" style="border-color: #f39c12; border-width: 5px;">
+                    <div class="quiz-question" style="color: #f39c12;">Question 4: What is 12.5 + 7.8?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 4)">A) 19.3</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, true, 4)">B) 20.3</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 4)">C) 20.13</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 4)">D) 19.13</div>
+                    </div>
+                </div>
+
+                <div class="quiz" style="border-color: #f39c12; border-width: 5px;">
+                    <div class="quiz-question" style="color: #f39c12;">Question 5: 250 grams = ? kilograms</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 5)">A) 2.5 kg</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, true, 5)">B) 0.25 kg</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 5)">C) 0.025 kg</div>
+                        <div class="quiz-option" onclick="checkFinalAnswer(this, false, 5)">D) 25 kg</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <button class="btn" onclick="showFinalScore()" style="font-size: 20px; padding: 15px 40px;">
+                        🎉 Show My Final Score! 🎉
+                    </button>
+                </div>
+
+                <div id="final-result" style="display: none; text-align: center; padding: 40px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 20px; margin: 20px 0;">
+                    <h2 style="color: white; font-size: 36px;">🎊 Congratulations! 🎊</h2>
+                    <div style="font-size: 48px; color: white; margin: 20px 0;" id="final-score-display"></div>
+                    <div style="font-size: 24px; color: white; margin: 20px 0;" id="final-message"></div>
+                    <button class="btn" style="background: white; color: #f5576c; font-size: 18px;" onclick="resetQuiz()">Try Again</button>
+                </div>
+            </section>
+
+            <!-- Celebration Section -->
+            <section class="section" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e); border: 5px solid #f39c12;">
+                <h2 style="text-align: center; color: #d63031;">🎉 You're a Decimal Champion! 🎉</h2>
+                <div style="text-align: center; padding: 20px;">
+                    <p style="font-size: 24px; line-height: 2; color: #2d3436;">
+                        You've completed the entire decimals tutorial!<br>
+                        You've learned about tenths, hundredths, thousandths,<br>
+                        place values, conversions, and operations!<br>
+                        <strong style="color: #d63031;">Keep practicing and you'll be a math superstar! ⭐</strong>
+                    </p>
+                    <div style="font-size: 80px; margin: 20px 0;">
+                        🦊🎓📚✨🏆
+                    </div>
+                    <p style="font-size: 20px; color: #2d3436;">
+                        - Deci the Fox 🦊
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Global variables
+        let totalScore = 0;
+        let sectionsCompleted = 0;
+        let finalQuizScore = 0;
+        let finalQuizAnswered = Array(5).fill(false);
+
+        // Progress tracking
+        function updateProgress() {
+            const totalSections = 13;
+            sectionsCompleted = Math.min(sectionsCompleted + 1, totalSections);
+            const percentage = Math.round((sectionsCompleted / totalSections) * 100);
+            document.getElementById('progress').style.width = percentage + '%';
+            document.getElementById('progress').textContent = percentage + '%';
+        }
+
+        // Score tracking
+        function updateScore(points) {
+            totalScore += points;
+            document.getElementById('total-score').textContent = `Score: ${totalScore} 🌟`;
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Generate hundredths grid
+        function generateGrid(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            for (let i = 0; i < 100; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                cell.onclick = function() { toggleGridCell(this, containerId); };
+                container.appendChild(cell);
+            }
+        }
+
+        // Toggle grid cell
+        function toggleGridCell(cell, containerId) {
+            cell.classList.toggle('shaded');
+            updateGridDisplay(containerId);
+        }
+
+        // Update grid display
+        function updateGridDisplay(containerId) {
+            const container = document.getElementById(containerId);
+            const shaded = container.querySelectorAll('.grid-cell.shaded').length;
+            const displayId = containerId + '-display';
+            const fraction = shaded + '/100';
+            const decimal = (shaded / 100).toFixed(2);
+            document.getElementById(displayId).textContent = `Shaded: ${fraction} = ${decimal}`;
+        }
+
+        // Reset grid
+        function resetGrid(containerId) {
+            const container = document.getElementById(containerId);
+            const cells = container.querySelectorAll('.grid-cell');
+            cells.forEach(cell => cell.classList.remove('shaded'));
+            updateGridDisplay(containerId);
+        }
+
+        // Toggle rectangle shade
+        function toggleShade(element) {
+            element.classList.toggle('filled');
+            updateTenthsDisplay();
+        }
+
+        // Update tenths display
+        function updateTenthsDisplay() {
+            const bar = document.getElementById('tenths-bar');
+            const filled = bar.querySelectorAll('.rect-part.filled').length;
+            const decimal = (filled / 10).toFixed(1);
+            document.getElementById('tenths-display').textContent = `Shaded: ${filled}/10 = ${decimal}`;
+        }
+
+        // Create custom decimal visualization
+        function createCustomDecimal() {
+            const value = parseInt(document.getElementById('custom-shade').value);
+            if (value < 0 || value > 10) {
+                alert('Please enter a number between 0 and 10!');
+                return;
+            }
+            
+            const bar = document.getElementById('custom-bar');
+            bar.innerHTML = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const part = document.createElement('div');
+                part.className = 'rect-part';
+                if (i < value) {
+                    part.classList.add('filled');
+                }
+                bar.appendChild(part);
+            }
+            
+            const decimal = (value / 10).toFixed(1);
+            document.getElementById('custom-decimal-display').textContent = 
+                `You created: ${value}/10 = ${decimal}! Great job! 🎨`;
+        }
+
+        // Check quiz answer
+        function checkAnswer(element, isCorrect) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                updateScore(10);
+                updateProgress();
+                setTimeout(() => {
+                    element.classList.add('celebrate');
+                }, 100);
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+
+        // Check decimal answer
+        function checkDecimalAnswer(inputId, correctAnswer, feedbackId, allowAlternate = false) {
+            const input = document.getElementById(inputId);
+            const feedback = document.getElementById(feedbackId);
+            const userAnswer = input.value.trim();
+            
+            let isCorrect = false;
+            if (allowAlternate) {
+                // Allow both 74.5 and 74.50
+                isCorrect = parseFloat(userAnswer) === parseFloat(correctAnswer);
+            } else {
+                isCorrect = userAnswer === correctAnswer;
+            }
+            
+            if (isCorrect) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '🎉 Perfect! You got it right!';
+                updateScore(10);
+                updateProgress();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `Not quite! Try again. (Hint: The answer is ${correctAnswer})`;
+            }
+        }
+
+        // Check fraction answer
+        function checkFractionAnswer(inputId, correctAnswer, feedbackId) {
+            const input = document.getElementById(inputId);
+            const feedback = document.getElementById(feedbackId);
+            const userAnswer = input.value.trim();
+            
+            if (userAnswer === correctAnswer) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '🎉 Excellent! That\'s the correct fraction!';
+                updateScore(10);
+                updateProgress();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `Not quite! The answer is ${correctAnswer}`;
+            }
+        }
+
+        // Check place value
+        function checkPlaceValue(inputId, correctAnswer, feedbackId) {
+            const input = document.getElementById(inputId);
+            const feedback = document.getElementById(feedbackId);
+            const userAnswer = parseFloat(input.value.trim());
+            const correct = parseFloat(correctAnswer);
+            
+            if (userAnswer === correct) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '🎉 Amazing! You understand place values!';
+                updateScore(10);
+                updateProgress();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `Try again! The digit 7 is in the tenths place, so its value is ${correctAnswer}`;
+            }
+        }
+
+        // Check comparison
+        function checkComparison(button, isCorrect) {
+            const buttons = button.parentElement.querySelectorAll('.btn');
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (isCorrect) {
+                button.style.background = '#27ae60';
+                button.textContent += ' ✓';
+                updateScore(10);
+                updateProgress();
+                setTimeout(() => {
+                    alert('🎉 Correct! 4.6 = 4.60, and 4.60 > 4.59');
+                }, 300);
+            } else {
+                button.style.background = '#e74c3c';
+                button.textContent += ' ✗';
+            }
+        }
+
+        // Check number line
+        function checkNumberLine(button, isCorrect) {
+            const buttons = button.parentElement.querySelectorAll('.btn');
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (isCorrect) {
+                button.style.background = '#27ae60';
+                button.textContent += ' ✓';
+                updateScore(10);
+                updateProgress();
+                setTimeout(() => {
+                    alert('🎉 Correct! 1.7 is between 1 and 2 on the number line!');
+                }, 300);
+            } else {
+                button.style.background = '#e74c3c';
+                button.textContent += ' ✗';
+            }
+        }
+
+        // Check final quiz answer
+        function checkFinalAnswer(element, isCorrect, questionNumber) {
+            if (finalQuizAnswered[questionNumber - 1]) return;
+            
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                finalQuizScore += 20;
+            } else {
+                element.classList.add('incorrect');
+            }
+            
+            finalQuizAnswered[questionNumber - 1] = true;
+        }
+
+        // Show final score
+        function showFinalScore() {
+            const allAnswered = finalQuizAnswered.every(answered => answered);
+            if (!allAnswered) {
+                alert('Please answer all questions first!');
+                return;
+            }
+            
+            const resultDiv = document.getElementById('final-result');
+            const scoreDisplay = document.getElementById('final-score-display');
+            const messageDisplay = document.getElementById('final-message');
+            
+            scoreDisplay.textContent = `Your Score: ${finalQuizScore}/100`;
+            
+            let message = '';
+            if (finalQuizScore === 100) {
+                message = '🏆 PERFECT SCORE! You\'re a Decimal Master! 🏆';
+            } else if (finalQuizScore >= 80) {
+                message = '🌟 Excellent work! You really understand decimals!';
+            } else if (finalQuizScore >= 60) {
+                message = '👍 Good job! Keep practicing to master decimals!';
+            } else {
+                message = '💪 Keep trying! Practice makes perfect!';
+            }
+            
+            messageDisplay.textContent = message;
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+            
+            updateScore(finalQuizScore);
+        }
+
+        // Reset quiz
+        function resetQuiz() {
+            finalQuizScore = 0;
+            finalQuizAnswered = Array(5).fill(false);
+            
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('correct', 'incorrect');
+                option.style.pointerEvents = 'auto';
+            });
+            
+            document.getElementById('final-result').style.display = 'none';
+            document.getElementById('final-quiz').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            generateGrid('hundredths-grid');
+            
+            // Generate custom bar
+            const customBar = document.getElementById('custom-bar');
+            for (let i = 0; i < 10; i++) {
+                const part = document.createElement('div');
+                part.className = 'rect-part';
+                customBar.appendChild(part);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Riya’s Revision – Decimals (Class 6)</title>
+  <style>
+    :root{
+      --brand:#5f3dc4;
+      --accent:#06b6d4;
+      --yellow:#FAF03A;
+      --ink:#1f2937;
+      --paper:#fffdfa;
+      --soft:#f3f4f6;
+    }
+    html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;}
+    header{
+      background:linear-gradient(90deg,var(--brand),#7c3aed);
+      color:white;padding:18px 16px 28px 16px;position:relative;overflow:hidden;
+    }
+    header h1{margin:0;font-size:clamp(22px,3.2vw,34px);}
+    header p{margin:6px 0 0 0;opacity:.95}
+    .top-hero{display:flex;gap:16px;align-items:center;max-width:1100px;margin:0 auto;}
+    .hero-img{width:min(120px,24vw); filter: drop-shadow(0 8px 12px rgba(0,0,0,.2));}
+    nav{max-width:1100px;margin:-18px auto 0;background:white;border-radius:14px;padding:10px 12px;box-shadow:0 10px 18px rgba(0,0,0,.08);display:flex;flex-wrap:wrap;gap:8px}
+    nav a{padding:8px 12px;border-radius:999px;background:var(--soft);text-decoration:none;color:#111;font-weight:600;font-size:14px}
+    nav a:hover{background:#e5e7eb}
+    main{max-width:1100px;margin:18px auto;padding:0 12px 80px}
+    section{background:white;border-radius:16px;padding:16px;box-shadow:0 10px 18px rgba(0,0,0,.06);margin:14px 0;position:relative}
+    section h2{margin-top:0}
+    .riya{position:absolute;right:8px;top:-22px;width:86px;max-width:25vw;filter:drop-shadow(0 8px 12px rgba(0,0,0,.2))}
+    .home-fab{
+      position:fixed;top:12px;right:12px;width:46px;height:46px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;background:var(--yellow);
+      color:#111;text-decoration:none;font-size:22px;border:2px solid rgba(0,0,0,.15);
+      box-shadow:0 4px 10px rgba(0,0,0,.2);z-index:9999;transition:transform .2s ease;
+    }
+    .home-fab:hover{transform:translateY(-2px)}
+    .tip{
+      background:#fff7ed;border-left:5px solid #ea580c;padding:10px 12px;border-radius:8px;margin:10px 0;
+    }
+    .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+    .card{background:var(--soft);border-radius:12px;padding:12px}
+    .q{background:#eef2ff;border-left:4px solid var(--brand);padding:10px;border-radius:8px;margin:10px 0}
+    .check{background:var(--brand);color:white;border:none;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
+    .small{font-size:13px;color:#374151}
+    .score{position:sticky;bottom:0;background:#111;color:white;padding:10px 14px;border-radius:12px;display:inline-flex;gap:10px;align-items:center}
+    .gamebox{background:#ecfeff;border:2px dashed var(--accent);padding:12px;border-radius:12px}
+    .table{width:100%;border-collapse:collapse}
+    .table td,.table th{border:1px solid #e5e7eb;padding:8px}
+    footer{max-width:1100px;margin:10px auto 60px;color:#6b7280;padding:0 12px}
+    .rev-btn{display:inline-block;background:var(--yellow);color:var(--brand);font-weight:800;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+  </style>
+</head>
+<body>
+  <a class="home-fab" href="index.html" title="Back to Maths Home">🏠</a>
+  <header>
+    <div class="top-hero">
+      <img src="images/Riya-happy.png" alt="Riya mascot waving" class="hero-img">
+      <div>
+        <h1 style="color:#FAF03A;">Riya’s Revision: <em>Decimals</em> ✨</h1>
+        <p>Fast, friendly recap with mini‑explanations, bite‑size practice, and a final score. Let’s go, Riya! 🚀</p>
+      </div>
+    </div>
+  </header>
+
+  
+
+  <main>
+    <section id="what">
+      <img src="images/Riya-giggling.png" alt="Riya thinking" class="riya"/>
+      <h2>What are decimals?</h2>
+      <div class="tip">👧 <strong>Riya says:</strong> A decimal point splits a number into a whole part and a part less than 1 (tenths, hundredths, …).</div>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Examples in life:</strong>
+          <ul>
+            <li>Height = <code>1.5 m</code></li>
+            <li>Medicine dose = <code>3.5 mL</code></li>
+            <li>Long jump = <code>2.36 m</code></li>
+            <li>Body temperature = <code>98.4°F</code></li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>Why decimals?</strong> Easy to compare, add, subtract, multiply and divide.
+        </div>
+      </div>
+      <div class="q">
+        Convert to decimal: <code>3/10</code> → 
+        <input id="q1" size="4" placeholder="0.x"> 
+        <button class="check" onclick="mark('q1','0.3')">Check</button>
+      </div>
+    </section>
+
+    <section id="parts">
+      <img src="images/Riya-confused.png" alt="Riya happy" class="riya"/>
+      <h2>Tenths, Hundredths, Thousandths</h2>
+      <ul>
+        <li><strong>Tenths:</strong> denominator 10 → <code>1/10=0.1</code>, <code>2/10=0.2</code></li>
+        <li><strong>Hundredths:</strong> denominator 100 → <code>3/100=0.03</code></li>
+        <li><strong>Thousandths:</strong> denominator 1000 → <code>2/1000=0.002</code></li>
+      </ul>
+      <div class="grid-2">
+        <div class="q">Write as decimals: <code>4/10</code>, <code>5/100</code><br>
+          <input id="q2a" size="4"> <input id="q2b" size="5">
+          <button class="check" onclick="batch(['q2a:0.4','q2b:0.05'])">Check</button>
+        </div>
+        <div class="q">Write as fractions: <code>0.6 = ?</code>, <code>0.08 = ?</code><br>
+          <input id="q3a" size="6" placeholder="a/b"> <input id="q3b" size="6" placeholder="a/b">
+          <button class="check" onclick="batch(['q3a:3/5','q3b:2/25'])">Check</button>
+          <div class="small">Tip: write as 6/10 then reduce → 3/5; 8/100 reduce → 2/25.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mixed">
+      <img src="images/Riya-thinking.png" alt="Riya explaining" class="riya"/>
+      <h2>Mixed Fractions as Decimals</h2>
+      <p>Example: <code>3 1/10 = 3.1</code>, <code>9 17/100 = 9.17</code>.</p>
+      <div class="q">Convert: <code>5 6/100</code> → 
+        <input id="q4" size="6">
+        <button class="check" onclick="mark('q4','5.06')">Check</button>
+      </div>
+    </section>
+
+    <section id="place">
+      <img src="images/Riya-shocked.png" alt="Riya pointing" class="riya"/>
+      <h2>Place Value</h2>
+      <p>Each step to the right is 1/10 of the previous place. After ones come tenths, hundredths, thousandths…</p>
+      <table class="table">
+        <tr><th>Thousands</th><th>Hundreds</th><th>Tens</th><th>Ones</th><th>.</th><th>Tenths</th><th>Hundredths</th><th>Thousandths</th></tr>
+        <tr><td>7</td><td>5</td><td>3</td><td>2</td><td>•</td><td>4</td><td>8</td><td>6</td></tr>
+      </table>
+      <p><code>7532.486 = 7×1000 + 5×100 + 3×10 + 2×1 + 4×1/10 + 8×1/100 + 6×1/1000</code></p>
+      <div class="q">Place value of 8 in <code>12.08</code> → 
+        <input id="q5" size="6">
+        <button class="check" onclick="mark('q5','8/100')">Check</button>
+      </div>
+    </section>
+
+    <section id="conv">
+      <img src="images/Riya-upset.png" alt="Riya curious" class="riya"/>
+      <h2>Convert: Decimal ↔ Fraction</h2>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Decimal → Fraction</strong>
+          <p>Drop the point, divide by power of 10, then reduce. e.g., <code>0.625 = 625/1000 = 5/8</code>.</p>
+        </div>
+        <div class="card">
+          <strong>Fraction → Decimal</strong>
+          <p>Make denominator 10, 100, 1000 (using 2s and 5s) or divide: <code>37/125 = 0.296</code>.</p>
+        </div>
+      </div>
+      <div class="q">Write as decimal: <code>7/25</code> → 
+        <input id="q6" size="6">
+        <button class="check" onclick="mark('q6','0.28')">Check</button>
+      </div>
+    </section>
+
+    <section id="numline">
+      <img src="images/Riya-posing.png" alt="Riya shows number line" class="riya"/>
+      <h2>Number Line</h2>
+      <p>To plot tenths, split each unit into 10 equal parts. Example: <code>0.5</code> is halfway from 0 to 1.</p>
+      <div class="q">Between which whole numbers does <code>14.9</code> lie?
+        <input id="q7" size="10" placeholder="__ and __">
+        <button class="check" onclick="mark('q7','14 and 15')">Check</button>
+      </div>
+    </section>
+
+    <section id="equiv">
+      <img src="images/Riya-giggling.png" alt="Riya nodding" class="riya"/>
+      <h2>Equivalent & Like / Unlike Decimals</h2>
+      <p><code>2.5 = 2.50 = 2.500</code> are equivalent decimals. Like decimals have the same number of places.</p>
+      <div class="q">Make like decimals: <code>6.28, 8.5, 127.748, 42.9, 637.4</code> →
+        <input id="q8" size="40" placeholder="..., ..., ...">
+        <button class="check" onclick="mark('q8','6.280, 8.500, 127.748, 42.900, 637.400')">Check</button>
+      </div>
+    </section>
+
+    <section id="compare">
+      <img src="images/Riya-posing.png" alt="Riya compares" class="riya"/>
+      <h2>Compare & Order</h2>
+      <div class="grid-2">
+        <div class="q">Greater: <code>8.736</code> or <code>8.74</code>?
+          <input id="q9" size="6">
+          <button class="check" onclick="mark('q9','8.74')">Check</button>
+        </div>
+        <div class="q">Ascending: <code>0.725, 0.723, 0.729</code> → 
+          <input id="q10" size="22">
+          <button class="check" onclick="mark('q10','0.723, 0.725, 0.729')">Check</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="use">
+      <img src="images/Riya-thinking.png" alt="Riya daily life" class="riya"/>
+      <h2>Everyday Use</h2>
+      <div class="grid-2">
+        <div class="card"><strong>Money:</strong> 50 paise = ₹0.50</div>
+        <div class="card"><strong>Length:</strong> 6 mm = 0.6 cm; 7 km 45 m = 7.045 km</div>
+        <div class="card"><strong>Weight:</strong> 155 g = 0.155 kg; 5 kg 75 g = 5.075 kg</div>
+        <div class="card"><strong>Practice:</strong> 175 paise = ₹<input id="q11" size="4"><button class="check" onclick="mark('q11','1.75')">Check</button></div>
+      </div>
+    </section>
+
+    <section id="add">
+      <img src="images/Riya-confused.png" alt="Riya adds" class="riya"/>
+      <h2>Addition of Decimals</h2>
+      <p>Line up decimal points, then add like whole numbers. Example: <code>27.98 + 2.1 + 62.735 = 92.815</code>.</p>
+      <div class="q">Compute: <code>7.4 + 34.82 + 246.09 + 8.765</code> → 
+        <input id="q12" size="8">
+        <button class="check" onclick="mark('q12','297.075')">Check</button>
+      </div>
+    </section>
+
+    <section id="sub">
+      <img src="images/Riya-upset.png" alt="Riya subtracts" class="riya"/>
+      <h2>Subtraction of Decimals</h2>
+      <p>Write like decimals (pad with zeroes) and subtract. Example: <code>67.9 − 24.83 = 43.07</code>.</p>
+      <div class="q">Compute: <code>20.4 − 9.57</code> → 
+        <input id="q13" size="8">
+        <button class="check" onclick="mark('q13','10.83')">Check</button>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <img src="images/Riya-giggling.png" alt="Riya quiz" class="riya"/>
+      <h2>Riya’s Speed Quiz 🎯</h2>
+      <p>Ten quick questions. Get 8+ for a ⭐ badge!</p>
+      <ol>
+        <li>Decimal part of <code>10.345</code> → <input id="z1" size="6" placeholder="0.xxx"></li>
+        <li><code>0.125</code> as a fraction (lowest terms) → <input id="z2" size="6" placeholder="a/b"></li>
+        <li>Between which tenths lies <code>0.94</code>? → <input id="z3" size="10" placeholder="0.? and 1.0"></li>
+        <li>Fill symbol: <code>7.05 __ 7.50</code> → <input id="z4" size="2"></li>
+        <li>Greater: <code>0.099</code> or <code>0.19</code>? → <input id="z5" size="6"></li>
+        <li>Write like decimals: <code>945, 39.118, 72.8</code> → <input id="z6" size="26"></li>
+        <li>Convert to decimal: <code>8/125</code> → <input id="z7" size="6"></li>
+        <li>Add: <code>9.839 + 5.69 + 3.03</code> → <input id="z8" size="8"></li>
+        <li>Subtract: <code>61.2 − 32.3</code> → <input id="z9" size="8"></li>
+        <li>Arrange ascending: <code>5.5, 5.05, 5.005, 5.555</code> → <input id="z10" size="34"></li>
+      </ol>
+      <button class="check" onclick="grade()">Finish & Show Score</button>
+      <div id="result" style="margin-top:10px"></div>
+      <div style="margin-top:12px" class="gamebox">
+        <strong>Mini‑game: Decimal Dartboard 🎯</strong>
+        <p>Type a number between 0 and 1 with <em>two</em> decimals. If it’s within ±0.03 of Riya’s secret number, you score!</p>
+        <input id="dart" size="6" placeholder="0.xx">
+        <button class="check" onclick="dart()">Throw!</button>
+        <div id="dartMsg" class="small"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Made for Riya ❤️ • Avatars sprinkled for fun motivation. <a class="rev-btn" href="index.html">Back to Maths Home</a></p>
+    </footer>
+  </main>
+
+<script>
+  // Answer key helpers
+  function norm(x){return (x||'').toString().trim().toLowerCase()}
+  function mark(id, ans){
+    const ok = norm(document.getElementById(id).value) === norm(ans);
+    document.getElementById(id).style.background = ok ? '#dcfce7' : '#fee2e2';
+    if(ok){ score.bump(1); }
+  }
+  function batch(items){
+    items.forEach(s=>{
+      const [id,ans] = s.split(':');
+      mark(id, ans);
+    });
+  }
+
+  const score = {
+    total:0,
+    bump(n){ this.total+=n; document.getElementById('scorebox')?.remove(); const box=document.createElement('div'); box.id='scorebox'; box.className='score'; box.innerHTML='⭐ Score: '+this.total; document.body.appendChild(box); }
+  }
+
+  function grade(){
+    const key = {
+      z1:'0.345', z2:'1/8', z3:'0.9 and 1.0', z4:'<', z5:'0.19',
+      z6:'945.000, 39.118, 72.800', z7:'0.064', z8:'18.559', z9:'28.9',
+      z10:'5.005, 5.05, 5.5, 5.555'
+    };
+    let got=0,n=0;
+    for(const k in key){ n++; if(norm(document.getElementById(k).value)===norm(key[k])) got++; }
+    const pct=Math.round(100*got/n);
+    let badge = pct>=80 ? '🏅 Riya Superstar!' : (pct>=60 ? '🎉 Nice work!' : '✨ Keep practising!');
+    document.getElementById('result').innerHTML = `<div class="score">⭐ ${got}/${n} correct — ${pct}% &nbsp; ${badge}</div>`;
+  }
+
+  function dart(){
+    const target = Math.floor(Math.random()*100)/100; // 0.00 to 0.99
+    const x = parseFloat(document.getElementById('dart').value);
+    if(isNaN(x) || x<0 || x>=1){ document.getElementById('dartMsg').textContent = 'Enter a number like 0.37'; return; }
+    const diff = Math.abs(x-target);
+    const ok = diff <= 0.03;
+    document.getElementById('dartMsg').textContent = `Riya’s number: ${target.toFixed(2)} — Your guess diff: ${diff.toFixed(2)} → ${ok?'✅ Win! +1':'❌ Miss! try again'}`;
+    if(ok){ score.bump(1); }
+  }
+</script>
+</body>
+</html>

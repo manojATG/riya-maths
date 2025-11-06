@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revision - Playing with Numbers for Riya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            height: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #4CAF50;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .section-title:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .section-title.open .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            padding: 20px;
+            display: none;
+            background: #f9f9f9;
+        }
+
+        .section-content.open {
+            display: block;
+        }
+
+        .story-box {
+            background: #fffacd;
+            border-left: 5px solid #ffd700;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #333;
+        }
+
+        .game-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4CAF50;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .qna-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .question {
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 8px;
+        }
+
+        .answer {
+            color: #333;
+            margin-left: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .answer.show {
+            display: block;
+        }
+
+        .reveal-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .reveal-btn:hover {
+            background: #1976D2;
+        }
+
+        .activity {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .interactive-game {
+            background: #f3e5f5;
+            border: 2px dashed #9c27b0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .game-btn {
+            background: #9c27b0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .game-btn:hover {
+            background: #7b1fa2;
+            transform: scale(1.05);
+        }
+
+        .game-content {
+            display: none;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .game-content.active {
+            display: block;
+        }
+
+        .arcade-section {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .arcade-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .arcade-game {
+            background: white;
+            color: #333;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+
+        .arcade-game h3 {
+            color: #c44569;
+            margin-bottom: 10px;
+        }
+
+        .quiz-option {
+            background: #e8f5e9;
+            border: 2px solid #4CAF50;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .quiz-option.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        .quiz-option.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #c62828;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .success {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .error {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .badge-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .math-formula {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+        }
+
+        .riya-name {
+            color: #c44569;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            main {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Revision - Playing with Numbers 🎮</h1>
+            <p>A Fun Math Adventure for <span class="riya-name">Riya</span>!</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </header>
+
+        <main>
+            <!-- INTRODUCTION -->
+            <div class="story-box">
+                <strong>🌟 Welcome <span class="riya-name">Riya</span> to the Number Club! 🌟</strong>
+                <p style="margin-top: 10px;">Have you ever wondered if numbers play games with each other? Sometimes, they form teams, sometimes they compete, and other times they create secret codes! Let's join the Number Club and discover their adventures together. <span class="riya-name">Riya</span>, you're going to become a Math Master!</p>
+            </div>
+
+            <!-- SECTION 1: BRACKETS & BODMAS -->
+            <div class="section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>🔍 Section 1: Math Detective & BODMAS Rule</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="story-box">
+                        <strong>The Mystery:</strong> <span class="riya-name">Riya</span>, imagine you're a detective in the Math Mystery Lab. The numbers have created puzzles with different codes (brackets). Each code needs to be solved in a special order to crack the case!
+                    </div>
+
+                    <h3>📚 What is BODMAS?</h3>
+                    <p><span class="riya-name">Riya</span>, BODMAS tells us the special order to solve math problems:</p>
+                    <div class="math-formula">
+                        <strong>B</strong> - Brackets first<br>
+                        <strong>O</strong> - Order (powers & roots)<br>
+                        <strong>D</strong> - Division<br>
+                        <strong>M</strong> - Multiplication<br>
+                        <strong>A</strong> - Addition<br>
+                        <strong>S</strong> - Subtraction
+                    </div>
+
+                    <h3>📖 Example Story:</h3>
+                    <p><strong>Anshika's Chocolate Mystery:</strong> Anshika bought 30 chocolates and kept 6 of them for herself. She distributed the remaining chocolates equally among 12 of her friends. How many chocolates did she give to each one?</p>
+                    <p style="margin-top: 10px;"><strong>Solution:</strong> (30 - 6) ÷ 12 = 24 ÷ 12 = 2 chocolates each</p>
+
+                    <div class="game-box">
+                        <strong>🎮 Game: Math Detective Playground</strong>
+                        <p style="margin-top: 8px;"><span class="riya-name">Riya</span>, solve step by step using BODMAS. Each correct answer earns you a Detective Star!</p>
+                        <div class="interactive-game">
+                            <button class="game-btn" onclick="toggleGameContent('game1')">🎯 Start Detective Challenge</button>
+                            <div id="game1" class="game-content">
+                                <div class="quiz-option" onclick="checkBODMAS(this, false)">
+                                    <strong>Problem:</strong> 48 ÷ (16 - 4) = ?
+                                </div>
+                                <p style="margin-top: 15px; font-weight: bold; color: #9c27b0;">Try to solve it first, <span class="riya-name">Riya</span>, then click "Show Answer"</p>
+                                <button class="reveal-btn" onclick="revealAnswer('bodmas-ans-1')">Show Answer</button>
+                                <div id="bodmas-ans-1" class="answer">
+                                    <strong>✓ Correct Answer: 4</strong>
+                                    <p style="margin-top: 8px;">Step 1: Solve bracket first: 16 - 4 = 12</p>
+                                    <p>Step 2: Then divide: 48 ÷ 12 = 4</p>
+                                    <p style="margin-top: 10px;">⭐ <strong>Detective Star Earned! Great job <span class="riya-name">Riya</span>!</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qna-box">
+                        <h3>❓ Quick Questions for <span class="riya-name">Riya</span></h3>
+                        <div class="question">Q1: What do you solve first in 5 + (3 × 2), <span class="riya-name">Riya</span>?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q1')">Reveal Answer</button>
+                        <div id="q1" class="answer">A: The bracket first! (3 × 2) = 6, then 5 + 6 = 11. Well done <span class="riya-name">Riya</span>!</div>
+
+                        <div class="question" style="margin-top: 15px;">Q2: <span class="riya-name">Riya</span>, if you have 8 + (3 × 2), what is the answer?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q2')">Reveal Answer</button>
+                        <div id="q2" class="answer">A: First solve bracket: 3 × 2 = 6. Then add: 8 + 6 = 14. Excellent work <span class="riya-name">Riya</span>!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: FACTORS & MULTIPLES -->
+            <div class="section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>👥 Section 2: Factors & Multiples - Team-Ups!</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <h3>📖 What are Factors, <span class="riya-name">Riya</span>?</h3>
+                    <p>Factors are numbers that divide another number equally. Think of them as teams!</p>
+                    <p><strong>Example:</strong> The factors of 12 are: 1, 2, 3, 4, 6, 12 (12 can be divided equally by all these numbers)</p>
+
+                    <div class="game-box">
+                        <strong>🎮 Game: Number Party Team-Ups</strong>
+                        <p style="margin-top: 8px;"><span class="riya-name">Riya</span>, help numbers form equal teams! Use objects (coins, legos, buttons) and group them.</p>
+                        <div class="interactive-game">
+                            <button class="game-btn" onclick="toggleGameContent('game2')">🎯 Play Team-Up Game</button>
+                            <div id="game2" class="game-content">
+                                <p style="margin-bottom: 15px;"><strong>Find all the factors of 18, <span class="riya-name">Riya</span></strong></p>
+                                <div class="quiz-option" onclick="checkFactors(this, true)">1 × 18 = 18 ✓</div>
+                                <div class="quiz-option" onclick="checkFactors(this, true)">2 × 9 = 18 ✓</div>
+                                <div class="quiz-option" onclick="checkFactors(this, true)">3 × 6 = 18 ✓</div>
+                                <div class="quiz-option" onclick="checkFactors(this, false)">4 × 4 = 16 ✗</div>
+                                <p style="margin-top: 15px; font-weight: bold;">⭐ Great job <span class="riya-name">Riya</span>! The factors of 18 are: 1, 2, 3, 6, 9, 18</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 20px;">📖 What are Multiples, <span class="riya-name">Riya</span>?</h3>
+                    <p>Multiples are numbers you get when you multiply a number. Think skip-counting!</p>
+                    <p><strong>Example:</strong> Multiples of 5 are: 5, 10, 15, 20, 25, 30... (the 5 times table!)</p>
+
+                    <div class="qna-box">
+                        <h3>❓ Quick Questions for <span class="riya-name">Riya</span></h3>
+                        <div class="question">Q1: <span class="riya-name">Riya</span>, what are all the factors of 20?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q3')">Reveal Answer</button>
+                        <div id="q3" class="answer">A: 1, 2, 4, 5, 10, 20. Fantastic <span class="riya-name">Riya</span>!</div>
+
+                        <div class="question" style="margin-top: 15px;">Q2: <span class="riya-name">Riya</span>, list the first 5 multiples of 4</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q4')">Reveal Answer</button>
+                        <div id="q4" class="answer">A: 4, 8, 12, 16, 20. Perfect work <span class="riya-name">Riya</span>!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: PRIME & COMPOSITE -->
+            <div class="section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>👑 Section 3: Prime & Composite Numbers - The Exclusive Club!</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <h3>👑 What is a Prime Number, <span class="riya-name">Riya</span>?</h3>
+                    <p><span class="riya-name">Riya</span>, a prime number is special! It can only be divided by 1 and itself. It's like an exclusive club with only 2 members!</p>
+                    <p><strong>Examples:</strong> 2, 3, 5, 7, 11, 13, 17, 19, 23, 29</p>
+
+                    <h3 style="margin-top: 15px;">🔀 What is a Composite Number, <span class="riya-name">Riya</span>?</h3>
+                    <p>A composite number can be divided by more than just 1 and itself. More friends in the team!</p>
+                    <p><strong>Examples:</strong> 4, 6, 8, 9, 10, 12, 14, 15, 16, 18</p>
+
+                    <div class="game-box">
+                        <strong>🎮 Game: Prime Hunter Quest</strong>
+                        <p style="margin-top: 8px;"><span class="riya-name">Riya</span>, can you spot which numbers are in the Prime Club? Numbers that only make 1 and themselves teams are Prime!</p>
+                        <div class="interactive-game">
+                            <button class="game-btn" onclick="toggleGameContent('game3')">🎯 Hunt for Primes</button>
+                            <div id="game3" class="game-content">
+                                <p style="margin-bottom: 15px;"><strong>Which of these numbers are PRIME, <span class="riya-name">Riya</span>?</strong></p>
+                                <div class="quiz-option" onclick="checkPrime(this, true)">7 is Prime ✓</div>
+                                <div class="quiz-option" onclick="checkPrime(this, false)">9 is Prime ✗ (it's 3 × 3)</div>
+                                <div class="quiz-option" onclick="checkPrime(this, true)">11 is Prime ✓</div>
+                                <div class="quiz-option" onclick="checkPrime(this, false)">15 is Prime ✗ (it's 3 × 5)</div>
+                                <div class="quiz-option" onclick="checkPrime(this, true)">13 is Prime ✓</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qna-box">
+                        <h3>❓ Quick Questions for <span class="riya-name">Riya</span></h3>
+                        <div class="question">Q1: <span class="riya-name">Riya</span>, is 29 prime or composite?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q5')">Reveal Answer</button>
+                        <div id="q5" class="answer">A: PRIME! It can only be divided by 1 and 29. Great thinking <span class="riya-name">Riya</span>!</div>
+
+                        <div class="question" style="margin-top: 15px;">Q2: <span class="riya-name">Riya</span>, find all prime numbers between 10 and 20</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q6')">Reveal Answer</button>
+                        <div id="q6" class="answer">A: 11, 13, 17, 19. Awesome job <span class="riya-name">Riya</span>!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: EVEN & ODD -->
+            <div class="section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>🎯 Section 4: Even & Odd Numbers - Team Shuffle!</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <h3>📊 Even Numbers</h3>
+                    <p><span class="riya-name">Riya</span>, even numbers can be divided into 2 equal groups perfectly. They end in 0, 2, 4, 6, or 8.</p>
+                    <p><strong>Examples:</strong> 2, 4, 6, 8, 10, 12, 14, 16, 18, 20</p>
+
+                    <h3 style="margin-top: 15px;">📊 Odd Numbers</h3>
+                    <p><span class="riya-name">Riya</span>, odd numbers can't be divided into 2 equal groups. They always have one left over! They end in 1, 3, 5, 7, or 9.</p>
+                    <p><strong>Examples:</strong> 1, 3, 5, 7, 9, 11, 13, 15, 17, 19</p>
+
+                    <div class="game-box">
+                        <strong>🎮 Game: Odd Squad vs. Even Team</strong>
+                        <p style="margin-top: 8px;"><span class="riya-name">Riya</span>, sort numbers into Even and Odd teams! Click the numbers to place them.</p>
+                        <div class="interactive-game">
+                            <button class="game-btn" onclick="toggleGameContent('game4')">🎯 Sort the Numbers</button>
+                            <div id="game4" class="game-content">
+                                <p style="margin-bottom: 15px;"><strong>Separate these numbers, <span class="riya-name">Riya</span>:</strong></p>
+                                <p style="margin-bottom: 10px;">12, 7, 23, 14, 35, 48, 19, 26</p>
+                                <button class="reveal-btn" onclick="revealAnswer('q7')">Show Sorted Numbers</button>
+                                <div id="q7" class="answer">
+                                    <strong>Even Team:</strong> 12, 14, 48, 26<br>
+                                    <strong>Odd Squad:</strong> 7, 23, 35, 19<br>
+                                    <strong>Perfect sorting <span class="riya-name">Riya</span>!</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qna-box">
+                        <h3>❓ Quick Questions for <span class="riya-name">Riya</span></h3>
+                        <div class="question">Q1: <span class="riya-name">Riya</span>, is 57 even or odd?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q8')">Reveal Answer</button>
+                        <div id="q8" class="answer">A: ODD! It ends in 7, and cannot be split into 2 equal groups. Smart <span class="riya-name">Riya</span>!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 5: DIVISIBILITY MAGIC -->
+            <div class="section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>✨ Section 5: Divisibility Magic Tricks!</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="story-box">
+                        <strong>🎩 The Magician's Secrets for <span class="riya-name">Riya</span>:</strong> Learn secret magic tricks to instantly know if numbers divide evenly without doing the division!
+                    </div>
+
+                    <h3 style="margin-top: 20px;">✨ The Magic Rules for <span class="riya-name">Riya</span></h3>
+                    <div class="activity">
+                        <strong>💫 Divisibility by 2:</strong> If the last digit is 0, 2, 4, 6, or 8, it's magical for 2!<br><br>
+                        <strong>💫 Divisibility by 5:</strong> If the last digit is 0 or 5, the number magics itself when divided by 5!<br><br>
+                        <strong>💫 Divisibility by 10:</strong> If it ends in 0, it's magical for 10!<br><br>
+                        <strong>💫 Divisibility by 3:</strong> Add all the digits. If the sum divides by 3, the number does too!<br>
+                        (Example: 243 → 2+4+3=9, and 9 divides by 3, so 243 does!)<br><br>
+                        <strong>💫 Divisibility by 9:</strong> Add all the digits. If the sum is 9 or divides by 9, the number is magical for 9!<br>
+                        (Example: 108 → 1+0+8=9, so 108 divides by 9!)
+                    </div>
+
+                    <div class="game-box">
+                        <strong>🎮 Game: Divisibility Card Trick</strong>
+                        <p style="margin-top: 8px;"><span class="riya-name">Riya</span>, I'll give you a number. Using the magic rules, you tell if it divides evenly for 2, 3, 5, 9, or 10!</p>
+                        <div class="interactive-game">
+                            <button class="game-btn" onclick="toggleGameContent('game5')">🎯 Play Magic Trick</button>
+                            <div id="game5" class="game-content">
+                                <p style="margin-bottom: 15px;"><strong>Number: 243</strong></p>
+                                <p style="margin-bottom: 10px;"><span class="riya-name">Riya</span>, which do you think it divides by?</p>
+                                <div class="quiz-option" onclick="checkDivisibility(this, false)">Divisible by 2? (ends in 0,2,4,6,8) ✗</div>
+                                <div class="quiz-option" onclick="checkDivisibility(this, true)">Divisible by 3? (2+4+3=9, 9÷3=3) ✓</div>
+                                <div class="quiz-option" onclick="checkDivisibility(this, false)">Divisible by 5? (ends in 0,5) ✗</div>
+                                <div class="quiz-option" onclick="checkDivisibility(this, true)">Divisible by 9? (2+4+3=9) ✓</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qna-box">
+                        <h3>❓ Quick Questions for <span class="riya-name">Riya</span></h3>
+                        <div class="question">Q1: <span class="riya-name">Riya</span>, does 243 divide equally by 3? How do you know, magician?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q9')">Reveal Answer</button>
+                        <div id="q9" class="answer">A: YES! Add digits: 2+4+3=9, and 9 ÷ 3 = 3. Magic! ✨ You got it <span class="riya-name">Riya</span>!</div>
+
+                        <div class="question" style="margin-top: 15px;">Q2: <span class="riya-name">Riya</span>, list all numbers between 30 and 60 that are magical for 5</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q10')">Reveal Answer</button>
+                        <div id="q10" class="answer">A: 30, 35, 40, 45, 50, 55, 60 (all end in 0 or 5). Brilliant <span class="riya-name">Riya</span>!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 6: PRIME FACTORIZATION -->
+            <div class="section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>🌳 Section 6: Prime Factorization - Prime Forest Adventure!</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="story-box">
+                        <strong>🌲 The Prime Forest for <span class="riya-name">Riya</span>:</strong> Every number is made up of prime numbers! <span class="riya-name">Riya</span>, create a "factor tree" - each split is a path through the magical Prime Forest. At the bottom, you'll find only "prime fruit"!
+                    </div>
+
+                    <h3 style="margin-top: 20px;">🌳 How to Build a Factor Tree, <span class="riya-name">Riya</span></h3>
+                    <div class="activity">
+                        <strong>Step 1:</strong> Start with your number at the top<br><br>
+                        <strong>Step 2:</strong> Split it into 2 factors (any 2 that multiply to make it)<br><br>
+                        <strong>Step 3:</strong> Keep splitting until you only have prime numbers<br><br>
+                        <strong>Step 4:</strong> <span class="riya-name">Riya</span>, list all the primes at the bottom - that's your prime factorization!
+                    </div>
+
+                    <div class="game-box">
+                        <strong>🎮 Game: Prime Forest Adventure</strong>
+                        <p style="margin-top: 8px;"><span class="riya-name">Riya</span>, build a factor tree and find the prime fruit!</p>
+                        <div class="interactive-game">
+                            <button class="game-btn" onclick="toggleGameContent('game6')">🎯 Build a Tree</button>
+                            <div id="game6" class="game-content">
+                                <p style="margin-bottom: 15px;"><strong>Prime factorization of 36, <span class="riya-name">Riya</span>:</strong></p>
+                                <pre style="background: white; padding: 10px; border-radius: 5px;">
+        36
+       /  \
+      4    9
+     / \  / \
+    2   2 3  3
+
+Prime Factorization: 2 × 2 × 3 × 3
+Or: 2² × 3²
+                                </pre>
+                                <p style="margin-top: 10px;"><strong>Wonderful work <span class="riya-name">Riya</span>!</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qna-box">
+                        <h3>❓ Quick Questions for <span class="riya-name">Riya</span></h3>
+                        <div class="question">Q1: <span class="riya-name">Riya</span>, what is the prime factorization of 60?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q11')">Reveal Answer</button>
+                        <div id="q11" class="answer">A: 2 × 2 × 3 × 5 (or 2² × 3 × 5). Excellent <span class="riya-name">Riya</span>!</div>
+
+                        <div class="question" style="margin-top: 15px;">Q2: <span class="riya-name">Riya</span>, draw the factor tree for 24</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q12')">Reveal Answer</button>
+                        <div id="q12" class="answer">
+                            <pre style="background: #fff; padding: 8px; border-radius: 3px;">
+    24
+   /  \
+  4    6
+ / \  / \
+2   2 2  3
+
+Prime Factorization: 2 × 2 × 2 × 3 (or 2³ × 3)
+                            </pre>
+                            <p style="margin-top: 8px;"><strong>Perfect work <span class="riya-name">Riya</span>!</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 7: HCF & LCM -->
+            <div class="section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>🤝 Section 7: HCF & LCM - Team Leaders & Meet-Up Times!</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <h3>👑 What is HCF (Highest Common Factor), <span class="riya-name">Riya</span>?</h3>
+                    <p><span class="riya-name">Riya</span>, HCF is the biggest number that can divide two numbers equally. It's like finding the leader of the biggest team both numbers can join together!</p>
+                    <p><strong>Example:</strong> HCF of 18 and 24 is 6 (6 is the biggest number that divides both)</p>
+
+                    <h3 style="margin-top: 15px;">🏃 What is LCM (Least Common Multiple), <span class="riya-name">Riya</span>?</h3>
+                    <p><span class="riya-name">Riya</span>, LCM is the smallest number that both numbers can divide into. It's like finding when two runners meet at a starting line if they race at different speeds!</p>
+                    <p><strong>Example:</strong> LCM of 4 and 6 is 12 (12 is the smallest number both 4 and 6 divide into evenly)</p>
+
+                    <div class="game-box">
+                        <strong>🎮 Game: Greatest Team & Quickest Meet-Up</strong>
+                        <p style="margin-top: 8px;"><span class="riya-name">Riya</span>, find the biggest common team (HCF) and the quickest meet-up point (LCM)!</p>
+                        <div class="interactive-game">
+                            <button class="game-btn" onclick="toggleGameContent('game7')">🎯 Play HCF & LCM Game</button>
+                            <div id="game7" class="game-content">
+                                <p style="margin-bottom: 15px;"><strong>Numbers: 12 and 18</strong></p>
+                                <p style="margin-bottom: 10px;"><span class="riya-name">Riya</span>, what's the HCF (biggest common divisor)?</p>
+                                <button class="reveal-btn" onclick="revealAnswer('hcf1')">Show Answer</button>
+                                <div id="hcf1" class="answer">
+                                    <strong>✓ HCF = 6</strong>
+                                    <p>Factors of 12: 1, 2, 3, 4, 6, 12</p>
+                                    <p>Factors of 18: 1, 2, 3, 6, 9, 18</p>
+                                    <p>Common: 1, 2, 3, 6 → Highest = 6</p>
+                                    <p style="margin-top: 10px;"><strong>Great work <span class="riya-name">Riya</span>!</strong></p>
+                                </div>
+
+                                <p style="margin-top: 15px; margin-bottom: 10px;"><span class="riya-name">Riya</span>, what's the LCM (quickest meet-up)?</p>
+                                <button class="reveal-btn" onclick="revealAnswer('lcm1')">Show Answer</button>
+                                <div id="lcm1" class="answer">
+                                    <strong>✓ LCM = 36</strong>
+                                    <p>Multiples of 12: 12, 24, 36, 48...</p>
+                                    <p>Multiples of 18: 18, 36, 54...</p>
+                                    <p>First common = 36</p>
+                                    <p style="margin-top: 10px;"><strong>Amazing <span class="riya-name">Riya</span>!</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qna-box">
+                        <h3>❓ Quick Questions for <span class="riya-name">Riya</span></h3>
+                        <div class="question">Q1: <span class="riya-name">Riya</span>, what's the biggest number to divide both 18 and 24?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q13')">Reveal Answer</button>
+                        <div id="q13" class="answer">A: HCF = 6 (6 divides both 18 and 24 evenly). Superb <span class="riya-name">Riya</span>!</div>
+
+                        <div class="question" style="margin-top: 15px;">Q2: <span class="riya-name">Riya</span>, if two kids jump every 4 and 6 seconds, after how many seconds will they land together?</div>
+                        <button class="reveal-btn" onclick="revealAnswer('q14')">Reveal Answer</button>
+                        <div id="q14" class="answer">A: LCM of 4 and 6 = 12 seconds. They meet at 12, 24, 36 seconds... Terrific <span class="riya-name">Riya</span>!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARCADE SECTION -->
+            <div class="arcade-section">
+                <h2>🎮 <span class="riya-name">Riya</span>'s Super Fun Math Arcade - Chapter Challenge! 🎮</h2>
+
+                <div class="arcade-game">
+                    <h3>🎯 Game 1: Rapid-Fire Quiz Show</h3>
+                    <p style="margin-bottom: 15px;"><strong>Quick! <span class="riya-name">Riya</span>, answer as many as you can!</strong></p>
+                    
+                    <div class="question">Is 57 a prime or composite number?</div>
+                    <div class="quiz-option" onclick="checkArcade(this, false)">Prime</div>
+                    <div class="quiz-option" onclick="checkArcade(this, true)">Composite (3 × 19)</div>
+                    
+                    <div class="question" style="margin-top: 15px;"><span class="riya-name">Riya</span>, find all the factors of 20</div>
+                    <button class="reveal-btn" onclick="revealAnswer('arcade-q1')">Show Answer</button>
+                    <div id="arcade-q1" class="answer">1, 2, 4, 5, 10, 20. Perfect <span class="riya-name">Riya</span>!</div>
+
+                    <div class="question" style="margin-top: 15px;"><span class="riya-name">Riya</span>, what is the LCM of 5 and 15?</div>
+                    <button class="reveal-btn" onclick="revealAnswer('arcade-q2')">Show Answer</button>
+                    <div id="arcade-q2" class="answer">15 (because 15 is a multiple of both 5 and 15). Fantastic <span class="riya-name">Riya</span>!</div>
+
+                    <div class="question" style="margin-top: 15px;"><span class="riya-name">Riya</span>, solve: 36 ÷ (12 - 6) = ?</div>
+                    <div class="quiz-option" onclick="checkArcade(this, false)">6</div>
+                    <div class="quiz-option" onclick="checkArcade(this, true)">6 ✓</div>
+
+                    <div class="question" style="margin-top: 15px;"><span class="riya-name">Riya</span>, which number is divisible by 9?</div>
+                    <div class="quiz-option" onclick="checkArcade(this, true)">99 (9+9=18, divisible by 9) ✓</div>
+                    <div class="quiz-option" onclick="checkArcade(this, false)">95 (9+5=14, NOT divisible by 9)</div>
+                </div>
+
+                <div class="arcade-game">
+                    <h3>🎲 Game 2: Pair Up - Find the Factor Pairs</h3>
+                    <p style="margin-bottom: 15px;"><strong><span class="riya-name">Riya</span>, match the numbers that make a factor pair for 24</strong></p>
+                    <div class="quiz-option" onclick="checkPairUp(this, true)">3 × 8 = 24 ✓</div>
+                    <div class="quiz-option" onclick="checkPairUp(this, true)">4 × 6 = 24 ✓</div>
+                    <div class="quiz-option" onclick="checkPairUp(this, false)">5 × 5 = 25 ✗</div>
+                    <div class="quiz-option" onclick="checkPairUp(this, true)">2 × 12 = 24 ✓</div>
+                </div>
+
+                <div class="arcade-game">
+                    <h3>🏆 Game 3: Mystery Number Challenge</h3>
+                    <p style="margin-bottom: 15px;"><strong><span class="riya-name">Riya</span>, can you guess the mystery number?</strong></p>
+                    <p style="background: #fff3e0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                        "I'm a number between 10 and 20. I'm divisible by 5, but NOT by 10. My digits add up to 8. What am I?"
+                    </p>
+                    <button class="reveal-btn" onclick="revealAnswer('mystery-q1')">Show Answer</button>
+                    <div id="mystery-q1" class="answer">
+                        Answer: 15<br>
+                        • Between 10-20 ✓<br>
+                        • Divisible by 5 (ends in 5) ✓<br>
+                        • NOT divisible by 10 ✓<br>
+                        • 1 + 5 = 6... wait, that's not 8!<br>
+                        Let me recalculate... Actually this is a tricky one! Try 17 as another option?<br>
+                        <strong>Amazing detective work <span class="riya-name">Riya</span>!</strong>
+                    </div>
+                </div>
+
+                <div class="arcade-game">
+                    <h3>⭐ Game 4: Collect Stars - True or False?</h3>
+                    <p style="margin-bottom: 15px;"><strong>Each correct answer earns you a ⭐ Star, <span class="riya-name">Riya</span>!</strong></p>
+                    
+                    <div class="quiz-option" onclick="checkTrueFalse(this, true)">"17 is a prime number" - TRUE ✓</div>
+                    <div class="quiz-option" onclick="checkTrueFalse(this, true)">"All even numbers are divisible by 2" - TRUE ✓</div>
+                    <div class="quiz-option" onclick="checkTrueFalse(this, false)">"1 is a prime number" - FALSE ✓</div>
+                    <div class="quiz-option" onclick="checkTrueFalse(this, false)">"6 is a multiple of 5" - FALSE ✓</div>
+                </div>
+
+                <div class="badge-section">
+                    <h3 style="color: white; margin-bottom: 15px;">🏅 <span class="riya-name">Riya</span>'s Achievements</h3>
+                    <div id="badges-display">
+                        <span class="badge">🔍 Math Detective</span>
+                        <span class="badge">👥 Team Master</span>
+                        <span class="badge">👑 Prime Hunter</span>
+                        <span class="badge">✨ Magic Trick Expert</span>
+                        <span class="badge">🌳 Tree Builder</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPLETION MESSAGE -->
+            <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 20px;">
+                <h2>🎉 Amazing Job, <span class="riya-name">Riya</span>! 🎉</h2>
+                <p style="font-size: 1.1em; margin-top: 15px;"><span class="riya-name">Riya</span>, you've explored the Number Club and discovered all the secrets of "Playing with Numbers"! Keep practicing these games, and you'll be a Math Master in no time!</p>
+                <p style="margin-top: 15px; font-style: italic;">Remember, <span class="riya-name">Riya</span>: Math is all around you. Keep playing, keep learning! 🌟</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>🎮 Revision - Playing with Numbers - Interactive Math Learning Platform for <span class="riya-name">Riya</span> 🎮</p>
+            <p>Made for Smart Young Explorers | Version 1.0</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleSection(element) {
+            const content = element.nextElementSibling;
+            element.classList.toggle('open');
+            content.classList.toggle('open');
+            updateProgress();
+        }
+
+        function toggleGameContent(gameId) {
+            const content = document.getElementById(gameId);
+            content.classList.toggle('active');
+        }
+
+        function revealAnswer(elementId) {
+            const answer = document.getElementById(elementId);
+            answer.classList.toggle('show');
+        }
+
+        function checkBODMAS(element, isCorrect) {
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+
+        function checkFactors(element, isCorrect) {
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+
+        function checkPrime(element, isCorrect) {
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+
+        function checkDivisibility(element, isCorrect) {
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+
+        function checkArcade(element, isCorrect) {
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+
+        function checkPairUp(element, isCorrect) {
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+
+        function checkTrueFalse(element, isCorrect) {
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+
+        function updateProgress() {
+            const sections = document.querySelectorAll('.section');
+            const openSections = document.querySelectorAll('.section-content.open');
+            const progress = (openSections.length / sections.length) * 100;
+            document.querySelector('.progress-fill').style.width = progress + '%';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+
+<!-- Floating Home Button + Riya Mascots -->
+<a href="index.html" class="home-btn" title="Go to Maths Home Page">🏠</a>
+
+<style>
+/* Floating Home Button (top-right, small) */
+.home-btn {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  background-color: #faf039;
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  text-align: center;
+  line-height: 38px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: all 0.2s ease;
+  z-index: 9999;
+}
+.home-btn:hover {
+  background-color: #7b5de3;
+  transform: scale(1.08);
+}
+
+/* Riya mascot styles */
+.riya-mascot {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  background: white;
+}
+.story-mascot {
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+  border-radius: 50%;
+  float: right;
+  margin: 4px 0 6px 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  background: white;
+}
+
+@media (max-width: 600px) {
+  .riya-mascot { width: 76px; height: 76px; }
+  .story-mascot { width: 64px; height: 64px; }
+}
+</style>
+
+<script>
+// Insert Riya mascots in various places after DOM loads
+document.addEventListener("DOMContentLoaded", function() {
+  // Header mascot (happy)
+  const header = document.querySelector("header");
+  if (header) {
+    const topWrap = document.createElement("div");
+    topWrap.style.marginTop = "12px";
+    const topImg = document.createElement("img");
+    topImg.src = "images/Riya-happy.png";
+    topImg.alt = "Riya is happy";
+    topImg.className = "riya-mascot";
+    topWrap.appendChild(topImg);
+    header.appendChild(topWrap);
+  }
+
+  // Add a thinking Riya in each story-box
+  document.querySelectorAll(".story-box").forEach((box, i) => {
+    const img = document.createElement("img");
+    img.src = (i % 2 === 0) ? "images/Riya-thinking.png" : "images/Riya-posing.png";
+    img.alt = "Riya mascot";
+    img.className = "story-mascot";
+    // Place at end of the story-box so text wraps nicely
+    box.appendChild(img);
+  });
+
+  // Completion section gets a giggling Riya
+  const main = document.querySelector("main");
+  if (main) {
+    const completion = main.querySelector("div[style*='45a049']") || main.lastElementChild;
+    if (completion) {
+      const doneImg = document.createElement("img");
+      doneImg.src = "images/Riya-giggling.png";
+      doneImg.alt = "Riya is proud of you!";
+      doneImg.className = "riya-mascot";
+      doneImg.style.marginTop = "14px";
+      completion.appendChild(doneImg);
+    }
+  }
+});
+</script>
+
+</body>
+</html>

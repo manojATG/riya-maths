@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Learn About Sets - Fun Math Adventure!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            background: white;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #f5576c;
+            padding-bottom: 10px;
+        }
+
+        .buddy {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #f5576c;
+        }
+
+        .buddy::before {
+            content: "🦊 Math Buddy says: ";
+            font-weight: bold;
+            color: #f5576c;
+        }
+
+        .example-box {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #2196F3;
+        }
+
+        .example-box h3 {
+            color: #2196F3;
+            margin-bottom: 10px;
+        }
+
+        .set-notation {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            text-align: center;
+            margin: 15px 0;
+            border: 2px dashed #ff9800;
+        }
+
+        .quiz-box {
+            background: #f3e5f5;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            font-size: 1.2em;
+            color: #7b1fa2;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #ce93d8;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: #ce93d8;
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .quiz-option.wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .feedback.wrong {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #bdbdbd;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .interactive-set {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            min-height: 100px;
+        }
+
+        .element {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .element:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .element.selected {
+            background: #4CAF50;
+            transform: scale(0.9);
+        }
+
+        .key-point {
+            background: #fff9c4;
+            border-left: 5px solid #fbc02d;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .key-point::before {
+            content: "💡 Remember: ";
+            font-weight: bold;
+            color: #f57c00;
+        }
+
+        .practice-box {
+            background: #e8f5e9;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .check-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .check-btn:hover {
+            background: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 2px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .symbol {
+            font-size: 1.5em;
+            color: #f5576c;
+            font-weight: bold;
+        }
+
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .celebration.show {
+            display: block;
+            animation: bounceIn 0.5s;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+		
+		.home-fab{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  background:#FAF003;
+  color:#222;text-decoration:none;
+  font-size:22px;line-height:1;
+  border-radius:50%;
+  border:2px solid rgba(0,0,0,0.15);
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  z-index:9999;
+}
+.home-fab:hover{ transform:translateY(-2px); }
+    </style>
+</head>
+<body>
+    <a class="home-fab" href="index.html" aria-label="Home">🏠</a>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Learn About SETS!</h1>
+            <p>Your Fun Math Adventure Starts Here!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Introduction -->
+            <div class="section active" id="section1">
+                <h2 class="section-title">🌟 What is a Set?</h2>
+                
+                <div class="buddy">
+                    Hey there, Math Explorer! Today we're going to learn about something super cool called "SETS"! Think of a set like a treasure chest where you keep similar things together. Ready to start? Let's go! 🚀
+                </div>
+
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    In everyday life, we group things together all the time! For example:
+                </p>
+
+                <div class="example-box">
+                    <h3>Real-Life Examples:</h3>
+                    <ul style="font-size: 1.1em; line-height: 2;">
+                        <li>🎨 A collection of paintings</li>
+                        <li>📚 A collection of books</li>
+                        <li>👥 A group of students</li>
+                        <li>🏏 A group of cricketers</li>
+                    </ul>
+                </div>
+
+                <div class="key-point">
+                    A <strong>SET</strong> is a well-defined collection of objects. This means we can clearly say whether something belongs to the set or not!
+                </div>
+
+                <div class="example-box">
+                    <h3>✅ Example of a Good Set:</h3>
+                    <p><strong>The set of all vowels in the English alphabet</strong></p>
+                    <div class="set-notation">A = {a, e, i, o, u}</div>
+                    <p>We can clearly say: 'e' belongs to this set ✅, but 'w' does not ❌</p>
+                </div>
+
+                <div class="example-box">
+                    <h3>❌ Example of NOT a Set:</h3>
+                    <p><strong>The collection of interesting books</strong></p>
+                    <p>Why is this NOT a set? Because "interesting" means different things to different people! What's interesting to you might be boring to your friend. So it's NOT well-defined.</p>
+                </div>
+
+                <div class="quiz-box">
+                    <div class="quiz-question">🤔 Let's Practice! Which of these forms a SET?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 1)">
+                            A group of tall boys
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 1)">
+                            A collection of flowers
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 1)">
+                            A collection of beautiful paintings
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback1"></div>
+                </div>
+            </div>
+
+            <!-- Section 2: Elements of a Set -->
+            <div class="section" id="section2">
+                <h2 class="section-title">🎯 Elements of a Set</h2>
+                
+                <div class="buddy">
+                    Great job getting here! Now let's learn about what we put INSIDE our sets. These are called ELEMENTS!
+                </div>
+
+                <div class="key-point">
+                    The objects that belong to a set are called its <strong>ELEMENTS</strong>. 
+                    <br>📝 Sets are written with CAPITAL letters: A, B, X, M
+                    <br>📝 Elements are written with small letters: a, b, h, l, n
+                </div>
+
+                <div class="example-box">
+                    <h3>How to Write a Set:</h3>
+                    <p>We write sets using curly brackets { } with commas between elements:</p>
+                    <div class="set-notation">A = {a, e, i, o, u}</div>
+                    <p>We can write the elements in ANY order! These are all the SAME set:</p>
+                    <div class="set-notation">
+                        A = {a, e, i, o, u}<br>
+                        A = {i, o, u, a, e}<br>
+                        A = {u, o, i, a, e}
+                    </div>
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">The Special Symbol: <span class="symbol">∈</span></h3>
+                
+                <div class="example-box">
+                    <h3>The "Belongs To" Symbol</h3>
+                    <p>The symbol <span class="symbol">∈</span> (epsilon) means "belongs to"</p>
+                    <table>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Meaning</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td><span class="symbol">∈</span></td>
+                            <td>belongs to</td>
+                            <td>a ∈ A means "a belongs to set A"</td>
+                        </tr>
+                        <tr>
+                            <td><span class="symbol">∉</span></td>
+                            <td>does NOT belong to</td>
+                            <td>w ∉ A means "w does not belong to set A"</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="practice-box">
+                    <h3>🎮 Interactive Practice!</h3>
+                    <p>Given Set T = {4, 8, 12, 16, 20}, click on the numbers that BELONG to set T:</p>
+                    <div class="interactive-set">
+                        <div class="element" onclick="toggleElement(this, true)">4</div>
+                        <div class="element" onclick="toggleElement(this, false)">6</div>
+                        <div class="element" onclick="toggleElement(this, true)">8</div>
+                        <div class="element" onclick="toggleElement(this, false)">10</div>
+                        <div class="element" onclick="toggleElement(this, true)">12</div>
+                        <div class="element" onclick="toggleElement(this, false)">14</div>
+                        <div class="element" onclick="toggleElement(this, true)">16</div>
+                        <div class="element" onclick="toggleElement(this, false)">18</div>
+                        <div class="element" onclick="toggleElement(this, true)">20</div>
+                    </div>
+                    <button class="check-btn" onclick="checkElementSelection()">Check My Answers!</button>
+                    <div class="feedback" id="elementFeedback"></div>
+                </div>
+            </div>
+
+            <!-- Section 3: Ways to Represent Sets -->
+            <div class="section" id="section3">
+                <h2 class="section-title">📝 Three Ways to Write Sets</h2>
+                
+                <div class="buddy">
+                    Awesome progress! Now I'll show you THREE different ways to write the same set. It's like having three different ways to describe your favorite ice cream! 🍦
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">Method 1: Roster or Tabular Method</h3>
+                <div class="example-box">
+                    <p><strong>We LIST all the elements separated by commas</strong></p>
+                    <p>Example: The set of odd natural numbers less than 15</p>
+                    <div class="set-notation">O = {1, 3, 5, 7, 9, 11, 13}</div>
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">Method 2: Set Builder or Rule Method</h3>
+                <div class="example-box">
+                    <p><strong>We write a RULE that describes the elements</strong></p>
+                    <p>Example: The set of odd natural numbers less than 15</p>
+                    <div class="set-notation">O = {x : x is an odd natural number less than 15}</div>
+                    <p>The colon <strong>:</strong> means "such that"</p>
+                    <p>We read this as: "O is the set of all x <em>such that</em> x is an odd natural number less than 15"</p>
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">Method 3: Description Method</h3>
+                <div class="example-box">
+                    <p><strong>We DESCRIBE the set in words</strong></p>
+                    <p>Example: The set of odd natural numbers less than 15</p>
+                    <div class="set-notation">O = {Odd natural numbers less than 15}</div>
+                </div>
+
+                <div class="key-point">
+                    All three methods describe the SAME set! Choose whichever is easiest for your problem.
+                </div>
+
+                <div class="practice-box">
+                    <h3>✍️ Practice Time!</h3>
+                    <p>Write the set of letters in the word "MATH" using roster method:</p>
+                    <input type="text" class="input-box" id="practice1" placeholder="Type your answer here, e.g., {a, b, c}">
+                    <button class="check-btn" onclick="checkPractice1()">Check Answer</button>
+                    <div class="feedback" id="practice1Feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <div class="quiz-question">🤔 Quick Quiz: What does the symbol ":" mean in set builder form?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 3)">
+                            And
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 3)">
+                            Such that
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 3)">
+                            Belongs to
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback3"></div>
+                </div>
+            </div>
+
+            <!-- Section 4: Cardinal Number -->
+            <div class="section" id="section4">
+                <h2 class="section-title">🔢 Cardinal Numbers</h2>
+                
+                <div class="buddy">
+                    You're doing amazing! Now let's learn how to COUNT the elements in a set. This is called the CARDINAL NUMBER!
+                </div>
+
+                <div class="key-point">
+                    The <strong>Cardinal Number</strong> of a set is the number of DISTINCT (different) elements in it.
+                    <br>We write it as: n(A) = number of elements
+                    <br>We read it as: "n of A" or "cardinal number of set A"
+                </div>
+
+                <div class="example-box">
+                    <h3>Examples:</h3>
+                    <p>Set A = {5, 10, 15, 20, 25}</p>
+                    <p>How many elements? Let's count: 5, 10, 15, 20, 25 = <strong>5 elements</strong></p>
+                    <div class="set-notation">n(A) = 5</div>
+                </div>
+
+                <div class="example-box">
+                    <h3>Tricky Example!</h3>
+                    <p>Set K = {x : x is a letter of the word 'HAPPINESS'}</p>
+                    <p>First, let's write in roster form:</p>
+                    <div class="set-notation">K = {H, A, P, I, N, E, S}</div>
+                    <p>Notice: We only write each letter ONCE, even if it appears multiple times in the word!</p>
+                    <p>Count: H, A, P, I, N, E, S = <strong>7 letters</strong></p>
+                    <div class="set-notation">n(K) = 7</div>
+                </div>
+
+                <div class="quiz-box">
+                    <div class="quiz-question">🤔 What is n(M) if M = {Monday, Tuesday, Wednesday}?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 4)">
+                            2
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 4)">
+                            3
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 4)">
+                            4
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback4"></div>
+                </div>
+
+                <div class="practice-box">
+                    <h3>🎯 Challenge!</h3>
+                    <p>Find the cardinal number of set B = {x : x is a letter in the word "MATHEMATICS"}</p>
+                    <p>Hint: Write all the DIFFERENT letters first!</p>
+                    <input type="number" class="input-box" id="practice4" placeholder="Enter the number">
+                    <button class="check-btn" onclick="checkPractice4()">Check Answer</button>
+                    <div class="feedback" id="practice4Feedback"></div>
+                </div>
+            </div>
+
+            <!-- Section 5: Types of Sets -->
+            <div class="section" id="section5">
+                <h2 class="section-title">🎨 Types of Sets</h2>
+                
+                <div class="buddy">
+                    Fantastic work! Now comes the fun part - learning about different TYPES of sets! There are FIVE special types. Let's explore them!
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">1. 🌌 Infinite Sets</h3>
+                <div class="example-box">
+                    <p><strong>A set with ENDLESS elements!</strong></p>
+                    <p>Examples:</p>
+                    <div class="set-notation">
+                        N = {1, 2, 3, 4, 5, ...} (Natural Numbers)<br>
+                        W = {0, 1, 2, 3, 4, ...} (Whole Numbers)
+                    </div>
+                    <p>The "..." means it goes on FOREVER! ♾️</p>
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">2. 📦 Finite Sets</h3>
+                <div class="example-box">
+                    <p><strong>A set with a COUNTABLE number of elements</strong></p>
+                    <p>Examples:</p>
+                    <div class="set-notation">
+                        {1, 2, 3, 4, 5, 6, 7, 8, 9}<br>
+                        {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday}
+                    </div>
+                    <p>We can count all the elements! The cardinal number is defined.</p>
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">3. ☝️ Singleton Sets</h3>
+                <div class="example-box">
+                    <p><strong>A set with ONLY ONE element!</strong></p>
+                    <p>Examples:</p>
+                    <div class="set-notation">
+                        {Sun of our solar system}<br>
+                        {The moon of Earth}<br>
+                        {2} (The only even prime number)
+                    </div>
+                    <p>Cardinal number = <strong>1</strong></p>
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">4. ⭕ Null/Empty Sets</h3>
+                <div class="example-box">
+                    <p><strong>A set with NO elements at all!</strong></p>
+                    <p>Symbol: <span class="symbol">∅</span> or { }</p>
+                    <p>Examples:</p>
+                    <div class="set-notation">
+                        {Days between Monday and Tuesday}<br>
+                        {Months with less than 28 days}<br>
+                        {Odd numbers between 4 and 6}
+                    </div>
+                    <p>Cardinal number = <strong>0</strong></p>
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 30px;">5. 🤝 Equal Sets</h3>
+                <div class="example-box">
+                    <p><strong>Two sets with EXACTLY the same elements</strong></p>
+                    <p>Example:</p>
+                    <div class="set-notation">
+                        A = {1, 2, 3, 4, 5}<br>
+                        B = {x : x is a natural number less than 6}
+                    </div>
+                    <p>A = B because they have the same elements!</p>
+                </div>
+
+                <div class="quiz-box">
+                    <div class="quiz-question">🤔 What type of set is {Prime numbers}?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 5)">
+                            Infinite Set
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 5)">
+                            Finite Set
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 5)">
+                            Singleton Set
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback5"></div>
+                </div>
+            </div>
+
+            <!-- Section 6: Equivalent Sets -->
+            <div class="section" id="section6">
+                <h2 class="section-title">⚖️ Equivalent Sets</h2>
+                
+                <div class="buddy">
+                    Almost there, champ! Let's learn about EQUIVALENT sets. This is super interesting!
+                </div>
+
+                <div class="key-point">
+                    Two sets are <strong>EQUIVALENT</strong> if they have the SAME NUMBER of elements.
+                    <br>We write: A ↔ B
+                    <br>This means: n(A) = n(B)
+                </div>
+
+                <div class="example-box">
+                    <h3>Important Difference!</h3>
+                    <table>
+                        <tr>
+                            <th>Equal Sets</th>
+                            <th>Equivalent Sets</th>
+                        </tr>
+                        <tr>
+                            <td>Have the SAME elements</td>
+                            <td>Have the SAME NUMBER of elements</td>
+                        </tr>
+                        <tr>
+                            <td>A = {1, 2, 3}<br>B = {1, 2, 3}</td>
+                            <td>A = {1, 2, 3}<br>B = {a, b, c}</td>
+                        </tr>
+                        <tr>
+                            <td>Equal AND Equivalent</td>
+                            <td>Equivalent but NOT Equal</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <h3>Examples of Equivalent Sets:</h3>
+                    <p>1. A = {1, 2, 3, 4, 5} and B = {M, A, T, H, S}</p>
+                    <p>n(A) = 5 and n(B) = 5, so A ↔ B ✅</p>
+                    <br>
+                    <p>2. D = {Days of the week} and R = {Colors of the rainbow}</p>
+                    <p>n(D) = 7 and n(R) = 7, so D ↔ R ✅</p>
+                </div>
+
+                <div class="key-point">
+                    🌟 Remember: ALL equal sets are equivalent sets, BUT all equivalent sets may NOT be equal sets!
+                </div>
+
+                <div class="quiz-box">
+                    <div class="quiz-question">🤔 Are these sets Equal, Equivalent, or Both?<br>X = {2, 4, 6} and Y = {6, 4, 2}</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 6)">
+                            Only Equivalent
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 6)">
+                            Both Equal AND Equivalent
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 6)">
+                            Neither
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback6"></div>
+                </div>
+
+                <div class="practice-box">
+                    <h3>🎯 Final Challenge!</h3>
+                    <p>Given: P = {a, e, i, o, u} and Q = {1, 2, 3, 4, 5}</p>
+                    <p>Are P and Q equivalent? (Type 'yes' or 'no')</p>
+                    <input type="text" class="input-box" id="practice6" placeholder="Your answer">
+                    <button class="check-btn" onclick="checkPractice6()">Check Answer</button>
+                    <div class="feedback" id="practice6Feedback"></div>
+                </div>
+            </div>
+
+            <!-- Section 7: Summary -->
+            <div class="section" id="section7">
+                <h2 class="section-title">🎉 Congratulations!</h2>
+                
+                <div class="buddy">
+                    WOW! You've completed the entire chapter on Sets! You're now a Set Master! Let's review everything you learned! 🌟
+                </div>
+
+                <div class="example-box">
+                    <h3>📚 What You Learned:</h3>
+                    <ol style="font-size: 1.1em; line-height: 2;">
+                        <li><strong>Sets:</strong> Well-defined collections of objects</li>
+                        <li><strong>Elements:</strong> Objects that belong to a set (∈ symbol)</li>
+                        <li><strong>Three Ways to Write Sets:</strong>
+                            <ul>
+                                <li>Roster Method: {1, 2, 3, 4, 5}</li>
+                                <li>Set Builder: {x : x is a natural number less than 6}</li>
+                                <li>Description: {Natural numbers less than 6}</li>
+                            </ul>
+                        </li>
+                        <li><strong>Cardinal Number:</strong> Count of elements n(A)</li>
+                        <li><strong>Types of Sets:</strong>
+                            <ul>
+                                <li>Infinite Set: Endless elements ♾️</li>
+                                <li>Finite Set: Countable elements 📦</li>
+                                <li>Singleton Set: Only one element ☝️</li>
+                                <li>Null Set: No elements ⭕</li>
+                                <li>Equal Sets: Same elements 🤝</li>
+                                <li>Equivalent Sets: Same number of elements ⚖️</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="key-point">
+                    🌟 Golden Rules to Remember:
+                    <br>✅ Elements can be written in any order
+                    <br>✅ Don't repeat elements in a set
+                    <br>✅ All equal sets are equivalent, but not all equivalent sets are equal
+                    <br>✅ Two empty sets are always equal
+                </div>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <h2 style="color: #667eea;">🏆 You Are Now a SET MASTER! 🏆</h2>
+                    <p style="font-size: 1.3em; margin: 20px 0;">
+                        Keep practicing and you'll become even better! Mathematics is an amazing adventure, and you're doing wonderfully! 🌟
+                    </p>
+                    <div style="font-size: 3em; margin: 20px 0;">
+                        🎊 🎉 🎈 🎁 🎓
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousSection()" disabled>
+                    ⬅️ Previous
+                </button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextSection()">
+                    Next ➡️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div class="overlay" id="overlay"></div>
+    <div class="celebration" id="celebration">
+        <h2 style="color: #4CAF50; font-size: 2.5em;">🎉 Awesome! 🎉</h2>
+        <p style="font-size: 1.3em; margin: 20px 0;">You completed another section!</p>
+        <p style="font-size: 3em;">⭐ ⭐ ⭐</p>
+        <button class="btn btn-primary" onclick="closeCelebration()">Continue Learning!</button>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 7;
+        let selectedElements = new Set();
+
+        function updateProgress() {
+            const progress = ((currentSection - 1) / (totalSections - 1)) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressBar').textContent = Math.round(progress) + '%';
+        }
+
+        function showSection(sectionNum) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('section' + sectionNum).classList.add('active');
+            
+            // Update buttons
+            document.getElementById('prevBtn').disabled = sectionNum === 1;
+            document.getElementById('nextBtn').textContent = sectionNum === totalSections ? 'Finish! 🎉' : 'Next ➡️';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            updateProgress();
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                currentSection++;
+                showSection(currentSection);
+                if (currentSection > 1 && currentSection < totalSections) {
+                    showCelebration();
+                }
+            } else {
+                showFinalCelebration();
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                currentSection--;
+                showSection(currentSection);
+            }
+        }
+
+        function checkAnswer(element, isCorrect, feedbackId) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            const feedback = document.getElementById('feedback' + feedbackId);
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = '🎉 Perfect! You got it right! Great job!';
+                feedback.className = 'feedback correct show';
+            } else {
+                element.classList.add('wrong');
+                feedback.textContent = '💡 Not quite! Try reading the section again. You can do it!';
+                feedback.className = 'feedback wrong show';
+                
+                setTimeout(() => {
+                    options.forEach(opt => {
+                        opt.classList.remove('wrong');
+                        opt.style.pointerEvents = 'auto';
+                    });
+                    feedback.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        function toggleElement(element, isCorrect) {
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                selectedElements.delete(element.textContent);
+            } else {
+                element.classList.add('selected');
+                selectedElements.add(element.textContent);
+            }
+        }
+
+        function checkElementSelection() {
+            const correctAnswers = new Set(['4', '8', '12', '16', '20']);
+            const isCorrect = 
+                selectedElements.size === correctAnswers.size &&
+                [...selectedElements].every(elem => correctAnswers.has(elem));
+            
+            const feedback = document.getElementById('elementFeedback');
+            
+            if (isCorrect) {
+                feedback.textContent = '🎉 Excellent! You selected all the correct elements!';
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = '💡 Almost there! Check again: Which numbers are in the set T = {4, 8, 12, 16, 20}?';
+                feedback.className = 'feedback wrong show';
+            }
+        }
+
+        function checkPractice1() {
+            const answer = document.getElementById('practice1').value.toLowerCase().replace(/\s/g, '');
+            const correctAnswers = ['{m,a,t,h}', '{h,a,t,m}', '{t,a,m,h}', '{a,m,t,h}', '{h,t,a,m}', '{m,h,a,t}'];
+            const feedback = document.getElementById('practice1Feedback');
+            
+            if (correctAnswers.includes(answer)) {
+                feedback.textContent = '🎉 Perfect! M = {m, a, t, h} is correct!';
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = '💡 Remember: Write the DIFFERENT letters in curly brackets, like {m, a, t, h}';
+                feedback.className = 'feedback wrong show';
+            }
+        }
+
+        function checkPractice4() {
+            const answer = parseInt(document.getElementById('practice4').value);
+            const feedback = document.getElementById('practice4Feedback');
+            
+            if (answer === 8) {
+                feedback.textContent = '🎉 Brilliant! The letters are M, A, T, H, E, I, C, S = 8 different letters!';
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = '💡 Hint: Write all the DIFFERENT letters: M-A-T-H-E-M-A-T-I-C-S. Count only unique ones!';
+                feedback.className = 'feedback wrong show';
+            }
+        }
+
+        function checkPractice6() {
+            const answer = document.getElementById('practice6').value.toLowerCase().trim();
+            const feedback = document.getElementById('practice6Feedback');
+            
+            if (answer === 'yes') {
+                feedback.textContent = '🎉 Correct! Both sets have 5 elements, so n(P) = n(Q) = 5, making them equivalent!';
+                feedback.className = 'feedback correct show';
+            } else {
+                feedback.textContent = '💡 Count the elements in each set. If they have the same NUMBER of elements, they are equivalent!';
+                feedback.className = 'feedback wrong show';
+            }
+        }
+
+        function showCelebration() {
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('celebration').classList.add('show');
+        }
+
+        function closeCelebration() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('celebration').classList.remove('show');
+        }
+
+        function showFinalCelebration() {
+            alert('🎊🎉 CONGRATULATIONS! 🎉🎊\n\nYou have completed the entire chapter on SETS!\n\nYou are now a SET MASTER! Keep practicing and exploring more math concepts!\n\n⭐⭐⭐⭐⭐');
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Revision - Fractrions (with Riya)</title>
+  <style>
+    :root{
+      --purple:#5f3dc4;
+      --soft:#f7f5ff;
+      --accent:#faf03a; /* requested yellow */
+      --ink:#1f1f29;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color:var(--ink);
+      background:linear-gradient(180deg,#fff 0%, #fafbff 100%);
+    }
+    header{
+      padding:22px 16px 8px;
+      background:radial-gradient(1200px 300px at 50% -50%, #efeaff 10%, transparent 60%), #fff;
+      border-bottom:1px solid #eee;
+      position:relative;
+    }
+    .title-row{
+      display:grid;
+      grid-template-columns: 100px 1fr;
+      gap:14px;
+      align-items:center;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    .riya-hero{
+      width:100px;height:100px;border-radius:50%;
+      object-fit:contain;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.12);
+    }
+    h1{margin:0;font-size:clamp(22px,3.8vw,34px);color:var(--purple)}
+    .sub{margin:6px 0 2px;color:#5b5b6a}
+    main{max-width:1000px;margin:0 auto;padding:18px 16px 80px}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 12px;border-radius:999px;background:#fff7c2;border:1px solid #ffe985;
+      font-weight:700;color:#6b5b00;margin:8px 8px 0 0
+    }
+    /* Floating Home Button (top-right) */
+    .home-btn{
+      position:fixed; top:14px; right:14px;
+      width:42px;height:42px;line-height:42px; text-align:center;
+      border-radius:50%; background:var(--accent); color:var(--purple);
+      text-decoration:none; font-size:20px; box-shadow:0 3px 8px rgba(0,0,0,.25);
+      z-index:9999; transition:transform .2s ease, filter .2s ease;
+    }
+    .home-btn:hover{ transform:scale(1.08); filter:brightness(1.05); }
+    .grid{
+      display:grid; gap:16px; grid-template-columns: 1fr;
+    }
+    @media(min-width:840px){ .grid{ grid-template-columns: 1fr 1fr; } }
+    .card{
+      background:var(--card); border:1px solid #eee; border-radius:16px; padding:16px;
+      box-shadow:0 2px 10px rgba(0,0,0,.04);
+      position:relative;
+    }
+    .card h2{margin:0 0 10px; font-size:20px; color:var(--purple)}
+    .mini{font-size:13px;color:#555; margin-top:10px}
+    .riya-badge{
+      position:absolute; top:-16px; right:-10px; width:64px;height:64px;border-radius:50%;
+      background:#fff; box-shadow:0 6px 16px rgba(0,0,0,.12); object-fit:contain;
+    }
+    .ex-block{
+      margin-top:10px; padding:10px; border-radius:12px; background:#f9f9ff; border:1px dashed #d9d6ff;
+    }
+    .ex-block h3{margin:0 0 8px; font-size:16px; color:#3b2d86}
+    .q{margin:8px 0}
+    .q input[type="number"], .q input[type="text"]{
+      width:110px;padding:8px;border:1px solid #ccc;border-radius:8px;
+    }
+    .btn{
+      background:var(--purple); color:#fff; border:none; border-radius:10px; padding:10px 14px;
+      font-weight:700; cursor:pointer; box-shadow:0 4px 10px rgba(95,61,196,.25);
+    }
+    .btn:disabled{opacity:.6; cursor:not-allowed}
+    .link-btn{ background:#fff; color:var(--purple); border:1px solid var(--purple); }
+    .result{margin-top:8px; font-weight:700}
+    .correct{color:#0a8f2b}
+    .incorrect{color:#c62828}
+    /* Quiz footer */
+    .scorebar{
+      position:sticky; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #eee;
+      padding:10px 16px; display:flex; gap:12px; align-items:center; justify-content:space-between;
+    }
+    .riya-float{
+      position:fixed; bottom:18px; right:18px; width:86px;height:86px;border-radius:50%; object-fit:contain;
+      background:#fff; box-shadow:0 10px 24px rgba(0,0,0,.18); cursor:pointer; z-index:9998;
+    }
+    .pill{background:#efeaff; color:#3b2d86; border-radius:999px; padding:6px 10px; font-weight:700}
+    details{border:1px dashed #ddd; border-radius:10px; padding:8px 12px; background:#fff}
+    details summary{cursor:pointer; font-weight:700; color:#3b2d86}
+  </style>
+</head>
+<body>
+  <a href="index.html" class="home-btn" title="Go to Maths Home Page">🏠</a>
+
+  <header>
+    <div class="title-row">
+      <img src="images/Riya-happy.png" alt="Riya mascot" class="riya-hero"/>
+      <div>
+        <h1>Revision – Fractrions: Quick Concepts & Tons of Practice with Riya</h1>
+        <div class="sub">A speedy recap + guided practice: definitions → number line → types → equivalent & simplest form → compare → add/subtract → multiply/divide → BODMAS.</div>
+        <div>
+          <span class="chip">Riya’s Revision</span>
+          <span class="chip">Practice First</span>
+          <span class="chip">Quizzes & Games</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid">
+      <!-- 1. What is a fraction -->
+      <article class="card">
+        <img src="images/Riya-posing.png" class="riya-badge" alt="Riya posing"/>
+        <h2>1) What is a Fraction?</h2>
+        <p>A <strong>fraction</strong> is a part of a whole, written as <em>p/q</em> where <em>p</em> is the numerator and <em>q</em> (≠0) is the denominator. Example: <em>3/5</em> means 3 parts out of 5 equal parts.</p>
+        <details class="mini"><summary>Riya’s tip</summary>Make sure the whole is divided into <em>equal</em> parts before calling it a fraction.</details>
+        <div class="ex-block">
+          <h3>Quick Practice</h3>
+          <div class="q">a) In <strong>7/9</strong>, numerator = <input id="q1a" type="number" placeholder="?">, denominator = <input id="q1b" type="number" placeholder="?"></div>
+          <button class="btn" onclick="check_1()">Check</button>
+          <div id="r1" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 2. Fractions on a number line -->
+      <article class="card">
+        <img src="images/Riya-thinking.png" class="riya-badge" alt="Riya thinking"/>
+        <h2>2) Fractions on the Number Line</h2>
+        <p>To plot <em>a/b</em>, divide the unit segment into <em>b</em> equal parts. The point after <em>a</em> parts is <em>a/b</em>. Example: mark 1/2, 2/2 (1), etc.</p>
+        <div class="ex-block">
+          <h3>Plotting (Mental)</h3>
+          <div class="q">Which lies between 0 and 1? <select id="q2"><option value="">—pick—</option><option>3/4</option><option>5/4</option><option>7/6</option></select></div>
+          <button class="btn" onclick="check_2()">Check</button>
+          <div id="r2" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 3. Types of fractions -->
+      <article class="card">
+        <img src="images/Riya-happy.png" class="riya-badge" alt="Riya happy"/>
+        <h2>3) Types: Proper, Improper & Mixed</h2>
+        <p><b>Proper:</b> numerator &lt; denominator (e.g., 3/4). <b>Improper:</b> numerator ≥ denominator (e.g., 9/7). <b>Mixed:</b> whole + proper (e.g., 2 1/3).</p>
+        <div class="ex-block">
+          <h3>Identify</h3>
+          <div class="q">a) 7/3 is <select id="q3a"><option>—pick—</option><option>Proper</option><option>Improper</option><option>Mixed</option></select></div>
+          <div class="q">b) 1 2/5 is <select id="q3b"><option>—pick—</option><option>Proper</option><option>Improper</option><option>Mixed</option></select></div>
+          <button class="btn" onclick="check_3()">Check</button>
+          <div id="r3" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 4. Convert between improper and mixed -->
+      <article class="card">
+        <img src="images/Riya-posing.png" class="riya-badge" alt="Riya posing"/>
+        <h2>4) Convert Improper ↔ Mixed</h2>
+        <p><b>Improper → Mixed:</b> divide numerator by denominator. <b>Mixed → Improper:</b> (whole × denominator) + numerator, over denominator.</p>
+        <div class="ex-block">
+          <h3>Convert</h3>
+          <div class="q">a) 23/6 = <input id="q4a" placeholder="e.g., 3 5/6"></div>
+          <div class="q">b) 5 1/4 = <input id="q4b" placeholder="improper?"></div>
+          <button class="btn" onclick="check_4()">Check</button>
+          <div id="r4" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 5. Equivalent fractions -->
+      <article class="card">
+        <img src="images/Riya-thinking.png" class="riya-badge" alt="Riya thinking"/>
+        <h2>5) Equivalent Fractions</h2>
+        <p>Multiply or divide <em>both</em> numerator and denominator by the <em>same non‑zero</em> number. Example: 1/2 = 2/4 = 3/6.</p>
+        <div class="ex-block">
+          <h3>Fill the Box</h3>
+          <div class="q">a) 2/7 = ☐/28 → ☐ = <input id="q5a" type="number"></div>
+          <div class="q">b) 12/27 = ☐/9 → ☐ = <input id="q5b" type="number"></div>
+          <button class="btn" onclick="check_5()">Check</button>
+          <div id="r5" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 6. Simplest form -->
+      <article class="card">
+        <img src="images/Riya-posing.png" class="riya-badge" alt="Riya posing"/>
+        <h2>6) Simplest (Lowest) Form</h2>
+        <p>Divide numerator and denominator by their HCF until no common factor remains. Example: 72/81 → 8/9.</p>
+        <div class="ex-block">
+          <h3>Reduce</h3>
+          <div class="q">a) 36/144 → <input id="q6a" placeholder="lowest form"></div>
+          <div class="q">b) 98/126 → <input id="q6b" placeholder="lowest form"></div>
+          <button class="btn" onclick="check_6()">Check</button>
+          <div id="r6" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 7. Like & Unlike; Comparison -->
+      <article class="card">
+        <img src="images/Riya-confused.png" class="riya-badge" alt="Riya curious"/>
+        <h2>7) Like/Unlike Fractions & Comparison</h2>
+        <p><b>Like:</b> same denominator. <b>Unlike:</b> different denominators. For two fractions a/b and c/d, compare <em>ad</em> and <em>bc</em> (cross‑multiply).</p>
+        <div class="ex-block">
+          <h3>Compare</h3>
+          <div class="q">Which is larger: 5/11 or 4/9? <select id="q7"><option>—pick—</option><option>5/11</option><option>4/9</option><option>Equal</option></select></div>
+          <button class="btn" onclick="check_7()">Check</button>
+          <div id="r7" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 8. Add/Subtract -->
+      <article class="card">
+        <img src="images/Riya-happy.png" class="riya-badge" alt="Riya happy"/>
+        <h2>8) Add & Subtract Fractions</h2>
+        <p>Like denominators: add/subtract numerators. Unlike: convert to like using LCM (or use equivalent fractions), then operate.</p>
+        <div class="ex-block">
+          <h3>Compute</h3>
+          <div class="q">a) 1/2 + 3/8 = <input id="q8a" placeholder="e.g., 7/8"></div>
+          <div class="q">b) 3/4 − 1/6 = <input id="q8b" placeholder=""></div>
+          <button class="btn" onclick="check_8()">Check</button>
+          <div id="r8" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 9. Multiply/Divide -->
+      <article class="card">
+        <img src="images/Riya-thinking.png" class="riya-badge" alt="Riya thinking"/>
+        <h2>9) Multiply & Divide Fractions</h2>
+        <p><b>Multiply:</b> multiply numerators & denominators. <b>Divide:</b> multiply by reciprocal of the divisor.</p>
+        <div class="ex-block">
+          <h3>Try</h3>
+          <div class="q">a) (2/5) × (15/4) = <input id="q9a" placeholder=""></div>
+          <div class="q">b) (1/3) ÷ (5/6) = <input id="q9b" placeholder=""></div>
+          <button class="btn" onclick="check_9()">Check</button>
+          <div id="r9" class="result"></div>
+        </div>
+      </article>
+
+      <!-- 10. BODMAS with fractions -->
+      <article class="card">
+        <img src="images/Riya-shocked.png" class="riya-badge" alt="Riya wow"/>
+        <h2>10) BODMAS with Fractions</h2>
+        <p>Follow brackets → of/×/÷ → +/−. Simplify step‑by‑step and keep fractions in lowest form.</p>
+        <div class="ex-block">
+          <h3>Simplify</h3>
+          <div class="q">a) (1/2 of 3/4) + 1/3 = <input id="q10a" placeholder=""></div>
+          <div class="q">b) 1 − (5/8) = <input id="q10b" placeholder=""></div>
+          <button class="btn" onclick="check_10()">Check</button>
+          <div id="r10" class="result"></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Games & Quiz -->
+    <section class="card" style="margin-top:20px">
+      <img src="images/Riya-giggling.png" class="riya-badge" alt="Riya cheers"/>
+      <h2>Riya’s Quick Quiz</h2>
+      <p>Answer all 6 to earn a ⭐ from Riya!</p>
+      <ol id="quizList" class="mini" style="font-size:15px">
+        <li>Equivalent to 3/5 is: 
+          <label><input type="radio" name="qz1" value="A"> 6/10</label>
+          <label><input type="radio" name="qz1" value="B"> 6/11</label>
+          <label><input type="radio" name="qz1" value="C"> 9/20</label>
+        </li>
+        <li>Lowest form of 54/72 is:
+          <label><input type="radio" name="qz2" value="A"> 3/4</label>
+          <label><input type="radio" name="qz2" value="B"> 9/12</label>
+          <label><input type="radio" name="qz2" value="C"> 6/9</label>
+        </li>
+        <li>Greater fraction is:
+          <label><input type="radio" name="qz3" value="A"> 7/12</label>
+          <label><input type="radio" name="qz3" value="B"> 5/8</label>
+        </li>
+        <li>2 1/4 as improper is:
+          <label><input type="radio" name="qz4" value="A"> 9/4</label>
+          <label><input type="radio" name="qz4" value="B"> 8/4</label>
+        </li>
+        <li>(3/4) × (1/2) = 
+          <label><input type="radio" name="qz5" value="A"> 3/6</label>
+          <label><input type="radio" name="qz5" value="B"> 3/8</label>
+        </li>
+        <li>(5/6) − (1/3) =
+          <label><input type="radio" name="qz6" value="A"> 4/6</label>
+          <label><input type="radio" name="qz6" value="B"> 1/2</label>
+        </li>
+      </ol>
+      <div style="display:flex; gap:8px; align-items:center; margin-top:10px">
+        <button class="btn" onclick="gradeQuiz()">Submit Quiz</button>
+        <button class="btn link-btn" onclick="resetQuiz()">Reset</button>
+        <span id="quizScore" class="pill">Score: 0 / 6</span>
+      </div>
+      <div id="quizMsg" class="result"></div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <img src="images/Riya-posing.png" class="riya-badge" alt="Riya pose"/>
+      <h2>Mini‑Game: Fraction Match</h2>
+      <p>Pick the correct match!</p>
+      <div class="ex-block">
+        <div class="q">1/2 matches with <select id="gm1"><option value="">—pick—</option><option>2/5</option><option>3/6</option><option>5/8</option></select></div>
+        <div class="q">4/6 in lowest form is <select id="gm2"><option value="">—pick—</option><option>2/3</option><option>4/9</option><option>6/8</option></select></div>
+        <button class="btn" onclick="checkGame()">Check</button>
+        <div id="rgm" class="result"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Riya floating avatar (click to pep talk) -->
+  <img src="images/Riya-happy.png" alt="Riya helper" class="riya-float" id="riyaFloat" title="Riya says: You can do it!"/>
+
+  <div class="scorebar">
+    <div><strong>Riya’s Scoreboard</strong> — keep answers correct to earn stars ⭐</div>
+    <div id="stars" class="pill">Stars: 0</div>
+  </div>
+
+<script>
+// helper parsing for answers like "3/4", "1 1/2"
+function norm(s){
+  s = (s||'').trim();
+  return s.replace(/\s+/g,' ').replace(/[–—]/g,'-').toLowerCase();
+}
+function fracEq(ans, n, d){
+  // compare as fractions; ans may be "a/b" or mixed like "x a/b"
+  function toVal(str){
+    str = norm(str);
+    if(!str) return null;
+    // mixed?
+    const mix = str.match(/^(\d+)\s+(\d+)\/(\d+)$/);
+    if(mix){
+      const W = +mix[1], A=+mix[2], B=+mix[3];
+      return (W*B + A)/B;
+    }
+    const f = str.match(/^(\d+)\s*\/\s*(\d+)$/);
+    if(f){ return (+f[1])/(+f[2]); }
+    const num = str.match(/^\d+$/);
+    if(num){ return +num[0]; }
+    return null;
+  }
+  const v = toVal(ans);
+  if(v===null) return false;
+  const target = n/d;
+  return Math.abs(v - target) < 1e-9;
+}
+
+// Section checks
+function setResult(id, ok, msgOK, msgBad){
+  const el = document.getElementById(id);
+  el.className = 'result ' + (ok ? 'correct' : 'incorrect');
+  el.textContent = ok ? ('✅ ' + msgOK) : ('❌ ' + msgBad);
+  bumpRiya(ok);
+}
+function bumpRiya(ok){
+  const img = document.getElementById('riyaFloat');
+  img.src = ok ? 'images/Riya-giggling.png' : 'images/Riya-confused.png';
+  setTimeout(()=> img.src='images/Riya-happy.png', 1600);
+  // stars
+  if(ok){ addStar(); }
+}
+let starCount = 0;
+function addStar(){
+  starCount += 1;
+  document.getElementById('stars').textContent = 'Stars: ' + starCount;
+}
+
+function check_1(){
+  const a = document.getElementById('q1a').value;
+  const b = document.getElementById('q1b').value;
+  const ok = (a=='7' && b=='9');
+  setResult('r1', ok, 'Great! 7 is numerator, 9 is denominator.', 'Try again: numerator = top number.');
+}
+function check_2(){
+  const v = document.getElementById('q2').value;
+  const ok = (v==='3/4');
+  setResult('r2', ok, 'Yes, 3/4 lies between 0 and 1.', 'Fractions >1 lie to the right of 1.');
+}
+function check_3(){
+  const ok = (document.getElementById('q3a').value==='Improper' && document.getElementById('q3b').value==='Mixed');
+  setResult('r3', ok, 'Spot on!', 'Hint: Mixed = whole + proper.');
+}
+function check_4(){
+  const a = norm(document.getElementById('q4a').value);
+  const b = norm(document.getElementById('q4b').value);
+  const ok = (a==='3 5/6' || a==='3 5 / 6') && (b==='21/4');
+  setResult('r4', ok, '23/6 = 3 5/6 and 5 1/4 = 21/4.', 'Divide for improper→mixed; multiply-add for mixed→improper.');
+}
+function check_5(){
+  const a = document.getElementById('q5a').value;
+  const b = document.getElementById('q5b').value;
+  const ok = (a=='8' && b=='4');
+  setResult('r5', ok, 'Nice! 2×4=8 and 27÷3=9 ⇒ 12÷3=4.', 'Multiply/divide both parts by same number.');
+}
+function check_6(){
+  const a = norm(document.getElementById('q6a').value);
+  const b = norm(document.getElementById('q6b').value);
+  const ok = (a==='1/4' || a==='1 / 4') && (b==='14/18' || b==='7/9' || b==='7 / 9');
+  setResult('r6', ok, 'Correct reductions!', 'Divide by highest common factor.');
+}
+function check_7(){
+  const v = document.getElementById('q7').value;
+  const ok = (v==='5/11'); // 5*9=45 vs 4*11=44
+  setResult('r7', ok, 'Right, 5/11 > 4/9 because 45 > 44.', 'Cross-multiply to compare.');
+}
+function check_8(){
+  const a = norm(document.getElementById('q8a').value);
+  const b = norm(document.getElementById('q8b').value);
+  const ok = fracEq(a,7,8) && fracEq(b,7,12);
+  setResult('r8', ok, 'Good job! 1/2+3/8=7/8, 3/4−1/6=7/12.', 'Find LCM for unlike denominators.');
+}
+function check_9(){
+  const a = norm(document.getElementById('q9a').value);
+  const b = norm(document.getElementById('q9b').value);
+  const ok = fracEq(a,3,2) && fracEq(b,2,5);
+  setResult('r9', ok, '(2/5)×(15/4)=3/2 and (1/3)÷(5/6)=2/5.', 'Multiply straight; divide by reciprocal.');
+}
+function check_10(){
+  const a = norm(document.getElementById('q10a').value);
+  const b = norm(document.getElementById('q10b').value);
+  const ok = fracEq(a,13,24) && fracEq(b,3,8);
+  setResult('r10', ok, 'Yes! (1/2 of 3/4)=3/8; +1/3 = 13/24. And 1−5/8=3/8.', 'Follow BODMAS & reduce.');
+}
+
+// Quiz
+function gradeQuiz(){
+  let score = 0;
+  if((document.querySelector('input[name="qz1"]:checked')||{}).value==='A') score++;
+  if((document.querySelector('input[name="qz2"]:checked')||{}).value==='A') score++;
+  // compare 7/12 vs 5/8 -> 7/12=0.583.., 5/8=0.625 so 5/8 bigger => answer B
+  if((document.querySelector('input[name="qz3"]:checked')||{}).value==='B') score++;
+  if((document.querySelector('input[name="qz4"]:checked')||{}).value==='A') score++;
+  if((document.querySelector('input[name="qz5"]:checked')||{}).value==='B') score++;
+  if((document.querySelector('input[name="qz6"]:checked')||{}).value==='B') score++;
+  document.getElementById('quizScore').textContent = 'Score: ' + score + ' / 6';
+  const msg = document.getElementById('quizMsg');
+  if(score>=5){
+    msg.className='result correct'; msg.textContent='Riya: Fantastic! Here is a ⭐ for you!';
+    addStar();
+    document.getElementById('riyaFloat').src='images/Riya-giggling.png';
+  }else if(score>=3){
+    msg.className='result'; msg.textContent='Riya: Good work! Review missed ones and try again!';
+    document.getElementById('riyaFloat').src='images/Riya-thinking.png';
+  }else{
+    msg.className='result incorrect'; msg.textContent='Riya: Let’s practice a bit more. You’ve got this!';
+    document.getElementById('riyaFloat').src='images/Riya-confused.png';
+  }
+  setTimeout(()=> document.getElementById('riyaFloat').src='images/Riya-happy.png', 1800);
+}
+function resetQuiz(){
+  document.querySelectorAll('#quizList input[type="radio"]').forEach(r=> r.checked=false);
+  document.getElementById('quizScore').textContent='Score: 0 / 6';
+  document.getElementById('quizMsg').textContent='';
+}
+
+// Pep talk
+document.getElementById('riyaFloat').addEventListener('click', function(){
+  const lines=[
+    "Riya: Keep going—small steps make big wins!",
+    "Riya: Try drawing it—pictures help!",
+    "Riya: Check the denominator—LCM is your friend.",
+    "Riya: You’re awesome at this 💪"
+  ];
+  const t = lines[Math.floor(Math.random()*lines.length)];
+  this.title = t;
+});
+</script>
+</body>
+</html>

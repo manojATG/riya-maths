@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Riya’s Revision — Sets (with Quizzes & Games)</title>
+<style>
+:root{--ink:#111827;--paper:#ffffff;--brand:#5f3dc4;--soft:#f6f6ff;--yellow:#FAF03A;--ok:#10b981;--warn:#ef4444}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.45}
+header{padding:18px 14px 6px;background:radial-gradient(900px 220px at 50% -40%, #efeaff 10%, transparent 60%)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 10px}
+h1{margin:0;font-size:clamp(22px,3.2vw,34px);color:var(--brand)}
+.lead{color:#374151;margin-top:6px}
+main{max-width:1100px;margin:0 auto;padding:16px 14px 120px}
+.card{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;margin:14px 0;position:relative;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+.card h2,.card h3{margin:0 0 8px;color:#3b2d86}
+.card h3{font-size:1.05rem}
+.riya-icon{float:right;width:64px;height:64px;border-radius:50%;margin-left:10px;margin-bottom:6px;background:#fff;object-fit:cover;box-shadow:0 4px 10px rgba(0,0,0,.18)}
+.tip{background:#fff7ed;border-left:5px solid #ea580c;padding:10px;border-radius:10px;margin:10px 0}
+.ex{background:#f2f7ff;border-left:4px solid var(--brand);padding:10px;border-radius:10px;margin:10px 0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+ul.check>li::marker{content:"✅ "}
+ol.tight>li{margin:6px 0}
+/* Floating Home Button */
+.home-fab{
+  position:fixed; top:12px; right:12px;
+  width:44px; height:44px; line-height:44px; text-align:center;
+  border-radius:50%; background:#FAF03A; color:#111;
+  font-size:22px; text-decoration:none;
+  border:2px solid rgba(0,0,0,0.12);
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+  z-index:9999; transition:transform .2s ease;
+}
+.home-fab:hover{ transform: translateY(-2px); }
+.btn{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--brand);color:#fff;text-decoration:none;border:none;cursor:pointer}
+.btn.ghost{background:#e5e7eb;color:#111}
+.input{padding:8px 10px;border-radius:8px;border:1px solid #e5e7eb}
+.small{font-size:12px;color:#6b7280}
+.scorebar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #eee;
+  display:flex;align-items:center;justify-content:space-between;padding:10px 14px;z-index:9998}
+.scorebar .left{display:flex;gap:12px;align-items:center}
+.badge{display:inline-block;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px}
+.badge.ok{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+.badge.warn{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}
+/* Drag & Drop */
+.dropzone{min-height:120px;border:2px dashed #c7d2fe;border-radius:12px;padding:10px;background:#fafbff}
+.item{display:inline-block;padding:8px 10px;margin:6px;border-radius:10px;background:#eef2ff;border:1px solid #c7d2fe;cursor:grab}
+.item:active{cursor:grabbing}
+.zone-title{font-weight:700;margin-bottom:8px}
+.timer{font-variant-numeric:tabular-nums}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #e5e7eb;border-bottom-width:2px;padding:2px 6px;border-radius:6px;background:#f9fafb}
+@media (max-width:520px){ .riya-icon{width:56px;height:56px} }
+</style>
+</head>
+<body>
+<a class="home-fab" href="index.html" title="Back to Maths Home">🏠</a>
+<header>
+  <div class="wrap">
+    <h1>Riya’s Revision: <strong>Sets</strong> ✨</h1>
+    <p class="lead"><img class="riya-icon" src="images/Riya-happy.png" alt="Riya happy">Hey Riya! Quick concepts, tons of exercises, and fun games. Earn ⭐ points and beat your high score!</p>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>1) What is a Set? 🧺</h2>
+    <img class="riya-icon" src="images/Riya-thinking.png" alt="Riya thinking">
+    <p>A <strong>set</strong> is a <em>well-defined</em> collection of objects. If you can clearly decide whether an object belongs or not, it’s a set.</p>
+    <div class="ex"><strong>Examples</strong><br>• Vowels in English: A = {a, e, i, o, u} (well-defined)<br>• “Interesting books” — not well-defined (depends on taste)</div>
+    <div class="tip">👧 <strong>Riya says:</strong> Make vague sets precise by adding a rule (e.g., “books with more than 300 pages”).</div>
+  </section>
+
+  <section class="card">
+    <h2>2) Elements & Symbols (∈, ∉) ✅❌</h2>
+    <img class="riya-icon" src="images/Riya-posing.png" alt="Riya posing">
+    <p>Use <strong>∈</strong> for “belongs to” and <strong>∉</strong> for “does not belong”.</p>
+    <div class="cols">
+      <div class="ex">If T = {4, 8, 12, 16, 20}, then 8 ∈ T and 6 ∉ T.</div>
+      <div class="ex">If P = {prime numbers}, then 11 ∈ P and 1 ∉ P.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3) Ways to Write a Set ✍️</h2>
+    <img class="riya-icon" src="images/Riya-giggling.png" alt="Riya giggling">
+    <div class="cols">
+      <div class="ex"><strong>Roster</strong> (list all): O = {1,3,5,7}</div>
+      <div class="ex"><strong>Rule/Builder</strong>: O = {x : x is odd, x &lt; 10}</div>
+      <div class="ex"><strong>Description</strong>: {Odd natural numbers less than 10}</div>
+    </div>
+    <div class="tip">👧 <strong>Riya says:</strong> Don’t repeat elements; order doesn’t matter.</div>
+  </section>
+
+  <section class="card">
+    <h2>4) Cardinal Number n(A) 🔢</h2>
+    <img class="riya-icon" src="images/Riya-confused.png" alt="Riya confused">
+    <p><strong>Cardinality</strong> is the number of distinct elements in a set.</p>
+    <div class="ex">A = {5, 10, 15, 20, 25} ⇒ n(A) = 5</div>
+  </section>
+
+  <section class="card">
+    <h2>5) Types of Sets 🧰</h2>
+    <img class="riya-icon" src="images/Riya-posing.png" alt="Riya posing again">
+    <ul class="check">
+      <li><strong>Infinite</strong>: N = {1,2,3,…}</li>
+      <li><strong>Finite</strong>: {letters of English}</li>
+      <li><strong>Singleton</strong>: {even prime number} = {2}</li>
+      <li><strong>Null/Empty (ϕ)</strong>: {odd numbers between 5 and 7} ⇒ ϕ</li>
+      <li><strong>Equal</strong>: same elements; <strong>Equivalent</strong>: same count</li>
+    </ul>
+  </section>
+
+  <!-- ===== BIG EXERCISE PACK ===== -->
+  <section class="card">
+    <h2>6) Exercises — Warm‑up 🏃‍♀️</h2>
+    <img class="riya-icon" src="images/Riya-thinking.png" alt="Riya thinking">
+    <ol class="tight">
+      <li>Say which are sets (and fix vague ones): (a) good paintings (b) capital cities of India (c) four‑sided polygons (d) books by Mr. X</li>
+      <li>Write in roster form: (a) prime &lt; 20 (b) colours of rainbow (c) months with 31 days (d) vowels in “stationery”</li>
+      <li>Convert to set‑builder: (a) {d, e, l, h, i} (b) {24,32,40,48,56,64} (c) {–5,…,5}</li>
+      <li>Cardinality: (a) consonants in English (b) 2‑digit multiples of 3 and 4 (c) letters of “assessment”</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>7) Exercises — Identify the Type 🧪</h2>
+    <img class="riya-icon" src="images/Riya-giggling.png" alt="Riya giggling">
+    <ol class="tight">
+      <li>{x : x is a factor of 36} → Finite or Infinite?</li>
+      <li>{x : x is a natural number &amp; x &gt; 1000} → Finite or Infinite?</li>
+      <li>{x : x is a letter in the word “apple”} → Singleton? Finite?</li>
+      <li>{x : x^2 = 2} in integers → Null/Empty or Non‑empty?</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>8) Exercises — Fill the Missing Element 🧩</h2>
+    <img class="riya-icon" src="images/Riya-posing.png" alt="Riya posing">
+    <div class="cols">
+      <div class="ex">A = {1, __, 5, 7}; A is odd ≤ 7. Fill the gap.</div>
+      <div class="ex">B = {2, 4, 6, __, 10}; write the missing element.</div>
+      <div class="ex">C = {Jan, Mar, May, Jul, __, Nov}; fill the month.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>9) Exercises — Real‑Life Sets 🌍</h2>
+    <img class="riya-icon" src="images/Riya-happy.png" alt="Riya happy">
+    <p>Write any 3 real‑life examples for each:</p>
+    <ol class="tight">
+      <li>A set of items in your school bag</li>
+      <li>Students who have birthdays in January</li>
+      <li>Cricketers who have scored a century</li>
+    </ol>
+  </section>
+
+  <!-- ===== QUIZZES ===== -->
+  <section class="card">
+    <h2>Riya’s Quiz — Part A (MCQ) 🎯</h2>
+    <img class="riya-icon" src="images/Riya-shocked.png" alt="Riya quiz">
+    <div class="cols">
+      <div class="ex">
+        1) Which is a well‑defined set?<br>
+        <label><input type="radio" name="qa1" value="a"> beautiful flowers</label><br>
+        <label><input type="radio" name="qa1" value="b"> prime numbers &lt; 50</label><br>
+        <label><input type="radio" name="qa1" value="c"> tasty snacks</label><br>
+        <button class="btn" onclick="mcq('qa1','b')">Check</button>
+      </div>
+      <div class="ex">
+        2) If A = {2,4,6,8}, n(A) = 
+        <input class="input" id="qa2" type="number" placeholder="?">
+        <button class="btn" onclick="checkAns('qa2',4)">Check</button>
+      </div>
+      <div class="ex">
+        3) The set {x : x is a multiple of 5} is
+        <label><input type="radio" name="qa3" value="finite"> Finite</label>
+        <label><input type="radio" name="qa3" value="infinite"> Infinite</label>
+        <button class="btn" onclick="mcq('qa3','infinite')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Riya’s Quiz — Part B (Short Answer) ✍️</h2>
+    <img class="riya-icon" src="images/Riya-thinking.png" alt="Riya thinking quiz">
+    <div class="cols">
+      <div class="ex">4) Write roster for: {x : x is even, x ≤ 10}<br>
+        <input class="input" id="qb4" type="text" placeholder="{ ?, ?, ?, ?, ?, ? }">
+        <button class="btn" onclick="checkSet('qb4','{0,2,4,6,8,10}')">Check</button>
+      </div>
+      <div class="ex">5) Fill: In the word “committee”, n({letters}) =
+        <input class="input" id="qb5" type="number" placeholder="?">
+        <button class="btn" onclick="checkAns('qb5',7)">Check</button>
+        <div class="small">Hint: count distinct letters.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GAMES ===== -->
+  <section class="card" id="game-sorter">
+    <h2>Game 1 — Set Sorter (Drag & Drop) 🧲</h2>
+    <img class="riya-icon" src="images/Riya-giggling.png" alt="Riya giggling">
+    <p>Drag the numbers into the correct box for the set <strong>E = {x : x is EVEN and x ≤ 12}</strong>.</p>
+    <div class="cols">
+      <div class="dropzone" id="pool" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">Number Pool</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">2</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">3</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">4</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">5</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">6</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">7</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">8</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">9</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">10</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">11</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)">12</div>
+      </div>
+      <div class="dropzone" id="belongs" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">Belongs to E (∈)</div>
+      </div>
+      <div class="dropzone" id="nbelongs" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">Doesn’t Belong (∉)</div>
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <button class="btn" onclick="checkSorter()">Check Boxes</button>
+      <button class="btn ghost" onclick="resetSorter()">Reset</button>
+    </div>
+  </section>
+
+  <section class="card" id="game-speed">
+    <h2>Game 2 — Speed Roster ⏱️</h2>
+    <img class="riya-icon" src="images/Riya-angry.png" alt="Riya intense">
+    <p>Type the <strong>roster</strong> for multiples of 3 up to 30. You have <span class="timer" id="tleft">20</span> seconds! Use commas.</p>
+    <input class="input" id="speedAnswer" placeholder="{ 3, 6, 9, ... }" style="width:100%;max-width:520px">
+    <div style="margin-top:8px">
+      <button class="btn" onclick="startSpeed()">Start</button>
+      <button class="btn ghost" onclick="stopSpeed()">Stop</button>
+      <button class="btn" onclick="checkSpeed()">Submit</button>
+      <span class="small">Tip: Press <span class="kbd">Enter</span> to submit.</span>
+    </div>
+  </section>
+
+  <section class="card" id="game-lightning">
+    <h2>Game 3 — Riya’s Lightning Round ⚡</h2>
+    <img class="riya-icon" src="images/Riya-posing.png" alt="Riya posing">
+    <p>Answer as many quick questions as you can in <strong>45 seconds</strong>. +1 ⭐ per correct!</p>
+    <div style="display:flex;gap:8px;align-items:center;margin:6px 0">
+      <button class="btn" onclick="startLightning()">Start Round</button>
+      <div class="badge"><span class="timer" id="ltime">45</span> s</div>
+      <div class="badge">Streak: <span id="lstreak">0</span></div>
+    </div>
+    <div id="lq" class="ex">Press Start to see your first question…</div>
+    <input class="input" id="lans" placeholder="Type answer" onkeydown="if(event.key==='Enter'){checkLightning()}">
+    <button class="btn" onclick="checkLightning()">Check</button>
+  </section>
+
+</main>
+
+<div class="scorebar">
+  <div class="left">
+    <div class="badge">⭐ Score: <strong id="score">0</strong></div>
+    <div class="badge ok">✅ Correct: <span id="ok">0</span></div>
+    <div class="badge warn">❌ Wrong: <span id="wrong">0</span></div>
+  </div>
+  <div class="small">Riya says: Keep going — practice makes perfect!</div>
+</div>
+
+<footer class="small" style="max-width:1100px;margin:16px auto 80px;padding:0 14px">
+  Based on your Class‑6 Sets chapter. Icons: Riya’s small face avatars. No external libraries needed.
+</footer>
+
+<script>
+let score = 0, ok=0, wrong=0;
+function bump(n){ score += n; document.getElementById('score').textContent = score; }
+function markOK(){ ok += 1; document.getElementById('ok').textContent = ok; }
+function markWrong(){ wrong += 1; document.getElementById('wrong').textContent = wrong; }
+
+function checkAns(id, ans){
+  const v = (document.getElementById(id).value || '').trim();
+  if(String(v) === String(ans)){ bump(1); markOK(); alert('Correct! +1 ⭐'); }
+  else { markWrong(); alert('Try again, Riya!'); }
+}
+
+function mcq(name, ans){
+  const sel = document.querySelector('input[name="'+name+'"]:checked');
+  if(!sel){ alert('Pick an option!'); return; }
+  if(sel.value === String(ans)){ bump(1); markOK(); alert('Nice! +1 ⭐'); }
+  else { markWrong(); alert('Oops, not that one.'); }
+}
+
+function normaliseSetText(s){
+  return s.replace(/\s+/g,'').replace(/，/g,',').toLowerCase();
+}
+function checkSet(id, expected){
+  const v = normaliseSetText(document.getElementById(id).value || '');
+  const e = normaliseSetText(expected);
+  if(v === e){ bump(1); markOK(); alert('Correct! +1 ⭐'); }
+  else { markWrong(); alert('Compare with: '+expected); }
+}
+
+/* ==== Game 1: Set Sorter (Drag & Drop) ==== */
+let dragged = null;
+function dragItem(ev){ dragged = ev.target; ev.dataTransfer.setData('text/plain', ev.target.textContent); }
+function allowDrop(ev){ ev.preventDefault(); }
+function dropItem(ev){ ev.preventDefault(); if(dragged){ ev.currentTarget.appendChild(dragged); dragged=null; } }
+function resetSorter(){
+  const pool = document.getElementById('pool');
+  ['belongs','nbelongs'].forEach(id => {
+    const z = document.getElementById(id);
+    [...z.querySelectorAll('.item')].forEach(x => pool.appendChild(x));
+  });
+}
+function checkSorter(){
+  const correct = ['2','4','6','8','10','12'];
+  const wrongs = ['3','5','7','9','11'];
+  const inBelongs = [...document.getElementById('belongs').querySelectorAll('.item')].map(x=>x.textContent.trim());
+  const inNot = [...document.getElementById('nbelongs').querySelectorAll('.item')].map(x=>x.textContent.trim());
+  let good = inBelongs.every(x=>correct.includes(x)) && inNot.every(x=>wrongs.includes(x)) &&
+             correct.every(x=>inBelongs.includes(x)) && wrongs.every(x=>inNot.includes(x));
+  if(good){ bump(3); markOK(); alert('Perfect! +3 ⭐'); }
+  else { markWrong(); alert('Not quite. Tip: E has even numbers ≤ 12.'); }
+}
+
+/* ==== Game 2: Speed Roster (Timer) ==== */
+let timer = null, tleft = 20;
+function startSpeed(){ stopSpeed(); tleft=20; document.getElementById('tleft').textContent=tleft;
+  timer=setInterval(()=>{ tleft--; document.getElementById('tleft').textContent=tleft; if(tleft<=0){ stopSpeed(); checkSpeed(); }},1000);
+}
+function stopSpeed(){ if(timer){ clearInterval(timer); timer=null; } }
+function checkSpeed(){
+  const v = normaliseSetText(document.getElementById('speedAnswer').value||'');
+  const ans = '{3,6,9,12,15,18,21,24,27,30}';
+  if(v === normaliseSetText(ans)){ bump(2); markOK(); alert('Great speed! +2 ⭐'); }
+  else { markWrong(); alert('Answer: '+ans); }
+}
+
+/* ==== Game 3: Lightning Round ==== */
+let lTimer=null, lLeft=45, lQ=null, lStreak=0;
+const bank=[
+  {q:'n({2,4,6,8}) = ?', a:'4'},
+  {q:'Does 1 belong to primes? (yes/no)', a:'no'},
+  {q:'Roster for even ≤ 6 ?', a:'{0,2,4,6}'},
+  {q:'Write the next: 18,27,36,45, ___', a:'54'},
+  {q:'Is {x: x is a multiple of 100} finite? (yes/no)', a:'no'},
+  {q:'Is set of vowels well-defined? (yes/no)', a:'yes'},
+  {q:'Symbol for “does not belong”: ?', a:'∉'},
+  {q:'Cardinality of {a,p,p,l,e} ?', a:'4'},
+  {q:'Builder: {x: x is odd, x<10} roster?', a:'{1,3,5,7,9}'}
+];
+function nextLQ(){
+  lQ = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('lq').textContent = lQ.q;
+  document.getElementById('lans').value='';
+  document.getElementById('lans').focus();
+}
+function startLightning(){
+  stopLightning();
+  lLeft=45; lStreak=0; document.getElementById('lstreak').textContent=lStreak;
+  document.getElementById('ltime').textContent=lLeft;
+  nextLQ();
+  lTimer=setInterval(()=>{
+    lLeft--; document.getElementById('ltime').textContent=lLeft;
+    if(lLeft<=0){ stopLightning(); alert('Time! Your streak: '+lStreak); }
+  },1000);
+}
+function stopLightning(){ if(lTimer){ clearInterval(lTimer); lTimer=null; } }
+function checkLightning(){
+  if(!lQ){ return; }
+  const v=(document.getElementById('lans').value||'').trim().toLowerCase();
+  const a=(lQ.a+'').trim().toLowerCase();
+  if(v===a){ bump(1); markOK(); lStreak++; document.getElementById('lstreak').textContent=lStreak; nextLQ(); }
+  else { markWrong(); alert('Correct: '+lQ.a); nextLQ(); }
+}
+</script>
+</body>
+</html>

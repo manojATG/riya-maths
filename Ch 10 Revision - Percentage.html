@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Riya’s Revision — Percentage (Class 6)</title>
+<style>
+:root{--ink:#111827;--paper:#ffffff;--brand:#5f3dc4;--soft:#f6f6ff;--yellow:#FAF03A;--ok:#10b981;--warn:#ef4444}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.45}
+header{padding:18px 14px 6px;background:radial-gradient(900px 220px at 50% -40%, #efeaff 10%, transparent 60%)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 10px}
+h1{margin:0;font-size:clamp(22px,3.2vw,34px);color:var(--brand)}
+.lead{color:#374151;margin-top:6px}
+main{max-width:1100px;margin:0 auto;padding:16px 14px 120px}
+.card{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;margin:14px 0;position:relative;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+.card h2,.card h3{margin:0 0 8px;color:#3b2d86}
+.card h3{font-size:1.05rem}
+.riya-icon{float:right;width:64px;height:64px;border-radius:50%;margin-left:10px;margin-bottom:6px;background:#fff;object-fit:cover;box-shadow:0 4px 10px rgba(0,0,0,.18)}
+.tip{background:#fff7ed;border-left:5px solid #ea580c;padding:10px;border-radius:10px;margin:10px 0}
+.ex{background:#f2f7ff;border-left:4px solid var(--brand);padding:10px;border-radius:10px;margin:10px 0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+ul.check>li::marker{content:"✅ "}
+ol.tight>li{margin:6px 0}
+/* Floating Home Button */
+.home-fab{
+  position:fixed; top:12px; right:12px;
+  width:44px; height:44px; line-height:44px; text-align:center;
+  border-radius:50%; background:var(--yellow); color:#111;
+  font-size:22px; text-decoration:none;
+  border:2px solid rgba(0,0,0,0.12);
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+  z-index:9999; transition:transform .2s ease;
+}
+.home-fab:hover{ transform: translateY(-2px); }
+.btn{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--brand);color:#fff;text-decoration:none;border:none;cursor:pointer}
+.btn.ghost{background:#e5e7eb;color:#111}
+.input{padding:8px 10px;border-radius:8px;border:1px solid #e5e7eb}
+.small{font-size:12px;color:#6b7280}
+.scorebar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #eee;
+  display:flex;align-items:center;justify-content:space-between;padding:10px 14px;z-index:9998}
+.scorebar .left{display:flex;gap:12px;align-items:center}
+.badge{display:inline-block;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px}
+.badge.ok{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+.badge.warn{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}
+/* Drag & Drop */
+.dropzone{min-height:120px;border:2px dashed #c7d2fe;border-radius:12px;padding:10px;background:#fafbff}
+.item{display:inline-block;padding:8px 10px;margin:6px;border-radius:10px;background:#eef2ff;border:1px solid #c7d2fe;cursor:grab}
+.item:active{cursor:grabbing}
+.zone-title{font-weight:700;margin-bottom:8px}
+.timer{font-variant-numeric:tabular-nums}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #e5e7eb;border-bottom-width:2px;padding:2px 6px;border-radius:6px;background:#f9fafb}
+table.kv{width:100%;border-collapse:collapse}
+table.kv th, table.kv td{border:1px solid #e5e7eb;padding:8px;text-align:center}
+table.kv th{background:#f9fafb}
+@media (max-width:520px){ .riya-icon{width:56px;height:56px} }
+</style>
+</head>
+<body>
+<a class="home-fab" href="index.html" title="Back to Maths Home">🏠</a>
+<header>
+  <div class="wrap">
+    <h1>Riya’s Revision: <strong>Percentage</strong> ✨</h1>
+    <p class="lead"><img class="riya-icon" src="images/Riya-happy.png" alt="Riya happy">Hey Riya! Quick concepts, lots of practice, and fun games. Earn ⭐ points and beat your high score!</p>
+  </div>
+</header>
+
+<main>
+  <!-- Concepts -->
+  <section class="card">
+    <h2>1) What does “percent” mean? %</h2>
+    <img class="riya-icon" src="images/Riya-thinking.png" alt="Riya thinking">
+    <p><strong>Percent</strong> means “per hundred”. 39% = <strong>39 out of 100</strong> = 39/100 = 0.39.</p>
+    <div class="ex">36 shaded out of 100 squares ⇒ 36/100 = <strong>36%</strong> = 0.36.</div>
+    <div class="tip">👧 <strong>Riya says:</strong> Percentage is a fraction with denominator 100.</div>
+  </section>
+
+  <section class="card">
+    <h2>2) Convert between % ⇄ Fraction ⇄ Decimal ⇄ Ratio</h2>
+    <img class="riya-icon" src="images/Riya-giggling.png" alt="Riya giggling">
+    <div class="cols">
+      <div class="ex"><strong>% → Fraction & Ratio</strong><br>24% = 24/100 = 6/25 = 6:25<br>6.75% = 6.75/100 = 27/400 = 27:400</div>
+      <div class="ex"><strong>% → Decimal</strong><br>49% = 0.49, 7.8% = 0.078, 119% = 1.19</div>
+      <div class="ex"><strong>Fraction → %</strong><br>9/25 = 36%, 17/20 = 85%, 11/50 = 22%</div>
+      <div class="ex"><strong>Decimal → %</strong><br>0.7 = 70%, 0.09 = 9%, 0.003 = 0.3%</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3) Finding a percentage of a quantity</h2>
+    <img class="riya-icon" src="images/Riya-posing.png" alt="Riya posing">
+    <p>Change % to a fraction and multiply.</p>
+    <div class="cols">
+      <div class="ex">30% of 40 = (30/100)×40 = <strong>12</strong></div>
+      <div class="ex">6.25% of 8 hours = 1/16 × 8 = <strong>0.5 h (30 min)</strong></div>
+      <div class="ex">11 1/9% of 45 m = <strong>5 m</strong></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>4) “What percent of … ?” and “Find the number”</h2>
+    <img class="riya-icon" src="images/Riya-confused.png" alt="Riya confused">
+    <div class="cols">
+      <div class="ex">What % of 85 is 17?<br>x% × 85 = 17 ⇒ x = 20%</div>
+      <div class="ex">8% of N is 6 ⇒ N = 6 ÷ 0.08 = 75</div>
+      <div class="ex">On increasing a number by 12% it becomes 504 ⇒ original = 504 ÷ 1.12 = <strong>450</strong></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>5) Word problems & increase/decrease</h2>
+    <img class="riya-icon" src="images/Riya-posing.png" alt="Riya posing">
+    <ul class="check">
+      <li>Percent score in tests (find total %)</li>
+      <li>Pass/fail distribution and totals</li>
+      <li>Salary/price increase and original price</li>
+      <li>Percentage error = (error ÷ correct) × 100</li>
+    </ul>
+  </section>
+
+  <!-- Exercises -->
+  <section class="card">
+    <h2>6) Exercises — Quick Practice</h2>
+    <img class="riya-icon" src="images/Riya-thinking.png" alt="Riya thinking">
+    <ol class="tight">
+      <li>Convert to fractions in lowest terms: 32%, 24%, 56%, 13 1/3%, 3 1/8%</li>
+      <li>Express as decimals: 41%, 28%, 7 1/2%, 5.9%</li>
+      <li>Fractions to %: 17/25, 12/125, 2 13/50, 7/20, 5/9</li>
+      <li>Decimals to %: 0.43, 0.8, 0.007, 3.12, 1.7</li>
+      <li>Ratios to %: 2:5, 11:25, 3:4, 19:125, 2:3</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>7) Exercises — Find the value</h2>
+    <img class="riya-icon" src="images/Riya-giggling.png" alt="Riya giggling">
+    <ol class="tight">
+      <li>30% of ₹360, 12% of 750 g, 25% of 560 L</li>
+      <li>16 2/3% of ₹840, 15% of 720 m</li>
+      <li>Express: 125 g of 2 kg; 39 paise of ₹3; 3 min of 2 h; 36 cm of 4 m; 125 mL of 5 L; 50/125 marks</li>
+      <li>Find the number: (a) 8% is 6 (b) 15% is 45 (c) 5% is 12 (d) 6 1/4% is 30 (e) 35% is 28</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>8) Exercises — Word Problems</h2>
+    <img class="riya-icon" src="images/Riya-posing.png" alt="Riya posing">
+    <ol class="tight">
+      <li>Compare subject performance: 45/60 vs 56/80</li>
+      <li>300 sweets; 126 distributed. % left?</li>
+      <li>School of 1200: 45% girls. 30% of girls & 25% of boys use bus. % students using bus?</li>
+      <li>Town population 3,78,000 after +5% increase. Find previous population.</li>
+      <li>Price ₹3500 increased by 6%. New price?</li>
+    </ol>
+  </section>
+
+  <!-- Interactive Quizzes -->
+  <section class="card">
+    <h2>Riya’s Quiz — MCQ</h2>
+    <img class="riya-icon" src="images/Riya-shocked.png" alt="Riya quiz">
+    <div class="cols">
+      <div class="ex">
+        1) 7.8% as a decimal is:
+        <label><input type="radio" name="qa1" value="a"> 0.78</label>
+        <label><input type="radio" name="qa1" value="b"> 0.078</label>
+        <label><input type="radio" name="qa1" value="c"> 7.8</label>
+        <button class="btn" onclick="mcq('qa1','b')">Check</button>
+      </div>
+      <div class="ex">
+        2) 11/50 as a percentage is:
+        <label><input type="radio" name="qa2" value="a"> 11%</label>
+        <label><input type="radio" name="qa2" value="b"> 22%</label>
+        <label><input type="radio" name="qa2" value="c"> 44%</label>
+        <button class="btn" onclick="mcq('qa2','b')">Check</button>
+      </div>
+      <div class="ex">
+        3) 6.25% equals:
+        <label><input type="radio" name="qa3" value="a"> 1/8</label>
+        <label><input type="radio" name="qa3" value="b"> 1/16</label>
+        <label><input type="radio" name="qa3" value="c"> 1/4</label>
+        <button class="btn" onclick="mcq('qa3','b')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Riya’s Quiz — Short Answer</h2>
+    <img class="riya-icon" src="images/Riya-thinking.png" alt="Riya thinking quiz">
+    <div class="cols">
+      <div class="ex">4) Convert to %: 12/125<br>
+        <input class="input" id="qb4" type="text" placeholder="?? %">
+        <button class="btn" onclick="checkAns('qb4','9.6%')">Check</button>
+        <div class="small">Hint: ×100</div>
+      </div>
+      <div class="ex">5) Express 0.003 as a %<br>
+        <input class="input" id="qb5" type="text" placeholder="?? %">
+        <button class="btn" onclick="checkAns('qb5','0.3%')">Check</button>
+      </div>
+      <div class="ex">6) If 119% as a decimal is …?<br>
+        <input class="input" id="qb6" type="text" placeholder="?.??">
+        <button class="btn" onclick="checkAns('qb6','1.19')">Check</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games -->
+  <section class="card" id="game-match">
+    <h2>Game 1 — Match the Conversions 🔗</h2>
+    <img class="riya-icon" src="images/Riya-giggling.png" alt="Riya giggling">
+    <p>Drag the blue chips to the correct boxes.</p>
+    <div class="cols">
+      <div class="dropzone" id="chips" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">Chips</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)" data-key="49%">0.49</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)" data-key="7.8%">0.078</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)" data-key="6.25%">1/16</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)" data-key="24%">6/25</div>
+        <div class="item" draggable="true" ondragstart="dragItem(event)" data-key="11/50">22%</div>
+      </div>
+      <div class="dropzone" id="box1" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">49% →</div>
+      </div>
+      <div class="dropzone" id="box2" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">7.8% →</div>
+      </div>
+      <div class="dropzone" id="box3" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">6.25% →</div>
+      </div>
+      <div class="dropzone" id="box4" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">24% →</div>
+      </div>
+      <div class="dropzone" id="box5" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <div class="zone-title">11/50 →</div>
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <button class="btn" onclick="checkMatch()">Check</button>
+      <button class="btn ghost" onclick="resetMatch()">Reset</button>
+    </div>
+  </section>
+
+  <section class="card" id="game-speed">
+    <h2>Game 2 — Speed % → Decimal ⏱️</h2>
+    <img class="riya-icon" src="images/Riya-angry.png" alt="Riya intense">
+    <p>Convert these in <span class="timer" id="tleft">25</span> seconds. Separate answers with commas.</p>
+    <table class="kv">
+      <tr><th>Given %</th><th>Your Decimal Answers</th></tr>
+      <tr><td>0.3%, 7.8%, 49%</td><td><input class="input" id="speedAns" placeholder="0.003, 0.078, 0.49" style="width:100%"></td></tr>
+    </table>
+    <div style="margin-top:8px">
+      <button class="btn" onclick="startSpeed()">Start</button>
+      <button class="btn ghost" onclick="stopSpeed()">Stop</button>
+      <button class="btn" onclick="checkSpeed()">Submit</button>
+    </div>
+  </section>
+
+  <section class="card" id="game-lightning">
+    <h2>Game 3 — Riya’s Lightning Round ⚡</h2>
+    <img class="riya-icon" src="images/Riya-posing.png" alt="Riya posing">
+    <p>Answer as many quick questions as you can in <strong>45 seconds</strong>. +1 ⭐ per correct!</p>
+    <div style="display:flex;gap:8px;align-items:center;margin:6px 0">
+      <button class="btn" onclick="startLightning()">Start Round</button>
+      <div class="badge"><span class="timer" id="ltime">45</span> s</div>
+      <div class="badge">Streak: <span id="lstreak">0</span></div>
+    </div>
+    <div id="lq" class="ex">Press Start to see your first question…</div>
+    <input class="input" id="lans" placeholder="Type answer" onkeydown="if(event.key==='Enter'){checkLightning()}">
+    <button class="btn" onclick="checkLightning()">Check</button>
+  </section>
+
+</main>
+
+<div class="scorebar">
+  <div class="left">
+    <div class="badge">⭐ Score: <strong id="score">0</strong></div>
+    <div class="badge ok">✅ Correct: <span id="ok">0</span></div>
+    <div class="badge warn">❌ Wrong: <span id="wrong">0</span></div>
+  </div>
+  <div class="small">Riya says: Keep going — practice makes perfect!</div>
+</div>
+
+<footer class="small" style="max-width:1100px;margin:16px auto 80px;padding:0 14px">
+  Concepts & practice adapted from your Percentage chapter. Icons: Riya’s small face avatars. No external libraries needed.
+</footer>
+
+<script>
+let score = 0, ok=0, wrong=0;
+function bump(n){ score += n; document.getElementById('score').textContent = score; }
+function markOK(){ ok += 1; document.getElementById('ok').textContent = ok; }
+function markWrong(){ wrong += 1; document.getElementById('wrong').textContent = wrong; }
+
+function checkAns(id, ans){
+  const v = (document.getElementById(id).value || '').trim();
+  if(String(v).toLowerCase() === String(ans).toLowerCase()){ bump(1); markOK(); alert('Correct! +1 ⭐'); }
+  else { markWrong(); alert('Try again, Riya!'); }
+}
+
+function mcq(name, ans){
+  const sel = document.querySelector('input[name="'+name+'"]:checked');
+  if(!sel){ alert('Pick an option!'); return; }
+  if(sel.value === String(ans)){ bump(1); markOK(); alert('Nice! +1 ⭐'); }
+  else { markWrong(); alert('Oops, not that one.'); }
+}
+
+/* ==== Game 1: Match the Conversions ==== */
+let dragged = null;
+function dragItem(ev){ dragged = ev.target; ev.dataTransfer.setData('text/plain', ev.target.textContent); }
+function allowDrop(ev){ ev.preventDefault(); }
+function dropItem(ev){ ev.preventDefault(); if(dragged){ ev.currentTarget.appendChild(dragged); dragged=null; } }
+function resetMatch(){
+  const chips = document.getElementById('chips');
+  ['box1','box2','box3','box4','box5'].forEach(id => {
+    const z = document.getElementById(id);
+    [...z.querySelectorAll('.item')].forEach(x => chips.appendChild(x));
+  });
+}
+function checkMatch(){
+  const need = {
+    box1: '49%',
+    box2: '7.8%',
+    box3: '6.25%',
+    box4: '24%',
+    box5: '11/50'
+  };
+  let good = true;
+  for(const [box,key] of Object.entries(need)){
+    const it = document.querySelector('#'+box+' .item');
+    if(!it || it.getAttribute('data-key') !== key){ good=false; break; }
+  }
+  if(good){ bump(3); markOK(); alert('Perfect! +3 ⭐'); }
+  else { markWrong(); alert('Not quite. Re-check each match.'); }
+}
+
+/* ==== Game 2: Speed %→Decimal (Timer) ==== */
+let timer = null, tleft = 25;
+function startSpeed(){ stopSpeed(); tleft=25; document.getElementById('tleft').textContent=tleft;
+  timer=setInterval(()=>{ tleft--; document.getElementById('tleft').textContent=tleft; if(tleft<=0){ stopSpeed(); checkSpeed(); }},1000);
+}
+function stopSpeed(){ if(timer){ clearInterval(timer); timer=null; } }
+function checkSpeed(){
+  const v = (document.getElementById('speedAns').value||'').replace(/\s+/g,'').toLowerCase();
+  const ans = '0.003,0.078,0.49';
+  if(v === ans){ bump(2); markOK(); alert('Great speed! +2 ⭐'); }
+  else { markWrong(); alert('Answer: '+ans); }
+}
+
+/* ==== Game 3: Lightning Round ==== */
+let lTimer=null, lLeft=45, lQ=null, lStreak=0;
+const bank=[
+  {q:'49% as decimal?', a:'0.49'},
+  {q:'7.8% as decimal?', a:'0.078'},
+  {q:'6.25% equals (fraction)?', a:'1/16'},
+  {q:'n({2,4,6,8}) = ?', a:'4'},
+  {q:'If 8% of N is 6, N=?', a:'75'},
+  {q:'119% as decimal?', a:'1.19'},
+  {q:'0.003 as %?', a:'0.3%'},
+  {q:'Fraction 11/50 as %?', a:'22%'},
+  {q:'What % of 85 is 17?', a:'20%'},
+  {q:'30% of 40 = ?', a:'12'}
+];
+function nextLQ(){
+  lQ = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('lq').textContent = lQ.q;
+  document.getElementById('lans').value='';
+  document.getElementById('lans').focus();
+}
+function startLightning(){
+  stopLightning();
+  lLeft=45; lStreak=0; document.getElementById('lstreak').textContent=lStreak;
+  document.getElementById('ltime').textContent=lLeft;
+  nextLQ();
+  lTimer=setInterval(()=>{
+    lLeft--; document.getElementById('ltime').textContent=lLeft;
+    if(lLeft<=0){ stopLightning(); alert('Time! Your streak: '+lStreak); }
+  },1000);
+}
+function stopLightning(){ if(lTimer){ clearInterval(lTimer); lTimer=null; } }
+function checkLightning(){
+  if(!lQ){ return; }
+  const v=(document.getElementById('lans').value||'').trim().toLowerCase();
+  const a=(lQ.a+'').trim().toLowerCase();
+  if(v===a){ bump(1); markOK(); lStreak++; document.getElementById('lstreak').textContent=lStreak; nextLQ(); }
+  else { markWrong(); alert('Correct: '+lQ.a); nextLQ(); }
+}
+</script>
+</body>
+</html>

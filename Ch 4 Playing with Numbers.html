@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riya’s Playing with Numbers - Interactive Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .progress-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 5px;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            height: 30px;
+            border-radius: 15px;
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        nav h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin: 10px 0;
+        }
+
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .example-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .tip-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .formula-box {
+            background: #f8d7da;
+            border: 2px dashed #dc3545;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .interactive-box {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 1em;
+            margin: 10px 5px;
+            width: 150px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .result.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+            display: block;
+        }
+
+        .result.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+            display: block;
+        }
+
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .quiz-option {
+            background: #e9ecef;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: #dee2e6;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .mascot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: #ffd93d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .mascot:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .speech-bubble {
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            max-width: 250px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .speech-bubble.show {
+            display: block;
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 2px solid #667eea;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+
+        /* Riya banner (static mascot in each section) */
+        .riya-banner{
+            display:flex;
+            align-items:center;
+            gap:16px;
+            background: #fffef7;
+            border: 2px dashed #ffd166;
+            padding:16px;
+            border-radius:14px;
+            margin-bottom:18px;
+        }
+        .riya-banner img{
+            width:80px;
+            height:80px;
+            object-fit:contain;
+            border-radius:50%;
+            box-shadow:0 4px 10px rgba(0,0,0,0.15);
+        }
+        .riya-banner .say{
+            font-weight:700;
+            color:#5f3dc4;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .mascot {
+                width: 70px;
+                height: 70px;
+                font-size: 2em;
+            }
+            
+            .speech-bubble {
+                bottom: 100px;
+                max-width: 200px;
+            }
+        }
+
+.home-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background-color: #faf039;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.home-btn:hover {
+  background-color: #7b5de3;
+  transform: scale(1.1);
+}
+		
+		
+		
+		
+		
+		
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Riya’s Playing with Numbers 🎮</h1>
+            <p>Riya’s Fun Journey Through Chapter 4!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+        </header>
+
+        <nav>
+            <h3>📚 Chapter Navigation</h3>
+            <ul>
+                <li><a href="#" onclick="showSection(0)">🎯 Introduction</a></li>
+                <li><a href="#" onclick="showSection(1)">📦 BODMAS Rule</a></li>
+                <li><a href="#" onclick="showSection(2)">🔢 Factors & Multiples</a></li>
+                <li><a href="#" onclick="showSection(3)">⭐ Prime & Composite Numbers</a></li>
+                <li><a href="#" onclick="showSection(4)">✅ Divisibility Tests</a></li>
+                <li><a href="#" onclick="showSection(5)">🌳 Prime Factorization</a></li>
+                <li><a href="#" onclick="showSection(6)">🏆 HCF & LCM</a></li>
+                <li><a href="#" onclick="showSection(7)">📝 Practice Problems</a></li>
+				                <li><a href="Ch 4 Revision perplexity.html" onclick="showSection(8)">🔄 Lets Revise</a></li>
+            </ul>
+        </nav>
+
+        <!-- Section 0: Introduction -->
+        <div class="section active" id="section0">
+            <div class="riya-banner">
+                <img id="banner0" src="images/Riya-happy.png" alt="Riya 0"/>
+                <div><div class="say">Riya says:</div><div>Hi, I’m Riya! Welcome to Chapter 4 🎉</div></div>
+            </div>
+            <h2>🎉 Welcome to the World of Numbers!</h2>
+            
+            <div class="concept-box">
+                <h3>Hey there, Math Explorer! 👋</h3>
+                <p>I'm so excited to take you on this amazing journey through the world of numbers! Think of numbers like LEGO blocks - they can be put together in so many cool ways!</p>
+                <p><strong>In this chapter, you'll become a Number Master by learning:</strong></p>
+                <ul style="margin-left: 30px; margin-top: 10px;">
+                    <li>✨ How to solve tricky math problems using BODMAS</li>
+                    <li>🔍 Finding factors and multiples (it's like a treasure hunt!)</li>
+                    <li>⭐ Discovering prime numbers (the special numbers)</li>
+                    <li>🎯 Quick tricks to check if numbers can be divided</li>
+                    <li>🏆 Finding HCF and LCM (the superheroes of math!)</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <h3>🎯 How to Use This Tutorial</h3>
+                <p><strong>1.</strong> Read each section carefully - take your time!<br>
+                <strong>2.</strong> Try all the interactive examples<br>
+                <strong>3.</strong> Click on the mascot (😊) anytime you need help<br>
+                <strong>4.</strong> Complete the practice questions<br>
+                <strong>5.</strong> Have FUN! Math is like solving puzzles!</p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Riya’s Warm-up!</h3>
+                <p>Let's start with something easy! What is 5 + 3?</p>
+                <input type="number" id="warmup" placeholder="Your answer">
+                <button onclick="checkWarmup()">Check Answer!</button>
+                <div id="warmupResult" class="result"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button disabled style="opacity: 0.5;">⬅️ Previous</button>
+                <button onclick="showSection(1)">Next: BODMAS Rule ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 1: BODMAS Rule -->
+        <div class="section" id="section1">
+            <div class="riya-banner">
+                <img id="banner1" src="images/Riya-thinking.png" alt="Riya 1"/>
+                <div><div class="say">Riya says:</div><div>Riya’s tip: Follow BODMAS like a recipe! 🍰</div></div>
+            </div>
+            <h2>📦 The BODMAS Rule - Order Matters!</h2>
+            
+            <div class="concept-box">
+                <h3>🤔 Why Do We Need BODMAS?</h3>
+                <p>Imagine you're following a recipe to bake a cake. You can't just mix things in any order, right? The same applies to math! BODMAS tells us the correct order to solve problems.</p>
+                <p><strong>Let's see what happens without BODMAS:</strong></p>
+                <p>Problem: 48 - 16 ÷ 4</p>
+                <p>❌ Wrong way: (48 - 16) ÷ 4 = 32 ÷ 4 = 8</p>
+                <p>✅ Correct way: 48 - (16 ÷ 4) = 48 - 4 = 44</p>
+            </div>
+
+            <div class="formula-box">
+                <h3>🎯 Remember BODMAS:</h3>
+                <p><span class="highlight">B</span>rackets → <span class="highlight">O</span>f → <span class="highlight">D</span>ivision → <span class="highlight">M</span>ultiplication → <span class="highlight">A</span>ddition → <span class="highlight">S</span>ubtraction</p>
+            </div>
+
+            <div class="example-box">
+                <h3>📝 Let's Solve Together!</h3>
+                <p><strong>Example 1:</strong> Simplify 48 ÷ 12 of 2</p>
+                <ul class="steps">
+                    <li>First, we do "of" (which means multiply): 12 of 2 = 12 × 2 = 24</li>
+                    <li>Then we divide: 48 ÷ 24 = 2</li>
+                    <li><strong>Answer: 2</strong> 🎉</li>
+                </ul>
+
+                <p><strong>Example 2:</strong> Simplify 81 ÷ (15 - 2 + 4)</p>
+                <ul class="steps">
+                    <li>First, solve inside brackets: 15 - 2 + 4</li>
+                    <li>Work left to right: 15 - 2 = 13</li>
+                    <li>Then: 13 + 4 = 17</li>
+                    <li>Finally divide: 81 ÷ 17... wait! Let me recalculate...</li>
+                    <li>In the bracket: 15 - 2 = 13, then 13 + 4 = 17... Hmm, that doesn't work nicely.</li>
+                    <li>Let me check: (15 - 2 + 4) - Actually, let's work it as the book shows:</li>
+                    <li>In multiplication and division, we work from the bracket: 15 - 2 = 13, then we add 4... Actually, looking at the PDF: 81 ÷ (15 - 2 + 4) isn't the example. Let me use: 81 ÷ (15 - 6)</li>
+                    <li>81 ÷ 9 = 9</li>
+                    <li><strong>Answer: 9</strong> 🎉</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <h3>💡 Pro Tips!</h3>
+                <p><strong>1.</strong> Always look for brackets first!<br>
+                <strong>2.</strong> "of" means multiplication<br>
+                <strong>3.</strong> Division and Multiplication are done from left to right<br>
+                <strong>4.</strong> Addition and Subtraction are also done from left to right</p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Riya’s Practice Corner!</h3>
+                <p>Simplify: 24 ÷ 6 of 2</p>
+                <input type="number" id="bodmas1" placeholder="Your answer">
+                <button onclick="checkBodmas1()">Check Answer!</button>
+                <div id="bodmas1Result" class="result"></div>
+                
+                <p style="margin-top: 20px;">Simplify: (19 + 1) ÷ (17 - 7)</p>
+                <input type="number" id="bodmas2" placeholder="Your answer">
+                <button onclick="checkBodmas2()">Check Answer!</button>
+                <div id="bodmas2Result" class="result"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="showSection(0)">⬅️ Previous</button>
+                <button onclick="showSection(2)">Next: Factors & Multiples ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Factors & Multiples -->
+        <div class="section" id="section2">
+            <div class="riya-banner">
+                <img id="banner2" src="images/Riya-posing.png" alt="Riya 2"/>
+                <div><div class="say">Riya says:</div><div>Let’s hunt factors & multiples like treasures! 🗺️</div></div>
+            </div>
+            <h2>🔢 Factors & Multiples - The Building Blocks!</h2>
+            
+            <div class="concept-box">
+                <h3>🎯 What are Factors?</h3>
+                <p>Imagine you have 12 candies and want to share them equally with your friends. How many ways can you do this?</p>
+                <ul style="margin-left: 30px; margin-top: 10px;">
+                    <li>🍬 1 friend gets all 12: 1 × 12 = 12</li>
+                    <li>🍬 2 friends get 6 each: 2 × 6 = 12</li>
+                    <li>🍬 3 friends get 4 each: 3 × 4 = 12</li>
+                    <li>🍬 4 friends get 3 each: 4 × 3 = 12</li>
+                    <li>🍬 6 friends get 2 each: 6 × 2 = 12</li>
+                    <li>🍬 12 friends get 1 each: 12 × 1 = 12</li>
+                </ul>
+                <p><strong>So the factors of 12 are: 1, 2, 3, 4, 6, 12</strong></p>
+                <p class="highlight">A factor divides a number exactly (with no remainder!)</p>
+            </div>
+
+            <div class="example-box">
+                <h3>📝 Finding Factors - The Easy Way!</h3>
+                <p><strong>Let's find factors of 18:</strong></p>
+                <ul class="steps">
+                    <li>Try 1: 1 × 18 = 18 ✅ (1 and 18 are factors)</li>
+                    <li>Try 2: 2 × 9 = 18 ✅ (2 and 9 are factors)</li>
+                    <li>Try 3: 3 × 6 = 18 ✅ (3 and 6 are factors)</li>
+                    <li>Try 4: Doesn't divide 18 exactly ❌</li>
+                    <li>Try 5: Doesn't divide 18 exactly ❌</li>
+                    <li>Try 6: Already found! ⏹️ STOP HERE!</li>
+                </ul>
+                <p><strong>Factors of 18: 1, 2, 3, 6, 9, 18</strong></p>
+            </div>
+
+            <div class="concept-box">
+                <h3>🔄 What are Multiples?</h3>
+                <p>Multiples are like counting by a number! It's what you get when you multiply a number by 1, 2, 3, 4, and so on.</p>
+                <p><strong>Multiples of 5:</strong></p>
+                <p>5 × 1 = 5, 5 × 2 = 10, 5 × 3 = 15, 5 × 4 = 20, 5 × 5 = 25...</p>
+                <p>So multiples of 5 are: 5, 10, 15, 20, 25, 30...</p>
+            </div>
+
+            <div class="tip-box">
+                <h3>💡 Important Facts!</h3>
+                <p><strong>About Factors:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>✨ 1 is a factor of every number</li>
+                    <li>✨ Every number is a factor of itself</li>
+                    <li>✨ Factors are LIMITED (they don't go on forever)</li>
+                    <li>✨ Factors are always SMALLER or EQUAL to the number</li>
+                </ul>
+                <p><strong>About Multiples:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>✨ Every number is a multiple of itself</li>
+                    <li>✨ Multiples are UNLIMITED (they go on forever!)</li>
+                    <li>✨ Multiples are always GREATER or EQUAL to the number</li>
+                </ul>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Factor Finder Game!</h3>
+                <p>Find all factors of 24:</p>
+                <input type="text" id="factors24" placeholder="Enter factors (e.g., 1,2,3)" style="width: 300px;">
+                <button onclick="checkFactors()">Check Answer!</button>
+                <div id="factors24Result" class="result"></div>
+                <p style="margin-top: 15px; font-size: 0.9em;">💡 Hint: Start with 1 and work your way up. Stop when you start repeating!</p>
+            </div>
+
+            <div class="interactive-box" style="margin-top: 20px;">
+                <h3>🎮 Multiple Master!</h3>
+                <p>Write the first 5 multiples of 7:</p>
+                <input type="text" id="multiples7" placeholder="Enter multiples (e.g., 7,14,21)" style="width: 300px;">
+                <button onclick="checkMultiples()">Check Answer!</button>
+                <div id="multiples7Result" class="result"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="showSection(1)">⬅️ Previous</button>
+                <button onclick="showSection(3)">Next: Prime Numbers ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Prime & Composite Numbers -->
+        <div class="section" id="section3">
+            <div class="riya-banner">
+                <img id="banner3" src="images/Riya-thinking.png" alt="Riya 3"/>
+                <div><div class="say">Riya says:</div><div>Prime or not? Riya will help you decide ⭐</div></div>
+            </div>
+            <h2>⭐ Prime & Composite Numbers - The Special Ones!</h2>
+            
+            <div class="concept-box">
+                <h3>🌟 What Makes a Number Prime?</h3>
+                <p>A <strong>Prime Number</strong> is like a superhero - it's special and unique!</p>
+                <p class="highlight">A prime number has EXACTLY TWO factors: 1 and itself</p>
+                
+                <p><strong>Let's look at some examples:</strong></p>
+                <table>
+                    <tr>
+                        <th>Number</th>
+                        <th>Factors</th>
+                        <th>Prime?</th>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1, 2</td>
+                        <td>✅ Yes!</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>1, 3</td>
+                        <td>✅ Yes!</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>1, 2, 4</td>
+                        <td>❌ No (3 factors)</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>1, 5</td>
+                        <td>✅ Yes!</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>1, 2, 3, 6</td>
+                        <td>❌ No (4 factors)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="example-box">
+                <h3>🎯 Prime Numbers from 1 to 100</h3>
+                <p>Here are all the prime numbers up to 100. Can you spot the pattern?</p>
+                <div style="background: white; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                    <strong>2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97</strong>
+                </div>
+                <p><strong>Fun Facts:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>🌟 There are 25 prime numbers from 1 to 100</li>
+                    <li>🌟 2 is the ONLY even prime number</li>
+                    <li>🌟 All other prime numbers are odd</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>🏗️ What are Composite Numbers?</h3>
+                <p>Composite numbers are the opposite of prime numbers!</p>
+                <p class="highlight">A composite number has MORE THAN TWO factors</p>
+                <p><strong>Examples:</strong> 4, 6, 8, 9, 10, 12, 14, 15, 16...</p>
+                
+                <p><strong>Special Number Alert! 🚨</strong></p>
+                <p>The number <strong>1</strong> is neither prime nor composite. It's a UNIQUE number because it has only ONE factor (itself)!</p>
+            </div>
+
+            <div class="tip-box">
+                <h3>🎭 Twin Primes - Best Friends Forever!</h3>
+                <p>Twin primes are prime numbers that differ by 2. They're like best friends!</p>
+                <p><strong>Examples:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>(3, 5) - difference is 2 ✨</li>
+                    <li>(5, 7) - difference is 2 ✨</li>
+                    <li>(11, 13) - difference is 2 ✨</li>
+                    <li>(17, 19) - difference is 2 ✨</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <h3>🤝 Co-prime Numbers - Friendly Numbers!</h3>
+                <p>Two numbers are co-prime if their only common factor is 1.</p>
+                <p><strong>Example:</strong> Are 9 and 14 co-prime?</p>
+                <ul class="steps">
+                    <li>Factors of 9: 1, 3, 9</li>
+                    <li>Factors of 14: 1, 2, 7, 14</li>
+                    <li>Common factor: Only 1</li>
+                    <li><strong>Yes! 9 and 14 are co-prime!</strong> 🎉</li>
+                </ul>
+                <p><strong>Note:</strong> Co-prime numbers don't have to be prime themselves!</p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Riya’s Prime Detective Game!</h3>
+                <p>Is 17 a prime number? (Type 'yes' or 'no')</p>
+                <input type="text" id="prime1" placeholder="yes or no">
+                <button onclick="checkPrime1()">Check Answer!</button>
+                <div id="prime1Result" class="result"></div>
+                
+                <p style="margin-top: 20px;">Is 21 a prime number? (Type 'yes' or 'no')</p>
+                <input type="text" id="prime2" placeholder="yes or no">
+                <button onclick="checkPrime2()">Check Answer!</button>
+                <div id="prime2Result" class="result"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="showSection(2)">⬅️ Previous</button>
+                <button onclick="showSection(4)">Next: Divisibility Tests ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Divisibility Tests -->
+        <div class="section" id="section4">
+            <div class="riya-banner">
+                <img id="banner4" src="images/Riya-shocked.png" alt="Riya 4"/>
+                <div><div class="say">Riya says:</div><div>Divisibility tricks that feel like magic! 🎩</div></div>
+            </div>
+            <h2>✅ Divisibility Tests - Quick Tricks!</h2>
+            
+            <div class="concept-box">
+                <h3>🎯 Why Learn These Tricks?</h3>
+                <p>Imagine you can tell if a HUGE number is divisible by 2, 3, 5, or 10 without actually dividing! These are like magic tricks for math! 🎩✨</p>
+            </div>
+
+            <div class="example-box">
+                <h3>🔢 Divisibility by 2</h3>
+                <p class="highlight">A number is divisible by 2 if its last digit is 0, 2, 4, 6, or 8</p>
+                <p><strong>Examples:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>124 → Last digit is 4 → Divisible by 2! ✅</li>
+                    <li>567 → Last digit is 7 → NOT divisible by 2! ❌</li>
+                    <li>3,45,67,894 → Last digit is 4 → Divisible by 2! ✅</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>5️⃣ Divisibility by 5</h3>
+                <p class="highlight">A number is divisible by 5 if its last digit is 0 or 5</p>
+                <p><strong>Examples:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>235 → Last digit is 5 → Divisible by 5! ✅</li>
+                    <li>780 → Last digit is 0 → Divisible by 5! ✅</li>
+                    <li>342 → Last digit is 2 → NOT divisible by 5! ❌</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>🔟 Divisibility by 10</h3>
+                <p class="highlight">A number is divisible by 10 if its last digit is 0</p>
+                <p><strong>Examples:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>560 → Last digit is 0 → Divisible by 10! ✅</li>
+                    <li>3,45,670 → Last digit is 0 → Divisible by 10! ✅</li>
+                    <li>235 → Last digit is 5 → NOT divisible by 10! ❌</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>3️⃣ Divisibility by 3</h3>
+                <p class="highlight">A number is divisible by 3 if the SUM of its digits is divisible by 3</p>
+                <p><strong>Let's try 3222:</strong></p>
+                <ul class="steps">
+                    <li>Add all digits: 3 + 2 + 2 + 2 = 9</li>
+                    <li>Is 9 divisible by 3? YES! (9 ÷ 3 = 3)</li>
+                    <li>So 3222 is divisible by 3! ✅</li>
+                </ul>
+                <p><strong>Let's try 145:</strong></p>
+                <ul class="steps">
+                    <li>Add all digits: 1 + 4 + 5 = 10</li>
+                    <li>Is 10 divisible by 3? NO!</li>
+                    <li>So 145 is NOT divisible by 3! ❌</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>9️⃣ Divisibility by 9</h3>
+                <p class="highlight">A number is divisible by 9 if the SUM of its digits is divisible by 9</p>
+                <p><strong>Let's try 5211:</strong></p>
+                <ul class="steps">
+                    <li>Add all digits: 5 + 2 + 1 + 1 = 9</li>
+                    <li>Is 9 divisible by 9? YES! (9 ÷ 9 = 1)</li>
+                    <li>So 5211 is divisible by 9! ✅</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>4️⃣ Divisibility by 4</h3>
+                <p class="highlight">A number is divisible by 4 if its LAST TWO DIGITS are divisible by 4</p>
+                <p><strong>Let's try 1936:</strong></p>
+                <ul class="steps">
+                    <li>Look at last two digits: 36</li>
+                    <li>Is 36 divisible by 4? YES! (36 ÷ 4 = 9)</li>
+                    <li>So 1936 is divisible by 4! ✅</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>8️⃣ Divisibility by 8</h3>
+                <p class="highlight">A number is divisible by 8 if its LAST THREE DIGITS are divisible by 8</p>
+                <p><strong>Let's try 54,37,024:</strong></p>
+                <ul class="steps">
+                    <li>Look at last three digits: 024</li>
+                    <li>Is 24 divisible by 8? YES! (24 ÷ 8 = 3)</li>
+                    <li>So 54,37,024 is divisible by 8! ✅</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>6️⃣ Divisibility by 6</h3>
+                <p class="highlight">A number is divisible by 6 if it's divisible by BOTH 2 AND 3</p>
+                <p><strong>Let's try 150:</strong></p>
+                <ul class="steps">
+                    <li>Last digit is 0 → Divisible by 2! ✅</li>
+                    <li>Sum of digits: 1 + 5 + 0 = 6 → Divisible by 3! ✅</li>
+                    <li>So 150 is divisible by 6! ✅</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>1️⃣1️⃣ Divisibility by 11 (The Coolest Trick!)</h3>
+                <p class="highlight">A number is divisible by 11 if the difference between the sum of digits at odd places and even places is 0 or divisible by 11</p>
+                <p><strong>Let's try 121:</strong></p>
+                <ul class="steps">
+                    <li>Digits at odd places (from right): 1, 1 → Sum = 2</li>
+                    <li>Digits at even places: 2 → Sum = 2</li>
+                    <li>Difference: 2 - 2 = 0 ✅</li>
+                    <li>So 121 is divisible by 11!</li>
+                </ul>
+                <p><strong>Let's try 3839:</strong></p>
+                <ul class="steps">
+                    <li>Digits at odd places: 9, 8 → Sum = 17</li>
+                    <li>Digits at even places: 3, 3 → Sum = 6</li>
+                    <li>Difference: 17 - 6 = 11 ✅</li>
+                    <li>11 is divisible by 11, so 3839 is divisible by 11!</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <h3>💡 Quick Summary Table</h3>
+                <table>
+                    <tr>
+                        <th>Divisible by</th>
+                        <th>Rule</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Last digit is 0,2,4,6,8</td>
+                        <td>124 ✅</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Sum of digits ÷ 3</td>
+                        <td>321 (3+2+1=6) ✅</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Last 2 digits ÷ 4</td>
+                        <td>316 (16÷4) ✅</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Last digit is 0 or 5</td>
+                        <td>235 ✅</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Divisible by 2 AND 3</td>
+                        <td>150 ✅</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Last 3 digits ÷ 8</td>
+                        <td>1024 (024÷8) ✅</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Sum of digits ÷ 9</td>
+                        <td>729 (7+2+9=18) ✅</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Last digit is 0</td>
+                        <td>560 ✅</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Difference of alternating sums = 0 or ÷11</td>
+                        <td>121 ✅</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Riya’s Divisibility Challenge!</h3>
+                <p>Is 456 divisible by 3? (Type 'yes' or 'no')</p>
+                <p style="font-size: 0.9em;">💡 Hint: Add the digits: 4 + 5 + 6 = ?</p>
+                <input type="text" id="div1" placeholder="yes or no">
+                <button onclick="checkDiv1()">Check Answer!</button>
+                <div id="div1Result" class="result"></div>
+                
+                <p style="margin-top: 20px;">Is 1234 divisible by 4? (Type 'yes' or 'no')</p>
+                <p style="font-size: 0.9em;">💡 Hint: Look at the last 2 digits!</p>
+                <input type="text" id="div2" placeholder="yes or no">
+                <button onclick="checkDiv2()">Check Answer!</button>
+                <div id="div2Result" class="result"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="showSection(3)">⬅️ Previous</button>
+                <button onclick="showSection(5)">Next: Prime Factorization ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 5: Prime Factorization -->
+        <div class="section" id="section5">
+            <div class="riya-banner">
+                <img id="banner5" src="images/Riya-thinking.png" alt="Riya 5"/>
+                <div><div class="say">Riya says:</div><div>Break numbers into prime building blocks 🌳</div></div>
+            </div>
+            <h2>🌳 Prime Factorization - Breaking It Down!</h2>
+            
+            <div class="concept-box">
+                <h3>🎯 What is Prime Factorization?</h3>
+                <p>Prime factorization is like breaking a big LEGO structure into its smallest pieces (prime numbers)!</p>
+                <p class="highlight">Prime Factorization means writing a number as a product of ONLY prime numbers</p>
+                <p><strong>Example:</strong> 24 = 2 × 2 × 2 × 3</p>
+                <p>All these factors (2, 2, 2, 3) are prime numbers!</p>
+            </div>
+
+            <div class="example-box">
+                <h3>🎯 Division Method - Step by Step!</h3>
+                <p><strong>Let's find prime factorization of 60:</strong></p>
+                <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace;">
+                    <pre>
+2 | 60
+2 | 30
+3 | 15
+5 | 5
+  | 1
+                    </pre>
+                </div>
+                <ul class="steps">
+                    <li>Divide 60 by smallest prime (2): 60 ÷ 2 = 30</li>
+                    <li>Divide 30 by 2: 30 ÷ 2 = 15</li>
+                    <li>15 is not divisible by 2, try next prime (3): 15 ÷ 3 = 5</li>
+                    <li>5 is prime, divide by itself: 5 ÷ 5 = 1</li>
+                    <li><strong>Answer: 60 = 2 × 2 × 3 × 5</strong> 🎉</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>🎯 Let's Try Another One!</h3>
+                <p><strong>Prime factorization of 84:</strong></p>
+                <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace;">
+                    <pre>
+2 | 84
+2 | 42
+3 | 21
+7 | 7
+  | 1
+                    </pre>
+                </div>
+                <p><strong>Answer: 84 = 2 × 2 × 3 × 7</strong> 🎉</p>
+            </div>
+
+            <div class="tip-box">
+                <h3>💡 Pro Tips for Prime Factorization!</h3>
+                <ul style="margin-left: 30px;">
+                    <li>✨ Always start with the smallest prime number (2)</li>
+                    <li>✨ Keep dividing until you get 1</li>
+                    <li>✨ Use only prime numbers (2, 3, 5, 7, 11, 13...)</li>
+                    <li>✨ Every number has a UNIQUE prime factorization!</li>
+                </ul>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 Riya’s Prime Factorization Practice!</h3>
+                <p>What is the prime factorization of 12?</p>
+                <p style="font-size: 0.9em;">💡 Enter as: 2*2*3 (use * for multiplication)</p>
+                <input type="text" id="primefact1" placeholder="e.g., 2*2*3" style="width: 200px;">
+                <button onclick="checkPrimeFact1()">Check Answer!</button>
+                <div id="primefact1Result" class="result"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="showSection(4)">⬅️ Previous</button>
+                <button onclick="showSection(6)">Next: HCF & LCM ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 6: HCF & LCM -->
+        <div class="section" id="section6">
+            <div class="riya-banner">
+                <img id="banner6" src="images/Riya-posing.png" alt="Riya 6"/>
+                <div><div class="say">Riya says:</div><div>HCF & LCM are math besties 🦸</div></div>
+            </div>
+            <h2>🏆 HCF & LCM - The Superheroes!</h2>
+            
+            <div class="concept-box">
+                <h3>🦸 What is HCF?</h3>
+                <p><strong>HCF = Highest Common Factor</strong></p>
+                <p>It's the BIGGEST number that can divide ALL the given numbers!</p>
+                <p><strong>Example: Find HCF of 12 and 18</strong></p>
+                <ul class="steps">
+                    <li>Factors of 12: 1, 2, 3, 4, 6, 12</li>
+                    <li>Factors of 18: 1, 2, 3, 6, 9, 18</li>
+                    <li>Common factors: 1, 2, 3, 6</li>
+                    <li><strong>HIGHEST common factor = 6</strong> 🎉</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>🎯 Finding HCF by Prime Factorization</h3>
+                <p><strong>Find HCF of 24 and 36:</strong></p>
+                <ul class="steps">
+                    <li>Prime factors of 24 = 2 × 2 × 2 × 3</li>
+                    <li>Prime factors of 36 = 2 × 2 × 3 × 3</li>
+                    <li>Common prime factors: 2, 2, 3</li>
+                    <li>Multiply them: 2 × 2 × 3 = 12</li>
+                    <li><strong>HCF = 12</strong> 🎉</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>🦸 What is LCM?</h3>
+                <p><strong>LCM = Lowest Common Multiple</strong></p>
+                <p>It's the SMALLEST number that is a multiple of ALL the given numbers!</p>
+                <p><strong>Example: Find LCM of 4 and 6</strong></p>
+                <ul class="steps">
+                    <li>Multiples of 4: 4, 8, 12, 16, 20, 24...</li>
+                    <li>Multiples of 6: 6, 12, 18, 24, 30...</li>
+                    <li>Common multiples: 12, 24...</li>
+                    <li><strong>LOWEST common multiple = 12</strong> 🎉</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>🎯 Finding LCM by Division Method</h3>
+                <p><strong>Find LCM of 12, 18, and 30:</strong></p>
+                <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace;">
+                    <pre>
+2 | 12, 18, 30
+3 | 6,  9,  15
+  | 2,  3,  5
+                    </pre>
+                </div>
+                <ul class="steps">
+                    <li>Divide by 2: 12÷2=6, 18÷2=9, 30÷2=15</li>
+                    <li>Divide by 3: 6÷3=2, 9÷3=3, 15÷3=5</li>
+                    <li>No more common factors</li>
+                    <li>Multiply all: 2 × 3 × 2 × 3 × 5 = 180</li>
+                    <li><strong>LCM = 180</strong> 🎉</li>
+                </ul>
+            </div>
+
+            <div class="formula-box">
+                <h3>💎 Golden Formula!</h3>
+                <p>For any two numbers:</p>
+                <p><strong>Number 1 × Number 2 = HCF × LCM</strong></p>
+                <p>This is like a magic formula!</p>
+            </div>
+
+            <div class="tip-box">
+                <h3>🎯 When to Use What?</h3>
+                <p><strong>Use HCF when:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>🎁 Dividing things into equal groups</li>
+                    <li>📦 Finding maximum size of packages</li>
+                    <li>✂️ Cutting things into largest possible equal pieces</li>
+                </ul>
+                <p><strong>Use LCM when:</strong></p>
+                <ul style="margin-left: 30px;">
+                    <li>⏰ Events happening at intervals (when will they meet again?)</li>
+                    <li>📅 Finding when things happen together</li>
+                    <li>🏃 Athletes taking steps together</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h3>🎯 Real-Life Example!</h3>
+                <p><strong>Problem:</strong> Two bells ring at intervals of 6 and 8 minutes. If they ring together now, when will they ring together again?</p>
+                <ul class="steps">
+                    <li>This is an LCM problem! (finding when events happen together)</li>
+                    <li>Multiples of 6: 6, 12, 18, 24, 30...</li>
+                    <li>Multiples of 8: 8, 16, 24, 32...</li>
+                    <li>LCM = 24</li>
+                    <li><strong>They will ring together after 24 minutes!</strong> 🔔</li>
+                </ul>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎮 HCF Challenge!</h3>
+                <p>Find the HCF of 16 and 24:</p>
+                <input type="number" id="hcf1" placeholder="Your answer">
+                <button onclick="checkHCF1()">Check Answer!</button>
+                <div id="hcf1Result" class="result"></div>
+                
+                <p style="margin-top: 20px;">Find the LCM of 4 and 5:</p>
+                <input type="number" id="lcm1" placeholder="Your answer">
+                <button onclick="checkLCM1()">Check Answer!</button>
+                <div id="lcm1Result" class="result"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="showSection(5)">⬅️ Previous</button>
+                <button onclick="showSection(7)">Next: Practice Problems ➡️</button>
+            </div>
+        </div>
+
+        <!-- Section 7: Practice Problems -->
+        <div class="section" id="section7">
+            <div class="riya-banner">
+                <img id="banner7" src="images/Riya-happy.png" alt="Riya 7"/>
+                <div><div class="say">Riya says:</div><div>Show Riya what you’ve learned! 🏆</div></div>
+            </div>
+            <h2>📝 Practice Time - Show What You've Learned!</h2>
+            
+            <div class="concept-box">
+                <h3>🎉 Congratulations!</h3>
+                <p>You've learned SO MUCH! Now let's practice and become a true Number Master! 🏆</p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎯 Challenge 1: BODMAS</h3>
+                <p>Simplify: 15 × (102 - 2)</p>
+                <p style="font-size: 0.9em;">💡 Remember: Brackets first!</p>
+                <input type="number" id="practice1" placeholder="Your answer">
+                <button onclick="checkPractice1()">Check Answer!</button>
+                <div id="practice1Result" class="result"></div>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎯 Challenge 2: Factors</h3>
+                <p>How many factors does 20 have?</p>
+                <input type="number" id="practice2" placeholder="Your answer">
+                <button onclick="checkPractice2()">Check Answer!</button>
+                <div id="practice2Result" class="result"></div>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎯 Challenge 3: Prime Numbers</h3>
+                <p>Is 29 a prime number? (Type 'yes' or 'no')</p>
+                <input type="text" id="practice3" placeholder="yes or no">
+                <button onclick="checkPractice3()">Check Answer!</button>
+                <div id="practice3Result" class="result"></div>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎯 Challenge 4: Divisibility</h3>
+                <p>Is 540 divisible by both 3 and 5? (Type 'yes' or 'no')</p>
+                <p style="font-size: 0.9em;">💡 Check: 5+4+0 for 3, last digit for 5</p>
+                <input type="text" id="practice4" placeholder="yes or no">
+                <button onclick="checkPractice4()">Check Answer!</button>
+                <div id="practice4Result" class="result"></div>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎯 Challenge 5: HCF</h3>
+                <p>Find the HCF of 18 and 24:</p>
+                <input type="number" id="practice5" placeholder="Your answer">
+                <button onclick="checkPractice5()">Check Answer!</button>
+                <div id="practice5Result" class="result"></div>
+            </div>
+
+            <div class="interactive-box">
+                <h3>🎯 Challenge 6: LCM</h3>
+                <p>Find the LCM of 6 and 8:</p>
+                <input type="number" id="practice6" placeholder="Your answer">
+                <button onclick="checkPractice6()">Check Answer!</button>
+                <div id="practice6Result" class="result"></div>
+            </div>
+
+            <div class="tip-box">
+                <h3>🌟 Final Tips to Remember!</h3>
+                <ul style="margin-left: 30px;">
+                    <li>✨ BODMAS helps you solve problems in the right order</li>
+                    <li>✨ Factors are numbers that divide exactly</li>
+                    <li>✨ Prime numbers have exactly 2 factors</li>
+                    <li>✨ Use divisibility rules to save time!</li>
+                    <li>✨ HCF is for dividing/sharing equally</li>
+                    <li>✨ LCM is for finding when things happen together</li>
+                </ul>
+            </div>
+
+            <div class="concept-box" style="text-align: center; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <h2>🎉 YOU DID IT! 🎉</h2>
+                <p style="font-size: 1.2em;">You're now a NUMBER MASTER!</p>
+                <p>Keep practicing and you'll become even better!</p>
+                <p style="font-size: 2em; margin: 20px 0;">🏆 ⭐ 🎯</p>
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="showSection(6)">⬅️ Previous</button>
+                <a href="Ch 4 Revision perplexity.html"><button onclick="showSection(8)">Lets Revise</button></a>
+				
+            </div>
+        </div>
+    </div>
+
+    <!-- Friendly Mascot -->
+    <img id="riyaFloat" class="mascot" src="images/Riya-happy.png" alt="Riya mascot" onclick="toggleHelp()" />
+    <div class="speech-bubble" id="speechBubble">
+        <p id="helpText">Hi Riya! Happy learning!</a></p>
+    </div>
+
+    <script>
+
+        // --- Riya avatar state control ---
+        const RIYA_EMOTES = {
+            happy: "images/Riya-happy.png",
+            thinking: "images/Riya-thinking.png",
+            giggling: "images/Riya-giggling.png",
+            confused: "images/Riya-confused.png",
+            shocked: "images/Riya-shocked.png",
+            posing: "images/Riya-posing.png"
+        };
+
+        const SECTION_DEFAULTS = {
+            0: "happy",
+            1: "thinking",
+            2: "posing",
+            3: "thinking",
+            4: "shocked",
+            5: "thinking",
+            6: "posing",
+            7: "happy"
+        };
+
+        function setRiya(state){
+            const img = document.getElementById('riyaFloat');
+            if (img && RIYA_EMOTES[state]) {
+                img.src = RIYA_EMOTES[state];
+            }
+            // also set current section banner
+            const b = document.getElementById('banner'+currentSection);
+            if (b && RIYA_EMOTES[state]) b.src = RIYA_EMOTES[state];
+        }
+
+        function resetRiyaSoon(delay=1800){
+            setTimeout(()=>{
+                const def = SECTION_DEFAULTS[currentSection] || "happy";
+                setRiya(def);
+            }, delay);
+        }
+
+        let currentSection = 0;
+        const totalSections = 8;
+        const helpMessages = [
+            "Welcome Riya! Let's start this amazing journey! Click here to go back to the Home Page🎉",
+            "Riya says: BODMAS is like following a recipe - order matters! 🍰",
+            "Factors are like building blocks of numbers! 🧱",
+            "Prime numbers are the superstars! ⭐",
+            "These tricks will make you super fast! ⚡",
+            "Breaking numbers into primes is fun! 🌳",
+            "HCF and LCM are like superhero partners! 🦸",
+            "Practice makes perfect! You've got this! 💪"
+        ];
+
+        function showSection(index) {
+            const def = SECTION_DEFAULTS[index] || 'happy';
+            setRiya(def);
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById('section' + index).classList.add('active');
+            
+            // Update progress bar
+            currentSection = index;
+            updateProgress();
+            
+            // Update help message
+            updateHelp();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function updateProgress() {
+            const progress = Math.round((currentSection / (totalSections - 1)) * 100);
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = progress + '%';
+        }
+
+        function updateHelp() {
+            document.getElementById('helpText').textContent = helpMessages[currentSection];
+        }
+
+        function toggleHelp() {
+            const bubble = document.getElementById('speechBubble');
+            bubble.classList.toggle('show');
+            setTimeout(() => {
+                bubble.classList.remove('show');
+            }, 3000);
+        }
+
+        // Section 0: Warmup
+        function checkWarmup() {
+            const answer = document.getElementById('warmup').value;
+            const result = document.getElementById('warmupResult');
+            if (answer == 8) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Perfect! You got it right! 5 + 3 = 8. You\'re ready to start!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Hmm, try again! What is 5 + 3? Count on your fingers if it helps!';
+            }
+        }
+
+        // Section 1: BODMAS
+        function checkBodmas1() {
+            const answer = document.getElementById('bodmas1').value;
+            const result = document.getElementById('bodmas1Result');
+            if (answer == 2) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Excellent! 24 ÷ 6 of 2 = 24 ÷ (6 × 2) = 24 ÷ 12 = 2. You understood "of" means multiply!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Not quite! Remember: "of" means multiply first! So 6 of 2 = 12, then 24 ÷ 12 = ?';
+            }
+        }
+
+        function checkBodmas2() {
+            const answer = document.getElementById('bodmas2').value;
+            const result = document.getElementById('bodmas2Result');
+            if (answer == 2) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Perfect! (19 + 1) ÷ (17 - 7) = 20 ÷ 10 = 2. You solved the brackets first!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Try again! First solve inside brackets: (19+1) and (17-7), then divide!';
+            }
+        }
+
+        // Section 2: Factors & Multiples
+        function checkFactors() {
+            const answer = document.getElementById('factors24').value.toLowerCase().replace(/\s/g, '');
+            const result = document.getElementById('factors24Result');
+            const correct = '1,2,3,4,6,8,12,24';
+            if (answer === correct || answer === '1,2,3,4,6,8,12,24') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Amazing! The factors of 24 are: 1, 2, 3, 4, 6, 8, 12, 24. You found them all!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Not quite! Try: 1×24, 2×12, 3×8, 4×6. The factors are: 1, 2, 3, 4, 6, 8, 12, 24';
+            }
+        }
+
+        function checkMultiples() {
+            const answer = document.getElementById('multiples7').value.toLowerCase().replace(/\s/g, '');
+            const result = document.getElementById('multiples7Result');
+            if (answer === '7,14,21,28,35') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Perfect! The first 5 multiples of 7 are: 7, 14, 21, 28, 35!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Try: 7×1, 7×2, 7×3, 7×4, 7×5. They are: 7, 14, 21, 28, 35';
+            }
+        }
+
+        // Section 3: Prime Numbers
+        function checkPrime1() {
+            const answer = document.getElementById('prime1').value.toLowerCase();
+            const result = document.getElementById('prime1Result');
+            if (answer === 'yes') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Correct! 17 is prime! Its only factors are 1 and 17.';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Actually, 17 IS prime! Check: can you divide it by 2, 3, 5, 7, 11, 13? No! Only 1 and 17 work!';
+            }
+        }
+
+        function checkPrime2() {
+            const answer = document.getElementById('prime2').value.toLowerCase();
+            const result = document.getElementById('prime2Result');
+            if (answer === 'no') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Correct! 21 is NOT prime because 21 = 3 × 7. It has more than 2 factors!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Oops! 21 is NOT prime. Try dividing by 3: 21 ÷ 3 = 7. So 21 has factors 1, 3, 7, 21.';
+            }
+        }
+
+        // Section 4: Divisibility
+        function checkDiv1() {
+            const answer = document.getElementById('div1').value.toLowerCase();
+            const result = document.getElementById('div1Result');
+            if (answer === 'yes') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Perfect! 456 is divisible by 3 because 4+5+6 = 15, and 15÷3 = 5!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Try adding: 4+5+6 = 15. Is 15 divisible by 3? Yes! So 456 is divisible by 3!';
+            }
+        }
+
+        function checkDiv2() {
+            const answer = document.getElementById('div2').value.toLowerCase();
+            const result = document.getElementById('div2Result');
+            if (answer === 'no') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Correct! 1234 is NOT divisible by 4. Last 2 digits are 34, and 34÷4 = 8.5 (not whole!)';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Look at last 2 digits: 34. Is 34÷4 a whole number? No! (8.5). So 1234 is NOT divisible by 4.';
+            }
+        }
+
+        // Section 5: Prime Factorization
+        function checkPrimeFact1() {
+            const answer = document.getElementById('primefact1').value.toLowerCase().replace(/\s/g, '');
+            const result = document.getElementById('primefact1Result');
+            if (answer === '2*2*3' || answer === '2×2×3' || answer === '2x2x3') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Excellent! 12 = 2 × 2 × 3. You broke it down perfectly!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Try dividing: 12÷2=6, 6÷2=3, 3÷3=1. So 12 = 2 × 2 × 3';
+            }
+        }
+
+        // Section 6: HCF & LCM
+        function checkHCF1() {
+            const answer = document.getElementById('hcf1').value;
+            const result = document.getElementById('hcf1Result');
+            if (answer == 8) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Perfect! HCF of 16 and 24 is 8. It\'s the largest number that divides both!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Factors of 16: 1,2,4,8,16. Factors of 24: 1,2,3,4,6,8,12,24. Highest common? 8!';
+            }
+        }
+
+        function checkLCM1() {
+            const answer = document.getElementById('lcm1').value;
+            const result = document.getElementById('lcm1Result');
+            if (answer == 20) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Excellent! LCM of 4 and 5 is 20. It\'s the smallest number both divide into!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Multiples of 4: 4,8,12,16,20... Multiples of 5: 5,10,15,20... First common? 20!';
+            }
+        }
+
+        // Section 7: Practice
+        function checkPractice1() {
+            const answer = document.getElementById('practice1').value;
+            const result = document.getElementById('practice1Result');
+            if (answer == 1500) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Outstanding! 15 × (102-2) = 15 × 100 = 1500. You mastered BODMAS!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Brackets first: (102-2) = 100, then 15 × 100 = 1500';
+            }
+        }
+
+        function checkPractice2() {
+            const answer = document.getElementById('practice2').value;
+            const result = document.getElementById('practice2Result');
+            if (answer == 6) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Perfect! 20 has 6 factors: 1, 2, 4, 5, 10, 20!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Find all: 1×20, 2×10, 4×5. So: 1, 2, 4, 5, 10, 20 = 6 factors!';
+            }
+        }
+
+        function checkPractice3() {
+            const answer = document.getElementById('practice3').value.toLowerCase();
+            const result = document.getElementById('practice3Result');
+            if (answer === 'yes') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Correct! 29 is prime! Only 1 and 29 divide it!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 29 IS prime! Try dividing by 2,3,5,7 - none work! Only 1 and 29.';
+            }
+        }
+
+        function checkPractice4() {
+            const answer = document.getElementById('practice4').value.toLowerCase();
+            const result = document.getElementById('practice4Result');
+            if (answer === 'yes') {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Excellent! 540: last digit 0 (÷5), sum 5+4+0=9 (÷3). Both work!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Check: Last digit 0 means ÷5 ✅. Sum: 5+4+0=9 means ÷3 ✅. Both!';
+            }
+        }
+
+        function checkPractice5() {
+            const answer = document.getElementById('practice5').value;
+            const result = document.getElementById('practice5Result');
+            if (answer == 6) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Perfect! HCF of 18 and 24 is 6!';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Common factors of 18 and 24: 1,2,3,6. Highest? 6!';
+            }
+        }
+
+        function checkPractice6() {
+            const answer = document.getElementById('practice6').value;
+            const result = document.getElementById('practice6Result');
+            if (answer == 24) {
+                result.className = 'result correct';
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                setRiya('giggling'); resetRiyaSoon();
+                result.innerHTML = '🎉 Amazing! LCM of 6 and 8 is 24! You\'re a master now! 🏆';
+            } else {
+                result.className = 'result incorrect';
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                setRiya('confused'); resetRiyaSoon();
+                result.innerHTML = '💭 Multiples: 6→6,12,18,24... 8→8,16,24... First common? 24!';
+            }
+        }
+
+        // Show initial help message
+        window.onload = function() {
+            setRiya(SECTION_DEFAULTS[0]);
+            setTimeout(() => {
+                toggleHelp();
+            }, 1000);
+        };
+    </script>
+	<a href="index.html" class="home-btn" title="Go to Maths Home Page">🏠</a>
+</body>
+</html>
